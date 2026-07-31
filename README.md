@@ -1,4 +1,4 @@
-# La Biblia Nos Habla 2.0 — Next.js
+# La Biblia Nos Habla 2.1 — Next.js
 
 Primera base profesional de la nueva Plataforma Ministerial.
 
@@ -68,3 +68,51 @@ Suba todo el contenido de esta carpeta. Luego importe ese repositorio en Vercel.
 - Calendario.
 - Reportes.
 - Diezmos y ofrendas al final.
+
+
+## Versión 2.1 — Biblia completa
+
+- Los 66 libros y los 1,189 capítulos.
+- Traducción Reina-Valera 1909, dominio público.
+- Navegación por libro y capítulo.
+- Búsqueda rápida de libros.
+- Botones anterior/siguiente.
+- Carga del texto desde eBible.org con caché diaria.
+- Ruta API `/api/bible/status`.
+- Fuente y licencia visibles.
+- Fallback para abrir el capítulo en la fuente si falla la conexión.
+- Panel Pastoral ampliado y preparado para Supabase.
+
+### Fuente bíblica
+
+Santa Biblia Reina-Valera 1909, dominio público:
+`https://ebible.org/spaRV1909/`
+
+El sitio obtiene el texto desde la fuente pública y no incluye traducciones modernas protegidas.
+
+
+## Versión 2.2 — Preparada para Reina-Valera 1960
+
+- RVR1960 establecida como versión oficial del proyecto.
+- Eliminada la integración con Reina-Valera 1909.
+- Conservados los 66 libros y 1,189 capítulos.
+- Navegación completa por libro y capítulo.
+- Integración preparada para API o licencia autorizada.
+- Variables de entorno:
+  - `RVR1960_API_URL`
+  - `RVR1960_API_KEY`
+- Ruta de comprobación:
+  - `/api/bible/status`
+- El sistema no distribuye texto protegido sin autorización.
+
+### Configuración en Vercel
+
+Cuando obtenga acceso autorizado:
+
+1. Abra el proyecto en Vercel.
+2. Entre a **Settings → Environment Variables**.
+3. Añada `RVR1960_API_URL`.
+4. Añada `RVR1960_API_KEY`.
+5. Haga un nuevo deployment.
+
+La página comenzará a mostrar automáticamente los versículos proporcionados por el servicio autorizado.

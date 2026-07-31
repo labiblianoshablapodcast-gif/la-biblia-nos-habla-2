@@ -1,0 +1,464 @@
+[
+  {
+    "name": "Génesis",
+    "code": "GEN",
+    "chapters": 50,
+    "testament": "Antiguo Testamento",
+    "slug": "genesis"
+  },
+  {
+    "name": "Éxodo",
+    "code": "EXO",
+    "chapters": 40,
+    "testament": "Antiguo Testamento",
+    "slug": "exodo"
+  },
+  {
+    "name": "Levítico",
+    "code": "LEV",
+    "chapters": 27,
+    "testament": "Antiguo Testamento",
+    "slug": "levitico"
+  },
+  {
+    "name": "Números",
+    "code": "NUM",
+    "chapters": 36,
+    "testament": "Antiguo Testamento",
+    "slug": "numeros"
+  },
+  {
+    "name": "Deuteronomio",
+    "code": "DEU",
+    "chapters": 34,
+    "testament": "Antiguo Testamento",
+    "slug": "deuteronomio"
+  },
+  {
+    "name": "Josué",
+    "code": "JOS",
+    "chapters": 24,
+    "testament": "Antiguo Testamento",
+    "slug": "josue"
+  },
+  {
+    "name": "Jueces",
+    "code": "JDG",
+    "chapters": 21,
+    "testament": "Antiguo Testamento",
+    "slug": "jueces"
+  },
+  {
+    "name": "Rut",
+    "code": "RUT",
+    "chapters": 4,
+    "testament": "Antiguo Testamento",
+    "slug": "rut"
+  },
+  {
+    "name": "1 Samuel",
+    "code": "1SA",
+    "chapters": 31,
+    "testament": "Antiguo Testamento",
+    "slug": "1-samuel"
+  },
+  {
+    "name": "2 Samuel",
+    "code": "2SA",
+    "chapters": 24,
+    "testament": "Antiguo Testamento",
+    "slug": "2-samuel"
+  },
+  {
+    "name": "1 Reyes",
+    "code": "1KI",
+    "chapters": 22,
+    "testament": "Antiguo Testamento",
+    "slug": "1-reyes"
+  },
+  {
+    "name": "2 Reyes",
+    "code": "2KI",
+    "chapters": 25,
+    "testament": "Antiguo Testamento",
+    "slug": "2-reyes"
+  },
+  {
+    "name": "1 Crónicas",
+    "code": "1CH",
+    "chapters": 29,
+    "testament": "Antiguo Testamento",
+    "slug": "1-cronicas"
+  },
+  {
+    "name": "2 Crónicas",
+    "code": "2CH",
+    "chapters": 36,
+    "testament": "Antiguo Testamento",
+    "slug": "2-cronicas"
+  },
+  {
+    "name": "Esdras",
+    "code": "EZR",
+    "chapters": 10,
+    "testament": "Antiguo Testamento",
+    "slug": "esdras"
+  },
+  {
+    "name": "Nehemías",
+    "code": "NEH",
+    "chapters": 13,
+    "testament": "Antiguo Testamento",
+    "slug": "nehemias"
+  },
+  {
+    "name": "Ester",
+    "code": "EST",
+    "chapters": 10,
+    "testament": "Antiguo Testamento",
+    "slug": "ester"
+  },
+  {
+    "name": "Job",
+    "code": "JOB",
+    "chapters": 42,
+    "testament": "Antiguo Testamento",
+    "slug": "job"
+  },
+  {
+    "name": "Salmos",
+    "code": "PSA",
+    "chapters": 150,
+    "testament": "Antiguo Testamento",
+    "slug": "salmos"
+  },
+  {
+    "name": "Proverbios",
+    "code": "PRO",
+    "chapters": 31,
+    "testament": "Antiguo Testamento",
+    "slug": "proverbios"
+  },
+  {
+    "name": "Eclesiastés",
+    "code": "ECC",
+    "chapters": 12,
+    "testament": "Antiguo Testamento",
+    "slug": "eclesiastes"
+  },
+  {
+    "name": "Cantares",
+    "code": "SNG",
+    "chapters": 8,
+    "testament": "Antiguo Testamento",
+    "slug": "cantares"
+  },
+  {
+    "name": "Isaías",
+    "code": "ISA",
+    "chapters": 66,
+    "testament": "Antiguo Testamento",
+    "slug": "isaias"
+  },
+  {
+    "name": "Jeremías",
+    "code": "JER",
+    "chapters": 52,
+    "testament": "Antiguo Testamento",
+    "slug": "jeremias"
+  },
+  {
+    "name": "Lamentaciones",
+    "code": "LAM",
+    "chapters": 5,
+    "testament": "Antiguo Testamento",
+    "slug": "lamentaciones"
+  },
+  {
+    "name": "Ezequiel",
+    "code": "EZK",
+    "chapters": 48,
+    "testament": "Antiguo Testamento",
+    "slug": "ezequiel"
+  },
+  {
+    "name": "Daniel",
+    "code": "DAN",
+    "chapters": 12,
+    "testament": "Antiguo Testamento",
+    "slug": "daniel"
+  },
+  {
+    "name": "Oseas",
+    "code": "HOS",
+    "chapters": 14,
+    "testament": "Antiguo Testamento",
+    "slug": "oseas"
+  },
+  {
+    "name": "Joel",
+    "code": "JOL",
+    "chapters": 3,
+    "testament": "Antiguo Testamento",
+    "slug": "joel"
+  },
+  {
+    "name": "Amós",
+    "code": "AMO",
+    "chapters": 9,
+    "testament": "Antiguo Testamento",
+    "slug": "amos"
+  },
+  {
+    "name": "Abdías",
+    "code": "OBA",
+    "chapters": 1,
+    "testament": "Antiguo Testamento",
+    "slug": "abdias"
+  },
+  {
+    "name": "Jonás",
+    "code": "JON",
+    "chapters": 4,
+    "testament": "Antiguo Testamento",
+    "slug": "jonas"
+  },
+  {
+    "name": "Miqueas",
+    "code": "MIC",
+    "chapters": 7,
+    "testament": "Antiguo Testamento",
+    "slug": "miqueas"
+  },
+  {
+    "name": "Nahúm",
+    "code": "NAM",
+    "chapters": 3,
+    "testament": "Antiguo Testamento",
+    "slug": "nahum"
+  },
+  {
+    "name": "Habacuc",
+    "code": "HAB",
+    "chapters": 3,
+    "testament": "Antiguo Testamento",
+    "slug": "habacuc"
+  },
+  {
+    "name": "Sofonías",
+    "code": "ZEP",
+    "chapters": 3,
+    "testament": "Antiguo Testamento",
+    "slug": "sofonias"
+  },
+  {
+    "name": "Hageo",
+    "code": "HAG",
+    "chapters": 2,
+    "testament": "Antiguo Testamento",
+    "slug": "hageo"
+  },
+  {
+    "name": "Zacarías",
+    "code": "ZEC",
+    "chapters": 14,
+    "testament": "Antiguo Testamento",
+    "slug": "zacarias"
+  },
+  {
+    "name": "Malaquías",
+    "code": "MAL",
+    "chapters": 4,
+    "testament": "Antiguo Testamento",
+    "slug": "malaquias"
+  },
+  {
+    "name": "Mateo",
+    "code": "MAT",
+    "chapters": 28,
+    "testament": "Nuevo Testamento",
+    "slug": "mateo"
+  },
+  {
+    "name": "Marcos",
+    "code": "MRK",
+    "chapters": 16,
+    "testament": "Nuevo Testamento",
+    "slug": "marcos"
+  },
+  {
+    "name": "Lucas",
+    "code": "LUK",
+    "chapters": 24,
+    "testament": "Nuevo Testamento",
+    "slug": "lucas"
+  },
+  {
+    "name": "Juan",
+    "code": "JHN",
+    "chapters": 21,
+    "testament": "Nuevo Testamento",
+    "slug": "juan"
+  },
+  {
+    "name": "Hechos",
+    "code": "ACT",
+    "chapters": 28,
+    "testament": "Nuevo Testamento",
+    "slug": "hechos"
+  },
+  {
+    "name": "Romanos",
+    "code": "ROM",
+    "chapters": 16,
+    "testament": "Nuevo Testamento",
+    "slug": "romanos"
+  },
+  {
+    "name": "1 Corintios",
+    "code": "1CO",
+    "chapters": 16,
+    "testament": "Nuevo Testamento",
+    "slug": "1-corintios"
+  },
+  {
+    "name": "2 Corintios",
+    "code": "2CO",
+    "chapters": 13,
+    "testament": "Nuevo Testamento",
+    "slug": "2-corintios"
+  },
+  {
+    "name": "Gálatas",
+    "code": "GAL",
+    "chapters": 6,
+    "testament": "Nuevo Testamento",
+    "slug": "galatas"
+  },
+  {
+    "name": "Efesios",
+    "code": "EPH",
+    "chapters": 6,
+    "testament": "Nuevo Testamento",
+    "slug": "efesios"
+  },
+  {
+    "name": "Filipenses",
+    "code": "PHP",
+    "chapters": 4,
+    "testament": "Nuevo Testamento",
+    "slug": "filipenses"
+  },
+  {
+    "name": "Colosenses",
+    "code": "COL",
+    "chapters": 4,
+    "testament": "Nuevo Testamento",
+    "slug": "colosenses"
+  },
+  {
+    "name": "1 Tesalonicenses",
+    "code": "1TH",
+    "chapters": 5,
+    "testament": "Nuevo Testamento",
+    "slug": "1-tesalonicenses"
+  },
+  {
+    "name": "2 Tesalonicenses",
+    "code": "2TH",
+    "chapters": 3,
+    "testament": "Nuevo Testamento",
+    "slug": "2-tesalonicenses"
+  },
+  {
+    "name": "1 Timoteo",
+    "code": "1TI",
+    "chapters": 6,
+    "testament": "Nuevo Testamento",
+    "slug": "1-timoteo"
+  },
+  {
+    "name": "2 Timoteo",
+    "code": "2TI",
+    "chapters": 4,
+    "testament": "Nuevo Testamento",
+    "slug": "2-timoteo"
+  },
+  {
+    "name": "Tito",
+    "code": "TIT",
+    "chapters": 3,
+    "testament": "Nuevo Testamento",
+    "slug": "tito"
+  },
+  {
+    "name": "Filemón",
+    "code": "PHM",
+    "chapters": 1,
+    "testament": "Nuevo Testamento",
+    "slug": "filemon"
+  },
+  {
+    "name": "Hebreos",
+    "code": "HEB",
+    "chapters": 13,
+    "testament": "Nuevo Testamento",
+    "slug": "hebreos"
+  },
+  {
+    "name": "Santiago",
+    "code": "JAS",
+    "chapters": 5,
+    "testament": "Nuevo Testamento",
+    "slug": "santiago"
+  },
+  {
+    "name": "1 Pedro",
+    "code": "1PE",
+    "chapters": 5,
+    "testament": "Nuevo Testamento",
+    "slug": "1-pedro"
+  },
+  {
+    "name": "2 Pedro",
+    "code": "2PE",
+    "chapters": 3,
+    "testament": "Nuevo Testamento",
+    "slug": "2-pedro"
+  },
+  {
+    "name": "1 Juan",
+    "code": "1JN",
+    "chapters": 5,
+    "testament": "Nuevo Testamento",
+    "slug": "1-juan"
+  },
+  {
+    "name": "2 Juan",
+    "code": "2JN",
+    "chapters": 1,
+    "testament": "Nuevo Testamento",
+    "slug": "2-juan"
+  },
+  {
+    "name": "3 Juan",
+    "code": "3JN",
+    "chapters": 1,
+    "testament": "Nuevo Testamento",
+    "slug": "3-juan"
+  },
+  {
+    "name": "Judas",
+    "code": "JUD",
+    "chapters": 1,
+    "testament": "Nuevo Testamento",
+    "slug": "judas"
+  },
+  {
+    "name": "Apocalipsis",
+    "code": "REV",
+    "chapters": 22,
+    "testament": "Nuevo Testamento",
+    "slug": "apocalipsis"
+  }
+]

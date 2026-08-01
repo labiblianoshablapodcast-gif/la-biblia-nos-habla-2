@@ -221,3 +221,11 @@ Después de iniciar sesión será enviado al Panel Pastoral.
 ## Versión 2.6 — Seguimiento pastoral conectado
 
 El formulario guarda solicitudes en Supabase, registra nuevos creyentes y mantiene FormSubmit para correo y respuesta automática.
+
+
+## Versión 2.6.1 — Corrección para Vercel
+
+- Corregido el error TypeScript de `cookiesToSet`.
+- Aplicado tipado explícito en `lib/supabase/server.ts`.
+- Aplicada la misma corrección preventiva en `middleware.ts`.
+- Mantiene la conexión con Supabase, el Panel Pastoral y el seguimiento de nuevos creyentes.

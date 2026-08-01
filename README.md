@@ -116,3 +116,15 @@ Cuando obtenga acceso autorizado:
 5. Haga un nuevo deployment.
 
 La página comenzará a mostrar automáticamente los versículos proporcionados por el servicio autorizado.
+
+
+## Versión 2.3 — Seguimiento de nuevos creyentes
+- Respuesta automática según la solicitud.
+- Página de confirmación.
+- Recursos para nuevos creyentes.
+- Botón de WhatsApp preparado.
+- Copia en Google Sheets preparada.
+
+Variables en Vercel:
+- NEXT_PUBLIC_WHATSAPP_NUMBER
+- NEXT_PUBLIC_GOOGLE_SHEETS_WEBHOOK

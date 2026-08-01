@@ -23,3 +23,5 @@ footer{background:#03111f;color:#fff;padding:45px clamp(24px,8vw,130px);display:
 
 .scriptureText sup{font-family:Inter,Arial,sans-serif;font-size:12px;color:#a4761e;font-weight:800;margin-right:5px}
 .notice code{display:inline-block;background:#071829;color:#fff;padding:4px 8px;border-radius:7px;margin:4px 0}
+
+.connectionLayout{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:start}.connectionFormWrap{display:grid;gap:18px}.ministryForm{background:#fff;border:1px solid #dde3e7;border-radius:22px;padding:30px;box-shadow:0 18px 45px rgba(7,24,41,.08)}.ministryForm button:disabled{opacity:.65}.whatsappButton{display:block;text-align:center;background:#1fa855;color:#fff;padding:14px 20px;border-radius:999px;font-weight:800}.setupNote{font-size:13px;color:var(--muted);text-align:center}.thankHero{background:linear-gradient(135deg,#071829,#18583d)}.connectionLayout h2{font-size:clamp(48px,6vw,78px)}@media(max-width:900px){.connectionLayout{grid-template-columns:1fr}}

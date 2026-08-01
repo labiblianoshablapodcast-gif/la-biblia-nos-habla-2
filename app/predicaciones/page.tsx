@@ -11,8 +11,8 @@ export default function Predicaciones() {
 
   <section className="section">
     <div className="predicationTopActions">
-      <a className="btn" href={youtube.ministryVideosUrl} target="_blank" rel="noopener noreferrer">Ver canal La Biblia Nos Habla</a>
-      <a className="btn secondaryDark" href={youtube.pastorVideosUrl} target="_blank" rel="noopener noreferrer">Ver canal Pastor Gilberto</a>
+      <a className="btn" href={youtube.ministry.videos} target="_blank" rel="noopener noreferrer">Ver canal La Biblia Nos Habla</a>
+      <a className="btn secondaryDark" href={youtube.pastor.videos} target="_blank" rel="noopener noreferrer">Ver canal Pastor Gilberto</a>
     </div>
 
     <input className="search" placeholder="Buscar mensaje..."/>
@@ -25,7 +25,7 @@ export default function Predicaciones() {
         <p>Escuche este tema y explore más predicaciones en nuestros canales oficiales.</p>
         <a
           className="textLink"
-          href={index % 2 === 0 ? youtube.ministryVideosUrl : youtube.pastorVideosUrl}
+          href={index % 2 === 0 ? youtube.ministry.videos : youtube.pastor.videos}
           target="_blank"
           rel="noopener noreferrer"
         >

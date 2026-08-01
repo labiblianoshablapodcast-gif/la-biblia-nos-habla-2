@@ -67,8 +67,8 @@ export default function Home() {
         <h2>Conéctese con nuestros canales de YouTube</h2>
         <p className="lead">Predicaciones, estudios bíblicos, podcast y testimonios para seguir creciendo en la Palabra de Dios.</p>
         <div className="youtubeActions">
-          <a className="btn" href={youtube.ministryUrl} target="_blank" rel="noopener noreferrer">La Biblia Nos Habla</a>
-          <a className="btn secondaryDark" href={youtube.pastorUrl} target="_blank" rel="noopener noreferrer">Pastor Gilberto</a>
+          <a className="btn" href={youtube.ministry.url} target="_blank" rel="noopener noreferrer">La Biblia Nos Habla</a>
+          <a className="btn secondaryDark" href={youtube.pastor.url} target="_blank" rel="noopener noreferrer">Pastor Gilberto</a>
         </div>
       </div>
       <div className="youtubeHomePanel">

@@ -11,6 +11,7 @@ export default function Header() {
         <Link href="/biblia">Biblia</Link>
         <Link href="/predicaciones">Predicaciones</Link>
         <Link href="/youtube">YouTube</Link>
+        <Link href="/multimedia">Multimedia</Link>
         <Link href="/instalar">Instalar App</Link>
         <Link href="/primeros-pasos">Primeros pasos</Link>
         <Link href="/misiones">Misiones</Link>

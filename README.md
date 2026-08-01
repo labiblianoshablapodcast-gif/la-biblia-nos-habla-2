@@ -304,3 +304,15 @@ Esta es la última actualización de la jornada.
 - Service Worker y caché básica para abrir contenido visitado.
 - Accesos rápidos a Biblia, oración y predicaciones.
 - No requiere mantener dos códigos separados.
+
+
+## Versión 4.0 — Centro Multimedia y YouTube corregido
+
+- Corregido el canal pastoral que abría una página vacía.
+- Enlace estable por ID: UC4fqgWP7zyB7zT3sBiJLZyA.
+- Configuración centralizada de ambos canales.
+- Nueva página Centro Multimedia.
+- Acceso a videos, shorts y transmisiones en vivo.
+- Menú actualizado con Multimedia.
+- Página YouTube renovada.
+- Corrección aplicada en Inicio, Predicaciones, Misiones, El Pastor y el pie de página.

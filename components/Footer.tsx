@@ -13,8 +13,8 @@ export default function Footer() {
       <div>
         <p>Labiblianoshablapodcast@gmail.com</p>
         <p className="footerLinks">
-          <a href={youtube.ministryUrl} target="_blank" rel="noopener noreferrer">YouTube ministerial</a><br/>
-          <a href={youtube.pastorUrl} target="_blank" rel="noopener noreferrer">YouTube pastoral</a>
+          <a href={youtube.ministry.url} target="_blank" rel="noopener noreferrer">YouTube ministerial</a><br/>
+          <a href={youtube.pastor.url} target="_blank" rel="noopener noreferrer">YouTube pastoral</a>
         </p>
       </div>
     </footer>

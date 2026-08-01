@@ -1,10 +1,19 @@
 export const youtube = {
-  ministryHandle: "@labiblianoshabla2",
-  pastorHandle: "@GilbertoMaldonado-00",
-  ministryUrl: "https://www.youtube.com/@labiblianoshabla2",
-  pastorUrl: "https://www.youtube.com/@GilbertoMaldonado-00",
-  ministryVideosUrl: "https://www.youtube.com/@labiblianoshabla2/videos",
-  pastorVideosUrl: "https://www.youtube.com/@GilbertoMaldonado-00/videos",
-  ministryLiveUrl: "https://www.youtube.com/@labiblianoshabla2/live",
-  pastorLiveUrl: "https://www.youtube.com/@GilbertoMaldonado-00/live"
+  ministry: {
+    name: "La Biblia Nos Habla",
+    handle: "@labiblianoshabla2",
+    url: "https://www.youtube.com/@labiblianoshabla2",
+    videos: "https://www.youtube.com/@labiblianoshabla2/videos",
+    live: "https://www.youtube.com/@labiblianoshabla2/live",
+    shorts: "https://www.youtube.com/@labiblianoshabla2/shorts"
+  },
+
+  pastor: {
+    name: "Pastor Gilberto Maldonado",
+    channelId: "UC4fqgWP7zyB7zT3sBiJLZyA",
+    url: "https://www.youtube.com/channel/UC4fqgWP7zyB7zT3sBiJLZyA",
+    videos: "https://www.youtube.com/channel/UC4fqgWP7zyB7zT3sBiJLZyA/videos",
+    live: "https://www.youtube.com/channel/UC4fqgWP7zyB7zT3sBiJLZyA/live",
+    shorts: "https://www.youtube.com/channel/UC4fqgWP7zyB7zT3sBiJLZyA/shorts"
+  }
 } as const;

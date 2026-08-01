@@ -128,3 +128,23 @@ La página comenzará a mostrar automáticamente los versículos proporcionados 
 Variables en Vercel:
 - NEXT_PUBLIC_WHATSAPP_NUMBER
 - NEXT_PUBLIC_GOOGLE_SHEETS_WEBHOOK
+
+
+## Versión 2.4 — Biblioteca Bíblica RV1909
+
+- Texto Reina-Valera 1909 de dominio público.
+- Los 66 libros y 1,189 capítulos.
+- Búsqueda por libro y referencia.
+- Navegación anterior/siguiente y selector de capítulo.
+- Favoritos por capítulo guardados en el dispositivo.
+- Notas personales guardadas en el dispositivo.
+- Última lectura y botón para continuar.
+- Modo claro y oscuro.
+- Tamaño de letra ajustable.
+- Compartir versículos o copiarlos al portapapeles.
+- Estructura preparada para cambiar a RVR1960 autorizada.
+- Endpoint de estado: `/api/bible/status`.
+
+### Importante
+
+Favoritos, notas y última lectura se guardan actualmente en `localStorage`. Cuando conectemos Supabase y las cuentas de usuario, estos datos podrán sincronizarse entre iPhone, Mac y otros dispositivos.

@@ -1,15 +1,13 @@
 import {NextResponse} from "next/server";
-
 export async function GET(){
- const connected=Boolean(process.env.RVR1960_API_URL && process.env.RVR1960_API_KEY);
-
  return NextResponse.json({
-  translation:"Reina-Valera 1960",
+  translation:"Reina-Valera 1909",
   language:"es",
-  license:"Authorized provider required",
+  license:"Public Domain",
+  source:"eBible.org",
   books:66,
   chapters:1189,
-  connected,
-  status:connected ? "ready" : "awaiting_authorized_provider"
+  features:["favorites","notes","last-reading","dark-mode","font-size","share"],
+  futureTranslation:"RVR1960 authorized"
  });
 }

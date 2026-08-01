@@ -3,6 +3,7 @@ import Link from "next/link";
 import {notFound} from "next/navigation";
 import MissionGallery from "@/components/MissionGallery";
 import {missions} from "@/data/missions";
+import {youtube} from "@/data/youtube";
 
 const stories: Record<string,{intro:string;sections:{title:string;text:string}[]}> = {
   "coban-2022":{
@@ -70,6 +71,7 @@ export default async function MissionDetail({params}:{params:Promise<{slug:strin
       <h2>Toda la gloria sea para Jesucristo.</h2>
       <p>Lo que comenzó con una carga en el corazón se convirtió en una historia que ahora podemos compartir con las futuras generaciones.</p>
       <Link className="btn" href="/misiones">Volver a todas las misiones</Link>
+      <a className="btn secondary" href={youtube.ministryVideosUrl} target="_blank" rel="noopener noreferrer">Ver videos de misiones</a>
     </section>
   </>;
 }

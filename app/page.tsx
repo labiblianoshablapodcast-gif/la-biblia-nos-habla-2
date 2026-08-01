@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import SectionCard from "@/components/SectionCard";
+import {youtube} from "@/data/youtube";
 
 export default function Home() {
   return <>
@@ -55,6 +56,24 @@ export default function Home() {
           para la gloria de Jesucristo.
         </p>
         <Link className="btn" href="/el-pastor">Leer el testimonio</Link>
+      </div>
+    </section>
+
+
+    <section className="section youtubeHomeFeature">
+      <div>
+        <p className="eyebrow">Contenido en video</p>
+        <h2>Conéctese con nuestros canales de YouTube</h2>
+        <p className="lead">Predicaciones, estudios bíblicos, podcast y testimonios para seguir creciendo en la Palabra de Dios.</p>
+        <div className="youtubeActions">
+          <a className="btn" href={youtube.ministryUrl} target="_blank" rel="noopener noreferrer">La Biblia Nos Habla</a>
+          <a className="btn secondaryDark" href={youtube.pastorUrl} target="_blank" rel="noopener noreferrer">Pastor Gilberto</a>
+        </div>
+      </div>
+      <div className="youtubeHomePanel">
+        <span className="youtubePlay">▶</span>
+        <strong>Dos canales. Un mismo propósito.</strong>
+        <p>Predicar a Jesucristo y enseñar fielmente Su Palabra.</p>
       </div>
     </section>
 

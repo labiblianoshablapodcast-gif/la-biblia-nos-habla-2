@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import {youtube} from "@/data/youtube";
 
 const timeline = [
   {
@@ -52,6 +53,7 @@ export default function ElPastor(){
         <div className="pastorHeroActions">
           <a className="btn" href="#trayectoria">Ver trayectoria</a>
           <Link className="btn secondary" href="/misiones">Ver misiones</Link>
+          <a className="btn secondary" href={youtube.pastorUrl} target="_blank" rel="noopener noreferrer">Canal de YouTube</a>
         </div>
       </div>
     </section>

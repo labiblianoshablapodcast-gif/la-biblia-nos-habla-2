@@ -279,3 +279,14 @@ Esta es la última actualización de la jornada.
 - Fotografía del Pastor Gilberto junto al Rev. Solórzano.
 - Enlace “El Pastor” añadido al menú.
 - Nueva presentación del testimonio en la página principal.
+
+
+## Versión 3.2 — YouTube conectado
+
+- Nueva página central de YouTube.
+- Canal ministerial conectado: @labiblianoshabla2.
+- Canal pastoral conectado: @GilbertoMaldonado-00.
+- Enlaces de videos y transmisiones en vivo.
+- Botones de YouTube en Inicio, Predicaciones, Misiones y El Pastor.
+- Enlaces de ambos canales en el pie de página.
+- Tarjetas de predicación conectadas con YouTube.

@@ -10,6 +10,7 @@ export default function Header() {
       <nav>
         <Link href="/biblia">Biblia</Link>
         <Link href="/predicaciones">Predicaciones</Link>
+        <Link href="/youtube">YouTube</Link>
         <Link href="/primeros-pasos">Primeros pasos</Link>
         <Link href="/misiones">Misiones</Link>
         <Link href="/el-pastor">El Pastor</Link>

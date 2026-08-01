@@ -216,3 +216,8 @@ Abra:
 `/login`
 
 Después de iniciar sesión será enviado al Panel Pastoral.
+
+
+## Versión 2.6 — Seguimiento pastoral conectado
+
+El formulario guarda solicitudes en Supabase, registra nuevos creyentes y mantiene FormSubmit para correo y respuesta automática.

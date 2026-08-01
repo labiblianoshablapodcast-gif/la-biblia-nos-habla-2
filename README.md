@@ -229,3 +229,27 @@ El formulario guarda solicitudes en Supabase, registra nuevos creyentes y mantie
 - Aplicado tipado explícito en `lib/supabase/server.ts`.
 - Aplicada la misma corrección preventiva en `middleware.ts`.
 - Mantiene la conexión con Supabase, el Panel Pastoral y el seguimiento de nuevos creyentes.
+
+
+## Versión 2.7 — Panel Pastoral de seguimiento
+
+Esta es la última actualización de la jornada.
+
+### Añadido
+
+- Cambio de estado para peticiones y nuevos creyentes.
+- Estados: Nuevo, En seguimiento, Contactado, Discipulado y Completado.
+- Página administrativa de configuración.
+- Migración de seguridad `supabase-2-7-security.sql`.
+- Políticas RLS para que únicamente el equipo autorizado pueda leer y actualizar registros.
+- Se mantiene el envío de correos por FormSubmit.
+- Se mantiene el almacenamiento en Supabase.
+
+### Activación final
+
+1. Suba esta versión a GitHub.
+2. Espere el deployment verde en Vercel.
+3. Ejecute `supabase-2-7-security.sql` en Supabase SQL Editor.
+4. En Supabase, vaya a Authentication → Users y cree el usuario pastoral.
+5. Ejecute la instrucción final comentada en el SQL, colocando el correo correcto.
+6. Abra `/login`.

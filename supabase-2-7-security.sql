@@ -1,0 +1,84 @@
+-- LA BIBLIA NOS HABLA 2.7
+-- Seguridad y seguimiento pastoral
+-- Ejecute todo este archivo en Supabase SQL Editor.
+
+alter table public.profiles enable row level security;
+alter table public.prayer_requests enable row level security;
+alter table public.new_believers enable row level security;
+
+create or replace function public.is_ministry_staff()
+returns boolean
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select exists (
+    select 1
+    from public.profiles
+    where id = auth.uid()
+      and role in ('pastor','secretary','treasurer','media')
+  );
+$$;
+
+drop policy if exists "Public inserts prayer requests" on public.prayer_requests;
+drop policy if exists "Insert Prayer Requests" on public.prayer_requests;
+create policy "Public inserts prayer requests"
+on public.prayer_requests
+for insert
+to anon, authenticated
+with check (true);
+
+drop policy if exists "Staff reads prayer requests" on public.prayer_requests;
+create policy "Staff reads prayer requests"
+on public.prayer_requests
+for select
+to authenticated
+using (public.is_ministry_staff());
+
+drop policy if exists "Staff updates prayer requests" on public.prayer_requests;
+create policy "Staff updates prayer requests"
+on public.prayer_requests
+for update
+to authenticated
+using (public.is_ministry_staff())
+with check (public.is_ministry_staff());
+
+drop policy if exists "Public inserts new believers" on public.new_believers;
+drop policy if exists "Insert New Believers" on public.new_believers;
+create policy "Public inserts new believers"
+on public.new_believers
+for insert
+to anon, authenticated
+with check (true);
+
+drop policy if exists "Staff reads new believers" on public.new_believers;
+create policy "Staff reads new believers"
+on public.new_believers
+for select
+to authenticated
+using (public.is_ministry_staff());
+
+drop policy if exists "Staff updates new believers" on public.new_believers;
+create policy "Staff updates new believers"
+on public.new_believers
+for update
+to authenticated
+using (public.is_ministry_staff())
+with check (public.is_ministry_staff());
+
+drop policy if exists "User reads own profile" on public.profiles;
+create policy "User reads own profile"
+on public.profiles
+for select
+to authenticated
+using (id = auth.uid() or public.is_ministry_staff());
+
+-- Después de crear el usuario en Authentication, reemplace SU_CORREO:
+-- insert into public.profiles (id, full_name, role)
+-- select id, 'Pastor Gilberto Maldonado', 'pastor'
+-- from auth.users
+-- where email = 'SU_CORREO'
+-- on conflict (id) do update
+-- set full_name = excluded.full_name,
+--     role = excluded.role;

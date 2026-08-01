@@ -290,3 +290,17 @@ Esta es la última actualización de la jornada.
 - Botones de YouTube en Inicio, Predicaciones, Misiones y El Pastor.
 - Enlaces de ambos canales en el pie de página.
 - Tarjetas de predicación conectadas con YouTube.
+
+
+## Versión 3.3 — Aplicación para iPhone y Samsung
+
+- Aplicación web instalable (PWA).
+- Compatible con iPhone, iPad, Samsung y otros Android.
+- Iconos propios de la aplicación.
+- Manifest oficial.
+- Modo independiente, sin barra del navegador.
+- Página de instalación.
+- Instrucciones específicas para iPhone y Android.
+- Service Worker y caché básica para abrir contenido visitado.
+- Accesos rápidos a Biblia, oración y predicaciones.
+- No requiere mantener dos códigos separados.

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SectionCard from "@/components/SectionCard";
 import {youtube} from "@/data/youtube";
+import InstallApp from "@/components/InstallApp";
 
 export default function Home() {
   return <>
@@ -75,6 +76,11 @@ export default function Home() {
         <strong>Dos canales. Un mismo propósito.</strong>
         <p>Predicar a Jesucristo y enseñar fielmente Su Palabra.</p>
       </div>
+    </section>
+
+
+    <section className="section soft">
+      <InstallApp/>
     </section>
 
     <section className="section dark">

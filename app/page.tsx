@@ -37,6 +37,27 @@ export default function Home() {
       </div>
     </section>
 
+
+    <section className="section homePastorFeature">
+      <div className="homePastorImage">
+        <Image
+          src="/images/pastor/pastor-gilberto.webp"
+          alt="Pastor Gilberto Maldonado"
+          fill
+          sizes="(max-width: 900px) 100vw, 42vw"
+        />
+      </div>
+      <div>
+        <p className="eyebrow">Una vida transformada</p>
+        <h2>Conozca la trayectoria del Pastor Gilberto Maldonado</h2>
+        <p className="lead">
+          De la prisión al púlpito: una historia de redención, llamado y servicio
+          para la gloria de Jesucristo.
+        </p>
+        <Link className="btn" href="/el-pastor">Leer el testimonio</Link>
+      </div>
+    </section>
+
     <section className="section dark">
       <p className="eyebrow">Estudio bíblico virtual</p><h2>Jueves · 8:00–9:00 p.m.</h2>
       <p className="lead">Conéctese por videollamada de WhatsApp.</p>

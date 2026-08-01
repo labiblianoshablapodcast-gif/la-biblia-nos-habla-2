@@ -266,3 +266,16 @@ Esta es la última actualización de la jornada.
 - Estadísticas del recorrido misionero.
 - Nueva sección visual de misiones en la página principal.
 - Diseño adaptable para teléfono, tableta y computadora.
+
+
+## Versión 3.1 — Trayectoria Pastoral
+
+- Nueva página “El Pastor”.
+- Testimonio: de la prisión al púlpito.
+- Línea de tiempo de la trayectoria ministerial.
+- Fotografía pastoral principal.
+- Sección de ordenación y llamado pastoral.
+- Reconocimiento especial al Rev. Rodolfo Solórzano y la Pastora Masiel Solórzano.
+- Fotografía del Pastor Gilberto junto al Rev. Solórzano.
+- Enlace “El Pastor” añadido al menú.
+- Nueva presentación del testimonio en la página principal.

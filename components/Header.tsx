@@ -12,6 +12,7 @@ export default function Header() {
         <Link href="/predicaciones">Predicaciones</Link>
         <Link href="/primeros-pasos">Primeros pasos</Link>
         <Link href="/misiones">Misiones</Link>
+        <Link href="/el-pastor">El Pastor</Link>
         <Link href="/conexion">Conéctese</Link>
         <Link href="/admin" className="adminLink">Administrar</Link>
       </nav>

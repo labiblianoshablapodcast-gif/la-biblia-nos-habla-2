@@ -253,3 +253,16 @@ Esta es la última actualización de la jornada.
 4. En Supabase, vaya a Authentication → Users y cree el usuario pastoral.
 5. Ejecute la instrucción final comentada en el SQL, colocando el correo correcto.
 6. Abra `/login`.
+
+
+## Versión 3.0 — Misiones Guatemala
+
+- Nueva portada visual de Misiones.
+- Línea de tiempo de Cobán 2022 y Lanquín 2026.
+- Páginas individuales para cada misión.
+- Más de 30 fotografías integradas.
+- Galerías con vista de pantalla completa.
+- Historias misioneras y versículos.
+- Estadísticas del recorrido misionero.
+- Nueva sección visual de misiones en la página principal.
+- Diseño adaptable para teléfono, tableta y computadora.

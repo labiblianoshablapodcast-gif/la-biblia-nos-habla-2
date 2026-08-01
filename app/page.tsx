@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import SectionCard from "@/components/SectionCard";
 
@@ -20,6 +21,19 @@ export default function Home() {
         <SectionCard icon="🙏" title="Oración" description="Comparta su petición y reciba acompañamiento." href="/conexion"/>
         <SectionCard icon="🌎" title="Misiones" description="Cobán, Lanquín y el trabajo misionero." href="/misiones"/>
         <SectionCard icon="👤" title="Conozca al Pastor" description="Testimonio, llamado y cobertura ministerial." href="/pastor"/>
+      </div>
+    </section>
+
+
+    <section className="section homeMissionFeature">
+      <div className="homeMissionImage">
+        <Image src="/images/misiones/lanquin-templo-portada.png" alt="Misión Lanquín 2026" fill sizes="(max-width: 900px) 100vw, 50vw"/>
+      </div>
+      <div>
+        <p className="eyebrow">Misiones Guatemala</p>
+        <h2>De Cobán a Lanquín</h2>
+        <p className="lead">Conozca la historia de las misiones de 2022 y 2026, desde el evangelismo en Cobán hasta la inauguración del templo en Chicachuy.</p>
+        <Link className="btn" href="/misiones">Explorar las misiones</Link>
       </div>
     </section>
 

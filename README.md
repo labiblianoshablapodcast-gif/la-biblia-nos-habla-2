@@ -148,3 +148,71 @@ Variables en Vercel:
 ### Importante
 
 Favoritos, notas y última lectura se guardan actualmente en `localStorage`. Cuando conectemos Supabase y las cuentas de usuario, estos datos podrán sincronizarse entre iPhone, Mac y otros dispositivos.
+
+
+## Versión 2.5 — Panel Pastoral y Supabase
+
+Incluye:
+
+- Login privado con Supabase Auth.
+- Protección automática de todas las rutas `/admin`.
+- Cierre de sesión.
+- Panel con contadores en vivo.
+- Páginas administrativas para:
+  - Peticiones.
+  - Predicaciones.
+  - Devocionales.
+  - Eventos.
+  - Misiones.
+- Esquema SQL ampliado.
+- Row Level Security.
+- Roles:
+  - pastor
+  - secretary
+  - treasurer
+  - media
+  - member
+
+## Configuración
+
+### 1. Crear proyecto en Supabase
+
+Entre a Supabase y cree un proyecto nuevo.
+
+### 2. Ejecutar el esquema
+
+Abra SQL Editor y ejecute:
+
+`supabase-schema.sql`
+
+### 3. Crear el usuario pastoral
+
+En Authentication → Users, cree su usuario con correo y contraseña.
+
+### 4. Asignar rol pastoral
+
+Después de crear el usuario, ejecute en SQL Editor:
+
+```sql
+insert into public.profiles (id, full_name, role)
+select id, 'Pastor Gilberto Maldonado', 'pastor'
+from auth.users
+where email='SU_CORREO_AQUI';
+```
+
+### 5. Añadir variables en Vercel
+
+En Settings → Environment Variables:
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+
+Después haga Redeploy.
+
+### 6. Entrar
+
+Abra:
+
+`/login`
+
+Después de iniciar sesión será enviado al Panel Pastoral.

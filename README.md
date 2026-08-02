@@ -417,3 +417,23 @@ Esta versión usa las tablas ya creadas en Supabase y no requiere SQL nuevo.
 Ejecute la sección que comienza con:
 `-- Versión 7.0A: centro multimedia dinámico`
 en Supabase SQL Editor.
+
+
+## Versión 7.1 — Cierre Estable
+
+Esta versión organiza el cambio de base de datos en un archivo independiente:
+
+`supabase/001_media_items_7_1.sql`
+
+### Ventajas
+
+- No hace falta buscar bloques dentro de `supabase-schema.sql`.
+- El archivo puede ejecutarse completo en Supabase SQL Editor.
+- La tabla multimedia queda preparada con índices básicos.
+- Las políticas permiten lectura pública del contenido publicado.
+- Solamente el personal autenticado puede administrar multimedia.
+- Incluye instrucciones separadas para GitHub, Vercel y Supabase.
+
+### Mensaje recomendado para GitHub Desktop
+
+`Versión 7.1 - Cierre estable y Centro Multimedia`

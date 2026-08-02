@@ -162,3 +162,28 @@ on devotionals for all
 to authenticated
 using (public.is_staff())
 with check (public.is_staff());
+
+
+-- Versión 5.3: biblioteca de predicaciones
+alter table sermons add column if not exists scripture text;
+alter table sermons add column if not exists preacher text default 'Pastor Gilberto Maldonado';
+alter table sermons add column if not exists category text;
+alter table sermons add column if not exists youtube_url text;
+alter table sermons add column if not exists audio_url text;
+alter table sermons add column if not exists featured boolean default false;
+alter table sermons add column if not exists published boolean default true;
+alter table sermons add column if not exists created_by uuid references auth.users(id);
+
+alter table sermons enable row level security;
+
+drop policy if exists "Public reads published sermons" on sermons;
+create policy "Public reads published sermons"
+on sermons for select
+using (published=true or public.is_staff());
+
+drop policy if exists "Staff manages sermons" on sermons;
+create policy "Staff manages sermons"
+on sermons for all
+to authenticated
+using (public.is_staff())
+with check (public.is_staff());

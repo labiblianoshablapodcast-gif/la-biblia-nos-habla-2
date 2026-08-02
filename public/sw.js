@@ -1,42 +1,18 @@
-const CACHE_NAME="la-biblia-nos-habla-v3-3";
-const STATIC_ASSETS=[
-  "/",
-  "/biblia",
-  "/predicaciones",
-  "/misiones",
-  "/el-pastor",
-  "/youtube",
-  "/instalar",
-  "/icons/icon-192.png",
-  "/icons/icon-512.png"
-];
-
+const CACHE="labiblianoshabla-v5-3";
+const OFFLINE=["/","/biblia","/devocionales","/predicaciones","/iglesia"];
 self.addEventListener("install",event=>{
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache=>cache.addAll(STATIC_ASSETS))
-  );
-  self.skipWaiting();
+ event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(OFFLINE)));
+ self.skipWaiting();
 });
-
 self.addEventListener("activate",event=>{
-  event.waitUntil(
-    caches.keys().then(keys=>
-      Promise.all(keys.filter(key=>key!==CACHE_NAME).map(key=>caches.delete(key)))
-    )
-  );
-  self.clients.claim();
+ event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))));
+ self.clients.claim();
 });
-
 self.addEventListener("fetch",event=>{
-  if(event.request.method!=="GET") return;
-
-  event.respondWith(
-    fetch(event.request)
-      .then(response=>{
-        const copy=response.clone();
-        caches.open(CACHE_NAME).then(cache=>cache.put(event.request,copy));
-        return response;
-      })
-      .catch(()=>caches.match(event.request).then(cached=>cached || caches.match("/")))
-  );
+ if(event.request.method!=="GET") return;
+ event.respondWith(fetch(event.request).then(response=>{
+  const copy=response.clone();
+  caches.open(CACHE).then(cache=>cache.put(event.request,copy));
+  return response;
+ }).catch(()=>caches.match(event.request).then(response=>response||caches.match("/"))));
 });

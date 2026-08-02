@@ -358,3 +358,18 @@ Esta es la última actualización de la jornada.
 ### Paso obligatorio en Supabase
 Ejecute nuevamente `supabase-schema.sql` o la sección nueva de `supabase-2-7-security.sql`
 para crear la tabla `devotionals` y sus políticas.
+
+
+## Versión 5.3 — Biblioteca y Aplicación
+
+- Biblioteca pública de predicaciones con buscador.
+- Filtro por categoría.
+- Administración de predicaciones desde el Panel Pastoral.
+- Enlaces para video y audio.
+- Mensajes destacados.
+- Manifest y service worker para instalación tipo aplicación.
+- Instrucciones para instalar en iPhone y Android.
+- SQL actualizado para ampliar y proteger la tabla `sermons`.
+
+### Paso obligatorio
+Ejecute la sección de la versión 5.3 en `supabase-schema.sql`.

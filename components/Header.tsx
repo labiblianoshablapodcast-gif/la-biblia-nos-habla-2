@@ -21,6 +21,9 @@ export default function Header() {
               <Link href="/iglesia">Iglesia</Link>
               <Link href="/eventos">Eventos</Link>
               <Link href="/donaciones">Donar</Link>
+              <Link href="/podcast">Podcast</Link>
+              <Link href="/galeria">Galería</Link>
+              <Link href="/mapa-ministerial">Mapa</Link>
       </nav>
     </header>
   );

@@ -327,3 +327,18 @@ Esta es la última actualización de la jornada.
 - Eventos públicos desde Supabase.
 - Página profesional de diezmos, ofrendas y donaciones.
 - Preparada para conectar un proveedor seguro mediante `NEXT_PUBLIC_DONATION_URL`.
+
+
+## Versión 5.1 — Experiencia Premium
+
+- Página principal completamente rediseñada.
+- Hero fotográfico de alto impacto.
+- Accesos rápidos al contenido principal.
+- Trayectoria pastoral destacada.
+- Nueva página de podcast.
+- Nueva galería organizada por álbumes.
+- Nuevo mapa de la trayectoria ministerial.
+- Centro multimedia reforzado.
+- Diseño optimizado para teléfonos.
+- `.DS_Store` agregado a `.gitignore`.
+- Variables preparadas para Spotify, Apple Podcasts y Amazon Music.

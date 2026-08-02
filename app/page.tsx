@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SectionCard from "@/components/SectionCard";
 import {youtube} from "@/data/youtube";
+import {church} from "@/data/church";
 import InstallApp from "@/components/InstallApp";
 
 export default function Home() {
@@ -81,6 +82,25 @@ export default function Home() {
 
     <section className="section soft">
       <InstallApp/>
+    </section>
+
+
+    <section className="section homeChurchFeature">
+      <div>
+        <p className="eyebrow">Iglesia Príncipe de Paz</p>
+        <h2>Le esperamos esta semana</h2>
+        <div className="homeScheduleList">
+          {church.schedule.map(item=><div key={item.day}><strong>{item.day}</strong><span>{item.time} · {item.title}</span></div>)}
+        </div>
+        <div className="churchActions">
+          <Link className="btn" href="/iglesia">Ver iglesia y horarios</Link>
+          <Link className="btn secondaryDark" href="/donaciones">Diezmos y ofrendas</Link>
+        </div>
+      </div>
+      <div className="homeChurchAddress">
+        <span>📍</span><strong>{church.address}</strong>
+        <a href={church.mapsUrl} target="_blank" rel="noopener noreferrer">Cómo llegar →</a>
+      </div>
     </section>
 
     <section className="section dark">

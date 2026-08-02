@@ -387,3 +387,16 @@ Ejecute la sección de la versión 5.3 en `supabase-schema.sql`.
 - Diseño adaptable para computadora y teléfono.
 
 Esta versión usa las tablas ya creadas en Supabase y no requiere SQL nuevo.
+
+
+## Versión 6.0B — Experiencia del Visitante
+
+- Página principal más clara y pastoral.
+- Hero con mensaje directo y accesos principales.
+- Menú móvil tipo hamburguesa.
+- Accesos rápidos a Biblia, predicaciones, oración, nuevos creyentes, iglesia y misiones.
+- Horarios y ubicación destacados.
+- Testimonio pastoral visible desde Inicio.
+- Pie de página reorganizado.
+- Navegación optimizada para teléfonos.
+- No requiere cambios nuevos en Supabase.

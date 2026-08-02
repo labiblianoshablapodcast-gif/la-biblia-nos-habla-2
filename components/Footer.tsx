@@ -1,11 +1,37 @@
 import Link from "next/link";
-import {youtube} from "@/data/youtube";
 import {church} from "@/data/church";
+import {youtube} from "@/data/youtube";
 
 export default function Footer(){
- return <footer>
-  <div><strong>La Biblia Nos Habla</strong><p>Iglesia Príncipe de Paz · Philadelphia</p><p>{church.address}</p></div>
-  <div className="footerNav"><Link href="/iglesia">Horarios e iglesia</Link><Link href="/eventos">Eventos</Link><Link href="/donaciones">Diezmos y ofrendas</Link><Link href="/conexion">Contacto y oración</Link></div>
-  <div><p>{church.email}</p><p className="footerLinks"><a href={youtube.ministry.url} target="_blank" rel="noopener noreferrer">YouTube ministerial</a><br/><a href={youtube.pastor.url} target="_blank" rel="noopener noreferrer">YouTube pastoral</a></p></div>
- </footer>;
+  return <footer className="siteFooter">
+    <div className="footerAbout">
+      <strong>La Biblia Nos Habla</strong>
+      <p>Predicando la Palabra. Formando discípulos. Documentando la obra de Dios.</p>
+      <small>Toda la gloria sea para Jesucristo.</small>
+    </div>
+
+    <div>
+      <h3>Explore</h3>
+      <Link href="/biblia">Biblia</Link>
+      <Link href="/predicaciones">Predicaciones</Link>
+      <Link href="/devocionales">Devocionales</Link>
+      <Link href="/misiones">Misiones</Link>
+    </div>
+
+    <div>
+      <h3>Iglesia</h3>
+      <Link href="/iglesia">Horarios y ubicación</Link>
+      <Link href="/eventos">Eventos</Link>
+      <Link href="/conexion">Contacto y oración</Link>
+      <Link href="/donaciones">Diezmos y ofrendas</Link>
+    </div>
+
+    <div>
+      <h3>Conéctese</h3>
+      <a href={youtube.ministry.url} target="_blank" rel="noopener noreferrer">YouTube ministerial</a>
+      <a href={youtube.pastor.url} target="_blank" rel="noopener noreferrer">YouTube pastoral</a>
+      <a href={`mailto:${church.email}`}>{church.email}</a>
+      <small>{church.address}</small>
+    </div>
+  </footer>;
 }

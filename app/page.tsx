@@ -1,120 +1,133 @@
 import Image from "next/image";
 import Link from "next/link";
-import SectionCard from "@/components/SectionCard";
-import {youtube} from "@/data/youtube";
 import {church} from "@/data/church";
+import {youtube} from "@/data/youtube";
 import InstallApp from "@/components/InstallApp";
 
-export default function Home() {
+const quickLinks=[
+  {icon:"📖",title:"Leer la Biblia",text:"Acceda a los 66 libros y encuentre una palabra para hoy.",href:"/biblia"},
+  {icon:"🎙️",title:"Ver predicaciones",text:"Mensajes, estudios y enseñanzas para fortalecer su fe.",href:"/predicaciones"},
+  {icon:"🙏",title:"Pedir oración",text:"Comparta su necesidad con nuestro equipo pastoral.",href:"/conexion"},
+  {icon:"❤️",title:"Acepté a Cristo",text:"Comience sus primeros pasos en una nueva vida con Jesús.",href:"/primeros-pasos"},
+  {icon:"⛪",title:"Visitar la iglesia",text:"Conozca nuestros horarios y cómo llegar.",href:"/iglesia"},
+  {icon:"🌎",title:"Conocer las misiones",text:"Descubra lo que Dios ha hecho en Cobán y Lanquín.",href:"/misiones"}
+];
+
+export default function Home(){
   return <>
-    <section className="premiumHero">
+    <section className="visitorHero">
       <Image
         src="/images/pastor/pastor-gilberto.webp"
-        alt="Pastor Gilberto Maldonado"
+        alt="Pastor Gilberto Maldonado predicando"
         fill
         priority
         sizes="100vw"
-        className="premiumHeroImage"
       />
-      <div className="premiumHeroOverlay"/>
-      <div className="premiumHeroContent">
-        <p className="eyebrow">La Biblia Nos Habla · Plataforma Ministerial</p>
-        <h1>Predicando el Evangelio de Jesucristo al mundo.</h1>
+      <div className="visitorHeroOverlay"></div>
+      <div className="visitorHeroContent">
+        <p className="eyebrow">Bienvenido a La Biblia Nos Habla</p>
+        <h1>Una palabra de esperanza para su vida.</h1>
         <p>
-          Biblia, predicaciones, discipulado, misiones, oración y cuidado pastoral
-          desde la Iglesia Príncipe de Paz en Philadelphia.
+          Aquí encontrará la Biblia, predicaciones, devocionales, misiones y una
+          iglesia donde será bienvenido.
         </p>
-        <div className="premiumHeroActions">
-          <a className="btn" href={youtube.pastor.videos} target="_blank" rel="noopener noreferrer">▶ Ver el último mensaje</a>
-          <Link className="btn secondary" href="/biblia">📖 Leer la Biblia</Link>
+        <div className="visitorHeroActions">
+          <Link className="btn" href="/biblia">📖 Leer la Biblia</Link>
+          <a className="btn secondary" href={youtube.pastor.videos} target="_blank" rel="noopener noreferrer">▶ Ver el último mensaje</a>
           <Link className="btn secondary" href="/conexion">🙏 Necesito oración</Link>
         </div>
       </div>
-      <div className="premiumHeroStats">
-        <div><strong>66</strong><span>Libros de la Biblia</span></div>
-        <div><strong>2</strong><span>Misiones documentadas</span></div>
-        <div><strong>4</strong><span>Reuniones semanales</span></div>
+    </section>
+
+    <section className="section visitorQuickSection">
+      <div className="sectionHeadingCentered">
+        <p className="eyebrow">¿Qué está buscando?</p>
+        <h2>Comience aquí</h2>
+        <p>Seleccione una opción y encuentre rápidamente el recurso que necesita.</p>
+      </div>
+
+      <div className="visitorQuickGrid">
+        {quickLinks.map(item=>(
+          <Link className="visitorQuickCard" href={item.href} key={item.title}>
+            <span>{item.icon}</span>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+            <strong>Abrir →</strong>
+          </Link>
+        ))}
       </div>
     </section>
 
-    <section className="section quickAccessSection">
-      <p className="eyebrow">Acceso rápido</p>
-      <h2>Todo el ministerio en un solo lugar</h2>
-      <div className="grid">
-        <SectionCard icon="📖" title="Biblia completa" description="Los 66 libros, capítulos y búsqueda." href="/biblia"/>
-        <SectionCard icon="🎙️" title="Predicaciones" description="Mensajes, podcast y estudios bíblicos." href="/predicaciones"/>
-        <SectionCard icon="🌎" title="Misiones" description="Cobán 2022 y Lanquín 2026." href="/misiones"/>
-        <SectionCard icon="👤" title="Trayectoria pastoral" description="Testimonio, llamado y servicio." href="/el-pastor"/>
-        <SectionCard icon="⛪" title="La Iglesia" description="Horarios, dirección y contacto." href="/iglesia"/>
-        <SectionCard icon="♥" title="Donaciones" description="Diezmos, ofrendas y apoyo misionero." href="/donaciones"/>
+    <section className="section visitorMessage">
+      <div className="visitorMessageImage">
+        <Image
+          src="/images/misiones/lanquin-templo-portada.png"
+          alt="Misión Lanquín 2026"
+          fill
+          sizes="(max-width: 900px) 100vw, 50vw"
+        />
+      </div>
+      <div>
+        <p className="eyebrow">La obra continúa</p>
+        <h2>Predicando, formando discípulos y sirviendo a las comunidades.</h2>
+        <p className="lead">
+          Desde Philadelphia hasta las montañas de Guatemala, seguimos proclamando
+          que Jesucristo salva, restaura y transforma vidas.
+        </p>
+        <div className="visitorHeroActions">
+          <Link className="btn" href="/misiones">Ver las misiones</Link>
+          <Link className="btn secondaryDark" href="/el-pastor">Conocer la trayectoria pastoral</Link>
+        </div>
       </div>
     </section>
 
-    <section className="section premiumStory">
-      <div className="premiumStoryImage">
-        <Image src="/images/pastor/pastor-gilberto-rev-solorzano.webp" alt="Trayectoria y cobertura ministerial" fill sizes="(max-width: 900px) 100vw, 50vw"/>
+    <section className="section soft visitorChurch">
+      <div>
+        <p className="eyebrow">Iglesia Príncipe de Paz Philadelphia</p>
+        <h2>Le esperamos esta semana</h2>
+        <p className="lead">Venga como está. Será recibido con amor y respeto.</p>
+
+        <div className="visitorSchedule">
+          {church.schedule.map(item=>(
+            <article key={item.day}>
+              <small>{item.day}</small>
+              <strong>{item.time}</strong>
+              <span>{item.title}</span>
+            </article>
+          ))}
+        </div>
+
+        <div className="visitorHeroActions">
+          <Link className="btn" href="/iglesia">Ver todos los detalles</Link>
+          <a className="btn secondaryDark" href={church.mapsUrl} target="_blank" rel="noopener noreferrer">Cómo llegar</a>
+        </div>
       </div>
+
+      <aside className="visitorChurchCard">
+        <span>📍</span>
+        <h3>{church.address}</h3>
+        <p>Philadelphia, Pennsylvania</p>
+        <Link href="/eventos">Ver próximos eventos →</Link>
+      </aside>
+    </section>
+
+    <section className="section visitorTestimony">
       <div>
         <p className="eyebrow">Rescatado con propósito</p>
-        <h2>Una historia de gracia, llamado y servicio</h2>
+        <h2>Ninguna vida está demasiado lejos para la gracia de Dios.</h2>
         <p className="lead">
-          De la prisión al púlpito: el testimonio del Pastor Gilberto Maldonado
-          proclama que ninguna vida está fuera del alcance de Jesucristo.
+          Conozca el testimonio del Pastor Gilberto Maldonado: una historia de
+          redención, llamado y servicio para la gloria de Jesucristo.
         </p>
-        <div className="premiumStoryActions">
-          <Link className="btn" href="/el-pastor">Conocer la trayectoria</Link>
-          <Link className="btn secondaryDark" href="/mapa-ministerial">Ver mapa ministerial</Link>
-        </div>
+        <Link className="btn" href="/el-pastor">Leer el testimonio</Link>
       </div>
-    </section>
-
-    <section className="section homeMissionFeature">
-      <div className="homeMissionImage">
-        <Image src="/images/misiones/lanquin-templo-portada.png" alt="Misión Lanquín 2026" fill sizes="(max-width: 900px) 100vw, 50vw"/>
-      </div>
-      <div>
-        <p className="eyebrow">Misiones Guatemala</p>
-        <h2>De Cobán a Lanquín</h2>
-        <p className="lead">Evangelismo, fortalecimiento de iglesias e inauguración del templo en Chicachuy.</p>
-        <div className="premiumStoryActions">
-          <Link className="btn" href="/misiones">Explorar las misiones</Link>
-          <Link className="btn secondaryDark" href="/galeria">Abrir galería</Link>
-        </div>
-      </div>
-    </section>
-
-    <section className="section premiumMediaSection">
-      <div>
-        <p className="eyebrow">Centro multimedia</p>
-        <h2>Predicaciones, podcast y transmisiones</h2>
-        <p className="lead">Conéctese con el contenido oficial del ministerio en YouTube y otras plataformas.</p>
-        <div className="youtubeActions">
-          <Link className="btn" href="/multimedia">Abrir multimedia</Link>
-          <Link className="btn secondaryDark" href="/podcast">Escuchar podcast</Link>
-        </div>
-      </div>
-      <div className="premiumMediaPanel">
-        <span>▶</span>
-        <strong>La Palabra sigue llegando</strong>
-        <p>Mensajes para fortalecer la fe, formar discípulos y anunciar a Jesucristo.</p>
-      </div>
-    </section>
-
-    <section className="section homeChurchFeature">
-      <div>
-        <p className="eyebrow">Iglesia Príncipe de Paz</p>
-        <h2>Le esperamos esta semana</h2>
-        <div className="homeScheduleList">
-          {church.schedule.map(item=><div key={item.day}><strong>{item.day}</strong><span>{item.time} · {item.title}</span></div>)}
-        </div>
-        <div className="churchActions">
-          <Link className="btn" href="/iglesia">Horarios y ubicación</Link>
-          <Link className="btn secondaryDark" href="/eventos">Próximos eventos</Link>
-        </div>
-      </div>
-      <div className="homeChurchAddress">
-        <span>📍</span><strong>{church.address}</strong>
-        <a href={church.mapsUrl} target="_blank" rel="noopener noreferrer">Cómo llegar →</a>
+      <div className="visitorTestimonyImage">
+        <Image
+          src="/images/pastor/pastor-gilberto-rev-solorzano.webp"
+          alt="Pastor Gilberto Maldonado y Rev. Rodolfo Solórzano"
+          fill
+          sizes="(max-width: 900px) 100vw, 50vw"
+        />
       </div>
     </section>
 
@@ -122,11 +135,11 @@ export default function Home() {
       <InstallApp/>
     </section>
 
-    <section className="section dark premiumClosing">
-      <p className="eyebrow">Hay esperanza en Cristo</p>
-      <h2>Ninguna vida está demasiado lejos para la gracia de Dios.</h2>
-      <p className="lead">Estamos aquí para orar, acompañar y compartir la Palabra con usted.</p>
-      <Link className="btn" href="/conexion">Conectarme con el ministerio</Link>
+    <section className="section dark visitorClosing">
+      <p className="eyebrow">Estamos para servirle</p>
+      <h2>¿Necesita oración, consejería o desea aceptar a Cristo?</h2>
+      <p>Puede comunicarse con nosotros de manera sencilla y confidencial.</p>
+      <Link className="btn" href="/conexion">Abrir Centro de Conexión</Link>
     </section>
   </>;
 }

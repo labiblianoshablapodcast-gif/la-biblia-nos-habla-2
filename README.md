@@ -342,3 +342,19 @@ Esta es la última actualización de la jornada.
 - Diseño optimizado para teléfonos.
 - `.DS_Store` agregado a `.gitignore`.
 - Variables preparadas para Spotify, Apple Podcasts y Amazon Music.
+
+
+## Versión 5.2 — Contenido Dinámico
+
+- Devocionales públicos conectados a Supabase.
+- Publicación y eliminación de devocionales desde el Panel Pastoral.
+- Posibilidad de destacar un devocional.
+- Administración real de eventos desde el panel.
+- Mensaje destacado configurable.
+- Navegación inferior tipo aplicación para teléfonos.
+- Contador de devocionales en el panel.
+- SQL actualizado con tabla y políticas de seguridad para `devotionals`.
+
+### Paso obligatorio en Supabase
+Ejecute nuevamente `supabase-schema.sql` o la sección nueva de `supabase-2-7-security.sql`
+para crear la tabla `devotionals` y sus políticas.

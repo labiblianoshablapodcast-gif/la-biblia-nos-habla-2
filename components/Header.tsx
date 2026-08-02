@@ -24,6 +24,7 @@ export default function Header() {
               <Link href="/podcast">Podcast</Link>
               <Link href="/galeria">Galería</Link>
               <Link href="/mapa-ministerial">Mapa</Link>
+              <Link href="/devocionales">Devocionales</Link>
       </nav>
     </header>
   );

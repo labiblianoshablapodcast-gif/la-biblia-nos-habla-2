@@ -1,60 +1,94 @@
-import Link from "next/link";
+import MediaCard from "@/components/MediaCard";
+import {createClient} from "@/lib/supabase/server";
 import {youtube} from "@/data/youtube";
 
-export default function Multimedia(){
+export default async function Multimedia({
+  searchParams
+}:{
+  searchParams:Promise<{tipo?:string;categoria?:string}>
+}){
+  const params=await searchParams;
+  const type=(params.tipo||"").trim();
+  const category=(params.categoria||"").trim();
+
+  const supabase=await createClient();
+  let query=supabase
+    .from("media_items")
+    .select("*")
+    .eq("published",true)
+    .order("featured",{ascending:false})
+    .order("created_at",{ascending:false});
+
+  if(type) query=query.eq("media_type",type);
+  if(category) query=query.eq("category",category);
+
+  const {data,error}=await query.limit(48);
+  const {data:categoryRows}=await supabase
+    .from("media_items")
+    .select("category")
+    .eq("published",true)
+    .not("category","is",null);
+
+  const categories=[...new Set((categoryRows??[]).map(item=>item.category).filter(Boolean))];
+
   return <>
     <section className="pageHero multimediaHero">
-      <p className="eyebrow">Centro multimedia 4.0</p>
-      <h1>Predicaciones, podcast y transmisiones</h1>
-      <p>Todo el contenido oficial del ministerio reunido en un solo lugar.</p>
+      <p className="eyebrow">Centro Multimedia</p>
+      <h1>Vea, escuche y comparta la Palabra.</h1>
+      <p>Predicaciones, podcast, audios, Shorts y transmisiones reunidos en un solo lugar.</p>
     </section>
 
-    <section className="section">
-      <div className="mediaChannelGrid">
-        <article className="mediaChannelCard">
-          <span className="mediaPlay">▶</span>
-          <p className="eyebrow">Canal ministerial</p>
-          <h2>{youtube.ministry.name}</h2>
-          <p>Podcast, estudios bíblicos, misiones y contenido para el crecimiento espiritual.</p>
-          <div className="youtubeActions">
-            <a className="btn" href={youtube.ministry.url} target="_blank" rel="noopener noreferrer">Abrir canal</a>
-            <a className="btn secondaryDark" href={youtube.ministry.videos} target="_blank" rel="noopener noreferrer">Videos</a>
-            <a className="btn secondaryDark" href={youtube.ministry.shorts} target="_blank" rel="noopener noreferrer">Shorts</a>
-          </div>
-        </article>
-
-        <article className="mediaChannelCard">
-          <span className="mediaPlay">▶</span>
-          <p className="eyebrow">Canal pastoral</p>
-          <h2>{youtube.pastor.name}</h2>
-          <p>Predicaciones, enseñanzas, testimonios y contenido del ministerio pastoral.</p>
-          <div className="youtubeActions">
-            <a className="btn" href={youtube.pastor.url} target="_blank" rel="noopener noreferrer">Abrir canal</a>
-            <a className="btn secondaryDark" href={youtube.pastor.videos} target="_blank" rel="noopener noreferrer">Videos</a>
-            <a className="btn secondaryDark" href={youtube.pastor.shorts} target="_blank" rel="noopener noreferrer">Shorts</a>
-          </div>
-        </article>
+    <section className="section mediaChannelStrip">
+      <div>
+        <p className="eyebrow">Canales oficiales</p>
+        <h2>Conéctese directamente</h2>
+      </div>
+      <div className="mediaChannelActions">
+        <a className="btn" href={youtube.ministry.url} target="_blank" rel="noopener noreferrer">La Biblia Nos Habla</a>
+        <a className="btn secondaryDark" href={youtube.pastor.url} target="_blank" rel="noopener noreferrer">Pastor Gilberto</a>
+        <a className="btn secondaryDark" href={youtube.ministry.live} target="_blank" rel="noopener noreferrer">Transmisiones en vivo</a>
       </div>
     </section>
 
-    <section className="section dark mediaLive">
-      <p className="eyebrow">Transmisiones en vivo</p>
-      <h2>Conéctese con nosotros</h2>
-      <p>Abra directamente la página de transmisiones de cualquiera de los dos canales.</p>
-      <div className="youtubeActions centered">
-        <a className="btn" href={youtube.ministry.live} target="_blank" rel="noopener noreferrer">La Biblia Nos Habla en vivo</a>
-        <a className="btn secondary" href={youtube.pastor.live} target="_blank" rel="noopener noreferrer">Pastor Gilberto en vivo</a>
+    <section className="section soft">
+      <form className="mediaFilters">
+        <select name="tipo" defaultValue={type}>
+          <option value="">Todo el contenido</option>
+          <option value="video">Videos</option>
+          <option value="short">Shorts</option>
+          <option value="podcast">Podcast</option>
+          <option value="audio">Audio</option>
+          <option value="live">En vivo</option>
+        </select>
+
+        <select name="categoria" defaultValue={category}>
+          <option value="">Todas las categorías</option>
+          {categories.map(item=><option key={item} value={item}>{item}</option>)}
+        </select>
+
+        <button className="btn" type="submit">Filtrar</button>
+      </form>
+
+      {error&&<div className="notice">
+        <strong>El Centro Multimedia está preparado.</strong>
+        <p>Ejecute la sección SQL de la versión 7.0A en Supabase para publicar contenido dinámico.</p>
+      </div>}
+
+      <div className="mediaLibraryGrid">
+        {(data??[]).map(item=><MediaCard item={item} key={item.id}/>)}
+
+        {!data?.length&&!error&&<div className="notice">
+          <strong>Próximamente habrá contenido publicado aquí.</strong>
+          <p>Mientras tanto puede visitar los canales oficiales de YouTube.</p>
+        </div>}
       </div>
     </section>
 
-    <section className="section mediaCategories">
-      <p className="eyebrow">Explore por contenido</p>
-      <h2>Todo el ministerio en video</h2>
-      <div className="grid">
-        <Link className="sectionCard" href="/predicaciones"><span>🎙️</span><h3>Predicaciones</h3><p>Mensajes y enseñanzas bíblicas.</p></Link>
-        <Link className="sectionCard" href="/misiones"><span>🌎</span><h3>Misiones</h3><p>Videos y memorias de Guatemala.</p></Link>
-        <Link className="sectionCard" href="/primeros-pasos"><span>🌱</span><h3>Discipulado</h3><p>Contenido para nuevos creyentes.</p></Link>
-      </div>
+    <section className="section dark multimediaClosing">
+      <p className="eyebrow">Comparta el mensaje</p>
+      <h2>Una palabra compartida puede alcanzar una vida.</h2>
+      <p>Suscríbase, comparta los mensajes y ayúdenos a llevar el Evangelio más lejos.</p>
+      <a className="btn" href={youtube.ministry.url} target="_blank" rel="noopener noreferrer">Suscribirme en YouTube</a>
     </section>
   </>;
 }

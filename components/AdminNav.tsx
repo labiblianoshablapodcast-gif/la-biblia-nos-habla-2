@@ -4,6 +4,7 @@ import SignOutButton from "@/components/SignOutButton";
 const sections=[
   ["Resumen","/admin","⌂"],
   ["Predicaciones","/admin/predicaciones","🎙"],
+  ["Multimedia","/admin/multimedia","▶"],
   ["Devocionales","/admin/devocionales","☀"],
   ["Eventos","/admin/eventos","📅"],
   ["Peticiones","/admin/peticiones","🙏"],

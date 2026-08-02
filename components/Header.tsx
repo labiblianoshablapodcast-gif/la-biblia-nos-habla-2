@@ -14,6 +14,7 @@ export default function Header(){
     <nav className="desktopNav">
       <Link href="/biblia">Biblia</Link>
       <Link href="/predicaciones">Predicaciones</Link>
+      <Link href="/multimedia">Multimedia</Link>
       <Link href="/devocionales">Devocionales</Link>
       <Link href="/misiones">Misiones</Link>
       <Link href="/iglesia">Iglesia</Link>

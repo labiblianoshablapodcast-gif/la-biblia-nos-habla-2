@@ -400,3 +400,20 @@ Esta versión usa las tablas ya creadas en Supabase y no requiere SQL nuevo.
 - Pie de página reorganizado.
 - Navegación optimizada para teléfonos.
 - No requiere cambios nuevos en Supabase.
+
+
+## Versión 7.0A — Centro Multimedia Dinámico
+
+- Página unificada para videos, Shorts, podcast, audio y transmisiones.
+- Filtros por tipo y categoría.
+- Tarjetas con miniaturas automáticas de YouTube.
+- Administración multimedia desde el Panel Pastoral.
+- Publicación, borradores y contenido destacado.
+- Series y textos bíblicos para organizar el contenido.
+- Accesos directos a los canales oficiales.
+- SQL nuevo para la tabla `media_items`.
+
+### Paso obligatorio
+Ejecute la sección que comienza con:
+`-- Versión 7.0A: centro multimedia dinámico`
+en Supabase SQL Editor.

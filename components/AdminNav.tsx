@@ -1,21 +1,29 @@
 import Link from "next/link";
 import SignOutButton from "@/components/SignOutButton";
 
-const items=[
-  ["Resumen","/admin"],
-  ["Peticiones","/admin/peticiones"],
-  ["Nuevos creyentes","/admin/nuevos-creyentes"],
-  ["Predicaciones","/admin/predicaciones"],
-  ["Devocionales","/admin/devocionales"],
-  ["Eventos","/admin/eventos"],
-  ["Misiones","/admin/misiones"],
-  ["Configuración","/admin/configuracion"]
+const sections=[
+  ["Resumen","/admin","⌂"],
+  ["Predicaciones","/admin/predicaciones","🎙"],
+  ["Devocionales","/admin/devocionales","☀"],
+  ["Eventos","/admin/eventos","📅"],
+  ["Peticiones","/admin/peticiones","🙏"],
+  ["Nuevos creyentes","/admin/nuevos-creyentes","♥"],
+  ["Misiones","/admin/misiones","🌎"],
+  ["Configuración","/admin/configuracion","⚙"]
 ];
 
 export default function AdminNav(){
-  return <aside className="adminNav">
-    <h2>Panel Pastoral</h2>
-    {items.map(([label,href])=><Link href={href} key={href}>{label}</Link>)}
-    <SignOutButton/>
-  </aside>;
+ return <aside className="adminNav adminNavPro">
+  <div className="adminBrand">
+   <span>LB</span>
+   <div><strong>Panel Pastoral</strong><small>La Biblia Nos Habla</small></div>
+  </div>
+  <nav>
+   {sections.map(([label,href,icon])=><Link href={href} key={href}><span>{icon}</span>{label}</Link>)}
+  </nav>
+  <div className="adminNavFooter">
+   <Link href="/">Ver sitio público</Link>
+   <SignOutButton/>
+  </div>
+ </aside>;
 }

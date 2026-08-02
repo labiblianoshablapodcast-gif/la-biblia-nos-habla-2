@@ -373,3 +373,17 @@ para crear la tabla `devotionals` y sus políticas.
 
 ### Paso obligatorio
 Ejecute la sección de la versión 5.3 en `supabase-schema.sql`.
+
+
+## Versión 6.0A — Panel Pastoral Completo
+
+- Panel principal completamente rediseñado.
+- Resumen de peticiones, creyentes, predicaciones, devocionales y eventos.
+- Acciones rápidas para publicar contenido.
+- Listas de seguimiento reciente.
+- Navegación administrativa profesional.
+- Página de configuración y estado del sistema.
+- Acceso rápido al sitio público.
+- Diseño adaptable para computadora y teléfono.
+
+Esta versión usa las tablas ya creadas en Supabase y no requiere SQL nuevo.

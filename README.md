@@ -316,3 +316,14 @@ Esta es la última actualización de la jornada.
 - Menú actualizado con Multimedia.
 - Página YouTube renovada.
 - Corrección aplicada en Inicio, Predicaciones, Misiones, El Pastor y el pie de página.
+
+
+## Versión 5.0A — Iglesia, horarios, eventos y donaciones
+
+- Página pública de la iglesia.
+- Horarios semanales.
+- Dirección y Google Maps.
+- Estudio bíblico virtual por WhatsApp.
+- Eventos públicos desde Supabase.
+- Página profesional de diezmos, ofrendas y donaciones.
+- Preparada para conectar un proveedor seguro mediante `NEXT_PUBLIC_DONATION_URL`.

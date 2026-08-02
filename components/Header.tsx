@@ -18,6 +18,9 @@ export default function Header() {
         <Link href="/el-pastor">El Pastor</Link>
         <Link href="/conexion">Conéctese</Link>
         <Link href="/admin" className="adminLink">Administrar</Link>
+              <Link href="/iglesia">Iglesia</Link>
+              <Link href="/eventos">Eventos</Link>
+              <Link href="/donaciones">Donar</Link>
       </nav>
     </header>
   );

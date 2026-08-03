@@ -448,3 +448,15 @@ Esta versión organiza el cambio de base de datos en un archivo independiente:
 - Estados publicado/borrador y mensaje destacado.
 - Diagnóstico de conexión con Supabase.
 - Migración independiente `supabase/002_centro_pastoral_8_0A.sql`.
+
+
+## Versión 8.2A — Predicaciones Pro
+
+- Editor enriquecido sin dependencias externas.
+- Slug automático y URL individual.
+- Categorías y series administrables.
+- Borradores y publicación inmediata.
+- SEO por predicación.
+- Biblioteca pública con filtros.
+- Página individual para bosquejo, video, audio y PDF.
+- Migración: `supabase/003_predicaciones_pro_8_2A.sql`.

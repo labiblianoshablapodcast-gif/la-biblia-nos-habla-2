@@ -4,6 +4,7 @@ import {createClient} from "@/lib/supabase/server";
 
 export default async function Admin(){
  const supabase=await createClient();
+ const {data:{user}}=await supabase.auth.getUser();
 
  const [
   {count:requests},
@@ -30,6 +31,7 @@ export default async function Admin(){
     <div>
      <p className="eyebrow">Centro de administración</p>
      <h1>Bienvenido, Pastor Gilberto</h1>
+     <small className="adminUserEmail">{user?.email}</small>
      <p>Administre el contenido y el seguimiento pastoral desde un solo lugar.</p>
     </div>
     <div className="adminQuickActions">

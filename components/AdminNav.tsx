@@ -10,7 +10,8 @@ const sections=[
   ["Peticiones","/admin/peticiones","🙏"],
   ["Nuevos creyentes","/admin/nuevos-creyentes","♥"],
   ["Misiones","/admin/misiones","🌎"],
-  ["Configuración","/admin/configuracion","⚙"]
+  ["Configuración","/admin/configuracion","⚙"],
+  ["Estado Supabase","/admin/configuracion/supabase","●"]
 ];
 
 export default function AdminNav(){

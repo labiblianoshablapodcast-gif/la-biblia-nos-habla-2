@@ -437,3 +437,14 @@ Esta versión organiza el cambio de base de datos en un archivo independiente:
 ### Mensaje recomendado para GitHub Desktop
 
 `Versión 7.1 - Cierre estable y Centro Multimedia`
+
+
+## Versión 8.0A — Centro Pastoral
+
+- Login con Supabase Auth.
+- Dashboard pastoral protegido.
+- Administración ampliada de predicaciones.
+- Bosquejo, serie, PDF, audio, video y miniatura.
+- Estados publicado/borrador y mensaje destacado.
+- Diagnóstico de conexión con Supabase.
+- Migración independiente `supabase/002_centro_pastoral_8_0A.sql`.

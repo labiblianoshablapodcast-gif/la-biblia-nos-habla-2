@@ -460,3 +460,14 @@ Esta versión organiza el cambio de base de datos en un archivo independiente:
 - Biblioteca pública con filtros.
 - Página individual para bosquejo, video, audio y PDF.
 - Migración: `supabase/003_predicaciones_pro_8_2A.sql`.
+
+
+## Versión 8.3A — Editor Profesional de Predicaciones
+
+- Guardado automático local mientras se escribe.
+- Vista previa antes de publicar.
+- Edición de predicaciones existentes.
+- Subtítulo, etiquetas y programación de publicación.
+- Undo/redo y citas bíblicas en el editor.
+- Página individual mejorada con subtítulo y etiquetas.
+- Migración independiente `supabase/004_editor_profesional_8_3A.sql`.

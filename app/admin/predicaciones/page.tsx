@@ -22,6 +22,7 @@ async function createSermon(formData:FormData){
     preacher:String(formData.get("preacher")||"Pastor Gilberto Maldonado").trim(),
     category:String(formData.get("category")||"").trim(),
     series_name:String(formData.get("series_name")||"").trim(),
+    subtitle:String(formData.get("subtitle")||"").trim(),
     summary:String(formData.get("summary")||"").trim(),
     description:String(formData.get("summary")||"").trim(),
     content_html:String(formData.get("content_html")||"").trim(),
@@ -32,6 +33,8 @@ async function createSermon(formData:FormData){
     thumbnail_url:String(formData.get("thumbnail_url")||"").trim(),
     seo_title:String(formData.get("seo_title")||title).trim(),
     seo_description:String(formData.get("seo_description")||formData.get("summary")||"").trim(),
+    tags:String(formData.get("tags")||"").split(",").map(x=>x.trim()).filter(Boolean),
+    scheduled_at:String(formData.get("scheduled_at")||"")||null,
     status,published,
     published_at:published?new Date().toISOString():null,
     featured:formData.get("featured")==="on",
@@ -73,12 +76,12 @@ export default async function PredicacionesAdmin({searchParams}:{searchParams:Pr
     <AdminNav/>
     <main className="adminMain">
       <div className="adminPageIntro">
-        <div><p className="eyebrow">Predicaciones Pro 8.2A</p><h1>Nueva predicación</h1><p>Prepare el mensaje, guárdelo como borrador o publíquelo inmediatamente.</p></div>
+        <div><p className="eyebrow">Editor Profesional 8.3A</p><h1>Nueva predicación</h1><p>Prepare el mensaje, guárdelo como borrador o publíquelo inmediatamente.</p></div>
         <a className="btn secondaryDark" href="/predicaciones" target="_blank">Ver biblioteca pública</a>
       </div>
 
       {params.success&&<div className="successNotice"><strong>Predicación guardada correctamente.</strong></div>}
-      {(params.error||error)&&<div className="notice"><strong>Falta completar la actualización.</strong><p>{params.error||error?.message}</p><p>Ejecute <code>supabase/003_predicaciones_pro_8_2A.sql</code>.</p></div>}
+      {(params.error||error)&&<div className="notice"><strong>Falta completar la actualización.</strong><p>{params.error||error?.message}</p><p>Ejecute <code>supabase/004_editor_profesional_8_3A.sql</code>.</p></div>}
 
       <form action={createSermon} className="adminForm sermonProForm">
         <div className="adminFormGrid">
@@ -94,6 +97,8 @@ export default async function PredicacionesAdmin({searchParams}:{searchParams:Pr
             <datalist id="sermon-series">{(series??[]).map(item=><option value={item.name} key={item.id}/>)}</datalist>
           </label>
           <label className="wideField">Resumen<textarea name="summary" rows={4} placeholder="Descripción breve para la biblioteca y Google…"/></label>
+          <label className="wideField">Etiquetas<input name="tags" placeholder="fe, familia, Espíritu Santo (separadas por comas)"/></label>
+          <label>Programar publicación<input name="scheduled_at" type="datetime-local"/></label>
           <label>YouTube<input name="youtube_url" type="url"/></label>
           <label>Audio<input name="audio_url" type="url"/></label>
           <label>PDF<input name="pdf_url" type="url"/></label>
@@ -114,7 +119,7 @@ export default async function PredicacionesAdmin({searchParams}:{searchParams:Pr
           {(sermons??[]).map(item=><article key={item.id}>
             <div className="adminSermonStatus"><span className={item.published?"statusPublished":"statusDraft"}>{item.published?"Publicado":"Borrador"}</span>{item.featured&&<span className="statusFeatured">Destacado</span>}</div>
             <div><h3>{item.title}</h3><p>{item.scripture||"Sin texto"} {item.category?`· ${item.category}`:""} {item.series_name?`· ${item.series_name}`:""}</p><small>/predicaciones/{item.slug||item.id}</small></div>
-            <div className="adminItemActions">{item.published&&item.slug&&<a href={`/predicaciones/${item.slug}`} target="_blank">Ver</a>}<form action={deleteSermon}><input type="hidden" name="id" value={item.id}/><button className="dangerButton" type="submit">Eliminar</button></form></div>
+            <div className="adminItemActions"><a href={`/admin/predicaciones/${item.id}/editar`}>Editar</a>{item.published&&item.slug&&<a href={`/predicaciones/${item.slug}`} target="_blank">Ver</a>}<form action={deleteSermon}><input type="hidden" name="id" value={item.id}/><button className="dangerButton" type="submit">Eliminar</button></form></div>
           </article>)}
           {!sermons?.length&&!error&&<div className="notice"><p>Todavía no hay predicaciones guardadas.</p></div>}
         </div>

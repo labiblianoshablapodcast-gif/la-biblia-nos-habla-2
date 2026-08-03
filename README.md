@@ -1,3 +1,7 @@
+# La Biblia Nos Habla 9.0 — Pulido Final
+
+Versión final del Home con fotografías reales del proyecto, botones compactos, encuadre corregido del Hero y presentación profesional de los horarios y la ubicación de Iglesia Príncipe de Paz Philadelphia.
+
 # La Biblia Nos Habla 2.1 — Next.js
 
 Primera base profesional de la nueva Plataforma Ministerial.

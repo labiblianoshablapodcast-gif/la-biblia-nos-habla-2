@@ -76,7 +76,7 @@ export default function Home(){
         </p>
         <div className="visitorHeroActions">
           <Link className="btn" href="/misiones">Ver las misiones</Link>
-          <Link className="btn secondaryDark" href="/el-pastor">Conocer la trayectoria pastoral</Link>
+          <Link className="btn secondaryDark" href="/el-pastor">Conozca a sus Pastores</Link>
         </div>
       </div>
     </section>
@@ -119,7 +119,7 @@ export default function Home(){
           Conozca el testimonio del Pastor Gilberto Maldonado: una historia de
           redención, llamado y servicio para la gloria de Jesucristo.
         </p>
-        <Link className="btn" href="/el-pastor">Leer el testimonio</Link>
+        <Link className="btn" href="/el-pastor">Conozca a sus Pastores</Link>
       </div>
       <div className="visitorTestimonyImage">
         <Image

@@ -1,0 +1,20 @@
+LA BIBLIA NOS HABLA — VERSIÓN 8.4 FINAL
+CONOZCA A SUS PASTORES
+
+Esta actualización conserva la plataforma existente y únicamente integra la sección aprobada del Pastor Gilberto Maldonado y la Hna. Yudelka Maldonado.
+
+INSTALACIÓN
+1. Descomprima este ZIP.
+2. Copie todo dentro de la carpeta del repositorio la-biblia-nos-habla-2.
+3. Seleccione Replace/Reemplazar cuando se le pregunte.
+4. En GitHub Desktop use el resumen:
+   Versión 8.4 Final - Nuestros Pastores
+5. Pulse Commit to main y luego Push origin.
+6. Espere hasta que Vercel indique Ready.
+7. Abra: https://labiblianoshabla.org/el-pastor
+
+SUPABASE
+Esta versión NO requiere ejecutar SQL.
+
+IMPORTANTE
+No se añadieron módulos, funciones ni cambios de arquitectura. Solo se integró y optimizó la sección visual aprobada.

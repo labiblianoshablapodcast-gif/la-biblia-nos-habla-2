@@ -10,7 +10,7 @@ const links=[
   ["Multimedia","/multimedia"],
   ["Devocionales","/devocionales"],
   ["Misiones","/misiones"],
-  ["El Pastor","/el-pastor"],
+  ["Nuestros Pastores","/el-pastor"],
   ["Iglesia","/iglesia"],
   ["Eventos","/eventos"],
   ["Donaciones","/donaciones"],

@@ -1,9 +1,10 @@
-# Historial de cambios
+# Registro de cambios
 
-## 8.3A
-- Editor profesional mejorado.
-- Guardado automático local.
-- Vista previa modal.
-- Edición de mensajes existentes.
-- Etiquetas, subtítulo y fecha programada.
-- Migración 004 para Supabase.
+## Versión 8.4 Final — Nuestros Pastores
+
+- Integrada la composición visual aprobada de Pastor Gilberto Maldonado y Hna. Yudelka Maldonado.
+- Optimizada la imagen para carga web en formato WebP.
+- Ajustada la presentación para computadora, tableta y teléfono.
+- Actualizados únicamente los rótulos existentes hacia “Nuestros Pastores”.
+- Sin migraciones SQL.
+- Sin módulos ni funciones nuevas.

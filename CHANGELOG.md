@@ -9,6 +9,11 @@
 - Conservados los módulos existentes: Biblia, predicaciones, multimedia, misiones, donaciones y administración.
 - Corregida la hoja de estilos de la página El Pastor para compilación de CSS Modules en Next.js.
 
+## Versión 9.0 — Refinamiento visual
+
+- Rediseñados los botones principales con formato compacto, esquinas suaves y detalle dorado.
+- Eliminado el estilo excesivamente redondo y genérico de los llamados a la acción.
+
 ## Versión 8.4 Final — Nuestros Pastores
 
 - Integrada la composición visual aprobada de Pastor Gilberto Maldonado y Hna. Yudelka Maldonado.

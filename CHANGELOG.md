@@ -7,6 +7,7 @@
 - Renovada la página `/el-pastor` con biografía, llamado ministerial y galería fotográfica.
 - Integradas fotografías de Pastor Gilberto Maldonado y Yudelka Maldonado.
 - Conservados los módulos existentes: Biblia, predicaciones, multimedia, misiones, donaciones y administración.
+- Corregida la hoja de estilos de la página El Pastor para compilación de CSS Modules en Next.js.
 
 ## Versión 8.4 Final — Nuestros Pastores
 

@@ -14,7 +14,6 @@ export default function Footer(){
       <h3>Explore</h3>
       <Link href="/biblia">Biblia</Link>
       <Link href="/predicaciones">Predicaciones</Link>
-      <Link href="/devocionales">Devocionales</Link>
       <Link href="/misiones">Misiones</Link>
     </div>
 

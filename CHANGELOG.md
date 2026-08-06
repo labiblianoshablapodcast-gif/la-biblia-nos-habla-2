@@ -1,5 +1,11 @@
 # Registro de cambios
 
+## Versión 10.1 — Navegación simplificada y controles compactos
+
+- Retiradas las secciones públicas Multimedia y Devocionales.
+- Simplificados los menús de escritorio, teléfono y pie de página.
+- Rediseñados los controles y botones de la aplicación con tamaños más pequeños y consistentes.
+
 ## Versión 10.0 — Rediseño profesional del Inicio
 
 - Rediseñada la página principal con una composición editorial más elegante.

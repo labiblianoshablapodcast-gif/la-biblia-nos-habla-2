@@ -7,8 +7,6 @@ const links=[
   ["Inicio","/"],
   ["Biblia","/biblia"],
   ["Predicaciones","/predicaciones"],
-  ["Multimedia","/multimedia"],
-  ["Devocionales","/devocionales"],
   ["Misiones","/misiones"],
   ["Nuestros Pastores","/el-pastor"],
   ["Iglesia","/iglesia"],

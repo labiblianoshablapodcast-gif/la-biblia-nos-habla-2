@@ -1,5 +1,11 @@
 # Registro de cambios
 
+## Versión 10.0 — Rediseño profesional del Inicio
+
+- Rediseñada la página principal con una composición editorial más elegante.
+- Simplificados los llamados a la acción y el acceso a Biblia, predicaciones y oración.
+- Reorganizados horarios, misiones y la historia pastoral para una lectura clara en móvil y computadora.
+
 ## Versión 8.5 — El Pastor y restauración de la aplicación
 
 - Restaurada la configuración de Next.js para que Vercel use las páginas de la aplicación.

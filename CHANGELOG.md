@@ -1,5 +1,13 @@
 # Registro de cambios
 
+## Versión 8.5 — El Pastor y restauración de la aplicación
+
+- Restaurada la configuración de Next.js para que Vercel use las páginas de la aplicación.
+- Eliminada la redirección global que enviaba todas las rutas a `index.html`.
+- Renovada la página `/el-pastor` con biografía, llamado ministerial y galería fotográfica.
+- Integradas fotografías de Pastor Gilberto Maldonado y Yudelka Maldonado.
+- Conservados los módulos existentes: Biblia, predicaciones, multimedia, misiones, donaciones y administración.
+
 ## Versión 8.4 Final — Nuestros Pastores
 
 - Integrada la composición visual aprobada de Pastor Gilberto Maldonado y Hna. Yudelka Maldonado.

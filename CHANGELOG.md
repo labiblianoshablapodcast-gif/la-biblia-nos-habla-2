@@ -1,5 +1,16 @@
 # Registro de cambios
 
+## Versión 10.3 — Misión Lanquín, Guatemala
+
+- Integrada una galería documental del viaje misionero a Chicachuy, Lanquín.
+- Añadidas fotografías de oración, inauguración del templo, equipo misionero y servicio a niños y familias.
+- Incorporada la portada oficial de la inauguración del templo en Alta Verapaz.
+
+## Versión 10.2 — Herencia espiritual
+
+- Añadida la fotografía del Pastor Rev. Rodolfo Solórzano junto al Pastor Gilberto Maldonado.
+- Creada una sección especial de gratitud por el liderazgo, discipulado y cobertura espiritual.
+
 ## Versión 10.1 — Navegación simplificada y controles compactos
 
 - Retiradas las secciones públicas Multimedia y Devocionales.

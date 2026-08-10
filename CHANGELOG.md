@@ -1,5 +1,10 @@
 # Registro de cambios
 
+## Versión 10.6 — Horario compacto
+
+- Reemplazadas las cajas grandes del horario por una agenda semanal compacta.
+- Mejorada la lectura de días, horas y tipos de servicio en computadora y teléfono.
+
 ## Versión 10.5 — Botones y página Iglesia
 
 - Rediseñados todos los botones con un sistema compacto, sobrio y consistente.

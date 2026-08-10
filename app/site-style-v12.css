@@ -1,0 +1,119 @@
+/* Sistema visual institucional — Versión 12.0 */
+:root{
+  --navy:#061729;
+  --navy-soft:#10283d;
+  --gold:#bf8620;
+  --gold-bright:#d8a43a;
+  --cream:#f7f4ed;
+  --paper:#ffffff;
+  --ink:#101c29;
+  --muted:#5e6a75;
+  --line:#dce2e6;
+}
+
+html{background:#eef1f3}
+body{background:#fff;color:var(--ink);font-size:15px;line-height:1.62}
+main{overflow:hidden}
+
+/* Encabezado inspirado en la referencia. */
+.siteHeader{position:sticky;top:0;z-index:100;min-height:68px;padding:0 clamp(16px,3vw,42px);background:rgba(255,255,255,.98);color:var(--ink);border-bottom:1px solid #e6eaed;box-shadow:0 3px 14px rgba(6,23,41,.06);backdrop-filter:blur(14px)}
+.siteLogo{display:flex;align-items:center;gap:11px}
+.siteLogo>span{display:grid;place-items:center;width:43px;height:43px;border-radius:9px;background:var(--navy);color:var(--gold-bright);font-size:15px;font-weight:900;box-shadow:0 3px 9px rgba(6,23,41,.16)}
+.siteLogo strong,.siteLogo small{display:block;line-height:1.25}
+.siteLogo strong{font-size:16px;letter-spacing:-.02em}
+.siteLogo small{margin-top:3px;color:#64707a;font-size:10px;font-weight:500}
+.desktopNav{gap:0!important;height:68px}
+.desktopNav>a{position:relative;display:flex;align-items:center;height:100%;padding:0 14px;font-size:12px;font-weight:800;transition:color .18s ease}
+.desktopNav>a:not(.navDonate):hover{color:var(--gold)}
+.desktopNav>a:not(.navDonate):hover:after{content:"";position:absolute;left:14px;right:14px;bottom:0;height:2px;background:var(--gold)}
+.desktopNav .navDonate{height:auto;min-height:38px;margin-left:10px;padding:9px 16px;border:0;border-radius:7px;background:linear-gradient(135deg,#c9942f,#b67b18);color:#fff;box-shadow:0 5px 13px rgba(182,123,24,.2)}
+.desktopNav .navDonate:hover{background:linear-gradient(135deg,#d4a345,#a96e12);transform:translateY(-1px)}
+
+/* Ritmo general y tipografía. */
+.section{padding:72px clamp(24px,7vw,112px)}
+.section>*,.pageHero>*{position:relative}
+.section h2{font-size:clamp(40px,5vw,64px);letter-spacing:-.025em;line-height:.98}
+.pageHero{padding:78px clamp(24px,7vw,112px);background:linear-gradient(118deg,#061729,#15334a);border-bottom:3px solid rgba(191,134,32,.55)}
+.pageHero h1{font-size:clamp(48px,7vw,82px);letter-spacing:-.025em;line-height:.92}
+.pageHero p{font-size:17px;line-height:1.65}
+.eyebrow{color:var(--gold-bright);font-size:10px;letter-spacing:.21em;font-weight:900}
+.lead{font-size:18px;line-height:1.7}
+.section.soft{background:var(--cream)}
+.section.dark{background:linear-gradient(125deg,#061729,#102b40)}
+
+/* Tarjetas y paneles: compactos, rectos y elegantes. */
+.sectionCard,.contentCard,.eventPublicCard,.youtubeChannelCard,.mediaChannelCard,.mobileInstallCard,.visitorQuickCard,.ministryForm,.loginCard,.setupChecklist article,.adminTable article,.adminItemCard,.churchAddressCard{
+  border:1px solid var(--line)!important;
+  border-radius:12px!important;
+  background:#fff;
+  box-shadow:0 7px 22px rgba(6,23,41,.055)!important;
+}
+.sectionCard,.contentCard,.eventPublicCard,.visitorQuickCard{padding:21px!important}
+.sectionCard:hover,.contentCard:hover,.visitorQuickCard:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(6,23,41,.09)!important}
+.sectionCard h3,.contentCard h3,.eventPublicCard h3,.visitorQuickCard h3{font-size:27px;line-height:1.05;margin:8px 0}
+.sectionCard p,.contentCard p,.eventPublicCard p,.visitorQuickCard p{font-size:14px;line-height:1.6}
+.grid,.cardList,.eventPublicGrid,.visitorQuickGrid{gap:14px}
+
+/* Botones coherentes en todas las páginas. */
+.btn,.whatsappButton,.readerToolbar button,.chapterControls button,.youtubeActions a,.mediaChannelActions a{
+  min-height:38px!important;
+  width:auto!important;
+  padding:8px 14px!important;
+  border-radius:7px!important;
+  border:1px solid #b98220!important;
+  background:var(--navy)!important;
+  color:#fff!important;
+  font:800 12px/1.15 Inter,Arial,sans-serif!important;
+  letter-spacing:.01em;
+  box-shadow:none!important;
+}
+.btn:hover,.whatsappButton:hover,.readerToolbar button:hover,.chapterControls button:hover{background:#14354e!important;border-color:var(--gold-bright)!important;transform:translateY(-1px)}
+.btn.secondary,.secondaryDark{background:transparent!important;color:var(--navy)!important;border-color:#7a8790!important}
+.section.dark .btn.secondary,.pageHero .btn.secondary,.pastorHero .btn.secondary,.visitorHero .btn.secondary{color:#fff!important;border-color:rgba(255,255,255,.48)!important}
+
+/* Formularios y controles. */
+input,textarea,select,.search,.mediaFilters select,.sermonProSearch input,.sermonProSearch select{border:1px solid #cfd7dc!important;border-radius:8px!important;background:#fff;box-shadow:inset 0 1px 2px rgba(6,23,41,.03)}
+input:focus,textarea:focus,select:focus{outline:3px solid rgba(191,134,32,.18);border-color:#b98220!important}
+.toolbar,.predicationTopActions,.youtubeActions,.mediaChannelActions,.churchActions{gap:8px}
+.notice{padding:17px 19px;border-left:3px solid var(--gold);border-radius:9px;background:#fff6dc;box-shadow:none}
+
+/* Héroes con fotografías ya existentes: solo se refinan proporciones y capas. */
+.missionsHero,.missionDetailHero,.pastorHero,.visitorHero{min-height:610px}
+.churchHero,.donationsHero{min-height:520px}
+.churchHeroContent,.donationsHeroContent{width:min(1120px,calc(100% - 48px))}
+.churchHeroContent h1,.donationsHeroContent h1{font-size:clamp(52px,6.7vw,82px);letter-spacing:-.025em}
+.missionsHeroContent{padding:86px clamp(24px,7vw,112px)}
+.missionsHeroContent h1{font-size:clamp(56px,8vw,94px)}
+.timelineCard,.pastorVisualCard,.mediaLibraryCard,.sermonProCard{border-radius:14px;box-shadow:0 9px 28px rgba(6,23,41,.08)}
+
+/* Donaciones e Iglesia conservan sus mejoras compactas. */
+.donationCampaignGrid{gap:12px;margin:24px 0 28px}
+.donationCampaignCard{padding:17px 19px;border-radius:11px;box-shadow:0 6px 18px rgba(6,23,41,.045)}
+.donationCampaignCard h3{font-size:25px}
+.donationCheckoutCard{padding:25px 29px;border-radius:14px;margin:28px 0}
+.donationCheckoutCard h2{font-size:clamp(37px,4.5vw,54px)}
+.donationSetupHelp{border-radius:11px;padding:22px 25px}
+.churchScheduleSection{padding-top:62px;padding-bottom:62px}
+.scheduleGrid{border-radius:11px;box-shadow:0 7px 22px rgba(6,23,41,.05)}
+.scheduleCard{padding-top:12px;padding-bottom:12px}
+.mapPlaceholder{border-radius:13px}
+
+/* Pie de página integrado al lenguaje visual. */
+.siteFooter,footer{background:#041321;color:#fff;border-top:3px solid #a87519}
+.siteFooter{padding:46px clamp(24px,6vw,84px)}
+.siteFooter h3{font-size:16px;color:var(--gold-bright)}
+.siteFooter a{font-size:13px}
+
+@media(max-width:1050px){
+  .siteHeader{min-height:64px}
+  .mobileMenuButton{display:block}
+}
+@media(max-width:700px){
+  .section{padding:56px 20px}
+  .pageHero{padding:62px 20px}
+  .pageHero h1{font-size:48px}
+  .churchHero,.donationsHero{min-height:560px}
+  .churchHeroContent h1,.donationsHeroContent h1{font-size:49px}
+  .donationCheckoutCard{padding:22px 20px}
+  .donationCampaignCard{padding:16px}
+}

@@ -87,3 +87,9 @@
 - Tarjetas de Diezmos, Misiones y Biblias reducidas y reorganizadas.
 - Menos altura, espacios internos más pequeños y títulos proporcionados.
 - Se descartó la composición lateral propuesta para la portada.
+# Versión 12.0
+
+- Nuevo sistema visual aplicado de forma consistente a todas las páginas públicas.
+- Encabezado blanco, navegación compacta, paleta azul marino y dorado.
+- Tarjetas, botones, formularios, avisos y secciones con proporciones más profesionales.
+- Se conservaron todas las fotografías existentes del sitio.

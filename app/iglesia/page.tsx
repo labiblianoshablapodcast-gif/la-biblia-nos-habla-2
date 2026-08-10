@@ -1,12 +1,17 @@
+import Image from "next/image";
 import Link from "next/link";
 import {church} from "@/data/church";
 
 export default function Iglesia(){
  return <>
   <section className="pageHero churchHero">
-   <p className="eyebrow">Iglesia Príncipe de Paz</p>
-   <h1>Un lugar para adorar, crecer y servir.</h1>
-   <p>Le esperamos en Philadelphia. Toda persona es bienvenida.</p>
+   <Image src="/images/church-worship-hero.jpg" alt="Congregación reunida en una iglesia durante un servicio" fill priority sizes="100vw"/>
+   <div className="churchHeroOverlay"></div>
+   <div className="churchHeroContent">
+    <p className="eyebrow">Iglesia Príncipe de Paz</p>
+    <h1>Un lugar para adorar, crecer y servir.</h1>
+    <p>Le esperamos en Philadelphia. Toda persona es bienvenida.</p>
+   </div>
   </section>
 
   <section className="section churchScheduleSection">

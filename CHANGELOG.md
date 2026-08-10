@@ -1,5 +1,11 @@
 # Registro de cambios
 
+## Versión 10.7 — Portada fotográfica de Iglesia
+
+- Añadida una fotografía representativa de una congregación reunida.
+- Incorporada una capa verde y azul para conservar la lectura del título.
+- Ajustada la composición de la portada para computadora y teléfono.
+
 ## Versión 10.6 — Horario compacto
 
 - Reemplazadas las cajas grandes del horario por una agenda semanal compacta.

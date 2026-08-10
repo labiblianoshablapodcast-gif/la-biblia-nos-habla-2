@@ -23,23 +23,31 @@ export default function Iglesia(){
   </section>
 
   <section className="section soft churchLocationSection">
-   <div>
+   <div className="churchLocationCopy">
     <p className="eyebrow">Visítenos</p>
-    <h2>{church.address}</h2>
-    <p>Abra la dirección en Google Maps para obtener instrucciones.</p>
+    <h2>Estamos en el corazón de Philadelphia.</h2>
+    <address className="churchAddressCard">
+     <span className="churchAddressMarker" aria-hidden="true">⌖</span>
+     <span>
+      <small>Dirección de la iglesia</small>
+      <strong>{church.address}</strong>
+      <em>Iglesia Príncipe de Paz</em>
+     </span>
+    </address>
+    <p className="churchLocationNote">Consulte la ruta y el tiempo estimado de llegada antes de salir.</p>
     <div className="churchActions">
-     <a className="btn" href={church.mapsUrl} target="_blank" rel="noopener noreferrer">Abrir Google Maps</a>
-     <Link className="btn secondaryDark" href="/conexion">Planificar mi visita</Link>
+     <a className="btn" href={church.mapsUrl} target="_blank" rel="noopener noreferrer">Ver ruta <span aria-hidden="true">↗</span></a>
+     <Link className="btn secondaryDark" href="/conexion">Planificar visita</Link>
     </div>
    </div>
-   <div className="mapPlaceholder"><span>📍</span><strong>Philadelphia, Pennsylvania</strong><p>Iglesia Príncipe de Paz</p></div>
+   <div className="mapPlaceholder"><span aria-hidden="true">⌖</span><small>Philadelphia, Pennsylvania</small><strong>3661 N Marvine St</strong><p>Iglesia Príncipe de Paz</p></div>
   </section>
 
   <section className="section dark virtualStudySection">
    <p className="eyebrow">Jueves · 8:00–9:00 PM</p>
    <h2>Estudio Bíblico Virtual</h2>
    <p>Participe por cámara mediante WhatsApp.</p>
-   <a className="btn" href={church.whatsappVideo} target="_blank" rel="noopener noreferrer">Abrir llamada de WhatsApp</a>
+   <a className="btn" href={church.whatsappVideo} target="_blank" rel="noopener noreferrer">Entrar al estudio <span aria-hidden="true">↗</span></a>
   </section>
  </>;
 }

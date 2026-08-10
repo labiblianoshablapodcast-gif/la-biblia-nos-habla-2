@@ -1,5 +1,11 @@
 # Registro de cambios
 
+## Versión 10.5 — Botones y página Iglesia
+
+- Rediseñados todos los botones con un sistema compacto, sobrio y consistente.
+- Renovada la presentación de la dirección de la Iglesia Príncipe de Paz.
+- Mejorada la jerarquía visual de mapas, visitas y estudio bíblico virtual.
+
 ## Versión 10.3 — Misión Lanquín, Guatemala
 
 - Integrada una galería documental del viaje misionero a Chicachuy, Lanquín.

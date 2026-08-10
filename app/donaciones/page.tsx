@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const campaigns=[
  {title:"Diezmos y ofrendas",description:"Apoye la obra local y las necesidades regulares de la congregación."},
@@ -10,9 +11,13 @@ export default function Donaciones(){
  const donationUrl=process.env.NEXT_PUBLIC_DONATION_URL;
  return <>
   <section className="pageHero donationsHero">
-   <p className="eyebrow">Generosidad con propósito</p>
-   <h1>Diezmos, ofrendas y donaciones</h1>
-   <p>Cada contribución ayuda a sostener la obra local, el discipulado y las misiones.</p>
+   <Image src="/images/misiones/coban-2022/coban-2022-36.jpg" alt="Miembros de la iglesia sirviendo y acompañando a una persona necesitada" fill priority sizes="100vw" />
+   <div className="donationsHeroOverlay" />
+   <div className="donationsHeroContent">
+    <p className="eyebrow">Generosidad con propósito</p>
+    <h1>Diezmos, ofrendas y donaciones</h1>
+    <p>Cada contribución ayuda a sostener la obra local, el discipulado y las misiones.</p>
+   </div>
   </section>
 
   <section className="section">
@@ -36,6 +41,11 @@ export default function Donaciones(){
    </div>
 
    <div className="notice"><strong>Transparencia y seguridad</strong><p>La página no almacena números de tarjetas. Los pagos se procesarán mediante un proveedor autorizado.</p></div>
+   {!donationUrl && <div className="donationSetupHelp">
+    <p className="eyebrow">Para activar donaciones directas</p>
+    <h2>Solicite un enlace oficial para recibir donaciones</h2>
+    <p>La tarjeta bancaria no contiene los datos necesarios para recibir depósitos. Pida al banco el número de cuenta y de ruta, o cree un enlace de pago para la iglesia con un proveedor autorizado. Cuando tenga el enlace, podrá conectarse al botón “Donar ahora” sin publicar información privada.</p>
+   </div>}
   </section>
  </>;
 }

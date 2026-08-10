@@ -68,3 +68,8 @@
 - La galería documenta el viaje, los cultos, la oración, el servicio comunitario y la convivencia.
 - Todas las imágenes fueron optimizadas para mejorar la velocidad de carga en teléfonos y computadoras.
 - Se corrigió la conversión de imágenes que aparecían negras en algunos navegadores.
+# Versión 10.8
+
+- Fotografía representativa del servicio comunitario en la portada de Donaciones.
+- Capa visual optimizada para mantener el título legible en computadora y teléfono.
+- Orientación segura para activar donaciones directas sin publicar datos de tarjetas.

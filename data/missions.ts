@@ -20,7 +20,6 @@ export const missions = [
       "/images/misiones/coban-2022/coban-2022-36.jpg",
       "/images/misiones/coban-2022/coban-2022-34.jpg",
       "/images/misiones/coban-2022/coban-2022-04.jpg",
-      "/images/misiones/coban-2022/coban-2022-01.jpg",
       "/images/misiones/coban-2022/coban-2022-05.jpg",
       "/images/misiones/coban-2022/coban-2022-29.jpg",
       "/images/misiones/coban-2022/coban-2022-06.jpg",

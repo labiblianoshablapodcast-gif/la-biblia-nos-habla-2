@@ -50,3 +50,4 @@
 - Se incorporaron 37 fotografías del viaje misionero a Cobán, Guatemala.
 - La galería documenta el viaje, los cultos, la oración, el servicio comunitario y la convivencia.
 - Todas las imágenes fueron optimizadas para mejorar la velocidad de carga en teléfonos y computadoras.
+- Se corrigió la conversión de imágenes que aparecían negras en algunos navegadores.

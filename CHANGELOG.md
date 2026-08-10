@@ -77,3 +77,13 @@
 
 - Botón del módulo de donaciones reducido a un formato compacto y profesional.
 - Alineación y proporciones corregidas en computadoras y teléfonos.
+# Versión 11.0
+
+- Portada de Donaciones recompuesta para respetar la fotografía vertical.
+- Texto sobre un panel limpio y fotografía visible al lado en computadoras.
+- Adaptación especial de la imagen para teléfonos.
+# Versión 11.1
+
+- Tarjetas de Diezmos, Misiones y Biblias reducidas y reorganizadas.
+- Menos altura, espacios internos más pequeños y títulos proporcionados.
+- Se descartó la composición lateral propuesta para la portada.

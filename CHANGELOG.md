@@ -45,3 +45,8 @@
 - Actualizados únicamente los rótulos existentes hacia “Nuestros Pastores”.
 - Sin migraciones SQL.
 - Sin módulos ni funciones nuevas.
+## Versión 10.4 — Galería Cobán 2022
+
+- Se incorporaron 37 fotografías del viaje misionero a Cobán, Guatemala.
+- La galería documenta el viaje, los cultos, la oración, el servicio comunitario y la convivencia.
+- Todas las imágenes fueron optimizadas para mejorar la velocidad de carga en teléfonos y computadoras.

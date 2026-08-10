@@ -73,3 +73,7 @@
 - Fotografía representativa del servicio comunitario en la portada de Donaciones.
 - Capa visual optimizada para mantener el título legible en computadora y teléfono.
 - Orientación segura para activar donaciones directas sin publicar datos de tarjetas.
+# Versión 10.9
+
+- Botón del módulo de donaciones reducido a un formato compacto y profesional.
+- Alineación y proporciones corregidas en computadoras y teléfonos.

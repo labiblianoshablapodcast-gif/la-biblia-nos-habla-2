@@ -5,7 +5,7 @@ import {missions} from "@/data/missions";
 export default function Misiones(){
  return <>
   <section className="missionsHero">
-    <Image src="/images/misiones/lanquin-templo-portada.png" alt="Inauguración del templo en Lanquín" fill priority sizes="100vw"/>
+    <Image className="missionsWorldMap" src="/images/misiones/mapa-misionero-mundial-v2.png" alt="Mapa mundial misionero con énfasis en Guatemala, Puerto Rico y Estados Unidos" fill priority sizes="100vw"/>
     <div className="missionsHeroOverlay"></div>
     <div className="missionsHeroContent">
       <p className="eyebrow">Nuestro recorrido misionero</p>

@@ -118,6 +118,26 @@ input:focus,textarea:focus,select:focus{outline:3px solid rgba(191,134,32,.18);b
   .donationCampaignCard{padding:16px}
 }
 
+/* Versión 12.6: mapa mundial misionero y portada móvil optimizada. */
+.missionsHero>.missionsWorldMap{object-fit:cover;object-position:center center}
+.missionsHeroOverlay{background:linear-gradient(90deg,rgba(3,15,27,.96) 0%,rgba(3,15,27,.84) 35%,rgba(3,15,27,.3) 59%,rgba(3,15,27,.05) 100%),linear-gradient(0deg,rgba(3,15,27,.68),transparent 55%)}
+.missionsHeroContent{max-width:760px}
+@media(max-width:700px){
+  .missionsHero{min-height:590px;align-items:flex-end}
+  .missionsHero>.missionsWorldMap{object-position:61% center;transform:scale(1.04)}
+  .missionsHeroOverlay{background:linear-gradient(0deg,rgba(3,15,27,.98) 0%,rgba(3,15,27,.87) 44%,rgba(3,15,27,.32) 76%,rgba(3,15,27,.08) 100%)}
+  .missionsHeroContent{width:100%;padding:210px 20px 50px}
+  .missionsHeroContent h1{max-width:520px;font-size:clamp(46px,13.5vw,62px);line-height:.9;margin:9px 0 17px}
+  .missionsHeroContent>p:not(.eyebrow){max-width:520px;margin-bottom:19px;font-size:16px;line-height:1.55}
+  .missionsHeroContent .btn{margin:0}
+}
+@media(max-width:390px){
+  .missionsHero{min-height:565px}
+  .missionsHero>.missionsWorldMap{object-position:64% center}
+  .missionsHeroContent{padding-top:195px;padding-bottom:38px}
+  .missionsHeroContent h1{font-size:44px}
+}
+
 /* PayPal QR — Versión 12.1 */
 .paypalQrSection{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,430px);gap:clamp(32px,6vw,76px);align-items:center;margin:38px 0;padding:clamp(28px,5vw,58px);border-radius:16px;background:linear-gradient(125deg,#061729,#102b40);color:#fff;box-shadow:0 16px 45px rgba(6,23,41,.13)}
 .paypalDonateButton{display:inline-flex!important;align-items:center;justify-content:center;margin:4px 0 20px;padding:10px 18px!important;background:linear-gradient(135deg,#d7a338,#b77914)!important;border-color:#e2b856!important;font-size:13px!important;color:#fff!important}

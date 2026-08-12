@@ -1,0 +1,20 @@
+LA BIBLIA NOS HABLA — VERSIÓN 12.4.1 LIMPIA
+
+Esta versión conserva:
+- La nueva portada profesional.
+- Las fotografías y galerías existentes.
+- El Panel Pastoral privado.
+- El registro automático de donaciones de PayPal.
+- La conexión con Supabase.
+
+PARA ACTUALIZAR CON GITHUB DESKTOP
+1. Descomprima este archivo ZIP.
+2. Copie el contenido de la carpeta la-biblia-nos-habla-v12.4.1-limpia dentro de su repositorio.
+3. En GitHub Desktop escriba en Summary:
+   Publicar portada profesional versión 12.4.1
+4. Pulse Commit to main.
+5. Pulse Push origin.
+
+IMPORTANTE
+La versión ya excluye node_modules, .next y tsconfig.tsbuildinfo.
+No copie esos archivos al repositorio.

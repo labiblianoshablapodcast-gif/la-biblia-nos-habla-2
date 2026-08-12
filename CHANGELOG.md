@@ -98,3 +98,8 @@
 - Código QR oficial de PayPal añadido a la página de Donaciones.
 - Sección adaptable con instrucciones para computadora y teléfono.
 - Opción de abrir el diseño en tamaño completo para facilitar el escaneo.
+# Versión 12.2
+
+- Se conectó el enlace oficial de PayPal a botones directos de donación.
+- Se añadió un botón compacto “Donar con PayPal” junto al código QR.
+- Se eliminó el mensaje temporal de configuración pendiente.

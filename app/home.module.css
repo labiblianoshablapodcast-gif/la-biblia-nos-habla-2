@@ -12,3 +12,9 @@
 .heroImage{object-position:center center!important}.heroOverlay{background:linear-gradient(90deg,rgba(3,16,31,.38) 0%,rgba(3,16,31,.18) 42%,transparent 58%)!important}
 @media(max-width:720px){.hero{min-height:610px!important}.heroImage{object-position:70% center!important}.heroOverlay{background:linear-gradient(90deg,rgba(3,16,31,.86) 0%,rgba(3,16,31,.48) 58%,rgba(3,16,31,.12) 100%)!important}.heroContent{padding-top:52px!important}.hero h1{max-width:62%!important;font-size:clamp(2.65rem,12vw,4rem)!important}.heroContent>p:not(.eyebrow){max-width:58%!important}}
 @media(max-width:470px){.heroImage{object-position:72% center!important}.hero h1{max-width:68%!important;font-size:2.65rem!important}.heroContent>p:not(.eyebrow){max-width:64%!important}}
+
+/* Versión 12.5.2: encuadres corregidos sin cortar rostros. */
+.heroImage{object-position:center top!important}
+.quickCard:nth-child(2) .cardImage img{object-position:center 18%!important}
+@media(max-width:720px){.heroImage{object-position:68% top!important}}
+@media(max-width:470px){.heroImage{object-position:70% top!important}}

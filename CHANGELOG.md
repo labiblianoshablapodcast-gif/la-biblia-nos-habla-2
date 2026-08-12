@@ -103,3 +103,9 @@
 - Se conectó el enlace oficial de PayPal a botones directos de donación.
 - Se añadió un botón compacto “Donar con PayPal” junto al código QR.
 - Se eliminó el mensaje temporal de configuración pendiente.
+# Versión 12.3
+
+- Nuevo registro privado de donaciones en el Panel Pastoral.
+- Muestra nombre, cantidad, fecha, hora, estado y transacción.
+- Conexión IPN verificada directamente con PayPal antes de guardar datos.
+- Acceso limitado al personal autorizado mediante Supabase.

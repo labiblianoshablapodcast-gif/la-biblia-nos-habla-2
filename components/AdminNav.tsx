@@ -8,6 +8,7 @@ const sections=[
   ["Eventos","/admin/eventos","📅"],
   ["Peticiones","/admin/peticiones","🙏"],
   ["Nuevos creyentes","/admin/nuevos-creyentes","♥"],
+  ["Donaciones","/admin/donaciones","$"],
   ["Misiones","/admin/misiones","🌎"],
   ["Configuración","/admin/configuracion","⚙"],
   ["Estado Supabase","/admin/configuracion/supabase","●"]

@@ -12,6 +12,7 @@ export default async function Admin(){
   {count:sermons},
   {count:events},
   {count:devotionals},
+  {count:donations},
   {data:recentRequests},
   {data:recentBelievers}
  ]=await Promise.all([
@@ -20,6 +21,7 @@ export default async function Admin(){
   supabase.from("sermons").select("*",{count:"exact",head:true}),
   supabase.from("events").select("*",{count:"exact",head:true}),
   supabase.from("devotionals").select("*",{count:"exact",head:true}),
+  supabase.from("paypal_donations").select("*",{count:"exact",head:true}),
   supabase.from("prayer_requests").select("*").order("created_at",{ascending:false}).limit(5),
   supabase.from("new_believers").select("*").order("created_at",{ascending:false}).limit(5)
  ]);
@@ -47,6 +49,7 @@ export default async function Admin(){
     <Link href="/admin/predicaciones"><strong>{sermons??0}</strong><span>Predicaciones</span></Link>
     <Link href="/admin/devocionales"><strong>{devotionals??0}</strong><span>Devocionales</span></Link>
     <Link href="/admin/eventos"><strong>{events??0}</strong><span>Eventos</span></Link>
+    <Link href="/admin/donaciones"><strong>{donations??0}</strong><span>Donaciones</span></Link>
    </section>
 
    <section className="adminDashboardGrid">
@@ -77,6 +80,7 @@ export default async function Admin(){
     <Link href="/admin/predicaciones"><span>🎙</span><h3>Predicaciones</h3><p>Publicar videos, audio, temas y textos bíblicos.</p></Link>
     <Link href="/admin/devocionales"><span>☀</span><h3>Devocionales</h3><p>Crear reflexiones y destacar el mensaje del día.</p></Link>
     <Link href="/admin/eventos"><span>📅</span><h3>Eventos</h3><p>Programar campañas, servicios y conferencias.</p></Link>
+    <Link href="/admin/donaciones"><span>$</span><h3>Donaciones</h3><p>Consultar nombres, cantidades, fechas y estados de PayPal.</p></Link>
     <Link href="/admin/configuracion"><span>⚙</span><h3>Configuración</h3><p>Revisar conexiones, seguridad y estado del sistema.</p></Link>
    </section>
   </main>

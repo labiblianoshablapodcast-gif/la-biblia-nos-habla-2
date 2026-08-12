@@ -15,7 +15,7 @@ const quickLinks=[
 export default function Home(){
  return <main className={styles.home}>
   <section className={styles.hero}>
-   <Image className={styles.heroImage} src="/images/pastor-y-yudelka-hero.jpg" alt="Pastor Gilberto Maldonado y Yudelka Maldonado" fill priority sizes="100vw"/>
+   <Image className={styles.heroImage} src="/images/pastor-y-yudelka-hero-v2.png" alt="Pastor Gilberto Maldonado y Yudelka Maldonado" fill priority sizes="100vw"/>
    <div className={styles.heroOverlay}/>
    <div className={styles.heroContent}>
     <p className={styles.eyebrow}>BIENVENIDO A LA BIBLIA NOS HABLA</p>

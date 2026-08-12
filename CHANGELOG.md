@@ -93,3 +93,8 @@
 - Encabezado blanco, navegación compacta, paleta azul marino y dorado.
 - Tarjetas, botones, formularios, avisos y secciones con proporciones más profesionales.
 - Se conservaron todas las fotografías existentes del sitio.
+# Versión 12.1
+
+- Código QR oficial de PayPal añadido a la página de Donaciones.
+- Sección adaptable con instrucciones para computadora y teléfono.
+- Opción de abrir el diseño en tamaño completo para facilitar el escaneo.

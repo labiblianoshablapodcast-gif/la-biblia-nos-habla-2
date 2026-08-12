@@ -40,6 +40,23 @@ export default function Donaciones(){
       : <Link className="btn" href="/conexion">Solicitar información para donar</Link>}
    </div>
 
+   <section className="paypalQrSection" aria-labelledby="paypal-qr-title">
+    <div className="paypalQrCopy">
+     <p className="eyebrow">Donación por PayPal</p>
+     <h2 id="paypal-qr-title">Escanee para apoyar la obra</h2>
+     <p>Abra la cámara de su teléfono, enfoque el código QR y siga las instrucciones seguras de PayPal para elegir el monto de su ofrenda.</p>
+     <div className="paypalQrSteps">
+      <span><strong>1</strong> Abra la cámara</span>
+      <span><strong>2</strong> Escanee el código</span>
+      <span><strong>3</strong> Complete su donación</span>
+     </div>
+     <small>PayPal procesa la donación fuera de esta página. La iglesia no almacena información de tarjetas ni cuentas bancarias.</small>
+    </div>
+    <a className="paypalQrImage" href="/images/paypal-donaciones-iglesia.png" target="_blank" rel="noopener noreferrer" aria-label="Abrir el código QR de PayPal en tamaño completo">
+     <Image src="/images/paypal-donaciones-iglesia.png" alt="Código QR de PayPal para ofrendas y donaciones de la Iglesia Príncipe de Paz Philadelphia" width={1056} height={1500} sizes="(max-width: 800px) 92vw, 430px" />
+    </a>
+   </section>
+
    <div className="notice"><strong>Transparencia y seguridad</strong><p>La página no almacena números de tarjetas. Los pagos se procesarán mediante un proveedor autorizado.</p></div>
    {!donationUrl && <div className="donationSetupHelp">
     <p className="eyebrow">Para activar donaciones directas</p>

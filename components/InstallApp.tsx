@@ -12,7 +12,7 @@ export default function InstallApp(){
  },[]);
  async function install(){if(!prompt)return;await prompt.prompt();await prompt.userChoice;setPrompt(null);}
  return <div className="installAppCard">
-  <div><p className="eyebrow">Instale la aplicación</p><h2>La Biblia Nos Habla en su teléfono</h2><p>Acceso rápido a Biblia, devocionales, predicaciones y oración.</p></div>
+  <div><p className="eyebrow">Instale la aplicación</p><h2>La Biblia Nos Habla en su teléfono</h2><p>Acceso rápido a la Biblia, misiones, información pastoral y oración.</p></div>
   {prompt&&<button className="btn" onClick={install}>Instalar aplicación</button>}
   {ios&&!prompt&&<div className="iosInstallHelp"><strong>En iPhone:</strong><span>Presione Compartir y luego “Añadir a pantalla de inicio”.</span></div>}
   {!ios&&!prompt&&<div className="iosInstallHelp"><strong>En Android:</strong><span>Abra el menú y seleccione “Instalar aplicación”.</span></div>}

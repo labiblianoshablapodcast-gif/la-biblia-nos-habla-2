@@ -138,6 +138,47 @@ input:focus,textarea:focus,select:focus{outline:3px solid rgba(191,134,32,.18);b
   .missionsHeroContent h1{font-size:44px}
 }
 
+/* Versión 12.7: navegación móvil estable y donaciones en dorado. */
+.desktopNav .navDonate{
+  border:1px solid #e2b84f!important;
+  background:linear-gradient(135deg,#e5b943,#bd8118)!important;
+  color:#071829!important;
+  box-shadow:0 5px 14px rgba(181,122,17,.24)!important;
+}
+.desktopNav .navDonate:hover{background:linear-gradient(135deg,#f0c958,#c98c20)!important}
+.quickGrid{grid-template-columns:repeat(5,minmax(0,1fr))!important}
+
+@media(max-width:1050px){
+  .siteHeader{align-items:center!important;min-height:68px!important;padding:10px 16px!important}
+  .siteHeader .desktopNav{display:none!important}
+  .siteLogo{min-width:0;max-width:calc(100% - 58px)}
+  .siteLogo>span{flex:0 0 43px}
+  .siteLogo strong{font-size:15px;white-space:nowrap}
+  .siteLogo small{white-space:nowrap}
+  .mobileMenuButton{position:relative;z-index:1101;display:block!important;flex:0 0 44px;margin:0 0 0 auto!important}
+  .siteHeader .mobileMenuOverlay{position:fixed!important;inset:0!important;z-index:1100!important;display:flex!important;justify-content:flex-end!important;margin:0!important;background:rgba(3,12,22,.58)!important}
+  .siteHeader .mobileMenuPanel{position:relative!important;width:min(340px,86vw)!important;height:100dvh!important;margin:0!important;padding:22px!important;display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;align-items:stretch!important;justify-content:flex-start!important;gap:0!important;overflow-y:auto!important;background:#071829!important;box-shadow:-18px 0 50px rgba(0,0,0,.25)!important}
+  .siteHeader .mobileMenuPanel>a{display:block!important;width:100%!important;height:auto!important;min-height:48px!important;margin:0!important;padding:13px 6px!important;color:#fff!important;border-bottom:1px solid rgba(255,255,255,.1)!important;font-size:15px!important}
+  .siteHeader .mobileMenuPanel .mobileMenuDonate{display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;margin:18px 0 4px!important;border:1px solid #e7bd50!important;border-radius:8px!important;background:linear-gradient(135deg,#e5b943,#bd8118)!important;color:#071829!important;font-weight:900!important}
+}
+
+@media(max-width:800px){
+  body{padding-bottom:calc(82px + env(safe-area-inset-bottom))!important}
+  .mobileBottomNav{position:fixed!important;left:12px!important;right:12px!important;bottom:max(10px,env(safe-area-inset-bottom))!important;z-index:1050!important;width:auto!important;margin:0!important;transform:none!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;padding:8px 5px!important}
+  .mobileBottomNav a{min-width:0!important;padding:5px 1px!important;text-align:center!important}
+  .mobileBottomNav small{font-size:10px!important;white-space:nowrap!important}
+}
+
+@media(max-width:1100px){.quickGrid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media(max-width:720px){.quickGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:470px){.quickGrid{grid-template-columns:1fr!important}}
+
+@media(max-width:390px){
+  .siteLogo strong{font-size:14px}
+  .mobileBottomNav{left:7px!important;right:7px!important}
+  .mobileBottomNav small{font-size:9px!important}
+}
+
 /* PayPal QR — Versión 12.1 */
 .paypalQrSection{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,430px);gap:clamp(32px,6vw,76px);align-items:center;margin:38px 0;padding:clamp(28px,5vw,58px);border-radius:16px;background:linear-gradient(125deg,#061729,#102b40);color:#fff;box-shadow:0 16px 45px rgba(6,23,41,.13)}
 .paypalDonateButton{display:inline-flex!important;align-items:center;justify-content:center;margin:4px 0 20px;padding:10px 18px!important;background:linear-gradient(135deg,#d7a338,#b77914)!important;border-color:#e2b856!important;font-size:13px!important;color:#fff!important}

@@ -6,12 +6,10 @@ import {useState} from "react";
 const links=[
   ["Inicio","/"],
   ["Biblia","/biblia"],
-  ["Predicaciones","/predicaciones"],
   ["Misiones","/misiones"],
   ["Nuestros Pastores","/el-pastor"],
   ["Iglesia","/iglesia"],
   ["Eventos","/eventos"],
-  ["Donaciones","/donaciones"],
   ["Contacto y oración","/conexion"]
 ];
 
@@ -38,6 +36,10 @@ export default function MobileHeader(){
         {links.map(([label,href])=>(
           <Link key={href} href={href} onClick={()=>setOpen(false)}>{label}</Link>
         ))}
+
+        <Link className="mobileMenuDonate" href="/donaciones" onClick={()=>setOpen(false)}>
+          ♡ Donar
+        </Link>
 
         <Link className="mobileMenuAdmin" href="/admin" onClick={()=>setOpen(false)}>
           Panel Pastoral

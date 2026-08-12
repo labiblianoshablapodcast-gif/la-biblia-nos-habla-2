@@ -5,7 +5,6 @@ import styles from "./home.module.css";
 
 const quickLinks=[
  {icon:"▤",title:"Leer la Biblia",text:"Acceda a los libros y encuentre una palabra para hoy.",href:"/biblia",image:"/images/biblia-abierta-portada.png",alt:"Biblia abierta sobre una mesa"},
- {icon:"◉",title:"Ver predicaciones",text:"Escuche mensajes que edifican y fortalecen su fe.",href:"/predicaciones",image:"/images/pastor-gilberto.jpg",alt:"Pastor Gilberto Maldonado predicando"},
  {icon:"♢",title:"Pedir oración",text:"Comparta su necesidad con nuestro equipo pastoral.",href:"/conexion",image:"/images/gallery-05.jpg",alt:"Momento de oración"},
  {icon:"✦",title:"Nuevos creyentes",text:"Si aceptó a Cristo, queremos acompañarle en su próximo paso.",href:"/primeros-pasos",image:"/images/gallery-04.jpg",alt:"Personas compartiendo su fe"},
  {icon:"⌂",title:"Nuestra iglesia",text:"Conozca quiénes somos, nuestros horarios y ubicación.",href:"/iglesia",image:"/images/iglesia-principe-de-paz-congregacion.jpeg",alt:"Congregación de la Iglesia Príncipe de Paz"},
@@ -20,10 +19,9 @@ export default function Home(){
    <div className={styles.heroContent}>
     <p className={styles.eyebrow}>BIENVENIDO A LA BIBLIA NOS HABLA</p>
     <h1>Una palabra de esperanza<br/>para su vida.</h1>
-    <p>Aquí encontrará la Biblia, predicaciones, misiones y una iglesia donde será bienvenido.</p>
+    <p>Aquí encontrará la Biblia, enseñanza, misiones y una iglesia donde será bienvenido.</p>
     <div className={styles.heroActions}>
      <Link className={styles.goldButton} href="/biblia">▤&nbsp; Leer la Biblia</Link>
-     <Link className={styles.outlineButton} href="/predicaciones">▶&nbsp; Ver el último mensaje</Link>
      <Link className={styles.outlineButton} href="/conexion">♢&nbsp; Necesito oración</Link>
     </div>
    </div>

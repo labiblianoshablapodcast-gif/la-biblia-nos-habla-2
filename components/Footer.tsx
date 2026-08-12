@@ -13,7 +13,7 @@ export default function Footer(){
     <div>
       <h3>Explore</h3>
       <Link href="/biblia">Biblia</Link>
-      <Link href="/predicaciones">Predicaciones</Link>
+      <Link href="/el-pastor">El Pastor</Link>
       <Link href="/misiones">Misiones</Link>
     </div>
 

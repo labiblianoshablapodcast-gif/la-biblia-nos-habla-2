@@ -1,12 +1,5 @@
-import type {Metadata} from "next";
-import Image from "next/image";
-import Link from "next/link";
-import {notFound} from "next/navigation";
-import {createClient} from "@/lib/supabase/server";
+import {redirect} from "next/navigation";
 
-async function getSermon(slug:string){const supabase=await createClient();const {data}=await supabase.from("sermons").select("*").eq("slug",slug).eq("published",true).maybeSingle();return data;}
-export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{const {slug}=await params;const sermon=await getSermon(slug);if(!sermon)return{};return{title:sermon.seo_title||sermon.title,description:sermon.seo_description||sermon.summary||sermon.description,openGraph:{title:sermon.title,description:sermon.summary||sermon.description,images:sermon.thumbnail_url?[sermon.thumbnail_url]:[]}};}
-export default async function SermonPage({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const sermon=await getSermon(slug);if(!sermon)notFound();return <>
-<section className="sermonDetailHero">{sermon.thumbnail_url&&<Image src={sermon.thumbnail_url} alt={sermon.title} fill priority sizes="100vw"/>}<div className="sermonDetailOverlay"/><div className="sermonDetailContent"><p className="eyebrow">{sermon.category||"Predicación"}{sermon.series_name?` · ${sermon.series_name}`:""}</p><h1>{sermon.title}</h1>{sermon.subtitle&&<p className="sermonSubtitle">{sermon.subtitle}</p>}{sermon.scripture&&<blockquote>{sermon.scripture}</blockquote>}<p>{sermon.summary||sermon.description}</p><div className="sermonDetailMeta"><span>{sermon.preacher||"Pastor Gilberto Maldonado"}</span>{sermon.published_at&&<span>{new Date(sermon.published_at).toLocaleDateString("es-US",{dateStyle:"long"})}</span>}</div></div></section>
-<section className="section sermonDetailLayout"><article className="sermonArticle">{sermon.tags?.length>0&&<div className="sermonTags">{sermon.tags.map((tag:string)=><span key={tag}>#{tag}</span>)}</div>}{sermon.content_html?<div className="sermonRichContent" dangerouslySetInnerHTML={{__html:sermon.content_html}}/>:<p>{sermon.outline}</p>}</article><aside className="sermonResources"><h2>Recursos</h2>{sermon.youtube_url&&<a className="btn" href={sermon.youtube_url} target="_blank" rel="noopener noreferrer">▶ Ver video</a>}{sermon.audio_url&&<a className="btn secondaryDark" href={sermon.audio_url} target="_blank" rel="noopener noreferrer">♫ Escuchar audio</a>}{sermon.pdf_url&&<a className="btn secondaryDark" href={sermon.pdf_url} target="_blank" rel="noopener noreferrer">Descargar PDF</a>}<Link href="/predicaciones">← Volver a la biblioteca</Link></aside></section>
-</>;}
+export default function Predicacion(){
+  redirect("/el-pastor");
+}

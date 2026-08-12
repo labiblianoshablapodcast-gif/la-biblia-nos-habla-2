@@ -8,7 +8,7 @@ const quickLinks=[
  {icon:"◉",title:"Ver predicaciones",text:"Escuche mensajes que edifican y fortalecen su fe.",href:"/predicaciones",image:"/images/pastor-gilberto.jpg",alt:"Pastor Gilberto Maldonado predicando"},
  {icon:"♢",title:"Pedir oración",text:"Comparta su necesidad con nuestro equipo pastoral.",href:"/conexion",image:"/images/gallery-05.jpg",alt:"Momento de oración"},
  {icon:"✦",title:"Nuevos creyentes",text:"Si aceptó a Cristo, queremos acompañarle en su próximo paso.",href:"/primeros-pasos",image:"/images/gallery-04.jpg",alt:"Personas compartiendo su fe"},
- {icon:"⌂",title:"Nuestra iglesia",text:"Conozca quiénes somos, nuestros horarios y ubicación.",href:"/iglesia",image:"/images/church-worship-hero.jpg",alt:"Iglesia Príncipe de Paz"},
+ {icon:"⌂",title:"Nuestra iglesia",text:"Conozca quiénes somos, nuestros horarios y ubicación.",href:"/iglesia",image:"/images/iglesia-principe-de-paz-congregacion.jpeg",alt:"Congregación de la Iglesia Príncipe de Paz"},
  {icon:"◎",title:"Misiones",text:"Vea cómo compartimos el Evangelio y servimos a comunidades.",href:"/misiones",image:"/images/misiones/lanquin-2026-comunidad-02.jpg",alt:"Comunidad reunida durante la misión en Lanquín"}
 ];
 
@@ -53,7 +53,6 @@ export default function Home(){
     <div className={styles.scheduleGrid}>{church.schedule.map(item=><article key={item.day}><span>▣</span><div><strong>{item.day}</strong><b>{item.time}</b><small>{item.title}</small></div></article>)}</div>
    </div>
    <address className={styles.contactPanel}>
-    <div><span>●</span><p><small>UBICACIÓN</small><strong>Philadelphia, Pennsylvania</strong><a href={church.mapsUrl} target="_blank" rel="noreferrer">Cómo llegar</a></p></div>
     <div><span>✉</span><p><small>CORREO ELECTRÓNICO</small><a href={`mailto:${church.email}`}>{church.email}</a></p></div>
     <div><span>♢</span><p><small>¿NECESITA ORACIÓN?</small><Link href="/conexion">Envíe su petición</Link></p></div>
    </address>

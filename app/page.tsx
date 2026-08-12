@@ -40,14 +40,20 @@ export default function Home(){
   </section>
 
   <section className={styles.churchPanel}>
-   <div className={styles.worshipImage}><Image src="/images/church-worship-hero.jpg" alt="Congregación reunida en la Iglesia Príncipe de Paz" fill sizes="(max-width: 800px) 100vw, 30vw"/></div>
+   <a className={styles.locationCard} href={church.mapsUrl} target="_blank" rel="noreferrer" aria-label="Abrir la ubicación de Iglesia Príncipe de Paz en Google Maps">
+    <span className={styles.locationPin}>⌖</span>
+    <small>VISÍTENOS</small>
+    <h2>Iglesia<br/>Príncipe de Paz</h2>
+    <strong>{church.address}</strong>
+    <b>Ver dirección en Google Maps&nbsp; →</b>
+   </a>
    <div className={styles.schedulePanel}>
     <div className={styles.churchTitle}><span>⌂</span><div><small>IGLESIA</small><h2>Príncipe de Paz</h2><p>Philadelphia, Pennsylvania</p></div></div>
     <h3>HORARIO DE SERVICIOS</h3>
     <div className={styles.scheduleGrid}>{church.schedule.map(item=><article key={item.day}><span>▣</span><div><strong>{item.day}</strong><b>{item.time}</b><small>{item.title}</small></div></article>)}</div>
    </div>
    <address className={styles.contactPanel}>
-    <div><span>●</span><p><small>DIRECCIÓN</small><strong>{church.address}</strong><a href={church.mapsUrl} target="_blank" rel="noreferrer">Ver en Google Maps</a></p></div>
+    <div><span>●</span><p><small>UBICACIÓN</small><strong>Philadelphia, Pennsylvania</strong><a href={church.mapsUrl} target="_blank" rel="noreferrer">Cómo llegar</a></p></div>
     <div><span>✉</span><p><small>CORREO ELECTRÓNICO</small><a href={`mailto:${church.email}`}>{church.email}</a></p></div>
     <div><span>♢</span><p><small>¿NECESITA ORACIÓN?</small><Link href="/conexion">Envíe su petición</Link></p></div>
    </address>

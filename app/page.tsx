@@ -4,12 +4,12 @@ import {church} from "@/data/church";
 import styles from "./home.module.css";
 
 const quickLinks=[
- {icon:"▤",title:"Leer la Biblia",text:"Acceda a los libros y encuentre una palabra para hoy.",href:"/biblia",image:"/images/gallery-03.jpg",alt:"Biblia abierta"},
+ {icon:"▤",title:"Leer la Biblia",text:"Acceda a los libros y encuentre una palabra para hoy.",href:"/biblia",image:"/images/biblia-abierta-portada.png",alt:"Biblia abierta sobre una mesa"},
  {icon:"◉",title:"Ver predicaciones",text:"Escuche mensajes que edifican y fortalecen su fe.",href:"/predicaciones",image:"/images/pastor-gilberto.jpg",alt:"Pastor Gilberto Maldonado predicando"},
  {icon:"♢",title:"Pedir oración",text:"Comparta su necesidad con nuestro equipo pastoral.",href:"/conexion",image:"/images/gallery-05.jpg",alt:"Momento de oración"},
  {icon:"✦",title:"Nuevos creyentes",text:"Si aceptó a Cristo, queremos acompañarle en su próximo paso.",href:"/primeros-pasos",image:"/images/gallery-04.jpg",alt:"Personas compartiendo su fe"},
  {icon:"⌂",title:"Nuestra iglesia",text:"Conozca quiénes somos, nuestros horarios y ubicación.",href:"/iglesia",image:"/images/church-worship-hero.jpg",alt:"Iglesia Príncipe de Paz"},
- {icon:"◎",title:"Misiones",text:"Vea cómo compartimos el Evangelio y servimos a comunidades.",href:"/misiones",image:"/images/ministry-team.jpg",alt:"Equipo misionero de la iglesia"}
+ {icon:"◎",title:"Misiones",text:"Vea cómo compartimos el Evangelio y servimos a comunidades.",href:"/misiones",image:"/images/misiones/lanquin-2026-comunidad-02.jpg",alt:"Comunidad reunida durante la misión en Lanquín"}
 ];
 
 export default function Home(){
@@ -19,7 +19,7 @@ export default function Home(){
    <div className={styles.heroOverlay}/>
    <div className={styles.heroContent}>
     <p className={styles.eyebrow}>BIENVENIDO A LA BIBLIA NOS HABLA</p>
-    <h1>Una palabra de<br/>esperanza para<br/>su vida.</h1>
+    <h1>Una palabra de esperanza<br/>para su vida.</h1>
     <p>Aquí encontrará la Biblia, predicaciones, misiones y una iglesia donde será bienvenido.</p>
     <div className={styles.heroActions}>
      <Link className={styles.goldButton} href="/biblia">▤&nbsp; Leer la Biblia</Link>

@@ -176,3 +176,14 @@ footer{background:#03111f;color:#fff;padding:45px clamp(24px,8vw,130px);display:
 .studyMessage{margin:0;color:#18583d;font-weight:800}
 .studyMessage.warning{color:#8b5e08}
 @media(max-width:700px){.johnStudy{margin:36px 0 28px;border-radius:17px}.johnStudyHeader{align-items:flex-start;padding:24px 20px}.johnStudyProgress{flex-basis:62px;width:62px;height:62px;font-size:13px}.johnStudyProgress strong{font-size:16px}.johnWrittenQuestions{padding:20px 16px 14px}.johnWrittenQuestions label{grid-template-columns:30px 1fr;padding:14px}.johnWrittenQuestions .johnQuestionNumber{width:28px;height:28px;font-size:12px}.johnWrittenQuestions textarea{min-height:78px}.johnChoiceQuestions{grid-template-columns:1fr;padding:0 16px 18px}.johnStudyFooter{display:block;padding:18px 16px 22px}.johnStudyFooter .btn{margin-top:12px}.studyMessage{font-size:14px}}
+
+/* Versión 12.12: texto y congregación ocupan zonas separadas. */
+.churchHero{min-height:570px}
+.churchHero>img{object-position:center center;filter:brightness(1.08) contrast(1.03)}
+.churchHeroOverlay{background:linear-gradient(90deg,rgba(3,18,30,.42) 0%,rgba(3,18,30,.12) 38%,transparent 52%)}
+.churchHeroContent{width:min(1180px,calc(100% - 56px));padding-right:55%}
+.churchHeroContent::before{inset:-30px auto -30px -30px;width:500px;max-width:calc(46vw - 24px);background:rgba(3,18,30,.68)}
+.churchHeroContent h1{width:440px;max-width:42vw;font-size:clamp(48px,4.8vw,68px);line-height:.94}
+.churchHeroContent>p:last-child{width:440px;max-width:42vw}
+@media(max-width:900px) and (min-width:761px){.churchHeroContent::before{width:410px}.churchHeroContent h1,.churchHeroContent>p:last-child{width:360px;max-width:40vw}.churchHeroContent h1{font-size:48px}}
+@media(max-width:760px){.churchHero{min-height:780px;align-items:flex-end;background:#071829}.churchHero>img{object-position:72% top;object-fit:cover;filter:brightness(1.08) contrast(1.02)}.churchHeroOverlay{background:linear-gradient(0deg,rgba(3,18,30,.99) 0%,rgba(3,18,30,.94) 36%,rgba(3,18,30,.12) 62%,transparent 100%)}.churchHeroContent{width:calc(100% - 32px);margin:0 auto 34px;padding:0}.churchHeroContent::before{inset:-22px -8px -22px;width:auto;max-width:none;background:rgba(3,18,30,.74)}.churchHeroContent h1,.churchHeroContent>p:last-child{width:auto;max-width:100%}.churchHeroContent h1{font-size:clamp(40px,11vw,52px)}}

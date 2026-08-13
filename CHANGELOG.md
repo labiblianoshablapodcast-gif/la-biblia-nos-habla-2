@@ -1,5 +1,11 @@
 # Registro de cambios
 
+## Versión 12.12 — Portada de Iglesia con zonas separadas
+
+- Movido el texto completamente al espacio vacío de la izquierda.
+- Reservada la parte derecha exclusivamente para la congregación, sin palabras encima de las personas.
+- Mejorada la iluminación de las personas y la composición para computadora, tableta y teléfono.
+
 ## Versión 12.11.1 — Opciones del cuestionario corregidas
 
 - Corregida la alineación de los círculos y el texto en las preguntas de selección múltiple.

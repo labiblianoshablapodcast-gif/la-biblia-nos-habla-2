@@ -1,0 +1,10 @@
+LA BIBLIA NOS HABLA — VERSION 8.2A PREDICACIONES PRO
+
+1. Copie todo el contenido dentro de la carpeta la-biblia-nos-habla-2.
+2. En GitHub Desktop: Versión 8.2A - Predicaciones Pro
+3. Commit to main y Push origin.
+4. Espere que Vercel muestre Ready.
+5. En Supabase > SQL Editor > New Query abra y copie TODO:
+   supabase/003_predicaciones_pro_8_2A.sql
+6. Pulse Run una sola vez.
+7. Entre a https://labiblianoshabla.org/admin/predicaciones

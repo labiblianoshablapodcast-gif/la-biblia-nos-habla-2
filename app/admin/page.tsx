@@ -1,6 +1,7 @@
 import Link from "next/link";
 import AdminNav from "@/components/AdminNav";
 import {createClient} from "@/lib/supabase/server";
+import {createAdminClient} from "@/lib/supabase/admin";
 
 export default async function Admin(){
  const supabase=await createClient();
@@ -26,6 +27,20 @@ export default async function Admin(){
   supabase.from("new_believers").select("*").order("created_at",{ascending:false}).limit(5)
  ]);
 
+ let studyParticipants=0;
+ let studyNotices=0;
+ try{
+  const admin=createAdminClient();
+  const [{count:participantCount},{count:noticeCount}]=await Promise.all([
+   admin.from("john_study_participants").select("*",{count:"exact",head:true}),
+   admin.from("john_study_milestones").select("*",{count:"exact",head:true}).is("seen_at",null)
+  ]);
+  studyParticipants=participantCount??0;
+  studyNotices=noticeCount??0;
+ }catch{
+  // La sección aparecerá en cero hasta activar las tablas del estudio en Supabase.
+ }
+
  return <div className="adminShell adminShellPro">
   <AdminNav/>
   <main className="adminMain adminDashboard">
@@ -50,6 +65,7 @@ export default async function Admin(){
     <Link href="/admin/devocionales"><strong>{devotionals??0}</strong><span>Devocionales</span></Link>
     <Link href="/admin/eventos"><strong>{events??0}</strong><span>Eventos</span></Link>
     <Link href="/admin/donaciones"><strong>{donations??0}</strong><span>Donaciones</span></Link>
+    <Link href="/admin/estudio-juan"><strong>{studyParticipants}</strong><span>Estudiantes de Juan{studyNotices?` · ${studyNotices} aviso${studyNotices===1?"":"s"}`:""}</span></Link>
    </section>
 
    <section className="adminDashboardGrid">
@@ -81,6 +97,7 @@ export default async function Admin(){
     <Link href="/admin/devocionales"><span>☀</span><h3>Devocionales</h3><p>Crear reflexiones y destacar el mensaje del día.</p></Link>
     <Link href="/admin/eventos"><span>📅</span><h3>Eventos</h3><p>Programar campañas, servicios y conferencias.</p></Link>
     <Link href="/admin/donaciones"><span>$</span><h3>Donaciones</h3><p>Consultar nombres, cantidades, fechas y estados de PayPal.</p></Link>
+    <Link href="/admin/estudio-juan"><span>📖</span><h3>Estudio de Juan</h3><p>Ver quién completó capítulos, las fechas y los avisos de cada cinco capítulos.</p></Link>
     <Link href="/admin/configuracion"><span>⚙</span><h3>Configuración</h3><p>Revisar conexiones, seguridad y estado del sistema.</p></Link>
    </section>
   </main>

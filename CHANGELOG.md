@@ -139,3 +139,9 @@
 - Corrige el paquete de despliegue para que no incluya dependencias locales.
 - Fija la versión de pnpm usada por Vercel.
 - Excluye archivos de compilación y entregas anteriores.
+# Versión 12.13.0
+
+- Registra el nombre, capítulo terminado y fecha de cada participante del plan de Juan.
+- Añade avisos privados al Panel Pastoral al completar 5, 10, 15 y 20 capítulos.
+- Mantiene las tres respuestas personales únicamente en el dispositivo del estudiante.
+- Incorpora una pantalla pastoral para revisar progreso y marcar avisos como vistos.

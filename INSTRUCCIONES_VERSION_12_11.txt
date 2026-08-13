@@ -1,0 +1,17 @@
+VERSIÓN 12.11 — ESTUDIO INTERACTIVO DEL EVANGELIO DE JUAN
+
+Esta versión añade un cuestionario al final de cada uno de los 21 capítulos de Juan.
+
+Cada cuestionario incluye:
+- 3 preguntas de reflexión para responder por escrito.
+- 2 preguntas de selección múltiple.
+- Indicador de progreso de 0 a 5.
+- Corrección y explicación de las respuestas de selección múltiple.
+- Guardado automático de las respuestas en el dispositivo.
+- Enlace para continuar al próximo capítulo.
+
+SUMMARY PARA GITHUB DESKTOP:
+Añadir cuestionarios interactivos al plan de Juan
+
+DESCRIPTION:
+Incluye cinco preguntas específicas después de cada capítulo de Juan, guarda el progreso del nuevo creyente y ofrece retroalimentación en las preguntas de selección múltiple.

@@ -69,10 +69,10 @@ export default function JohnChapterQuestions({chapter}:{chapter:number}){
       {study.multipleChoice.map((item,index)=><fieldset key={item.question}>
         <legend>Pregunta {index+4}</legend>
         <b>{item.question}</b>
-        {item.options.map((option,optionIndex)=><label key={option} className={completed?(optionIndex===item.correctIndex?"correctChoice":choices[index]===optionIndex?"incorrectChoice":""):""}>
-          <input type="radio" name={`juan-${chapter}-choice-${index}`} checked={choices[index]===optionIndex} onChange={()=>{
+        {item.options.map((option,optionIndex)=><label key={option} className={`johnChoiceOption ${completed?(optionIndex===item.correctIndex?"correctChoice":choices[index]===optionIndex?"incorrectChoice":""):""}`}>
+          <input className="johnChoiceRadio" type="radio" name={`juan-${chapter}-choice-${index}`} checked={choices[index]===optionIndex} onChange={()=>{
             const next=[...choices]; next[index]=optionIndex; setChoices(next); setCompleted(false); setMessage("");
-          }}/><span>{option}</span>
+          }}/><span className="johnChoiceText">{option}</span>
         </label>)}
         {completed&&<p className="choiceExplanation">{item.explanation}</p>}
       </fieldset>)}

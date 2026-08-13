@@ -161,12 +161,13 @@ footer{background:#03111f;color:#fff;padding:45px clamp(24px,8vw,130px);display:
 .johnWrittenQuestions textarea{grid-column:2;min-height:88px;width:100%;resize:vertical;padding:12px 14px;border:1px solid #cbd4d9;border-radius:10px;background:#fcfcfb;font:inherit;line-height:1.5;color:var(--navy)}
 .johnWrittenQuestions textarea:focus{outline:2px solid rgba(215,170,75,.45);border-color:#b88625}
 .johnChoiceQuestions{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:0 34px 25px}
-.johnChoiceQuestions fieldset{min-width:0;margin:0;padding:18px;border:1px solid #dce2e5;border-radius:15px;background:#fff}
+.johnChoiceQuestions fieldset{width:100%;min-width:0;max-width:100%;margin:0;padding:18px;border:1px solid #dce2e5;border-radius:15px;background:#fff;overflow:hidden}
 .johnChoiceQuestions legend{padding:0 8px;color:#9a6b12;font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
 .johnChoiceQuestions fieldset>b{display:block;margin:4px 0 12px;line-height:1.45}
-.johnChoiceQuestions label{display:flex;align-items:flex-start;gap:9px;margin:7px 0;padding:10px 11px;border:1px solid #e2e6e8;border-radius:9px;cursor:pointer;transition:.15s}
-.johnChoiceQuestions label:hover{border-color:#d1a33d;background:#fbf7ed}
-.johnChoiceQuestions input{flex:0 0 auto;margin-top:3px;accent-color:#a87618}
+.johnChoiceQuestions .johnChoiceOption{display:grid!important;grid-template-columns:18px minmax(0,1fr)!important;align-items:start!important;gap:10px!important;width:100%!important;min-width:0!important;min-height:0!important;margin:7px 0!important;padding:11px 12px!important;border:1px solid #e2e6e8;border-radius:9px;cursor:pointer;transition:.15s}
+.johnChoiceQuestions .johnChoiceOption:hover{border-color:#d1a33d;background:#fbf7ed}
+.johnChoiceQuestions .johnChoiceRadio{appearance:auto!important;-webkit-appearance:radio!important;display:block!important;flex:none!important;width:18px!important;height:18px!important;min-width:18px!important;min-height:18px!important;margin:2px 0 0!important;padding:0!important;border:0!important;border-radius:50%!important;box-shadow:none!important;accent-color:#a87618}
+.johnChoiceQuestions .johnChoiceText{display:block!important;width:auto!important;min-width:0!important;max-width:100%!important;line-height:1.45;overflow-wrap:anywhere;word-break:normal}
 .johnChoiceQuestions .correctChoice{border-color:#77b28e;background:#e9f6ee;color:#18583d}
 .johnChoiceQuestions .incorrectChoice{border-color:#d59aa3;background:#fff0f2;color:#8d1f31}
 .choiceExplanation{margin:11px 2px 0;color:#52616b;font-size:13px;line-height:1.5}

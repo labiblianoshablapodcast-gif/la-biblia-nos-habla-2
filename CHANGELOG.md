@@ -1,5 +1,11 @@
 # Registro de cambios
 
+## Versión 12.11.1 — Opciones del cuestionario corregidas
+
+- Corregida la alineación de los círculos y el texto en las preguntas de selección múltiple.
+- Eliminado el desbordamiento que comprimía las respuestas fuera de sus cajas.
+- Reforzado el diseño adaptable para computadora y teléfono.
+
 ## Versión 12.11 — Preguntas de estudio del Evangelio de Juan
 
 - Añadidas cinco preguntas al final de cada uno de los 21 capítulos de Juan.

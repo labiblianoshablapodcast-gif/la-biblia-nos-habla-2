@@ -187,3 +187,11 @@ footer{background:#03111f;color:#fff;padding:45px clamp(24px,8vw,130px);display:
 .churchHeroContent>p:last-child{width:440px;max-width:42vw}
 @media(max-width:900px) and (min-width:761px){.churchHeroContent::before{width:410px}.churchHeroContent h1,.churchHeroContent>p:last-child{width:360px;max-width:40vw}.churchHeroContent h1{font-size:48px}}
 @media(max-width:760px){.churchHero{min-height:780px;align-items:flex-end;background:#071829}.churchHero>img{object-position:72% top;object-fit:cover;filter:brightness(1.08) contrast(1.02)}.churchHeroOverlay{background:linear-gradient(0deg,rgba(3,18,30,.99) 0%,rgba(3,18,30,.94) 36%,rgba(3,18,30,.12) 62%,transparent 100%)}.churchHeroContent{width:calc(100% - 32px);margin:0 auto 34px;padding:0}.churchHeroContent::before{inset:-22px -8px -22px;width:auto;max-width:none;background:rgba(3,18,30,.74)}.churchHeroContent h1,.churchHeroContent>p:last-child{width:auto;max-width:100%}.churchHeroContent h1{font-size:clamp(40px,11vw,52px)}}
+
+/* Versión 12.12.1: margen limpio entre el título y el primer miembro. */
+@media(min-width:901px){
+  .churchHeroContent{padding-right:62%}
+  .churchHeroContent::before{width:430px;max-width:38vw}
+  .churchHeroContent h1,.churchHeroContent>p:last-child{width:370px;max-width:33vw}
+  .churchHeroContent h1{font-size:clamp(44px,4.25vw,60px)}
+}

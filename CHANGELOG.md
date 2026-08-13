@@ -1,5 +1,10 @@
 # Registro de cambios
 
+## Versión 12.12.1 — Separación adicional en la portada de Iglesia
+
+- Reducido el ancho del título y de su panel para no cubrir al primer miembro de la congregación.
+- Añadido un margen visual limpio entre las palabras y las personas.
+
 ## Versión 12.12 — Portada de Iglesia con zonas separadas
 
 - Movido el texto completamente al espacio vacío de la izquierda.

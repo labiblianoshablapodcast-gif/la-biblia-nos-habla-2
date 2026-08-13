@@ -39,3 +39,32 @@
   .heroContent>p:not(.eyebrow){max-width:66%!important;font-size:.82rem!important}
   .heroActions{width:66%}
 }
+
+/* Versión 12.8.1: acciones móviles compactas para descubrir el retrato. */
+@media(max-width:720px){
+  .heroActions{
+    width:auto;
+    max-width:440px;
+    flex-direction:row;
+    align-items:center;
+    gap:8px;
+  }
+  .goldButton,.outlineButton{
+    width:auto;
+    min-height:34px;
+    padding:0 12px;
+    border-radius:999px;
+    font-size:.68rem;
+    white-space:nowrap;
+    box-shadow:0 5px 16px rgba(0,0,0,.14);
+  }
+  .outlineButton{
+    border-color:rgba(255,255,255,.42);
+    background:rgba(3,16,31,.46);
+    backdrop-filter:blur(5px);
+  }
+}
+@media(max-width:390px){
+  .heroActions{gap:6px}
+  .goldButton,.outlineButton{min-height:32px;padding:0 10px;font-size:.63rem}
+}

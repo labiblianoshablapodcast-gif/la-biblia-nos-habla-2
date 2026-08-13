@@ -4,6 +4,12 @@ import BibleHomeClient from "@/components/BibleHomeClient";
 import {books} from "@/lib/bible";
 import styles from "./biblia.module.css";
 
+const johnPlan=[
+ "Jesús, la Palabra de vida","El primer milagro","Nacer de nuevo","Agua viva","El Hijo que da vida","Jesús, el Pan de vida","Ríos de agua viva",
+ "La luz del mundo","Ojos abiertos por la fe","El Buen Pastor","La resurrección y la vida","Servir y seguir a Jesús","Amor que transforma","El camino, la verdad y la vida",
+ "Permanecer en Cristo","La promesa del Espíritu Santo","Jesús ora por los suyos","El Rey ante Pilato","La cruz y el amor consumado","El Señor resucitado","Sígueme"
+];
+
 export default function BibliaPage(){
  const old=books.filter(b=>b.testament==="Antiguo Testamento");
  const fresh=books.filter(b=>b.testament==="Nuevo Testamento");
@@ -28,6 +34,22 @@ export default function BibliaPage(){
   <section className={styles.library}>
     <div className={styles.searchPanel}><BibleHomeClient/></div>
     <p className={styles.sourceNote}>Texto bíblico: Santa Biblia Reina-Valera 1909. Preparada para añadir RVR1960 cuando se obtenga autorización.</p>
+
+    <section className={styles.studyPlan} aria-labelledby="john-plan-title">
+      <div className={styles.planIntro}>
+        <p>Plan de estudio · 21 días</p>
+        <h2 id="john-plan-title">Conozca a Jesús en el Evangelio de Juan</h2>
+        <span>Lea un capítulo cada día, medite en el tema central y permita que la Palabra transforme su vida.</span>
+        <Link href="/biblia/juan/1">Comenzar el plan <b aria-hidden="true">→</b></Link>
+      </div>
+      <div className={styles.planDays}>
+        {johnPlan.map((theme,index)=><Link key={theme} href={`/biblia/juan/${index+1}`}>
+          <span>Día {String(index+1).padStart(2,"0")}</span>
+          <strong>Juan {index+1}</strong>
+          <small>{theme}</small>
+        </Link>)}
+      </div>
+    </section>
 
     <div className={styles.sectionHeading}><p>39 libros</p><h2>Antiguo Testamento</h2></div>
     <div className={styles.bookGrid}>{old.map((b,index)=>

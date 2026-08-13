@@ -18,7 +18,7 @@ const churchPhotos = [
 export default function Iglesia(){
  return <>
   <section className="pageHero churchHero">
-   <Image src="/images/iglesia-portada-congregacion.jpeg" alt="Congregación de la Iglesia Príncipe de Paz" fill priority sizes="100vw"/>
+   <Image src="/images/iglesia-portada-congregacion-v2.png" alt="Congregación de la Iglesia Príncipe de Paz" fill priority sizes="100vw"/>
    <div className="churchHeroOverlay"></div>
    <div className="churchHeroContent">
     <p className="eyebrow">Iglesia Príncipe de Paz</p>

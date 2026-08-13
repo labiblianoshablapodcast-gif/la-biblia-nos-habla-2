@@ -135,3 +135,13 @@ footer{background:#03111f;color:#fff;padding:45px clamp(24px,8vw,130px);display:
   .pastoresAprobadosMarco{border-radius:0;box-shadow:none;overflow-x:auto;overscroll-behavior-inline:contain}
   .pastoresAprobadosImagen{width:1120px;max-width:none;height:auto}
 }
+
+/* Versión 12.10: portada de Iglesia con retrato limpio y tipografía protegida. */
+.churchHero{min-height:560px}
+.churchHero>img{object-position:center center}
+.churchHeroOverlay{background:linear-gradient(90deg,rgba(3,18,30,.58) 0%,rgba(3,18,30,.2) 36%,rgba(3,18,30,.03) 62%,transparent 100%),linear-gradient(0deg,rgba(3,18,30,.22),transparent 50%)}
+.churchHeroContent{width:min(1180px,calc(100% - 56px))}
+.churchHeroContent::before{content:"";position:absolute;z-index:-1;inset:-34px auto -34px -34px;width:min(590px,52vw);border:1px solid rgba(255,255,255,.12);border-radius:24px;background:rgba(3,18,30,.56);box-shadow:0 24px 70px rgba(0,0,0,.24);backdrop-filter:blur(8px)}
+.churchHeroContent h1{max-width:560px;font-size:clamp(54px,5.6vw,78px);line-height:.92;text-wrap:balance;text-shadow:0 3px 20px rgba(0,0,0,.45)}
+.churchHeroContent>p:last-child{max-width:510px;font-size:18px;color:rgba(255,255,255,.9)}
+@media(max-width:760px){.churchHero{min-height:650px;align-items:flex-end}.churchHero>img{object-position:68% center}.churchHeroOverlay{background:linear-gradient(0deg,rgba(3,18,30,.97) 0%,rgba(3,18,30,.72) 45%,rgba(3,18,30,.08) 78%)}.churchHeroContent{width:calc(100% - 36px);margin:0 auto 54px;padding-top:0}.churchHeroContent::before{inset:-25px -12px -25px;width:auto;border-radius:18px;background:rgba(3,18,30,.66)}.churchHeroContent h1{max-width:470px;font-size:clamp(43px,12vw,58px)}.churchHeroContent>p:last-child{font-size:16px;line-height:1.55}}

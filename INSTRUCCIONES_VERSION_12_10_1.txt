@@ -1,0 +1,14 @@
+VERSIÓN 12.10.1 — REPARACIÓN PARA VERCEL
+
+Esta entrega corrige la instalación que fallaba con:
+Command "pnpm install" exited with 236
+
+Importante:
+1. Suba todos los archivos de esta versión a GitHub.
+2. No añada ni copie la carpeta node_modules.
+3. Use este resumen en GitHub Desktop:
+   Corregir instalación de Vercel en versión 12.10.1
+4. Haga Commit to main y luego Push origin.
+5. Vercel iniciará un despliegue nuevo automáticamente.
+
+La versión fija pnpm 10.14.0 y conserva el archivo pnpm-lock.yaml.

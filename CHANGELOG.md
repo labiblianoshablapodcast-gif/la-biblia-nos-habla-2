@@ -109,3 +109,8 @@
 - Muestra nombre, cantidad, fecha, hora, estado y transacción.
 - Conexión IPN verificada directamente con PayPal antes de guardar datos.
 - Acceso limitado al personal autorizado mediante Supabase.
+## 12.10.1
+
+- Corrige el paquete de despliegue para que no incluya dependencias locales.
+- Fija la versión de pnpm usada por Vercel.
+- Excluye archivos de compilación y entregas anteriores.

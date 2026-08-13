@@ -2,6 +2,7 @@ import {notFound} from "next/navigation";
 import Link from "next/link";
 import ChapterControls from "@/components/ChapterControls";
 import BibleReaderTools from "@/components/BibleReaderTools";
+import JohnChapterQuestions from "@/components/JohnChapterQuestions";
 import {getBook,getChapter,chapterUrl} from "@/lib/bible";
 
 export default async function ChapterPage({params}:{params:Promise<{book:string;chapter:string}>}){
@@ -36,6 +37,8 @@ export default async function ChapterPage({params}:{params:Promise<{book:string;
         <a className="btn" href={chapterUrl(book.code,chapter)} target="_blank">Abrir capítulo</a>
       </div>
     )}
+
+    {book.slug==="juan" && <JohnChapterQuestions key={chapter} chapter={chapter}/>} 
 
     <ChapterControls slug={book.slug} chapter={chapter} total={book.chapters}/>
 

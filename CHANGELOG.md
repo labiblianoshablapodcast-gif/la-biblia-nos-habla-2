@@ -1,5 +1,13 @@
 # Registro de cambios
 
+## Versión 12.11 — Preguntas de estudio del Evangelio de Juan
+
+- Añadidas cinco preguntas al final de cada uno de los 21 capítulos de Juan.
+- Incluidas tres preguntas de reflexión escrita y dos de selección múltiple por capítulo.
+- Incorporado guardado automático del progreso y las respuestas en el dispositivo.
+- Añadida confirmación de respuestas, explicaciones y acceso al capítulo siguiente.
+- Optimizada la experiencia para computadora y teléfono.
+
 ## Versión 10.7 — Portada fotográfica de Iglesia
 
 - Añadida una fotografía representativa de una congregación reunida.

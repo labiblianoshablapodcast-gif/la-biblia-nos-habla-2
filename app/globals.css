@@ -145,3 +145,33 @@ footer{background:#03111f;color:#fff;padding:45px clamp(24px,8vw,130px);display:
 .churchHeroContent h1{max-width:560px;font-size:clamp(54px,5.6vw,78px);line-height:.92;text-wrap:balance;text-shadow:0 3px 20px rgba(0,0,0,.45)}
 .churchHeroContent>p:last-child{max-width:510px;font-size:18px;color:rgba(255,255,255,.9)}
 @media(max-width:760px){.churchHero{min-height:650px;align-items:flex-end}.churchHero>img{object-position:68% center}.churchHeroOverlay{background:linear-gradient(0deg,rgba(3,18,30,.97) 0%,rgba(3,18,30,.72) 45%,rgba(3,18,30,.08) 78%)}.churchHeroContent{width:calc(100% - 36px);margin:0 auto 54px;padding-top:0}.churchHeroContent::before{inset:-25px -12px -25px;width:auto;border-radius:18px;background:rgba(3,18,30,.66)}.churchHeroContent h1{max-width:470px;font-size:clamp(43px,12vw,58px)}.churchHeroContent>p:last-child{font-size:16px;line-height:1.55}}
+
+/* Versión 12.11: estudio interactivo de los 21 capítulos de Juan. */
+.johnStudy{margin:52px 0 38px;overflow:hidden;border:1px solid #d7dee2;border-radius:22px;background:#fbfaf7;box-shadow:0 18px 48px rgba(7,24,41,.08)}
+.johnStudyHeader{display:flex;justify-content:space-between;gap:28px;align-items:center;padding:30px 34px;border-bottom:3px solid var(--gold);background:var(--navy);color:#fff}
+.johnStudyHeader .eyebrow{margin:0;color:var(--gold)}
+.johnStudyHeader h2{margin:5px 0 7px;font:700 clamp(36px,4.5vw,52px)/.95 "Cormorant Garamond",serif}
+.johnStudyHeader p:last-child{margin:0;color:rgba(255,255,255,.74)}
+.johnStudyProgress{display:grid;place-items:center;flex:0 0 82px;width:82px;height:82px;border:1px solid rgba(215,170,75,.6);border-radius:50%;background:rgba(255,255,255,.05);font-weight:900;color:var(--gold)}
+.johnStudyProgress strong,.johnStudyProgress span{display:block;line-height:1}.johnStudyProgress strong{font-size:20px}.johnStudyProgress span{font-size:10px;letter-spacing:.04em}
+.johnWrittenQuestions{display:grid;gap:14px;padding:28px 34px 18px}
+.johnWrittenQuestions label{display:grid;grid-template-columns:38px 1fr;gap:11px 14px;padding:18px;border:1px solid #e0e4e6;border-radius:15px;background:#fff}
+.johnWrittenQuestions .johnQuestionNumber{grid-row:1 / span 2;display:grid;place-items:center;align-self:start;width:34px;height:34px;border-radius:50%;background:#f3ead7;color:#986a10;font-weight:900}
+.johnWrittenQuestions label>b{align-self:center;line-height:1.45}
+.johnWrittenQuestions textarea{grid-column:2;min-height:88px;width:100%;resize:vertical;padding:12px 14px;border:1px solid #cbd4d9;border-radius:10px;background:#fcfcfb;font:inherit;line-height:1.5;color:var(--navy)}
+.johnWrittenQuestions textarea:focus{outline:2px solid rgba(215,170,75,.45);border-color:#b88625}
+.johnChoiceQuestions{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:0 34px 25px}
+.johnChoiceQuestions fieldset{min-width:0;margin:0;padding:18px;border:1px solid #dce2e5;border-radius:15px;background:#fff}
+.johnChoiceQuestions legend{padding:0 8px;color:#9a6b12;font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.johnChoiceQuestions fieldset>b{display:block;margin:4px 0 12px;line-height:1.45}
+.johnChoiceQuestions label{display:flex;align-items:flex-start;gap:9px;margin:7px 0;padding:10px 11px;border:1px solid #e2e6e8;border-radius:9px;cursor:pointer;transition:.15s}
+.johnChoiceQuestions label:hover{border-color:#d1a33d;background:#fbf7ed}
+.johnChoiceQuestions input{flex:0 0 auto;margin-top:3px;accent-color:#a87618}
+.johnChoiceQuestions .correctChoice{border-color:#77b28e;background:#e9f6ee;color:#18583d}
+.johnChoiceQuestions .incorrectChoice{border-color:#d59aa3;background:#fff0f2;color:#8d1f31}
+.choiceExplanation{margin:11px 2px 0;color:#52616b;font-size:13px;line-height:1.5}
+.johnStudyFooter{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 34px 26px;border-top:1px solid #e2e6e8}
+.johnStudyFooter .btn{width:auto;min-height:42px;padding:10px 18px;border-radius:9px}
+.studyMessage{margin:0;color:#18583d;font-weight:800}
+.studyMessage.warning{color:#8b5e08}
+@media(max-width:700px){.johnStudy{margin:36px 0 28px;border-radius:17px}.johnStudyHeader{align-items:flex-start;padding:24px 20px}.johnStudyProgress{flex-basis:62px;width:62px;height:62px;font-size:13px}.johnStudyProgress strong{font-size:16px}.johnWrittenQuestions{padding:20px 16px 14px}.johnWrittenQuestions label{grid-template-columns:30px 1fr;padding:14px}.johnWrittenQuestions .johnQuestionNumber{width:28px;height:28px;font-size:12px}.johnWrittenQuestions textarea{min-height:78px}.johnChoiceQuestions{grid-template-columns:1fr;padding:0 16px 18px}.johnStudyFooter{display:block;padding:18px 16px 22px}.johnStudyFooter .btn{margin-top:12px}.studyMessage{font-size:14px}}

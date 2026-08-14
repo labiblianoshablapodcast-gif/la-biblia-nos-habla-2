@@ -1,0 +1,23 @@
+VERSIÓN 12.16.2 — PAQUETE LIMPIO PARA VERCEL
+
+Esta versión elimina del paquete una referencia local llamada "node_modules 2".
+La aplicación fue comprobada con una compilación completa de producción.
+
+PARA PUBLICARLA
+
+1. Descomprima el archivo ZIP.
+2. Abra la carpeta descomprimida.
+3. Compruebe que package.json esté directamente dentro de esa carpeta.
+4. Sustituya con este contenido los archivos del repositorio en GitHub Desktop.
+5. No agregue carpetas llamadas node_modules, .next u outputs.
+6. Use este Summary en GitHub Desktop:
+   Corregir paquete de producción para Vercel — versión 12.16.2
+7. Haga Commit to main y luego Push origin.
+
+CONFIGURACIÓN DE VERCEL
+
+- Si package.json está en la raíz del repositorio, deje Root Directory vacío.
+- Si sube todo el proyecto padre, configure Root Directory como:
+  work/la-biblia-nos-habla-v12
+- Después del Push, cree un nuevo deployment sin reutilizar la caché anterior.
+

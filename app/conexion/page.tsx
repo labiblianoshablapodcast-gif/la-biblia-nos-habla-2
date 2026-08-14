@@ -13,25 +13,26 @@ export default function Conexion(){
     <section className="connectionHero">
       <div className="connectionHeroInner">
         <div className="connectionHeroCopy">
-          <p className="eyebrow">Estamos para servirle</p>
-          <h1>Un lugar para dar su próximo paso.</h1>
-          <p>Salvación, oración, bautismo, membresía y acompañamiento pastoral, todo en un solo lugar.</p>
-          <span className="connectionResponseBadge"><i/> Su solicitud será atendida con privacidad y cuidado</span>
+          <p className="eyebrow">Oración y acompañamiento pastoral</p>
+          <h1>Un lugar para descansar el corazón.</h1>
+          <p>Comparta su petición con confianza. Queremos orar por usted y acompañarle con cuidado en cada paso de fe.</p>
+          <blockquote className="connectionVerse">
+            <span aria-hidden="true">“</span>
+            <div><strong>Orad sin cesar.</strong><cite>1 Tesalonicenses 5:17</cite></div>
+          </blockquote>
+          <span className="connectionResponseBadge"><i/> Su petición será recibida con privacidad y respeto</span>
         </div>
-        <figure className="connectionPrayerVisual">
+        <div className="connectionPrayerVisual" role="img" aria-label="Manos unidas en oración ante la luz de una cruz">
           <Image
             src="/images/manos-orando-conexion-v2.png"
-            alt="Manos unidas en oración ante la luz de una cruz"
+            alt=""
             fill
             priority
-            sizes="(max-width: 700px) calc(100vw - 36px), 390px"
+            sizes="(max-width: 700px) calc(100vw - 36px), 48vw"
           />
           <span className="connectionPrayerGlow" aria-hidden="true" />
-          <figcaption>
-            <span className="connectionPrayerIcon" aria-hidden="true">♢</span>
-            <span><strong>Oramos con usted</strong><small>Su petición importa y será tratada con cuidado.</small></span>
-          </figcaption>
-        </figure>
+          <div className="connectionPrayerCaption"><span aria-hidden="true">◇</span><strong>Oramos con usted</strong></div>
+        </div>
       </div>
     </section>
 

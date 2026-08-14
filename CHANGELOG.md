@@ -1,5 +1,13 @@
 # Registro de cambios
 
+## Versión 12.14 — Portada móvil premium
+
+- Rediseñada la portada móvil con los pastores Gilberto y Yudelka como imagen principal.
+- Añadida una tarjeta compacta con dirección, enlace a Google Maps y horarios principales.
+- Incorporada una sección móvil de WhatsApp, YouTube y el texto de Salmo 119:105.
+- Convertida la navegación inferior en una barra fija, clara y estable de cuatro accesos.
+- Conservado el diseño existente de la versión para computadora.
+
 ## Versión 12.12.1 — Separación adicional en la portada de Iglesia
 
 - Reducido el ancho del título y de su panel para no cubrir al primer miembro de la congregación.

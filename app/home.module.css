@@ -68,3 +68,324 @@
   .heroActions{gap:6px}
   .goldButton,.outlineButton{min-height:32px;padding:0 10px;font-size:.63rem}
 }
+/* Version 12.14 — portada móvil inspirada en la identidad de la iglesia */
+.heroPortrait {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.pastorNames,
+.mobileChurchCard,
+.mobileConnect {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .home {
+    overflow: hidden;
+  }
+
+  .hero {
+    min-height: 690px !important;
+    background: radial-gradient(circle at 88% 22%, #173758 0, #082039 42%, #041529 78%) !important;
+    border-bottom: 1px solid #d8a62c;
+  }
+
+  .heroPortrait {
+    inset: 142px -24% 0 auto;
+    width: 91%;
+    height: 548px;
+    overflow: hidden;
+    border: 1.5px solid rgba(224, 172, 47, 0.9);
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 56% 0 0 38% / 26% 0 0 28%;
+    box-shadow: -22px 0 54px rgba(0, 0, 0, 0.28);
+  }
+
+  .heroImage {
+    object-fit: cover !important;
+    object-position: 68% center !important;
+  }
+
+  .heroOverlay {
+    z-index: 1;
+    background:
+      linear-gradient(90deg, rgba(3, 19, 37, 0.99) 0%, rgba(3, 19, 37, 0.96) 37%, rgba(3, 19, 37, 0.67) 58%, rgba(3, 19, 37, 0.12) 86%),
+      linear-gradient(0deg, rgba(2, 15, 30, 0.88) 0%, transparent 40%) !important;
+  }
+
+  .heroContent {
+    position: relative;
+    z-index: 2;
+    width: 100% !important;
+    max-width: none !important;
+    padding: 48px 22px 84px !important;
+  }
+
+  .eyebrow {
+    max-width: 64%;
+    margin-bottom: 16px !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 0.18em !important;
+  }
+
+  .hero h1 {
+    max-width: 62% !important;
+    margin-bottom: 18px !important;
+    font-size: clamp(2.45rem, 11vw, 3.15rem) !important;
+    line-height: 0.94 !important;
+    letter-spacing: -0.035em;
+  }
+
+  .heroContent > p:not(.eyebrow):not(.pastorNames) {
+    max-width: 55% !important;
+    margin-bottom: 10px !important;
+    font-size: 0.94rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .pastorNames {
+    display: block !important;
+    max-width: 54% !important;
+    margin: 0 0 22px !important;
+    color: #fff !important;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .heroActions {
+    width: 54%;
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px !important;
+  }
+
+  .goldButton,
+  .outlineButton {
+    min-height: 42px !important;
+    width: 100% !important;
+    padding: 10px 14px !important;
+    border-radius: 11px !important;
+    font-size: 0.82rem !important;
+    line-height: 1.1 !important;
+    box-shadow: none !important;
+  }
+
+  .mobileChurchCard {
+    position: relative;
+    z-index: 3;
+    display: block;
+    margin: -34px 16px 24px;
+    padding: 24px 16px 18px;
+    border: 1px solid rgba(202, 150, 34, 0.22);
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: 0 14px 35px rgba(2, 24, 45, 0.14);
+    text-align: center;
+  }
+
+  .mobilePin {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    margin: 0 auto 10px;
+    place-items: center;
+    border-radius: 50%;
+    background: #082039;
+    color: #e1aa2a;
+    font-size: 1.2rem;
+  }
+
+  .mobileChurchCard h2,
+  .mobileConnect h2 {
+    margin: 0;
+    color: #071829;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.85rem;
+    line-height: 1.08;
+  }
+
+  .mobileChurchCard > a {
+    display: inline-block;
+    margin: 9px 0 18px;
+    color: #2b3a49;
+    font-size: 0.88rem;
+    font-weight: 650;
+    text-decoration: underline;
+    text-decoration-color: #d9a429;
+    text-underline-offset: 4px;
+  }
+
+  .mobileSchedule {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .mobileSchedule article {
+    min-height: 78px;
+    padding: 12px 6px 10px;
+    border: 1px solid rgba(202, 150, 34, 0.28);
+    border-radius: 13px;
+    background: #fffdfa;
+  }
+
+  .mobileSchedule span {
+    display: block;
+    margin-bottom: 7px;
+    color: #a96f09;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .mobileSchedule strong {
+    color: #071829;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.94rem;
+  }
+
+  .mobileConnect {
+    display: block;
+    margin: 0 16px 26px;
+    padding: 25px 16px 16px;
+    border: 1px solid rgba(202, 150, 34, 0.16);
+    border-radius: 22px;
+    background: linear-gradient(145deg, #fffdf8, #fbf4e7);
+  }
+
+  .mobileConnect h2 {
+    margin-bottom: 18px;
+    text-align: center;
+  }
+
+  .connectGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .connectGrid a {
+    display: flex;
+    min-height: 132px;
+    padding: 16px 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(7, 24, 41, 0.09);
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 8px 20px rgba(7, 24, 41, 0.07);
+    color: #071829;
+    text-align: center;
+  }
+
+  .whatsappIcon,
+  .youtubeIcon {
+    display: grid;
+    width: 52px;
+    height: 52px;
+    margin-bottom: 10px;
+    place-items: center;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 1.35rem;
+  }
+
+  .whatsappIcon { background: #27b44a; }
+  .youtubeIcon { background: #e02720; }
+
+  .connectGrid strong {
+    font-size: 0.9rem;
+  }
+
+  .connectGrid small {
+    margin-top: 4px;
+    color: #66717d;
+    font-size: 0.72rem;
+  }
+
+  .mobileConnect blockquote {
+    margin: 14px 0 0;
+    padding: 17px 14px;
+    border-radius: 14px;
+    background: #082039;
+    color: #f3c65a;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    text-align: center;
+  }
+
+  .mobileConnect cite {
+    display: block;
+    margin-top: 4px;
+    color: #fff;
+    font-size: 0.7rem;
+    font-style: normal;
+    letter-spacing: 0.08em;
+  }
+
+  .quickGrid {
+    display: flex !important;
+    gap: 12px !important;
+    overflow-x: auto;
+    padding: 8px 16px 24px !important;
+    scroll-padding-left: 16px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .quickGrid::-webkit-scrollbar { display: none; }
+
+  .quickCard {
+    flex: 0 0 76vw;
+    min-height: 330px !important;
+    scroll-snap-align: start;
+  }
+
+  .cardImage {
+    height: 166px !important;
+  }
+
+  .churchPanel {
+    display: none !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .hero {
+    min-height: 660px !important;
+  }
+
+  .heroPortrait {
+    inset: 142px -29% 0 auto;
+    width: 96%;
+    height: 518px;
+  }
+
+  .hero h1 {
+    font-size: 2.35rem !important;
+  }
+
+  .heroContent > p:not(.eyebrow):not(.pastorNames),
+  .pastorNames,
+  .heroActions {
+    width: 58%;
+    max-width: 58% !important;
+  }
+
+  .mobileChurchCard h2,
+  .mobileConnect h2 {
+    font-size: 1.62rem;
+  }
+
+  .mobileSchedule strong {
+    font-size: 0.82rem;
+  }
+}

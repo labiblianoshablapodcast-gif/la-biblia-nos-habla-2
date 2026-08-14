@@ -7,6 +7,7 @@ import "./site-style-v12.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
+import MobileNav from "@/components/MobileNav";
 
 export const viewport = {
   themeColor: "#071829",
@@ -39,5 +40,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({children}:{children:React.ReactNode}) {
-  return <html lang="es"><body><ServiceWorkerRegistration/><Header/><main>{children}</main><Footer/><RegisterServiceWorker/></body></html>;
+  return <html lang="es"><body><ServiceWorkerRegistration/><Header/><main>{children}</main><Footer/><MobileNav/><RegisterServiceWorker/></body></html>;
 }

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import {church} from "@/data/church";
+import {youtube} from "@/data/youtube";
 import styles from "./home.module.css";
 
 const quickLinks=[
@@ -14,17 +15,36 @@ const quickLinks=[
 export default function Home(){
  return <main className={styles.home}>
   <section className={styles.hero}>
-   <Image className={styles.heroImage} src="/images/pastor-y-yudelka-hero-v2.png" alt="Pastor Gilberto Maldonado y Yudelka Maldonado" fill priority sizes="100vw"/>
+   <div className={styles.heroPortrait}><Image className={styles.heroImage} src="/images/pastor-y-yudelka-hero-v2.png" alt="Pastores Gilberto y Yudelka Maldonado" fill priority sizes="100vw"/></div>
    <div className={styles.heroOverlay}/>
    <div className={styles.heroContent}>
     <p className={styles.eyebrow}>BIENVENIDO A LA BIBLIA NOS HABLA</p>
     <h1>Una palabra de esperanza<br/>para su vida.</h1>
     <p>Aquí encontrará la Biblia, enseñanza, misiones y una iglesia donde será bienvenido.</p>
+    <p className={styles.pastorNames}>Pastores Gilberto y Yudelka Maldonado</p>
     <div className={styles.heroActions}>
      <Link className={styles.goldButton} href="/biblia">▤&nbsp; Leer la Biblia</Link>
      <Link className={styles.outlineButton} href="/conexion">♢&nbsp; Necesito oración</Link>
     </div>
    </div>
+  </section>
+
+  <section className={styles.mobileChurchCard} aria-label="Información de la iglesia">
+   <span className={styles.mobilePin}>●</span>
+   <h2>Iglesia Príncipe de Paz</h2>
+   <a href={church.mapsUrl} target="_blank" rel="noreferrer">{church.address}</a>
+   <div className={styles.mobileSchedule}>
+    {church.schedule.filter(item=>["Miércoles","Sábado","Domingo"].includes(item.day)).map(item=><article key={item.day}><span>▣</span><small>{item.day}</small><strong>{item.time}</strong></article>)}
+   </div>
+  </section>
+
+  <section className={styles.mobileConnect} aria-label="Conéctate con nosotros">
+   <h2>Conéctate con nosotros</h2>
+   <div className={styles.connectGrid}>
+    <a href={church.whatsappVideo} target="_blank" rel="noreferrer"><span className={styles.whatsappIcon}>☎</span><strong>Estudio bíblico</strong><small>Jueves 8–9 PM</small></a>
+    <a href={youtube.ministry.videos} target="_blank" rel="noreferrer"><span className={styles.youtubeIcon}>▶</span><strong>Mensajes en YouTube</strong><small>Vea las enseñanzas</small></a>
+   </div>
+   <blockquote>“Tu palabra es lámpara a mis pies” <cite>— Salmo 119:105</cite></blockquote>
   </section>
 
   <section className={styles.quickGrid} aria-label="Accesos principales">

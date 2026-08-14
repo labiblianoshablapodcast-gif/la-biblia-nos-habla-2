@@ -1,9 +1,0 @@
-LA BIBLIA NOS HABLA — VERSION 8.3A
-
-1. Copie todo dentro de la carpeta la-biblia-nos-habla-2.
-2. GitHub Desktop: Versión 8.3A - Editor Profesional de Predicaciones
-3. Commit to main y Push origin.
-4. Espere Vercel Ready.
-5. En Supabase SQL Editor ejecute una sola vez:
-   supabase/004_editor_profesional_8_3A.sql
-6. Abra https://labiblianoshabla.org/admin/predicaciones

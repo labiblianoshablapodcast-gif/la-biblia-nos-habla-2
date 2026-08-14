@@ -10,7 +10,15 @@ const photos = [
 
 export default function ElPastorPage() {
   return <>
-    <section className={styles.hero}><div><p>CONOZCA AL PASTOR</p><h1>Un testimonio de la<br/><em>gracia de Dios.</em></h1><span>Pastor Gilberto Maldonado y Yudelka Maldonado</span></div><Image src="/images/pastor-y-yudelka-hero.jpg" alt="Pastor Gilberto Maldonado y Yudelka Maldonado frente a la cruz" width={1512} height={2016} priority /></section>
+    <section className={styles.hero}>
+      <Image className={styles.heroImage} src="/images/pastor-y-yudelka-hero-v2.png" alt="Pastor Gilberto Maldonado y Yudelka Maldonado" fill sizes="100vw" priority />
+      <div className={styles.heroOverlay} />
+      <div className={styles.heroContent}>
+        <p>CONOZCA AL PASTOR</p>
+        <h1>Un testimonio<br/>de la <em>gracia de Dios.</em></h1>
+        <span>Pastor Gilberto Maldonado y Yudelka Maldonado</span>
+      </div>
+    </section>
 
     <section className={styles.bio}><Image src="/images/pastor-gilberto.jpg" alt="Pastor Gilberto Maldonado y Yudelka Maldonado" width={1152} height={2048}/><div><p className={styles.eyebrow}>UN TESTIMONIO DE LA GRACIA DE DIOS</p><h2>Conozca al Pastor</h2><p>La historia del Pastor <b>Gilberto Maldonado</b> es un testimonio vivo del poder transformador de Jesucristo. Después de permanecer privado de libertad durante 17 años y medio, Dios cambió completamente su vida, dándole una nueva oportunidad, una nueva familia en la fe y un propósito eterno.</p><p>Al recuperar su libertad, comenzó a congregarse en la <b>Iglesia Internacional Príncipe de Paz</b>, donde fue recibido con amor por el <b>Pastor Rev. Rodolfo Solórzano</b> y su esposa <b>Masiel Solórzano</b>. Bajo su liderazgo pastoral encontró discipulado, restauración y crecimiento espiritual.</p><p>Con el tiempo sirvió fielmente en diferentes áreas del ministerio, especialmente como director del Ministerio de Alabanza, ministrando con el piano y el bajo para la gloria de Dios.</p><p>Reconociendo el llamado de Dios sobre su vida, el <b>Pastor Rev. Rodolfo Solórzano</b> lo discipuló, preparó y posteriormente lo ordenó al ministerio pastoral. Hoy continúa sirviendo bajo la cobertura espiritual de la <b>Iglesia Internacional Príncipe de Paz</b>, pastoreando la congregación en Filadelfia.</p><p>Junto a su esposa <b>Yudelka Maldonado</b>, dedica su vida a la predicación del Evangelio, al discipulado, a las misiones y al desarrollo del ministerio <b>La Biblia Nos Habla</b>, cuyo propósito es llevar la Palabra de Dios a miles de personas mediante la enseñanza bíblica y la tecnología.</p><blockquote><small>NUESTRO LLAMADO</small>“Servimos a Cristo porque Él transformó nuestras vidas, y ahora vivimos para que otros conozcan el poder del Evangelio.”</blockquote></div></section>
 

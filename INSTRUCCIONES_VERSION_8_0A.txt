@@ -1,0 +1,42 @@
+LA BIBLIA NOS HABLA — VERSION 8.0A
+CENTRO PASTORAL: LOGIN, DASHBOARD Y PREDICACIONES
+
+PARTE 1 — ACTUALIZAR EL CÓDIGO
+1. Descomprima este ZIP.
+2. Copie todo dentro de la carpeta local la-biblia-nos-habla-2.
+3. Seleccione Replace.
+4. GitHub Desktop:
+   Versión 8.0A - Centro Pastoral y Predicaciones
+5. Commit to main.
+6. Push origin.
+7. Espere que Vercel muestre Ready.
+
+PARTE 2 — PREPARAR SUPABASE
+1. Abra Supabase > SQL Editor > New Query.
+2. Abra el archivo:
+   supabase/002_centro_pastoral_8_0A.sql
+3. Copie TODO.
+4. Péguelo en SQL Editor.
+5. Pulse Run una sola vez.
+
+PARTE 3 — CREAR SU USUARIO PASTORAL
+1. En Supabase abra Authentication > Users.
+2. Seleccione Add user > Create new user.
+3. Use su correo y una contraseña segura.
+4. Regrese a SQL Editor y ejecute:
+
+update public.profiles
+set role='pastor', full_name='Pastor Gilberto Maldonado'
+where id=(select id from auth.users
+          where email='labiblianoshablapodcast@gmail.com');
+
+Cambie el correo en esa línea si utilizó otro.
+
+PARTE 4 — ENTRAR
+Abra:
+https://labiblianoshabla.org/login
+
+Después visite:
+https://labiblianoshabla.org/admin/configuracion/supabase
+
+Debe mostrar las cuatro comprobaciones en verde.

@@ -1,0 +1,14 @@
+VERSIÓN 12.13 — SEGUIMIENTO DEL ESTUDIO DE JUAN
+
+1. Abra Supabase > SQL Editor.
+2. Copie y ejecute todo el contenido de ACTIVAR_PROGRESO_ESTUDIO_JUAN.sql.
+3. Publique esta versión en Vercel.
+4. El participante escribirá su nombre antes de terminar un capítulo.
+5. En el Panel Pastoral, abra “Estudio de Juan” para ver:
+   - nombre del participante;
+   - capítulos terminados;
+   - día y hora de cada avance;
+   - avisos nuevos al completar 5, 10, 15 y 20 capítulos.
+
+Privacidad: las respuestas personales permanecen en el dispositivo del participante.
+El panel pastoral recibe únicamente la identidad, el capítulo y la fecha del avance.

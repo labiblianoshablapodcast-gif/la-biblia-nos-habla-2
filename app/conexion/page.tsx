@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import ConnectionForm from '@/components/ConnectionForm';
 
 const supportPaths = [
@@ -17,11 +18,20 @@ export default function Conexion(){
           <p>Salvación, oración, bautismo, membresía y acompañamiento pastoral, todo en un solo lugar.</p>
           <span className="connectionResponseBadge"><i/> Su solicitud será atendida con privacidad y cuidado</span>
         </div>
-        <div className="connectionConstellation" aria-hidden="true">
-          <span className="connectionCenterMark">LB</span>
-          <i className="orbit orbitOne"/><i className="orbit orbitTwo"/>
-          <b className="node nodeOne">♡</b><b className="node nodeTwo">✦</b><b className="node nodeThree">○</b>
-        </div>
+        <figure className="connectionPrayerVisual">
+          <Image
+            src="/images/iglesia-servicio-de-oracion.jpeg"
+            alt="Congregación de Iglesia Príncipe de Paz reunida en oración"
+            fill
+            priority
+            sizes="(max-width: 700px) calc(100vw - 36px), 390px"
+          />
+          <span className="connectionPrayerGlow" aria-hidden="true" />
+          <figcaption>
+            <span className="connectionPrayerIcon" aria-hidden="true">♢</span>
+            <span><strong>Oramos con usted</strong><small>Su petición importa y será tratada con cuidado.</small></span>
+          </figcaption>
+        </figure>
       </div>
     </section>
 

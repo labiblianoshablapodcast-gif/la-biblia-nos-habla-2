@@ -214,6 +214,9 @@ footer{background:#03111f;color:#fff;padding:45px clamp(24px,8vw,130px);display:
 .connectionVerse>span{color:#e3ad34;font:500 42px/1 "Cormorant Garamond",serif}.connectionVerse div{display:grid;gap:2px}.connectionVerse strong{font:700 22px/1.05 "Cormorant Garamond",serif}.connectionVerse cite{color:rgba(255,255,255,.6);font-size:10px;font-style:normal;letter-spacing:.14em;text-transform:uppercase}
 .connectionResponseBadge{display:inline-flex;align-items:center;gap:10px;margin-top:28px;padding:9px 14px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(255,255,255,.07);font-size:12px;font-weight:800;letter-spacing:.03em}
 .connectionResponseBadge i{width:8px;height:8px;border-radius:50%;background:#64d69c;box-shadow:0 0 0 5px rgba(100,214,156,.12)}
+.connectionPromise{display:flex;align-items:center;flex-wrap:wrap;gap:11px;margin-top:20px;color:rgba(255,255,255,.64);font-size:10px;font-weight:850;letter-spacing:.14em;text-transform:uppercase}
+.connectionPromise::before{content:"";width:25px;height:1px;background:linear-gradient(90deg,#dfa92f,rgba(223,169,47,.2))}
+.connectionPromise i{width:4px;height:4px;border-radius:50%;background:#dfa92f;box-shadow:0 0 0 3px rgba(223,169,47,.1)}
 .connectionPrayerVisual{position:relative;min-width:0;min-height:500px;overflow:hidden;background:#071c30}
 .connectionPrayerVisual::before{content:"";position:absolute;z-index:2;inset:0;background:linear-gradient(90deg,#0a2b3c 0%,rgba(7,28,48,.38) 18%,rgba(4,15,27,.03) 54%),linear-gradient(180deg,rgba(4,15,27,.03) 54%,rgba(4,15,27,.78) 100%)}
 .connectionPrayerVisual>img{object-fit:cover;object-position:60% center;filter:saturate(.82) contrast(1.06)}

@@ -21,6 +21,11 @@ export default function Conexion(){
             <div><strong>Orad sin cesar.</strong><cite>1 Tesalonicenses 5:17</cite></div>
           </blockquote>
           <span className="connectionResponseBadge"><i/> Su petición será recibida con privacidad y respeto</span>
+          <div className="connectionPromise" aria-label="Nuestro compromiso pastoral">
+            <span>Oramos</span><i aria-hidden="true" />
+            <span>Escuchamos</span><i aria-hidden="true" />
+            <span>Acompañamos</span>
+          </div>
         </div>
         <div className="connectionPrayerVisual" role="img" aria-label="Manos unidas en oración ante la luz de una cruz">
           <Image

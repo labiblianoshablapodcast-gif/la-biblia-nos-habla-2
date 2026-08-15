@@ -732,3 +732,49 @@ input:focus,textarea:focus,select:focus{outline:3px solid rgba(191,134,32,.18);b
  .donationLibraryDetails strong{font-size:1.15rem}
  .donationLibraryImage img{object-position:62% 76%}
 }
+
+
+/* Versión 12.21.1: fotografía completa de Donaciones en teléfono. */
+@media(max-width:600px){
+ .donationLibraryHero{
+  position:relative;
+  display:flex;
+  min-height:0;
+  flex-direction:column;
+  background:#071d30;
+ }
+ .donationLibraryImage{
+  position:relative;
+  inset:auto;
+  order:1;
+  width:100%;
+  height:520px;
+  min-height:0;
+  background:linear-gradient(145deg,#071d30,#102b40);
+ }
+ .donationLibraryImage img{
+  object-fit:contain;
+  object-position:center center;
+  filter:saturate(.88) brightness(.88);
+ }
+ .donationLibraryShade{
+  display:block;
+  background:
+   linear-gradient(0deg,#071d30 0%,rgba(7,29,48,.38) 15%,transparent 38%),
+   linear-gradient(90deg,rgba(7,29,48,.22),transparent 35%,transparent 65%,rgba(7,29,48,.22));
+ }
+ .donationLibraryCopy{
+  position:relative;
+  order:2;
+  min-height:0;
+  margin-top:-34px;
+  padding:40px 22px 42px;
+  background:linear-gradient(180deg,#071d30 0%,#0b2942 100%);
+ }
+ .donationLibraryHero h1{
+  max-width:100%;
+  font-size:clamp(2.65rem,12vw,3.2rem);
+ }
+ .donationLibraryCopy>p:not(.donationLibraryEyebrow){max-width:100%}
+ .donationLibraryDetails{max-width:100%}
+}

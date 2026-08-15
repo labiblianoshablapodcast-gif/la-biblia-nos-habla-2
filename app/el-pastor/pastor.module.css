@@ -62,3 +62,34 @@
     object-position:center 14%;
   }
 }
+
+
+/* Versión 12.21.1: portada pastoral proporcionada y retrato completo. */
+@media(min-width:801px){
+ .hero{min-height:520px}
+ .heroImage{object-position:center 8%}
+ .heroContent{padding:5.4rem 0}
+ .hero h1{max-width:620px;font-size:clamp(3.2rem,5.2vw,5rem)}
+}
+@media(max-width:800px){
+ .hero{
+  min-height:640px;
+  background:linear-gradient(145deg,#06172b,#102b40);
+ }
+ .heroImage{
+  object-fit:contain;
+  object-position:center bottom;
+  transform:translateX(8%);
+ }
+ .heroOverlay{
+  background:
+   linear-gradient(90deg,rgba(2,15,30,.98) 0%,rgba(3,18,35,.88) 43%,rgba(3,18,35,.38) 72%,rgba(3,18,35,.10) 100%),
+   linear-gradient(0deg,rgba(2,15,30,.82),transparent 52%);
+ }
+ .heroContent{padding:3.8rem 0}
+ .hero h1{max-width:64%;font-size:clamp(2.65rem,11vw,3.55rem)}
+}
+@media(max-width:430px){
+ .heroImage{transform:translateX(5%);object-position:center bottom}
+ .hero h1{max-width:68%;font-size:2.65rem}
+}

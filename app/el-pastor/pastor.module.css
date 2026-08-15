@@ -1,1 +1,53 @@
 .hero{position:relative;min-height:560px;overflow:hidden;background:#06172b;color:#fff;border-bottom:2px solid #c89425}.heroImage{object-fit:cover;object-position:center}.heroOverlay{position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(2,15,30,.99) 0%,rgba(3,18,35,.93) 34%,rgba(3,18,35,.42) 58%,rgba(3,18,35,.08) 82%)}.heroContent{position:relative;z-index:2;width:min(1180px,calc(100% - 96px));margin:0 auto;padding:clamp(5rem,9vw,8rem) 0}.hero p,.eyebrow{color:#d9ae62;font-size:.72rem;font-weight:800;letter-spacing:.16em}.hero h1,.bio h2,.gallery h2{font-family:Georgia,serif;line-height:1;margin:.5rem 0 1.5rem}.hero h1{max-width:670px;font-size:clamp(3.4rem,6vw,5.7rem);letter-spacing:-.035em}.hero em{color:#d9ae62;font-weight:400}.hero span{display:block;color:#e6edf4;font-size:1rem;font-weight:600}.bio{display:grid;grid-template-columns:.75fr 1.25fr;gap:clamp(2rem,7vw,7rem);align-items:start;padding:clamp(3rem,8vw,8rem);background:#f8f4ec}.bio>img{width:100%;height:540px;object-fit:cover}.bio h2,.gallery h2{font-size:clamp(2.7rem,5vw,4.4rem)}.bio p{line-height:1.75}.bio blockquote{margin:2rem 0 0;padding:1.5rem;border-left:3px solid #d9ae62;background:#fff;font:italic 1.5rem/1.35 Georgia,serif;color:#071d38}.bio blockquote small{display:block;margin-bottom:.6rem;color:#a2762c;font:700 .65rem Arial;letter-spacing:.12em}.gallery{padding:clamp(3rem,8vw,8rem);background:#fff;text-align:center}.gallery>div{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}.gallery figure{height:250px;margin:0;position:relative;overflow:hidden;text-align:left;background:#071d38}.gallery img{width:100%;height:100%;object-fit:cover;transition:transform .25s}.gallery figure:hover img{transform:scale(1.05)}.gallery figcaption{position:absolute;inset:auto 0 0;padding:2.5rem 1rem 1rem;color:#fff;background:linear-gradient(transparent,#071d38d9);display:flex;flex-direction:column}.gallery small{color:#e0b970;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase}@media(max-width:800px){.hero{min-height:600px}.heroImage{object-position:68% center}.heroOverlay{background:linear-gradient(90deg,rgba(2,15,30,.97) 0%,rgba(3,18,35,.84) 47%,rgba(3,18,35,.25) 82%),linear-gradient(0deg,rgba(2,15,30,.72),transparent 55%)}.heroContent{width:calc(100% - 40px);padding:4.2rem 0}.hero h1{max-width:66%;font-size:clamp(2.8rem,12vw,4rem)}.hero span{max-width:58%;font-size:.88rem;line-height:1.45}.bio{grid-template-columns:1fr;padding:2.5rem 1.5rem}.bio>img{height:400px}.gallery{padding:3rem 1.5rem}.gallery>div{grid-template-columns:repeat(2,1fr)}.gallery figure{height:210px}}@media(max-width:430px){.gallery>div{grid-template-columns:1fr}.hero{min-height:560px}.heroImage{object-position:70% center}.heroContent{padding-top:3.5rem}.hero h1{max-width:70%;font-size:2.8rem}.hero span{max-width:64%}}
+
+
+/* Versión 12.17.4: fotografía pastoral auténtica y encuadre móvil completo. */
+.bio{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  background:#f3efe7;
+}
+.bio::before{
+  content:"";
+  position:absolute;
+  z-index:-2;
+  inset:0;
+  background:
+    linear-gradient(90deg,rgba(248,244,236,.94),rgba(248,244,236,.97)),
+    url("/images/iglesia-principe-de-paz-congregacion.jpeg") center/cover no-repeat;
+}
+.bio::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:0;
+  background:linear-gradient(135deg,rgba(7,24,41,.05),transparent 46%,rgba(201,148,37,.07));
+  pointer-events:none;
+}
+.bio>img{
+  display:block;
+  padding:10px;
+  border:1px solid rgba(201,148,37,.55);
+  border-radius:18px;
+  background:#071829;
+  box-shadow:0 24px 60px rgba(7,24,41,.18);
+  object-position:center 24%;
+}
+@media(max-width:800px){
+  .bio{gap:2rem}
+  .bio::before{
+    background:
+      linear-gradient(rgba(248,244,236,.95),rgba(248,244,236,.98)),
+      url("/images/iglesia-principe-de-paz-congregacion.jpeg") center/cover no-repeat;
+  }
+  .bio>img{
+    width:100%;
+    height:auto;
+    max-height:none;
+    padding:8px;
+    border-radius:15px;
+    object-fit:contain;
+    object-position:center top;
+  }
+}

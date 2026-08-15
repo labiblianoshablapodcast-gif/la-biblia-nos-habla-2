@@ -51,3 +51,14 @@
     object-position:center top;
   }
 }
+
+
+/* Corrección de encuadre: mostrar las cabezas en Un llamado compartido. */
+.gallery figure:last-child img{
+  object-position:center 18%;
+}
+@media(max-width:800px){
+  .gallery figure:last-child img{
+    object-position:center 14%;
+  }
+}

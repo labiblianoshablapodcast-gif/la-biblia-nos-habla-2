@@ -5,7 +5,14 @@ import heritage from "./heritage.module.css";
 export const metadata = { title: "Conozca al Pastor | La Biblia Nos Habla", description: "La historia y llamado ministerial del Pastor Gilberto Maldonado y Yudelka Maldonado." };
 
 const photos = [
-  ["gallery-01.jpg", "Pastor y Yudelka", "Pastor y Yudelka Maldonado"], ["gallery-02.jpg", "Ministerio", "Congregación y ministerio"], ["gallery-03.jpg", "Misiones", "Viaje y misión"], ["gallery-04.jpg", "Familia", "Familia ministerial"], ["gallery-05.jpg", "Eventos", "Evento especial"], ["gallery-06.png", "Ministerio", "Alabanza y adoración"], ["gallery-07.jpg", "Misiones", "Viaje ministerial"], ["gallery-08.jpg", "Pastor y Yudelka", "Un llamado compartido"]
+  ["gallery-01.jpg", "Pastor y Yudelka", "Pastor Gilberto y Yudelka Maldonado"],
+  ["iglesia-principe-de-paz-congregacion.jpeg", "Ministerio", "Nuestra congregación y ministerio"],
+  ["misiones/lanquin-2026-grupo-misionero.jpg", "Misiones", "Equipo misionero en Lanquín"],
+  ["iglesia-familias.jpeg", "Familia", "Familias de nuestra congregación"],
+  ["iglesia-dia-de-las-madres.jpeg", "Eventos", "Celebración especial en la iglesia"],
+  ["iglesia-congregacion-adorando.jpeg", "Ministerio", "Alabanza y adoración"],
+  ["misiones/lanquin-2026-culto-templo.jpg", "Misiones", "Culto misionero en Lanquín"],
+  ["pastor-gilberto.jpg", "Pastor y Yudelka", "Un llamado compartido"]
 ];
 
 export default function ElPastorPage() {

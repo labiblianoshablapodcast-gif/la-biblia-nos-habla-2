@@ -409,3 +409,19 @@
     width: 92%;
   }
 }
+
+
+/* Versión 12.18.1: la pareja completa queda dentro del marco móvil. */
+@media (max-width: 720px) {
+  .heroPortrait {
+    inset: 142px 2% 0 auto;
+    width: 84%;
+  }
+}
+
+@media (max-width: 390px) {
+  .heroPortrait {
+    inset: 142px 1% 0 auto;
+    width: 88%;
+  }
+}

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import {createClient} from "@/lib/supabase/server";
+import ManagedGallery from "@/components/ManagedGallery";
 
 const albums=[
  {title:"Lanquín 2026",subtitle:"Inauguración del templo en Chicachuy",image:"/images/misiones/lanquin-2026-grupo-misionero.jpg",href:"/misiones/lanquin-2026"},
@@ -29,12 +30,7 @@ export default async function Galeria(){
   <section className="section soft">
    <p className="eyebrow">Fotos recientes</p>
    <h2>Momentos de nuestra iglesia</h2>
-   <div className="managedGalleryGrid">
-    {(data??[]).map(photo=><figure key={photo.id}>
-     <img src={photo.image_url} alt={photo.alt_text||photo.title}/>
-     <figcaption><strong>{photo.title}</strong><small>{photo.category}</small></figcaption>
-    </figure>)}
-   </div>
+   <ManagedGallery photos={data??[]}/>
    {!data?.length&&<div className="notice"><strong>Próximamente añadiremos nuevas fotografías.</strong></div>}
   </section>
  </>;

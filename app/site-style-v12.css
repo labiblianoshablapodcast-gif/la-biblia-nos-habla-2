@@ -468,3 +468,69 @@ input:focus,textarea:focus,select:focus{outline:3px solid rgba(191,134,32,.18);b
  .donationsHeroContent h1{max-width:520px!important;font-size:clamp(39px,10.5vw,48px)!important;line-height:.98!important}
  .donationsHeroContent>p:last-child{margin-bottom:0;font-size:15px;line-height:1.55}
 }
+
+
+/* Versión 12.20.1: portada azul unificada para Diezmos y Ofrendas. */
+.donationsHero {
+  min-height: 500px !important;
+  background:
+    radial-gradient(circle at 18% 15%, rgba(28, 67, 101, .72), transparent 38%),
+    linear-gradient(135deg, #061729 0%, #0b2942 66%, #123a55 100%) !important;
+}
+
+.donationsHero > img {
+  right: 0 !important;
+  left: auto !important;
+  width: 58% !important;
+  object-position: center 76% !important;
+  filter: saturate(.82) contrast(1.04) brightness(.82) !important;
+}
+
+.donationsHeroOverlay {
+  background:
+    linear-gradient(90deg, #061729 0%, rgba(6, 23, 41, .98) 34%, rgba(6, 23, 41, .73) 60%, rgba(6, 23, 41, .24) 100%),
+    linear-gradient(0deg, rgba(6, 23, 41, .72), transparent 58%) !important;
+}
+
+.donationsHeroContent {
+  width: min(1180px, calc(100% - 48px)) !important;
+  padding: 76px 0 !important;
+}
+
+.donationsHeroContent h1 {
+  max-width: 670px !important;
+  font-size: clamp(48px, 5.5vw, 70px) !important;
+}
+
+@media (max-width: 700px) {
+  .donationsHero {
+    min-height: 560px !important;
+    display: block !important;
+  }
+
+  .donationsHero > img {
+    top: 0 !important;
+    width: 100% !important;
+    height: 58% !important;
+    object-position: center 77% !important;
+    filter: saturate(.86) contrast(1.03) brightness(.86) !important;
+  }
+
+  .donationsHeroOverlay {
+    background:
+      linear-gradient(0deg, #061729 0%, #061729 36%, rgba(6, 23, 41, .90) 55%, rgba(6, 23, 41, .18) 88%, rgba(6, 23, 41, .08) 100%) !important;
+  }
+
+  .donationsHeroContent {
+    position: absolute !important;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 300px 22px 38px !important;
+  }
+
+  .donationsHeroContent h1 {
+    max-width: 480px !important;
+    font-size: clamp(38px, 10vw, 46px) !important;
+  }
+}

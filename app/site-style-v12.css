@@ -239,3 +239,61 @@ input:focus,textarea:focus,select:focus{outline:3px solid rgba(191,134,32,.18);b
     line-height: 1.1 !important;
   }
 }
+
+
+/* Versión 12.17.1: portada móvil de Iglesia integrada y sin espacio vacío. */
+@media(max-width:760px){
+  .churchHero{
+    display:block!important;
+    min-height:0!important;
+    padding:0!important;
+    overflow:hidden!important;
+    background:#071829!important;
+  }
+  .churchHero>img{
+    position:relative!important;
+    inset:auto!important;
+    display:block!important;
+    width:100%!important;
+    height:440px!important;
+    object-fit:cover!important;
+    object-position:72% top!important;
+    filter:brightness(1.08) contrast(1.02)!important;
+  }
+  .churchHeroOverlay{
+    top:0!important;
+    right:0!important;
+    bottom:auto!important;
+    left:0!important;
+    height:440px!important;
+    background:linear-gradient(180deg,transparent 68%,rgba(7,24,41,.88) 100%)!important;
+  }
+  .churchHeroContent{
+    position:relative!important;
+    z-index:3!important;
+    width:100%!important;
+    margin:-34px 0 0!important;
+    padding:32px 24px 42px!important;
+    border-radius:26px 26px 0 0!important;
+    background:linear-gradient(145deg,#071829 0%,#102b40 100%)!important;
+  }
+  .churchHeroContent::before{display:none!important}
+  .churchHeroContent .eyebrow{margin:0 0 8px!important}
+  .churchHeroContent h1{
+    width:auto!important;
+    max-width:100%!important;
+    margin:0 0 14px!important;
+    font-size:clamp(40px,11vw,50px)!important;
+    line-height:.94!important;
+  }
+  .churchHeroContent>p:last-child{
+    width:auto!important;
+    max-width:100%!important;
+    margin:0!important;
+    font-size:15px!important;
+    line-height:1.55!important;
+  }
+}
+@media(max-width:390px){
+  .churchHero>img,.churchHeroOverlay{height:410px!important}
+}

@@ -241,59 +241,64 @@ input:focus,textarea:focus,select:focus{outline:3px solid rgba(191,134,32,.18);b
 }
 
 
-/* Versión 12.17.1: portada móvil de Iglesia integrada y sin espacio vacío. */
+/* Versión 12.17.2: portada móvil independiente, compacta e integrada. */
+.churchHeroMobile{display:none}
 @media(max-width:760px){
-  .churchHero{
-    display:block!important;
-    min-height:0!important;
-    padding:0!important;
-    overflow:hidden!important;
-    background:#071829!important;
+  .churchHeroDesktop{display:none!important}
+  .churchHeroMobile{
+    display:block;
+    overflow:hidden;
+    border-bottom:3px solid rgba(191,134,32,.55);
+    background:#071829;
+    color:#fff;
   }
-  .churchHero>img{
-    position:relative!important;
-    inset:auto!important;
-    display:block!important;
-    width:100%!important;
-    height:440px!important;
-    object-fit:cover!important;
-    object-position:72% top!important;
-    filter:brightness(1.08) contrast(1.02)!important;
+  .churchHeroMobilePhoto{
+    position:relative;
+    width:100%;
+    height:430px;
+    overflow:hidden;
+    background:#071829;
   }
-  .churchHeroOverlay{
-    top:0!important;
-    right:0!important;
-    bottom:auto!important;
-    left:0!important;
-    height:440px!important;
-    background:linear-gradient(180deg,transparent 68%,rgba(7,24,41,.88) 100%)!important;
+  .churchHeroMobilePhoto::after{
+    content:"";
+    position:absolute;
+    z-index:1;
+    inset:0;
+    pointer-events:none;
+    background:linear-gradient(180deg,transparent 64%,#071829 100%);
   }
-  .churchHeroContent{
-    position:relative!important;
-    z-index:3!important;
-    width:100%!important;
-    margin:-34px 0 0!important;
-    padding:32px 24px 42px!important;
-    border-radius:26px 26px 0 0!important;
-    background:linear-gradient(145deg,#071829 0%,#102b40 100%)!important;
+  .churchHeroMobilePhoto>img{
+    object-fit:cover;
+    object-position:72% top;
+    filter:brightness(1.08) contrast(1.02);
   }
-  .churchHeroContent::before{display:none!important}
-  .churchHeroContent .eyebrow{margin:0 0 8px!important}
-  .churchHeroContent h1{
-    width:auto!important;
-    max-width:100%!important;
-    margin:0 0 14px!important;
-    font-size:clamp(40px,11vw,50px)!important;
-    line-height:.94!important;
+  .churchHeroMobileCopy{
+    position:relative;
+    z-index:2;
+    margin-top:-46px;
+    padding:30px 24px 40px;
+    background:linear-gradient(145deg,#071829 0%,#102b40 100%);
   }
-  .churchHeroContent>p:last-child{
-    width:auto!important;
-    max-width:100%!important;
-    margin:0!important;
-    font-size:15px!important;
-    line-height:1.55!important;
+  .churchHeroMobileCopy .eyebrow{
+    margin:0 0 8px;
+    color:var(--gold-bright);
+  }
+  .churchHeroMobileCopy h1{
+    max-width:520px;
+    margin:0 0 14px;
+    color:#fff;
+    font:700 clamp(40px,11vw,50px)/.94 "Cormorant Garamond",serif;
+    letter-spacing:-.025em;
+    text-wrap:balance;
+  }
+  .churchHeroMobileCopy>p:last-child{
+    max-width:500px;
+    margin:0;
+    color:rgba(255,255,255,.84);
+    font-size:15px;
+    line-height:1.55;
   }
 }
 @media(max-width:390px){
-  .churchHero>img,.churchHeroOverlay{height:410px!important}
+  .churchHeroMobilePhoto{height:400px}
 }

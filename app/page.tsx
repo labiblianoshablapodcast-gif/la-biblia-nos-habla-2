@@ -42,7 +42,7 @@ export default function Home(){
    <h2>Conéctate con nosotros</h2>
    <div className={styles.connectGrid}>
     <a href={church.whatsappVideo} target="_blank" rel="noreferrer"><span className={styles.whatsappIcon}>☎</span><strong>Estudio bíblico</strong><small>Jueves 8–9 PM</small></a>
-    <a href={youtube.ministry.videos} target="_blank" rel="noreferrer"><span className={styles.youtubeIcon}>▶</span><strong>Mensajes en YouTube</strong><small>Vea las enseñanzas</small></a>
+    <a href={youtube.pastor.videos} target="_blank" rel="noreferrer"><span className={styles.youtubeIcon}>▶</span><strong>Mensajes en YouTube</strong><small>Vea las enseñanzas</small></a>
    </div>
    <blockquote>“Tu palabra es lámpara a mis pies” <cite>— Salmo 119:105</cite></blockquote>
   </section>

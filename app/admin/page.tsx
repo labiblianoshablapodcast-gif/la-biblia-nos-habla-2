@@ -55,6 +55,7 @@ export default async function Admin(){
      <Link className="btn" href="/admin/predicaciones">Nueva predicación</Link>
      <Link className="btn secondaryDark" href="/admin/devocionales">Nuevo devocional</Link>
      <Link className="btn secondaryDark" href="/admin/eventos">Nuevo evento</Link>
+     <Link className="btn secondaryDark" href="/admin/fotos">Subir foto</Link>
     </div>
    </section>
 
@@ -95,9 +96,11 @@ export default async function Admin(){
    <section className="adminManagementGrid">
     <Link href="/admin/predicaciones"><span>🎙</span><h3>Predicaciones</h3><p>Publicar videos, audio, temas y textos bíblicos.</p></Link>
     <Link href="/admin/devocionales"><span>☀</span><h3>Devocionales</h3><p>Crear reflexiones y destacar el mensaje del día.</p></Link>
-    <Link href="/admin/eventos"><span>📅</span><h3>Eventos</h3><p>Programar campañas, servicios y conferencias.</p></Link>
+    <Link href="/admin/eventos"><span>📅</span><h3>Eventos</h3><p>Programar campañas, servicios, fotografías y conferencias.</p></Link>
+    <Link href="/admin/fotos"><span>▣</span><h3>Fotos</h3><p>Subir, describir, publicar u ocultar fotografías de la iglesia.</p></Link>
     <Link href="/admin/donaciones"><span>$</span><h3>Donaciones</h3><p>Consultar nombres, cantidades, fechas y estados de PayPal.</p></Link>
     <Link href="/admin/estudio-juan"><span>📖</span><h3>Estudio de Juan</h3><p>Ver quién completó capítulos, las fechas y los avisos de cada cinco capítulos.</p></Link>
+    <Link href="/admin/usuarios"><span>👥</span><h3>Usuarios</h3><p>Invitar colaboradores y asignar permisos de trabajo.</p></Link>
     <Link href="/admin/configuracion"><span>⚙</span><h3>Configuración</h3><p>Revisar conexiones, seguridad y estado del sistema.</p></Link>
    </section>
   </main>

@@ -10,6 +10,7 @@ const links=[
   ["Nuestros Pastores","/el-pastor"],
   ["Iglesia","/iglesia"],
   ["Eventos","/eventos"],
+  ["Galería","/galeria"],
   ["Contacto y oración","/conexion"]
 ];
 

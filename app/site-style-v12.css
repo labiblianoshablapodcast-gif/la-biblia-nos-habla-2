@@ -1124,3 +1124,22 @@ input:focus,textarea:focus,select:focus{outline:3px solid rgba(191,134,32,.18);b
   max-height:calc(100vh - 175px)!important;
  }
 }
+
+
+/* Versión 12.23.4: corrección estructural del visor de galería. */
+.galleryViewer{
+ display:flex!important;
+ align-items:center!important;
+ justify-content:center!important;
+}
+.galleryViewerContent{
+ flex:1 1 auto!important;
+ width:min(1500px,calc(100vw - 180px))!important;
+ max-width:calc(100vw - 180px)!important;
+}
+@media(max-width:600px){
+ .galleryViewerContent{
+  width:100%!important;
+  max-width:100%!important;
+ }
+}

@@ -810,3 +810,46 @@ input:focus,textarea:focus,select:focus{outline:3px solid rgba(191,134,32,.18);b
  .adminUserGrid>article{grid-template-columns:1fr}
  .adminUserGrid form{flex-direction:column;align-items:stretch}
 }
+
+
+/* Versión 12.22.1: álbumes de galería proporcionados y bien encuadrados. */
+.albumGrid{
+ align-items:start!important;
+ gap:18px!important;
+}
+.albumCard{
+ height:auto!important;
+ border-radius:14px!important;
+}
+.albumImage{
+ position:relative!important;
+ width:100%!important;
+ height:clamp(240px,22vw,340px)!important;
+ min-height:0!important;
+ overflow:hidden!important;
+ background:#071829!important;
+}
+.albumImage img{
+ display:block!important;
+ width:100%!important;
+ height:100%!important;
+ max-width:none!important;
+ object-fit:cover!important;
+ object-position:center top!important;
+}
+.albumCopy{padding:22px!important}
+.albumCopy h2{
+ margin:7px 0!important;
+ font-size:clamp(30px,3vw,42px)!important;
+ line-height:1!important;
+}
+.albumCopy p{margin:8px 0 16px!important}
+@media(max-width:950px){
+ .albumImage{height:300px!important}
+}
+@media(max-width:620px){
+ .albumGrid{grid-template-columns:1fr!important}
+ .albumImage{height:280px!important}
+ .albumCopy{padding:18px!important}
+ .albumCopy h2{font-size:34px!important}
+}

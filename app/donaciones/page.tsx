@@ -9,13 +9,20 @@ const campaigns=[
 export default function Donaciones(){
  const donationUrl="https://www.paypal.com/ncp/payment/5CBCUYZXYBDBW";
  return <>
-  <section className="pageHero donationsHero">
-   <Image src="/images/donaciones-ofrenda-iglesia.jpg" alt="Congregación participando en la ofrenda durante un servicio cristiano" fill priority sizes="100vw" />
-   <div className="donationsHeroOverlay" />
-   <div className="donationsHeroContent">
-    <p className="eyebrow">Generosidad con propósito</p>
+  <section className="donationLibraryHero">
+   <div className="donationLibraryCopy">
+    <p className="donationLibraryEyebrow">Generosidad con propósito</p>
     <h1>Diezmos, ofrendas y donaciones</h1>
     <p>Cada contribución ayuda a sostener la obra local, el discipulado y las misiones.</p>
+    <div className="donationLibraryDetails" aria-label="Información sobre las donaciones">
+     <span><strong>3</strong> áreas de apoyo</span>
+     <span><strong>100%</strong> proceso seguro</span>
+    </div>
+   </div>
+   <div className="donationLibraryImage">
+    <Image src="/images/donaciones-ofrenda-iglesia.jpg" alt="Congregación participando en la ofrenda durante un servicio cristiano" fill priority sizes="(max-width: 760px) 100vw, 50vw" />
+    <div className="donationLibraryShade" />
+    <p>“Dios ama al dador alegre.” <span>2 Corintios 9:7</span></p>
    </div>
   </section>
 

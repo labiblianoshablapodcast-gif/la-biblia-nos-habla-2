@@ -10,7 +10,7 @@ export default function Donaciones(){
  const donationUrl="https://www.paypal.com/ncp/payment/5CBCUYZXYBDBW";
  return <>
   <section className="pageHero donationsHero">
-   <Image src="/images/misiones/coban-2022/coban-2022-36.jpg" alt="Miembros de la iglesia sirviendo y acompañando a una persona necesitada" fill priority sizes="100vw" />
+   <Image src="/images/iglesia-servicio-de-oracion.jpeg" alt="Congregación de la Iglesia Príncipe de Paz reunida en oración y adoración" fill priority sizes="100vw" />
    <div className="donationsHeroOverlay" />
    <div className="donationsHeroContent">
     <p className="eyebrow">Generosidad con propósito</p>

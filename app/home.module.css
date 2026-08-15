@@ -389,3 +389,23 @@
     font-size: 0.82rem;
   }
 }
+
+
+/* Versión 12.18: retrato principal centrado en teléfonos. */
+@media (max-width: 720px) {
+  .heroPortrait {
+    inset: 142px -8% 0 auto;
+    width: 88%;
+  }
+
+  .heroImage {
+    object-position: center top !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .heroPortrait {
+    inset: 142px -10% 0 auto;
+    width: 92%;
+  }
+}

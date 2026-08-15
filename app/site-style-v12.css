@@ -534,3 +534,87 @@ input:focus,textarea:focus,select:focus{outline:3px solid rgba(191,134,32,.18);b
     font-size: clamp(38px, 10vw, 46px) !important;
   }
 }
+
+
+/* Versión 12.20.2: foto y azul unidos en una sola portada. */
+.donationsHero {
+  min-height: 500px !important;
+  display: flex !important;
+  align-items: center !important;
+  background: #061729 !important;
+}
+
+.donationsHero > img {
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center 72% !important;
+  filter: saturate(.82) contrast(1.03) brightness(.76) !important;
+}
+
+.donationsHeroOverlay {
+  background:
+    linear-gradient(90deg, #061729 0%, rgba(6,23,41,.98) 25%, rgba(6,23,41,.87) 43%, rgba(6,23,41,.46) 64%, rgba(6,23,41,.13) 100%),
+    linear-gradient(0deg, rgba(6,23,41,.62), transparent 62%) !important;
+}
+
+.donationsHeroContent {
+  position: relative !important;
+  width: min(1180px, calc(100% - 48px)) !important;
+  padding: 72px 0 !important;
+}
+
+.donationsHeroContent h1 {
+  width: min(560px, 46vw) !important;
+  max-width: 100% !important;
+  margin: 10px 0 18px !important;
+  font-size: clamp(44px, 4.6vw, 64px) !important;
+  line-height: .98 !important;
+  overflow-wrap: normal;
+}
+
+.donationsHeroContent > p:last-child {
+  width: min(560px, 46vw);
+  max-width: 100%;
+}
+
+@media (max-width: 700px) {
+  .donationsHero {
+    min-height: 550px !important;
+    display: flex !important;
+    align-items: flex-end !important;
+  }
+
+  .donationsHero > img {
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-position: 54% 72% !important;
+  }
+
+  .donationsHeroOverlay {
+    background:
+      linear-gradient(0deg, #061729 0%, rgba(6,23,41,.99) 35%, rgba(6,23,41,.82) 58%, rgba(6,23,41,.30) 80%, rgba(6,23,41,.10) 100%) !important;
+  }
+
+  .donationsHeroContent {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    padding: 255px 22px 38px !important;
+  }
+
+  .donationsHeroContent h1 {
+    width: 100% !important;
+    max-width: 390px !important;
+    font-size: clamp(36px, 9.6vw, 43px) !important;
+    line-height: 1 !important;
+  }
+
+  .donationsHeroContent > p:last-child {
+    width: 100%;
+    max-width: 430px;
+    font-size: 14px !important;
+  }
+}

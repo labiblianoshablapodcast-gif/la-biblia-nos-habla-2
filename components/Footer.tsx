@@ -15,6 +15,7 @@ export default function Footer(){
       <Link href="/biblia">Biblia</Link>
       <Link href="/el-pastor">El Pastor</Link>
       <Link href="/misiones">Misiones</Link>
+      <Link href="/galeria">Galería</Link>
     </div>
 
     <div>

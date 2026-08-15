@@ -6,11 +6,13 @@ const sections=[
   ["Predicaciones","/admin/predicaciones","🎙"],
   ["Organizar sermones","/admin/predicaciones/organizacion","▦"],
   ["Eventos","/admin/eventos","📅"],
+  ["Fotos","/admin/fotos","▣"],
   ["Peticiones","/admin/peticiones","🙏"],
   ["Nuevos creyentes","/admin/nuevos-creyentes","♥"],
   ["Estudio de Juan","/admin/estudio-juan","📖"],
   ["Donaciones","/admin/donaciones","$"],
   ["Misiones","/admin/misiones","🌎"],
+  ["Usuarios","/admin/usuarios","👥"],
   ["Configuración","/admin/configuracion","⚙"],
   ["Estado Supabase","/admin/configuracion/supabase","●"]
 ];

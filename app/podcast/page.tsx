@@ -1,7 +1,7 @@
 import {youtube} from "@/data/youtube";
 
 const platforms=[
-  {name:"YouTube",description:"Predicaciones, estudios y episodios en video.",url:youtube.ministry.videos,icon:"▶"},
+  {name:"YouTube",description:"Predicaciones, estudios y episodios en video.",url:youtube.pastor.videos,icon:"▶"},
   {name:"Spotify",description:"Conecte aquí el enlace oficial del podcast.",url:process.env.NEXT_PUBLIC_SPOTIFY_URL,icon:"◉"},
   {name:"Apple Podcasts",description:"Conecte aquí el enlace oficial en Apple Podcasts.",url:process.env.NEXT_PUBLIC_APPLE_PODCASTS_URL,icon:"◌"},
   {name:"Amazon Music",description:"Conecte aquí el enlace oficial en Amazon Music.",url:process.env.NEXT_PUBLIC_AMAZON_MUSIC_URL,icon:"♫"}
@@ -35,7 +35,7 @@ export default function Podcast(){
   <section className="section dark podcastCallout">
    <p className="eyebrow">Contenido oficial</p>
    <h2>También puede ver todos los mensajes en YouTube</h2>
-   <a className="btn" href={youtube.ministry.url} target="_blank" rel="noopener noreferrer">Abrir La Biblia Nos Habla</a>
+   <a className="btn" href={youtube.pastor.url} target="_blank" rel="noopener noreferrer">Abrir canal pastoral</a>
   </section>
  </>;
 }

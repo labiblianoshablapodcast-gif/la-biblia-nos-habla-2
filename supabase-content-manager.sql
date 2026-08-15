@@ -1,4 +1,5 @@
 -- Gestor de contenido sin código — fotos, eventos y usuarios
+alter table public.profiles add column if not exists email text;
 alter table public.events add column if not exists image_url text;
 alter table public.events add column if not exists image_path text;
 

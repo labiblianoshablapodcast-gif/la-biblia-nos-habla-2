@@ -853,3 +853,52 @@ input:focus,textarea:focus,select:focus{outline:3px solid rgba(191,134,32,.18);b
  .albumCopy{padding:18px!important}
  .albumCopy h2{font-size:34px!important}
 }
+
+
+/* Versión 12.22.2: tarjetas de fotos compactas en el panel móvil. */
+.adminCheckbox{
+ display:flex!important;
+ align-items:center!important;
+ gap:10px!important;
+ width:max-content!important;
+ max-width:100%!important;
+}
+.adminCheckbox input[type="checkbox"]{
+ appearance:auto!important;
+ -webkit-appearance:checkbox!important;
+ flex:0 0 20px!important;
+ width:20px!important;
+ height:20px!important;
+ min-width:20px!important;
+ min-height:20px!important;
+ margin:0!important;
+ padding:0!important;
+ border:1px solid #87949d!important;
+ border-radius:4px!important;
+ box-shadow:none!important;
+ accent-color:#b98220!important;
+}
+@media(max-width:760px){
+ .adminPhotoGrid>article{
+  padding:14px!important;
+ }
+ .adminPhotoGrid>article>img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  max-height:none!important;
+  margin:0 0 16px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  border-radius:9px!important;
+  background:transparent!important;
+ }
+ .adminPhotoGrid>article form{
+  width:100%!important;
+  max-width:none!important;
+ }
+ .adminPhotoGrid>article .btn,
+ .adminPhotoGrid>article .dangerButton{
+  width:100%!important;
+ }
+}

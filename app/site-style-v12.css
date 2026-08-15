@@ -302,3 +302,24 @@ input:focus,textarea:focus,select:focus{outline:3px solid rgba(191,134,32,.18);b
 @media(max-width:390px){
   .churchHeroMobilePhoto{height:400px}
 }
+
+
+/* Versión 12.17.3: portada de Oración rectangular y de ancho completo. */
+.connectionHero{
+  width:100%!important;
+  padding:0!important;
+  background:#071c30!important;
+}
+.connectionHeroInner{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  border:0!important;
+  border-bottom:3px solid rgba(191,134,32,.55)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+@media(max-width:700px){
+  .connectionHero{padding:0!important}
+  .connectionHeroInner{border-radius:0!important}
+}

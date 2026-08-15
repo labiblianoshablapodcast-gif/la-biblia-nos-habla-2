@@ -17,7 +17,18 @@ const churchPhotos = [
 
 export default function Iglesia(){
  return <>
-  <section className="pageHero churchHero">
+  <section className="churchHeroMobile" aria-label="Iglesia Príncipe de Paz">
+   <div className="churchHeroMobilePhoto">
+    <Image src="/images/iglesia-portada-congregacion-v2.png" alt="Congregación de la Iglesia Príncipe de Paz" fill priority sizes="100vw"/>
+   </div>
+   <div className="churchHeroMobileCopy">
+    <p className="eyebrow">Iglesia Príncipe de Paz</p>
+    <h1>Un lugar para adorar, crecer y servir.</h1>
+    <p>Le esperamos en Philadelphia. Toda persona es bienvenida.</p>
+   </div>
+  </section>
+
+  <section className="pageHero churchHero churchHeroDesktop">
    <Image src="/images/iglesia-portada-congregacion-v2.png" alt="Congregación de la Iglesia Príncipe de Paz" fill priority sizes="100vw"/>
    <div className="churchHeroOverlay"></div>
    <div className="churchHeroContent">

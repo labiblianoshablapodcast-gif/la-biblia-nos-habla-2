@@ -27,7 +27,6 @@ export default function Footer(){
 
     <div>
       <h3>Conéctese</h3>
-      <a href={youtube.ministry.url} target="_blank" rel="noopener noreferrer">YouTube ministerial</a>
       <a href={youtube.pastor.url} target="_blank" rel="noopener noreferrer">YouTube pastoral</a>
       <a href={`mailto:${church.email}`}>{church.email}</a>
       <small>{church.address}</small>

@@ -93,3 +93,72 @@
  .heroImage{transform:translateX(5%);object-position:center bottom}
  .hero h1{max-width:68%;font-size:2.65rem}
 }
+
+
+/* Versión 12.23.1: portada pastoral móvil integrada y proporcionada. */
+.mobileHero{display:none}
+@media(max-width:800px){
+ .hero{display:none}
+ .mobileHero{
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  border-bottom:3px solid #c89425;
+  background:#06172b;
+  color:#fff;
+ }
+ .mobileHeroPhoto{
+  position:relative;
+  width:100%;
+  height:430px;
+  overflow:hidden;
+  background:#06172b;
+ }
+ .mobileHeroPhoto img{
+  object-fit:cover;
+  object-position:64% 12%;
+  filter:brightness(1.08) contrast(1.02);
+ }
+ .mobileHeroPhoto>div{
+  position:absolute;
+  inset:0;
+  background:
+   linear-gradient(180deg,transparent 62%,#06172b 100%),
+   linear-gradient(90deg,rgba(6,23,43,.12),transparent 55%);
+ }
+ .mobileHeroCopy{
+  position:relative;
+  z-index:2;
+  margin-top:-44px;
+  padding:28px 24px 40px;
+  background:linear-gradient(145deg,#06172b 0%,#102b40 100%);
+ }
+ .mobileHeroCopy p{
+  margin:0 0 10px;
+  color:#d9ae62;
+  font-size:.68rem;
+  font-weight:850;
+  letter-spacing:.18em;
+ }
+ .mobileHeroCopy h1{
+  max-width:520px;
+  margin:0 0 17px;
+  color:#fff;
+  font:700 clamp(2.7rem,12vw,3.35rem)/.94 Georgia,serif;
+  letter-spacing:-.035em;
+ }
+ .mobileHeroCopy h1 em{color:#d9ae62;font-weight:400}
+ .mobileHeroCopy span{
+  display:block;
+  color:rgba(255,255,255,.82);
+  font-size:.9rem;
+  font-weight:650;
+  line-height:1.45;
+ }
+}
+@media(max-width:430px){
+ .mobileHeroPhoto{height:400px}
+ .mobileHeroPhoto img{object-position:66% 10%}
+ .mobileHeroCopy{padding-left:20px;padding-right:20px}
+ .mobileHeroCopy h1{font-size:2.65rem}
+}

@@ -29,7 +29,7 @@ export default function PhotoUploadField({
  async function upload(file?:File){
   if(!file)return;
   if(!file.type.startsWith("image/")){
-   setStatus("Seleccione una fotografía.");
+   setStatus("Seleccione una fotografía válida.");
    return;
   }
   if(file.size>10*1024*1024){
@@ -50,9 +50,7 @@ export default function PhotoUploadField({
   const safe=file.name.toLowerCase().replace(/[^a-z0-9._-]+/g,"-");
   const storagePath=`${folder}/${user.id}/${Date.now()}-${safe}`;
   const {error}=await supabase.storage.from("site-media").upload(storagePath,file,{
-   cacheControl:"3600",
-   upsert:false,
-   contentType:file.type
+   cacheControl:"3600",upsert:false,contentType:file.type
   });
 
   if(error){
@@ -64,17 +62,21 @@ export default function PhotoUploadField({
   const {data}=supabase.storage.from("site-media").getPublicUrl(storagePath);
   setUrl(data.publicUrl);
   setPath(storagePath);
-  setStatus("Fotografía lista para guardar.");
+  setStatus("✓ Fotografía cargada. Ahora complete los datos y presione Guardar.");
   setUploading(false);
  }
 
- return <div className="adminPhotoField">
-  <label htmlFor={id}>{label}
+ return <div className={"adminPhotoField professionalDropzone "+(url?"hasPhoto":"")}>
+  <label className="photoDropzoneLabel" htmlFor={id}>
    <input id={id} type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" onChange={e=>upload(e.target.files?.[0])}/>
+   {!url&&<><span className="photoDropIcon">＋</span><strong>{label}</strong><small>Toque aquí para abrir sus fotos</small></>}
+   {url&&<img src={url} alt="Vista previa de la fotografía seleccionada"/>}
   </label>
   <input type="hidden" name={name} value={url}/>
   <input type="hidden" name={pathName} value={path}/>
-  {url&&<img src={url} alt="Vista previa de la fotografía seleccionada"/>}
-  <small className={uploading?"uploading":""}>{status||"JPG, PNG, WEBP o HEIC · máximo 10 MB"}</small>
+  <p className={"photoUploadStatus "+(uploading?"uploading":url?"ready":"")}>
+   {status||"JPG, PNG, WEBP o HEIC · máximo 10 MB"}
+  </p>
+  {url&&<label className="photoChangeButton" htmlFor={id}>Cambiar fotografía</label>}
  </div>;
 }

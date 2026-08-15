@@ -914,3 +914,70 @@ input:focus,textarea:focus,select:focus{outline:3px solid rgba(191,134,32,.18);b
  .mobileBottomNav a{padding-left:1px!important;padding-right:1px!important}
  .mobileBottomNav small{font-size:.61rem!important}
 }
+
+
+/* Versión 12.23: estudio profesional para subir fotografías. */
+.photoManagerPage{background:#f4f6f7}
+.photoManagerHeader{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:24px}
+.photoManagerHeader h1{margin:4px 0 0}
+.photoSaveNotice{display:flex;gap:13px;align-items:flex-start;margin:0 0 24px;padding:17px 19px;border:1px solid #a9d4b9;border-radius:12px;background:#edf8f1;color:#164c2e}
+.photoSaveNotice>span{display:grid;place-items:center;flex:0 0 30px;width:30px;height:30px;border-radius:50%;background:#278454;color:#fff;font-weight:900}
+.photoSaveNotice strong{display:block;font-size:15px}.photoSaveNotice p{margin:3px 0 0;font-size:13px}
+.photoSaveNotice.error{border-color:#e2a8ae;background:#fff1f2;color:#7e1f2b}.photoSaveNotice.error>span{background:#a51f2a}
+.photoSaveNotice.warning{border-color:#dfc27a;background:#fff8e6;color:#6f510f}.photoSaveNotice.warning>span{background:#a47718}
+.photoUploadStudio{display:grid;grid-template-columns:minmax(280px,.72fr) minmax(460px,1.28fr);overflow:hidden;margin-bottom:52px;border:1px solid #d6dee2;border-radius:18px;background:#fff;box-shadow:0 18px 48px rgba(6,23,41,.09)}
+.photoUploadIntro{padding:38px;background:radial-gradient(circle at 10% 10%,rgba(216,164,58,.15),transparent 35%),linear-gradient(145deg,#061729,#123650);color:#fff}
+.photoStudioIcon{display:grid;place-items:center;width:48px;height:48px;margin-bottom:24px;border:1px solid rgba(216,164,58,.65);border-radius:12px;color:#e2b24a;font-size:24px}
+.photoUploadIntro h2{margin:8px 0 17px;font:700 clamp(38px,4vw,52px)/.94 "Cormorant Garamond",serif}
+.photoUploadIntro>p:not(.eyebrow){color:rgba(255,255,255,.75);font-size:14px;line-height:1.65}
+.photoUploadIntro ol{display:grid;gap:10px;margin:28px 0 0;padding:20px 0 0;border-top:1px solid rgba(255,255,255,.16);list-style:none}
+.photoUploadIntro li{display:flex;align-items:center;gap:11px;color:rgba(255,255,255,.78);font-size:12px;font-weight:700}
+.photoUploadIntro li strong{display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:rgba(216,164,58,.18);color:#e2b24a}
+.professionalPhotoForm{width:100%;max-width:none;padding:30px;gap:20px}
+.professionalDropzone{padding:0!important;border:0!important;background:transparent!important}
+.photoDropzoneLabel{position:relative;display:grid;place-items:center;min-height:230px;padding:24px;overflow:hidden;border:2px dashed #b8c4ca;border-radius:14px;background:#f6f8f8;text-align:center;cursor:pointer;transition:.18s}
+.photoDropzoneLabel:hover{border-color:#bd8621;background:#fbf7ee}
+.photoDropzoneLabel input{position:absolute;width:1px!important;height:1px!important;opacity:0;pointer-events:none}
+.photoDropIcon{display:grid;place-items:center;width:48px;height:48px;margin-bottom:10px;border-radius:50%;background:#071829;color:#e0aa3d;font-size:27px}
+.photoDropzoneLabel strong,.photoDropzoneLabel small{display:block}.photoDropzoneLabel strong{font-size:15px}.photoDropzoneLabel small{margin-top:4px;color:#70808a;font-weight:500}
+.photoDropzoneLabel img{display:block;width:100%;max-height:360px;object-fit:contain;border-radius:10px;background:#071829}
+.photoUploadStatus{margin:10px 0 0;padding:10px 12px;border-radius:8px;background:#eef2f4;color:#596873;font-size:12px;font-weight:700}
+.photoUploadStatus.uploading{background:#fff4cf;color:#765409}.photoUploadStatus.ready{background:#e5f5eb;color:#17603a}
+.photoChangeButton{display:inline-flex;width:max-content;margin-top:8px;padding:7px 11px;border:1px solid #9daab2;border-radius:7px;background:#fff;cursor:pointer}
+.photoFormFields{display:grid;grid-template-columns:1fr 1fr;gap:15px}.photoFormFields label:nth-child(1),.photoFormFields label:nth-child(2),.photoFormFields .adminCheckbox{grid-column:1/-1}
+.photoPrimaryButton{justify-content:center;width:100%!important;min-height:46px!important;background:linear-gradient(135deg,#c9942f,#a96e12)!important;color:#071829!important}
+.photoLibrarySection{padding-top:8px}.photoLibraryHeading{display:flex;align-items:end;justify-content:space-between;gap:20px}.photoLibraryHeading h2{margin:4px 0 0;font-size:clamp(38px,4vw,52px)}.photoLibraryHeading>strong{padding:7px 12px;border-radius:999px;background:#e8edf0;color:#40515d;font-size:12px}
+.adminPhotoThumb{position:relative;overflow:hidden;margin-bottom:16px;border-radius:9px;background:#071829}
+.adminPhotoThumb img{display:block;width:100%;height:240px;object-fit:cover;object-position:center top}
+.adminPhotoThumb span{position:absolute;right:9px;bottom:9px;padding:5px 9px;border-radius:999px;background:rgba(6,23,41,.86);color:#fff;font-size:10px;font-weight:850}
+
+/* Fotografías públicas más pequeñas y equilibradas. */
+.managedGalleryGrid{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))!important;gap:14px!important}
+.managedGalleryGrid figure{min-height:0!important;aspect-ratio:4/3!important}
+.managedGalleryGrid img{display:block!important;width:100%!important;height:100%!important;min-height:0!important;object-fit:cover!important;object-position:center top!important}
+.managedGalleryGrid figcaption{padding:34px 14px 12px!important}
+@media(min-width:1300px){.managedGalleryGrid{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+@media(max-width:850px){
+ .photoManagerHeader{align-items:flex-start;flex-direction:column}
+ .photoUploadStudio{grid-template-columns:1fr}
+ .photoUploadIntro{padding:28px}
+ .professionalPhotoForm{padding:22px}
+}
+@media(max-width:600px){
+ .photoManagerPage{padding-left:14px!important;padding-right:14px!important}
+ .photoUploadStudio{border-radius:14px}
+ .photoUploadIntro{padding:25px 20px}
+ .photoUploadIntro h2{font-size:40px}
+ .professionalPhotoForm{padding:16px}
+ .photoFormFields{grid-template-columns:1fr}
+ .photoFormFields label{grid-column:1!important}
+ .photoDropzoneLabel{min-height:190px;padding:15px}
+ .photoDropzoneLabel img{max-height:none;background:transparent}
+ .photoLibraryHeading{align-items:flex-start;flex-direction:column}
+ .adminPhotoGrid{margin-top:17px}
+ .adminPhotoThumb img{height:auto;max-height:none;object-fit:contain;background:transparent}
+ .managedGalleryGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+ .managedGalleryGrid figcaption{padding:28px 9px 8px!important}
+ .managedGalleryGrid figcaption strong{font-size:11px;line-height:1.25}
+ .managedGalleryGrid figcaption small{font-size:9px}
+}

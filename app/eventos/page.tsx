@@ -24,8 +24,11 @@ export default async function Eventos(){
    <p className="eyebrow">Próximamente</p><h2>Eventos especiales</h2>
    <div className="eventPublicGrid">
     {(data??[]).map(event=><article className="eventPublicCard" key={event.id}>
-      <small>{event.starts_at ? new Date(event.starts_at).toLocaleString("es-US",{dateStyle:"long",timeStyle:"short"}) : "Fecha por confirmar"}</small>
-      <h3>{event.title}</h3><p>{event.description}</p>{event.location&&<strong>📍 {event.location}</strong>}
+      {event.image_url&&<img className="eventPublicImage" src={event.image_url} alt=""/>}
+      <div className="eventPublicBody">
+       <small>{event.starts_at ? new Date(event.starts_at).toLocaleString("es-US",{dateStyle:"long",timeStyle:"short"}) : "Fecha por confirmar"}</small>
+       <h3>{event.title}</h3><p>{event.description}</p>{event.location&&<strong>📍 {event.location}</strong>}
+      </div>
     </article>)}
     {!data?.length&&<div className="notice"><strong>No hay eventos especiales publicados todavía.</strong><p>Los servicios semanales continúan según el horario regular.</p></div>}
    </div>

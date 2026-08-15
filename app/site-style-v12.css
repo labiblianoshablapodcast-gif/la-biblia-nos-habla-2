@@ -618,3 +618,117 @@ input:focus,textarea:focus,select:focus{outline:3px solid rgba(191,134,32,.18);b
     font-size: 14px !important;
   }
 }
+
+
+/* Versión 12.21: Donaciones con la composición de Biblioteca Bíblica. */
+.donationLibraryHero{
+ display:grid;
+ grid-template-columns:1.02fr .98fr;
+ min-height:430px;
+ overflow:hidden;
+ border-bottom:3px solid #c8942c;
+ background:#071d30;
+ color:#fff;
+}
+.donationLibraryCopy{
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ padding:64px clamp(32px,7vw,112px);
+}
+.donationLibraryEyebrow{
+ margin:0 0 18px;
+ color:#ddb24f;
+ font-size:.68rem;
+ font-weight:850;
+ letter-spacing:.23em;
+ text-transform:uppercase;
+}
+.donationLibraryHero h1{
+ max-width:680px;
+ margin:0;
+ font:700 clamp(3.2rem,5.5vw,5.6rem)/.9 "Cormorant Garamond",serif;
+ letter-spacing:-.035em;
+}
+.donationLibraryCopy>p:not(.donationLibraryEyebrow){
+ max-width:620px;
+ margin:24px 0 0;
+ color:rgba(255,255,255,.77);
+ font-size:1rem;
+ line-height:1.65;
+}
+.donationLibraryDetails{
+ display:flex;
+ gap:32px;
+ margin-top:29px;
+ padding-top:20px;
+ border-top:1px solid rgba(255,255,255,.16);
+ color:rgba(255,255,255,.62);
+ font-size:.72rem;
+ text-transform:uppercase;
+ letter-spacing:.1em;
+}
+.donationLibraryDetails strong{
+ margin-right:6px;
+ color:#e0af43;
+ font:700 1.35rem "Cormorant Garamond",serif;
+ letter-spacing:0;
+}
+.donationLibraryImage{
+ position:relative;
+ min-height:430px;
+}
+.donationLibraryImage img{
+ object-fit:cover;
+ object-position:center 76%;
+ filter:saturate(.86) brightness(.84);
+}
+.donationLibraryShade{
+ position:absolute;
+ inset:0;
+ background:
+  linear-gradient(90deg,#071d30 0%,rgba(7,29,48,.25) 28%,rgba(7,29,48,.05) 67%),
+  linear-gradient(0deg,rgba(4,17,29,.76),transparent 50%);
+}
+.donationLibraryImage>p{
+ position:absolute;
+ z-index:2;
+ right:42px;
+ bottom:30px;
+ max-width:360px;
+ margin:0;
+ color:#fff;
+ font:italic 700 1.3rem/1.25 "Cormorant Garamond",serif;
+ text-align:right;
+ text-shadow:0 2px 14px rgba(0,0,0,.5);
+}
+.donationLibraryImage>p span{
+ display:block;
+ margin-top:5px;
+ color:#e4b553;
+ font:800 .6rem Inter,sans-serif;
+ letter-spacing:.14em;
+ text-transform:uppercase;
+}
+@media(max-width:900px){
+ .donationLibraryHero{position:relative;grid-template-columns:1fr;min-height:420px}
+ .donationLibraryCopy{
+  position:relative;
+  z-index:2;
+  min-height:420px;
+  padding:58px 38px;
+  background:linear-gradient(90deg,rgba(4,20,34,.97),rgba(4,20,34,.72) 70%,rgba(4,20,34,.25));
+ }
+ .donationLibraryImage{position:absolute;inset:0;min-height:420px}
+ .donationLibraryImage>p{display:none}
+ .donationLibraryShade{background:linear-gradient(90deg,#071d30 0%,rgba(7,29,48,.72) 55%,rgba(7,29,48,.16) 100%)}
+}
+@media(max-width:600px){
+ .donationLibraryHero{min-height:450px}
+ .donationLibraryCopy{min-height:450px;padding:48px 22px}
+ .donationLibraryHero h1{max-width:88%;font-size:clamp(3rem,13.5vw,3.6rem)}
+ .donationLibraryCopy>p:not(.donationLibraryEyebrow){max-width:78%;font-size:.84rem}
+ .donationLibraryDetails{max-width:86%;gap:20px;font-size:.62rem}
+ .donationLibraryDetails strong{font-size:1.15rem}
+ .donationLibraryImage img{object-position:62% 76%}
+}

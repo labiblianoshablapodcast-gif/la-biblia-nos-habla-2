@@ -252,3 +252,57 @@ footer{background:#03111f;color:#fff;padding:45px clamp(24px,8vw,130px);display:
 .connectionStepsInner li>span{color:#a7730d;font:700 20px "Cormorant Garamond",serif}.connectionStepsInner strong{display:block;margin-bottom:5px}.connectionStepsInner li p{margin:0;color:#65747e;font-size:12px;line-height:1.5}
 @media(max-width:980px){.connectionHeroInner{grid-template-columns:minmax(0,1fr) minmax(300px,.78fr)}.connectionHeroCopy{padding:48px 38px}.connectionPrayerVisual{min-height:470px}.connectionModernLayout{grid-template-columns:1fr;gap:44px}.connectionIntro{max-width:720px}.connectionStepsInner{grid-template-columns:1fr;gap:30px}}
 @media(max-width:700px){.connectionHero{padding:20px 16px 30px}.connectionHeroInner{grid-template-columns:1fr;min-height:0;border-radius:24px}.connectionHeroCopy{order:2;padding:34px 24px 30px}.connectionHero h1{font-size:clamp(43px,12vw,58px)}.connectionHeroCopy>p:not(.eyebrow){font-size:15px}.connectionPrayerVisual{order:1;min-height:255px}.connectionPrayerVisual::before{background:linear-gradient(180deg,rgba(4,15,27,.04) 42%,#071c30 100%)}.connectionPrayerVisual>img{object-position:60% 40%}.connectionPrayerCaption{right:18px;bottom:18px}.connectionVerse{margin-top:22px;padding:12px 14px}.connectionVerse strong{font-size:20px}.connectionResponseBadge{align-items:flex-start;border-radius:14px;line-height:1.4}.connectionModernLayout{padding:56px 18px}.connectionIntro h2{font-size:48px}.connectionSupportGrid{grid-template-columns:1fr}.connectionFormHeading{display:block;padding:22px 20px 16px}.connectionFormHeading h2{font-size:30px}.connectionFormHeading>span{display:inline-block;margin-top:12px}.requestQuickChoices{padding:0 20px 17px}.ministryFormModern{padding:20px}.connectionFieldGrid{grid-template-columns:1fr}.connectionSubmitRow{align-items:stretch;flex-direction:column}.connectionSubmitRow .btn{justify-content:center;width:100%}.whatsappButtonModern{margin:0 20px 20px}.connectionStepsSection{padding:46px 18px 110px}.connectionStepsInner ol{grid-template-columns:1fr}.connectionStepsInner li{padding:16px}}
+
+
+/* Versión 12.17: portada móvil de Iglesia sin cubrir la congregación. */
+@media(max-width:760px){
+  .churchHero{
+    display:block;
+    min-height:0;
+    padding:0;
+    overflow:hidden;
+    background:#071829;
+  }
+  .churchHero>img{
+    top:0!important;
+    right:0!important;
+    bottom:auto!important;
+    left:0!important;
+    width:100%!important;
+    height:440px!important;
+    object-fit:cover!important;
+    object-position:72% top!important;
+    filter:brightness(1.08) contrast(1.02);
+  }
+  .churchHeroOverlay{
+    top:0;
+    bottom:auto;
+    height:440px;
+    background:linear-gradient(180deg,transparent 72%,rgba(3,18,30,.4) 100%);
+  }
+  .churchHeroContent{
+    width:100%;
+    margin:440px 0 0;
+    padding:28px 24px 38px;
+    background:linear-gradient(135deg,#071829,#10283d);
+  }
+  .churchHeroContent::before{display:none}
+  .churchHeroContent h1{
+    width:auto;
+    max-width:100%;
+    margin:8px 0 15px;
+    font-size:clamp(40px,11vw,50px);
+    line-height:.94;
+  }
+  .churchHeroContent>p:last-child{
+    width:auto;
+    max-width:100%;
+    margin-bottom:0;
+    font-size:15px;
+    line-height:1.55;
+  }
+}
+@media(max-width:390px){
+  .churchHero>img,.churchHeroOverlay{height:410px!important}
+  .churchHeroContent{margin-top:410px}
+}

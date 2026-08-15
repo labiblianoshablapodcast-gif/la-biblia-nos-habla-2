@@ -374,3 +374,79 @@ input:focus,textarea:focus,select:focus{outline:3px solid rgba(191,134,32,.18);b
     line-height: 1 !important;
   }
 }
+
+
+/* Versión 12.20: Donaciones integrada al diseño institucional. */
+.donationsHero {
+  min-height: 520px !important;
+  border-bottom: 3px solid rgba(191, 134, 32, .68);
+  background: #071829 !important;
+}
+
+.donationsHero > img {
+  object-fit: cover !important;
+  object-position: center 32% !important;
+  filter: saturate(.9) contrast(1.03);
+}
+
+.donationsHeroOverlay {
+  background:
+    linear-gradient(90deg, rgba(3, 17, 31, .97) 0%, rgba(3, 17, 31, .84) 46%, rgba(3, 17, 31, .28) 78%, rgba(3, 17, 31, .12) 100%),
+    linear-gradient(0deg, rgba(3, 17, 31, .72), transparent 58%) !important;
+}
+
+.donationsHeroContent {
+  width: min(1160px, calc(100% - 48px)) !important;
+  padding: 90px 0 !important;
+}
+
+.donationsHeroContent h1 {
+  max-width: 760px !important;
+  margin: 10px 0 18px;
+  font-size: clamp(50px, 6vw, 76px) !important;
+  line-height: .96 !important;
+  letter-spacing: -.025em;
+}
+
+.donationsHeroContent > p:last-child {
+  max-width: 640px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.donationCampaignCard {
+  border-top: 3px solid rgba(191, 134, 32, .65) !important;
+}
+
+@media (max-width: 700px) {
+  .donationsHero {
+    min-height: 510px !important;
+    align-items: flex-end;
+  }
+
+  .donationsHero > img {
+    object-position: 58% top !important;
+  }
+
+  .donationsHeroOverlay {
+    background:
+      linear-gradient(0deg, rgba(3, 17, 31, .99) 0%, rgba(3, 17, 31, .88) 48%, rgba(3, 17, 31, .30) 78%, rgba(3, 17, 31, .12) 100%) !important;
+  }
+
+  .donationsHeroContent {
+    width: 100% !important;
+    padding: 235px 22px 46px !important;
+  }
+
+  .donationsHeroContent h1 {
+    max-width: 520px !important;
+    font-size: clamp(39px, 10.5vw, 48px) !important;
+    line-height: .98 !important;
+  }
+
+  .donationsHeroContent > p:last-child {
+    margin-bottom: 0;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+}

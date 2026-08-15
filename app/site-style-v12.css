@@ -902,3 +902,15 @@ input:focus,textarea:focus,select:focus{outline:3px solid rgba(191,134,32,.18);b
   width:100%!important;
  }
 }
+
+
+/* Versión 12.22.3: acceso público visible a la Galería. */
+@media(max-width:800px){
+ .mobileBottomNav{
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  padding-left:4px!important;
+  padding-right:4px!important;
+ }
+ .mobileBottomNav a{padding-left:1px!important;padding-right:1px!important}
+ .mobileBottomNav small{font-size:.61rem!important}
+}

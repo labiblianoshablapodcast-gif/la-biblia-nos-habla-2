@@ -323,3 +323,18 @@ input:focus,textarea:focus,select:focus{outline:3px solid rgba(191,134,32,.18);b
   .connectionHero{padding:0!important}
   .connectionHeroInner{border-radius:0!important}
 }
+
+
+/* Versión 12.18: galería móvil con rostros completos. */
+@media (max-width: 760px) {
+  .churchPhotoGrid figure {
+    aspect-ratio: 4 / 3;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .churchPhotoGrid figure > img {
+    object-fit: cover !important;
+    object-position: center top !important;
+  }
+}

@@ -456,3 +456,27 @@
  }
  .heroImage{object-position:78% top!important}
 }
+
+
+/* Versión 12.18.4: mover físicamente solo la capa fotográfica. */
+@media(max-width:720px){
+ .heroPortrait{
+  inset:142px 2% 0 auto!important;
+  width:84%!important;
+ }
+ .heroImage{
+  left:-10%!important;
+  right:auto!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center top!important;
+ }
+}
+@media(max-width:390px){
+ .heroPortrait{
+  inset:142px 1% 0 auto!important;
+  width:88%!important;
+ }
+ .heroImage{left:-11%!important}
+}

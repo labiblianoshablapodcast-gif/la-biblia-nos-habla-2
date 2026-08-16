@@ -1218,3 +1218,8 @@ input:focus,textarea:focus,select:focus{outline:3px solid rgba(191,134,32,.18);b
 @media(max-width:600px){
  .pastorsAlbumImage img{padding-top:6px;transform:scale(1.01)}
 }
+
+/* Versión 12.24.1: retrato llena y equilibra la tarjeta pastoral. */
+.pastorsAlbumImage{min-height:420px!important;display:block!important}
+.pastorsAlbumImage img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;padding:0!important;object-fit:cover!important;object-position:center 30%!important;transform:none!important}
+@media(max-width:600px){.pastorsAlbumImage{min-height:360px!important}.pastorsAlbumImage img{object-position:center 28%!important}}

@@ -425,3 +425,15 @@
     width: 88%;
   }
 }
+
+
+/* Versión 12.18.2: desplazar la pareja hacia la izquierda en la portada móvil. */
+@media(max-width:720px){
+ .heroPortrait{
+  right:8%!important;
+  left:auto!important;
+ }
+}
+@media(max-width:390px){
+ .heroPortrait{right:7%!important}
+}

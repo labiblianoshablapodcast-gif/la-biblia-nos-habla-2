@@ -541,3 +541,19 @@
  }
  .heroImage{transform:translateX(-4%)!important}
 }
+
+
+/* Versión 12.18.7: ampliar la pareja completa dentro del marco móvil. */
+@media(max-width:720px){
+ .heroImage{
+  object-fit:contain!important;
+  object-position:center top!important;
+  transform:translateX(-5%) scale(1.45)!important;
+  transform-origin:center top!important;
+ }
+}
+@media(max-width:390px){
+ .heroImage{
+  transform:translateX(-5%) scale(1.42)!important;
+ }
+}

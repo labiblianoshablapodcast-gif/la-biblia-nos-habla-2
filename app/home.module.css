@@ -557,3 +557,52 @@
   transform:translateX(-5%) scale(1.42)!important;
  }
 }
+
+
+/* Versión 12.19: portada móvil fotográfica, natural y completamente integrada. */
+@media(max-width:720px){
+ .hero{
+  min-height:720px!important;
+  background:#041529!important;
+ }
+ .heroPortrait{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  border:0!important;
+  border-radius:0!important;
+  background:
+   url("/images/gallery-01.jpg") 68% center/cover no-repeat!important;
+  box-shadow:none!important;
+ }
+ .heroImage{display:none!important}
+ .heroOverlay{
+  z-index:1!important;
+  background:
+   linear-gradient(90deg,
+    rgba(3,17,33,.99) 0%,
+    rgba(3,17,33,.96) 34%,
+    rgba(3,17,33,.76) 52%,
+    rgba(3,17,33,.30) 72%,
+    rgba(3,17,33,.06) 100%),
+   linear-gradient(0deg,
+    rgba(3,17,33,.88) 0%,
+    rgba(3,17,33,.22) 42%,
+    transparent 72%)!important;
+ }
+ .heroContent{
+  min-height:720px!important;
+  padding:52px 22px 58px!important;
+ }
+}
+@media(max-width:390px){
+ .hero{min-height:700px!important}
+ .heroPortrait{
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  background-position:70% center!important;
+ }
+ .heroContent{min-height:700px!important}
+}

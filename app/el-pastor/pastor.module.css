@@ -281,3 +281,16 @@
  }
  .hero span{max-width:560px!important}
 }
+
+
+/* Versión 12.25.3: iluminar el retrato y conservar contraste solo detrás del texto. */
+@media(min-width:801px){
+ .heroOverlay{
+  background:linear-gradient(90deg,
+   rgba(4,20,38,.98) 0%,
+   rgba(4,20,38,.92) 31%,
+   rgba(4,20,38,.58) 47%,
+   rgba(4,20,38,.12) 60%,
+   transparent 72%)!important;
+ }
+}

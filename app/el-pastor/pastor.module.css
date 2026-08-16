@@ -242,3 +242,42 @@
  }
  .mobileHeroPhoto>div{background:linear-gradient(180deg,transparent 76%,#06172b 100%)!important}
 }
+
+
+/* Versión 12.25.2: portada pastoral completa, centrada y sin expansión por el texto. */
+@media(min-width:801px){
+ .hero{
+  position:relative!important;
+  width:100%!important;
+  height:clamp(560px,43.75vw,700px)!important;
+  min-height:0!important;
+  overflow:hidden!important;
+  background:#041426!important;
+ }
+ .heroImage{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+ }
+ .heroContent{
+  position:absolute!important;
+  z-index:3!important;
+  inset:0!important;
+  display:flex!important;
+  width:min(1180px,calc(100% - 96px))!important;
+  margin:0 auto!important;
+  padding:0!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  align-items:flex-start!important;
+ }
+ .hero h1{
+  max-width:590px!important;
+  margin:.5rem 0 1.5rem!important;
+  font-size:clamp(3rem,5vw,5rem)!important;
+ }
+ .hero span{max-width:560px!important}
+}

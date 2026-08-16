@@ -437,3 +437,22 @@
 @media(max-width:390px){
  .heroPortrait{right:7%!important}
 }
+
+
+/* Versión 12.18.3: restaurar el marco y mover solo la fotografía interior. */
+@media(max-width:720px){
+ .heroPortrait{
+  inset:142px 2% 0 auto!important;
+  width:84%!important;
+ }
+ .heroImage{
+  object-position:78% top!important;
+ }
+}
+@media(max-width:390px){
+ .heroPortrait{
+  inset:142px 1% 0 auto!important;
+  width:88%!important;
+ }
+ .heroImage{object-position:78% top!important}
+}

@@ -658,3 +658,45 @@
  .heroImage{object-position:78% center!important}
  .heroContent{min-height:700px!important}
 }
+
+
+/* Versión 12.20: composición móvil fija, natural e integrada. */
+@media(max-width:720px){
+ .hero{
+  min-height:720px!important;
+  background:#061a30!important;
+ }
+ .heroPortrait{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  border:0!important;
+  border-radius:0!important;
+  background:url("/images/home-couple-mobile-v2.webp") center center/cover no-repeat!important;
+  box-shadow:none!important;
+ }
+ .heroImage{display:none!important}
+ .heroOverlay{
+  z-index:1!important;
+  background:
+   linear-gradient(90deg,
+    rgba(3,17,33,.99) 0%,
+    rgba(3,17,33,.95) 35%,
+    rgba(3,17,33,.54) 50%,
+    rgba(3,17,33,.10) 66%,
+    transparent 78%),
+   linear-gradient(0deg,
+    rgba(3,17,33,.42) 0%,
+    transparent 28%)!important;
+ }
+ .heroContent{
+  min-height:720px!important;
+  padding:52px 22px 58px!important;
+ }
+}
+@media(max-width:390px){
+ .hero{min-height:700px!important}
+ .heroPortrait{background-position:center center!important}
+ .heroContent{min-height:700px!important}
+}

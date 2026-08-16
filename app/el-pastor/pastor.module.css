@@ -218,3 +218,27 @@
  .mobileHeroPhoto{height:430px}
  .mobileHeroPhoto img{width:94%!important;left:3%!important;object-position:center bottom!important}
 }
+
+
+/* Versión 12.25.1: composiciones finales sin recorte dinámico. */
+.heroImage{
+ z-index:1!important;
+ inset:0!important;
+ width:100%!important;
+ height:100%!important;
+ object-fit:cover!important;
+ object-position:center!important;
+ filter:none!important;
+}
+@media(max-width:800px){
+ .mobileHeroPhoto{height:auto!important;aspect-ratio:900/980!important}
+ .mobileHeroPhoto img{
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  filter:none!important;
+ }
+ .mobileHeroPhoto>div{background:linear-gradient(180deg,transparent 76%,#06172b 100%)!important}
+}

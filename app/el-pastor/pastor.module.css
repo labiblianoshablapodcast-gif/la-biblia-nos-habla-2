@@ -162,3 +162,59 @@
  .mobileHeroCopy{padding-left:20px;padding-right:20px}
  .mobileHeroCopy h1{font-size:2.65rem}
 }
+
+
+/* Versión 12.25: retrato individual integrado en el portal del pastor. */
+.hero{
+ background:
+  radial-gradient(circle at 78% 26%,rgba(218,174,91,.2),transparent 25%),
+  radial-gradient(circle at 80% 115%,rgba(30,85,116,.55),transparent 45%),
+  linear-gradient(135deg,#041426 0%,#09263e 65%,#152733 100%);
+}
+.hero::after{
+ content:"";
+ position:absolute;
+ right:-8%;
+ bottom:-52%;
+ width:min(54vw,720px);
+ aspect-ratio:1;
+ border:1px solid rgba(211,163,65,.36);
+ border-radius:50%;
+ box-shadow:0 0 0 34px rgba(211,163,65,.035),0 0 0 88px rgba(211,163,65,.018);
+}
+.heroImage{
+ z-index:1!important;
+ width:52%!important;
+ left:auto!important;
+ right:4%!important;
+ object-fit:contain!important;
+ object-position:center bottom!important;
+ filter:drop-shadow(0 24px 24px rgba(0,0,0,.42));
+}
+.heroOverlay{
+ z-index:2!important;
+ background:linear-gradient(90deg,#041426 0%,rgba(4,20,38,.97) 38%,rgba(4,20,38,.62) 58%,rgba(4,20,38,.08) 85%)!important;
+}
+.heroContent{z-index:3!important}
+@media(max-width:800px){
+ .mobileHeroPhoto{
+  height:470px;
+  background:
+   radial-gradient(circle at 67% 22%,rgba(218,174,91,.2),transparent 27%),
+   linear-gradient(145deg,#041426,#11344c);
+ }
+ .mobileHeroPhoto img{
+  width:88%!important;
+  left:6%!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  filter:drop-shadow(0 20px 20px rgba(0,0,0,.42))!important;
+ }
+ .mobileHeroPhoto>div{
+  background:linear-gradient(180deg,transparent 68%,#06172b 100%)!important;
+ }
+}
+@media(max-width:430px){
+ .mobileHeroPhoto{height:430px}
+ .mobileHeroPhoto img{width:94%!important;left:3%!important;object-position:center bottom!important}
+}

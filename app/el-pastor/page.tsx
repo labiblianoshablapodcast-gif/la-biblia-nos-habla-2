@@ -18,24 +18,24 @@ const photos = [
 export default function ElPastorPage() {
   return <>
     <section className={styles.hero}>
-      <Image className={styles.heroImage} src="/images/pastor-y-yudelka-hero-v2.png" alt="Pastor Gilberto Maldonado y Yudelka Maldonado" fill sizes="100vw" priority />
+      <Image className={styles.heroImage} src="/images/pastor-gilberto-cutout.png" alt="Pastor Gilberto Maldonado" fill sizes="100vw" priority />
       <div className={styles.heroOverlay} />
       <div className={styles.heroContent}>
         <p>CONOZCA AL PASTOR</p>
         <h1>Un testimonio<br/>de la <em>gracia de Dios.</em></h1>
-        <span>Pastor Gilberto Maldonado y Yudelka Maldonado</span>
+        <span>Pastor Gilberto Maldonado</span>
       </div>
     </section>
 
     <section className={styles.mobileHero}>
       <div className={styles.mobileHeroPhoto}>
-       <Image src="/images/pastor-y-yudelka-hero-v2.png" alt="Pastor Gilberto Maldonado y Yudelka Maldonado" fill sizes="100vw" priority />
+       <Image src="/images/pastor-gilberto-cutout.png" alt="Pastor Gilberto Maldonado" fill sizes="100vw" priority />
        <div />
       </div>
       <div className={styles.mobileHeroCopy}>
        <p>CONOZCA AL PASTOR</p>
        <h1>Un testimonio de la <em>gracia de Dios.</em></h1>
-       <span>Pastor Gilberto Maldonado y Yudelka Maldonado</span>
+       <span>Pastor Gilberto Maldonado</span>
       </div>
     </section>
 

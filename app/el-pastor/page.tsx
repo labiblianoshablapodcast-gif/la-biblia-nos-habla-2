@@ -22,7 +22,7 @@ export default function ElPastorPage() {
       <div className={styles.heroOverlay} />
       <div className={styles.heroContent}>
         <p>CONOZCA AL PASTOR</p>
-        <h1>Un testimonio<br/>de la <em>gracia de Dios.</em></h1>
+        <h1>Un testimonio<br/>de la <em>gracia<br/>de Dios.</em></h1>
         <span>Pastor Gilberto Maldonado</span>
       </div>
     </section>

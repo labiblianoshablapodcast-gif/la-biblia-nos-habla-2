@@ -335,3 +335,52 @@
  .hero .heroImage{right:1.5%!important;width:52%!important}
  .hero h1{max-width:520px!important;font-size:clamp(3rem,5.4vw,4.4rem)!important}
 }
+
+
+/* Versión 12.28: recorte real sin fondo e integración editorial. */
+@media(min-width:801px){
+ .hero{
+  min-height:560px!important;
+  background:
+   radial-gradient(circle at 78% 28%,rgba(219,174,91,.14),transparent 24%),
+   radial-gradient(circle at 88% 88%,rgba(29,89,121,.42),transparent 42%),
+   linear-gradient(125deg,#031427 0%,#08243b 68%,#133246 100%)!important;
+ }
+ .hero .heroImage{
+  z-index:0!important;
+  inset:auto 4% 0 auto!important;
+  width:45%!important;
+  height:94%!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  transform:none!important;
+  filter:drop-shadow(0 28px 34px rgba(0,0,0,.34))!important;
+ }
+ .heroOverlay{
+  z-index:1!important;
+  background:
+   linear-gradient(90deg,
+    #031427 0%,
+    rgba(3,20,39,.99) 38%,
+    rgba(3,20,39,.96) 49%,
+    rgba(3,20,39,.79) 57%,
+    rgba(3,20,39,.34) 67%,
+    rgba(3,20,39,.08) 78%,
+    transparent 88%),
+   linear-gradient(0deg,rgba(3,20,39,.32),transparent 30%)!important;
+ }
+ .heroContent{
+  z-index:2!important;
+  width:min(1180px,calc(100% - 96px))!important;
+  padding:clamp(5rem,8vw,7rem) 0!important;
+ }
+ .hero h1{
+  max-width:560px!important;
+  font-size:clamp(3.2rem,5.3vw,5rem)!important;
+ }
+}
+@media(min-width:801px) and (max-width:1100px){
+ .hero .heroImage{right:1%!important;width:49%!important;height:91%!important}
+ .heroOverlay{background:linear-gradient(90deg,#031427 0%,rgba(3,20,39,.98) 45%,rgba(3,20,39,.72) 61%,rgba(3,20,39,.12) 82%,transparent 92%)!important}
+ .hero h1{max-width:500px!important;font-size:clamp(3rem,5.2vw,4.2rem)!important}
+}

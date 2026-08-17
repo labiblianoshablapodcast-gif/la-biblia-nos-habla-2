@@ -24,8 +24,9 @@ function eventDate(value:string|null){
 
 export default async function Iglesia(){
  const supabase=await createClient();
+ const now=new Date().toISOString();
  const [{data:events},{data:eventPhotos}]=await Promise.all([
-  supabase.from("events").select("id,title,description,location,starts_at,image_url").eq("published",true).order("starts_at",{ascending:true}).limit(6),
+  supabase.from("events").select("id,title,description,location,starts_at,image_url").eq("published",true).gte("starts_at",now).order("starts_at",{ascending:true}).limit(6),
   supabase.from("gallery_items").select("id,title,alt_text,image_url,created_at").eq("published",true).ilike("category","evento%").order("created_at",{ascending:false}).limit(6)
  ]);
  const eventPhotoIds=new Set((events??[]).map(item=>item.image_url).filter(Boolean));

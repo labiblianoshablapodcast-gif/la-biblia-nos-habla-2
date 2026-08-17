@@ -800,17 +800,17 @@
 }
 
 
-/* Versión 12.29: retrato pastoral amplio e integrado en móvil. */
+/* Versión 12.30: pareja completa a la derecha sin invadir el texto. */
 @media(max-width:720px){
  .heroPortrait{
   background-color:#061a30!important;
   background-image:url("/images/pastor-y-yudelka-hero-v2.png")!important;
   background-repeat:no-repeat!important;
-  background-size:cover!important;
-  background-position:72% center!important;
+  background-size:auto 82%!important;
+  background-position:right bottom!important;
  }
  .heroImage{display:none!important}
 }
 @media(max-width:390px){
- .heroPortrait{background-position:74% center!important}
+ .heroPortrait{background-size:auto 78%!important}
 }

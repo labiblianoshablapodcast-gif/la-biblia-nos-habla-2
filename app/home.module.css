@@ -798,3 +798,11 @@
    linear-gradient(0deg,rgba(3,17,33,.22),transparent 20%)!important;
  }
 }
+
+
+/* Versión 12.25: restaurar la primera foto, conservar composición actual. */
+@media(max-width:720px){
+ .heroPortrait{
+  background-image:url("/images/home-couple-mobile-v4.webp")!important;
+ }
+}

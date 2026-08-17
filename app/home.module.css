@@ -800,9 +800,12 @@
 }
 
 
-/* Versión 12.26: restaurar el fondo azul, conservar composición actual. */
+/* Versión 12.27: restaurar la foto original de los Pastores con fondo azul. */
 @media(max-width:720px){
  .heroPortrait{
-  background-image:url("/images/home-couple-mobile-blue.webp")!important;
+  background-image:url("/images/pastor-y-yudelka-hero.jpg")!important;
+  background-position:72% center!important;
+  background-size:cover!important;
+  background-color:#061a30!important;
  }
 }

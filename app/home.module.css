@@ -700,3 +700,31 @@
  .heroPortrait{background-position:center center!important}
  .heroContent{min-height:700px!important}
 }
+
+
+/* Versión 12.21: texto y retrato separados con transición completa. */
+@media(max-width:720px){
+ .heroPortrait{
+  background-image:url("/images/home-couple-mobile-v3.webp")!important;
+  background-position:center center!important;
+  background-size:cover!important;
+ }
+ .heroOverlay{
+  background:
+   linear-gradient(90deg,
+    rgba(3,17,33,.99) 0%,
+    rgba(3,17,33,.97) 38%,
+    rgba(3,17,33,.62) 52%,
+    rgba(3,17,33,.12) 66%,
+    transparent 75%),
+   linear-gradient(0deg,rgba(3,17,33,.32),transparent 25%)!important;
+ }
+ .hero h1{max-width:56%!important}
+ .heroContent>p:not(.eyebrow):not(.pastorNames){max-width:50%!important}
+ .pastorNames,.heroActions{width:50%!important;max-width:50%!important}
+}
+@media(max-width:390px){
+ .hero h1{max-width:57%!important}
+ .heroContent>p:not(.eyebrow):not(.pastorNames),
+ .pastorNames,.heroActions{width:52%!important;max-width:52%!important}
+}

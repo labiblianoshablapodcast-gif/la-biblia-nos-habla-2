@@ -433,3 +433,30 @@
   background:linear-gradient(90deg,rgba(3,18,35,.99) 0%,rgba(3,18,35,.94) 42%,rgba(3,18,35,.54) 60%,rgba(3,18,35,.08) 82%,transparent 94%)!important;
  }
 }
+
+
+/* Versión 12.30: portada azul integrada también en teléfono. */
+@media(max-width:800px){
+ .mobileHeroPhoto{
+  height:auto!important;
+  aspect-ratio:900/980!important;
+  background:#04172a!important;
+ }
+ .mobileHeroPhoto img{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  transform:none!important;
+  filter:none!important;
+ }
+ .mobileHeroPhoto>div{
+  background:
+   linear-gradient(180deg,transparent 70%,rgba(6,23,43,.38) 84%,#06172b 100%)!important;
+ }
+ .mobileHeroCopy{
+  margin-top:-46px!important;
+ }
+}

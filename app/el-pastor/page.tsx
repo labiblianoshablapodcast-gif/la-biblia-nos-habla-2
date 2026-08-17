@@ -29,7 +29,7 @@ export default function ElPastorPage() {
 
     <section className={styles.mobileHero}>
       <div className={styles.mobileHeroPhoto}>
-       <Image src="/images/pastor-portal-mobile.webp" alt="Pastor Gilberto Maldonado" fill sizes="100vw" priority />
+       <Image src="/images/pastor-hero-integrated-mobile-v2.webp" alt="Pastor Gilberto Maldonado" fill sizes="100vw" priority />
        <div />
       </div>
       <div className={styles.mobileHeroCopy}>

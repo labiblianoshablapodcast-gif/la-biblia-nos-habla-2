@@ -12,8 +12,9 @@ const shortDays=[
 
 export default async function Eventos(){
  const supabase=await createClient();
+ const now=new Date().toISOString();
  const [{data:events},{data:eventPhotos}]=await Promise.all([
-  supabase.from("events").select("*").eq("published",true).order("starts_at",{ascending:true}).limit(12),
+  supabase.from("events").select("*").eq("published",true).gte("starts_at",now).order("starts_at",{ascending:true}).limit(12),
   supabase.from("gallery_items").select("id,title,alt_text,image_url,created_at").eq("published",true).ilike("category","evento%").order("created_at",{ascending:false}).limit(12)
  ]);
  const eventImages=new Set((events??[]).map(item=>item.image_url).filter(Boolean));

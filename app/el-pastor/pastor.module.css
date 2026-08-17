@@ -294,3 +294,44 @@
    transparent 72%)!important;
  }
 }
+
+
+/* Versión 12.27: retrato pastoral integrado, sin bordes visibles. */
+@media(min-width:801px){
+ .hero{
+  isolation:isolate!important;
+  background:
+   radial-gradient(circle at 77% 30%,rgba(218,174,91,.16),transparent 24%),
+   radial-gradient(circle at 82% 92%,rgba(35,92,122,.44),transparent 39%),
+   linear-gradient(135deg,#041426 0%,#08263e 68%,#132d3e 100%)!important;
+ }
+ .hero::after{display:none!important}
+ .hero .heroImage{
+  position:absolute!important;
+  inset:auto 5.5% 0 auto!important;
+  width:47%!important;
+  height:94%!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  filter:drop-shadow(0 28px 26px rgba(0,0,0,.38))!important;
+ }
+ .heroOverlay{
+  background:
+   linear-gradient(90deg,
+    #041426 0%,
+    rgba(4,20,38,.99) 35%,
+    rgba(4,20,38,.91) 46%,
+    rgba(4,20,38,.52) 57%,
+    rgba(4,20,38,.12) 70%,
+    transparent 82%),
+   linear-gradient(0deg,rgba(4,20,38,.18),transparent 24%)!important;
+ }
+ .heroContent{
+  width:min(1180px,calc(100% - 96px))!important;
+ }
+ .hero h1{max-width:590px!important}
+}
+@media(min-width:801px) and (max-width:1100px){
+ .hero .heroImage{right:1.5%!important;width:52%!important}
+ .hero h1{max-width:520px!important;font-size:clamp(3rem,5.4vw,4.4rem)!important}
+}

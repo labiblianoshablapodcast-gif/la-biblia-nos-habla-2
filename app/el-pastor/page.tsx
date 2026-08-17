@@ -18,7 +18,7 @@ const photos = [
 export default function ElPastorPage() {
   return <>
     <section className={styles.hero}>
-      <Image className={styles.heroImage} src="/images/pastor-portal-desktop.webp" alt="Pastor Gilberto Maldonado" fill sizes="100vw" priority />
+      <Image className={styles.heroImage} src="/images/pastor-gilberto-cutout.png" alt="Pastor Gilberto Maldonado" fill sizes="100vw" priority />
       <div className={styles.heroOverlay} />
       <div className={styles.heroContent}>
         <p>CONOZCA AL PASTOR</p>

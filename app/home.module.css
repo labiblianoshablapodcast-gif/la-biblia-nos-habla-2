@@ -822,3 +822,26 @@
 @media(max-width:390px){
  .heroImage{transform:scale(1.14)!important}
 }
+
+
+/* Versión 12.26: foto pastoral oscura recortada sobre azul, composición solicitada. */
+@media(max-width:720px){
+ .heroPortrait{
+  background-image:url("/images/home-couple-dark-mobile-v1.webp")!important;
+  background-color:#061a30!important;
+  background-position:center center!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+ }
+ .heroImage{display:none!important}
+ .heroOverlay{
+  background:
+   linear-gradient(90deg,
+    rgba(3,17,33,.99) 0%,
+    rgba(3,17,33,.96) 42%,
+    rgba(3,17,33,.40) 56%,
+    rgba(3,17,33,.04) 68%,
+    transparent 76%),
+   linear-gradient(0deg,rgba(3,17,33,.14),transparent 18%)!important;
+ }
+}

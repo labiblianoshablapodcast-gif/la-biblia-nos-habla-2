@@ -40,7 +40,7 @@ export default async function Iglesia(){
     <Image src="/images/iglesia-portada-congregacion-v2.png" alt="Congregación de la Iglesia Príncipe de Paz" fill priority sizes="100vw"/>
    </div>
    <div className={styles.heroShade}/>
-   <div className={styles.heroCopy}>
+   <div className={`${styles.heroCopy} ${styles.heroCopyDesktop}`}>
     <p className="eyebrow">Iglesia Príncipe de Paz</p>
     <span className={styles.heroRule}/>
     <h1>Un lugar para adorar, crecer y servir.</h1>
@@ -48,6 +48,21 @@ export default async function Iglesia(){
     <div className={styles.heroActions}>
      <a className="btn" href={church.mapsUrl} target="_blank" rel="noopener noreferrer">Cómo llegar <span aria-hidden="true">↗</span></a>
      <a className={styles.heroTextLink} href="#eventos">Ver eventos ↓</a>
+    </div>
+   </div>
+   <div className={styles.heroCopyMobile}>
+    <p className={styles.mobileEyebrow}><span aria-hidden="true"/> Iglesia Príncipe de Paz</p>
+    <span className={styles.heroRule}/>
+    <h1>Un pueblo que camina hacia la <em>luz.</em></h1>
+    <blockquote>“Se llamará su nombre: Admirable, Consejero, Dios Fuerte, Padre Eterno, Príncipe de Paz.” <cite>— Isaías 9:6</cite></blockquote>
+    <p className={styles.mobileWelcome}>Un lugar para adorar, crecer y servir en comunidad. Toda persona es bienvenida, tal como es.</p>
+    <div className={styles.campusGrid}>
+     <a href={church.mapsUrl} target="_blank" rel="noopener noreferrer"><strong>Philadelphia, PA</strong><span>3661 N Marvine St</span></a>
+     <a href="https://www.google.com/maps/search/?api=1&query=132+Palisade+Ave+Garfield+NJ" target="_blank" rel="noopener noreferrer"><strong>Garfield, NJ</strong><span>132 Palisade Ave</span></a>
+    </div>
+    <div className={styles.mobileActions}>
+     <a className="btn" href={church.mapsUrl} target="_blank" rel="noopener noreferrer">Cómo llegar <span aria-hidden="true">↗</span></a>
+     <a href="#eventos">Ver eventos ↓</a>
     </div>
    </div>
   </section>

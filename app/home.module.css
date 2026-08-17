@@ -800,17 +800,25 @@
 }
 
 
-/* Versión 12.30: pareja completa a la derecha sin invadir el texto. */
+/* Versión 12.31: composición completa anclada abajo a la derecha. */
 @media(max-width:720px){
  .heroPortrait{
-  background-color:#061a30!important;
-  background-image:url("/images/pastor-y-yudelka-hero-v2.png")!important;
-  background-repeat:no-repeat!important;
-  background-size:auto 82%!important;
-  background-position:right bottom!important;
+  overflow:hidden!important;
+  background:#061a30!important;
  }
- .heroImage{display:none!important}
+ .heroImage{
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:right bottom!important;
+  transform:scale(1.18)!important;
+  transform-origin:right bottom!important;
+  filter:none!important;
+ }
 }
 @media(max-width:390px){
- .heroPortrait{background-size:auto 78%!important}
+ .heroImage{transform:scale(1.14)!important}
 }

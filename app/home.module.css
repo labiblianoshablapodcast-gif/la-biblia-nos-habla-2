@@ -800,9 +800,9 @@
 }
 
 
-/* Versión 12.25: restaurar la primera foto, conservar composición actual. */
+/* Versión 12.26: restaurar el fondo azul, conservar composición actual. */
 @media(max-width:720px){
  .heroPortrait{
-  background-image:url("/images/home-couple-mobile-v4.webp")!important;
+  background-image:url("/images/home-couple-mobile-blue.webp")!important;
  }
 }

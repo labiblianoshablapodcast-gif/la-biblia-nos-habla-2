@@ -384,3 +384,52 @@
  .heroOverlay{background:linear-gradient(90deg,#031427 0%,rgba(3,20,39,.98) 45%,rgba(3,20,39,.72) 61%,rgba(3,20,39,.12) 82%,transparent 92%)!important}
  .hero h1{max-width:500px!important;font-size:clamp(3rem,5.2vw,4.2rem)!important}
 }
+
+
+/* Versión 12.29: portada pastoral compuesta en una sola imagen, sin recortes visibles. */
+@media(min-width:801px){
+ .hero{
+  min-height:560px!important;
+  background:#04172a!important;
+ }
+ .hero .heroImage{
+  position:absolute!important;
+  z-index:0!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  transform:none!important;
+  filter:none!important;
+ }
+ .heroOverlay{
+  z-index:1!important;
+  background:
+   linear-gradient(90deg,
+    rgba(3,18,35,.99) 0%,
+    rgba(3,18,35,.97) 31%,
+    rgba(3,18,35,.83) 43%,
+    rgba(3,18,35,.45) 54%,
+    rgba(3,18,35,.10) 67%,
+    transparent 78%),
+   linear-gradient(0deg,rgba(3,18,35,.14),transparent 28%)!important;
+ }
+ .heroContent{
+  z-index:2!important;
+  width:min(1180px,calc(100% - 96px))!important;
+  padding:clamp(5rem,8vw,7rem) 0!important;
+ }
+ .hero h1{max-width:560px!important}
+}
+@media(min-width:801px) and (max-width:1100px){
+ .hero .heroImage{
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-position:56% center!important;
+ }
+ .heroOverlay{
+  background:linear-gradient(90deg,rgba(3,18,35,.99) 0%,rgba(3,18,35,.94) 42%,rgba(3,18,35,.54) 60%,rgba(3,18,35,.08) 82%,transparent 94%)!important;
+ }
+}

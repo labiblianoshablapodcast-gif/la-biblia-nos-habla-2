@@ -5,7 +5,7 @@
  margin:clamp(3.5rem,7vw,7rem) auto;
  overflow:hidden;
  border:1px solid rgba(217,174,98,.55);
- border-radius:30px;
+ border-radius:0;
  background:
   radial-gradient(circle at 94% 8%,rgba(217,174,98,.12),transparent 28%),
   linear-gradient(135deg,#071829 0%,#09243a 100%);
@@ -45,7 +45,7 @@
 .copy strong{color:#d9ae62;font:600 1.4rem Georgia,serif}
 .copy span{margin-top:.25rem;color:#b5c3ce;font-size:.85rem}
 @media(max-width:800px){
- .section{grid-template-columns:1fr;width:calc(100% - 28px);margin:2.5rem auto 4rem;border-radius:22px}
+ .section{grid-template-columns:1fr;width:calc(100% - 28px);margin:2.5rem auto 4rem;border-radius:0}
  .photo{min-height:460px}
  .photo::after{background:linear-gradient(0deg,#071829 0%,transparent 30%)}
  .photo img{object-position:center 32%}

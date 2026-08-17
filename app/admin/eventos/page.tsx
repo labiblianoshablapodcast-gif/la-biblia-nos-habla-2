@@ -21,6 +21,7 @@ async function createEvent(formData:FormData){
     created_by:user?.id
   });
   revalidatePath("/eventos");
+  revalidatePath("/iglesia");
   revalidatePath("/admin/eventos");
   redirect("/admin/eventos");
 }
@@ -41,6 +42,7 @@ async function updateEvent(formData:FormData){
     published:formData.get("published")==="on"
   }).eq("id",id);
   revalidatePath("/eventos");
+  revalidatePath("/iglesia");
   revalidatePath("/admin/eventos");
 }
 
@@ -52,6 +54,7 @@ async function deleteEvent(formData:FormData){
   if(imagePath) await supabase.storage.from("site-media").remove([imagePath]);
   if(id) await supabase.from("events").delete().eq("id",id);
   revalidatePath("/eventos");
+  revalidatePath("/iglesia");
   revalidatePath("/admin/eventos");
 }
 
@@ -77,7 +80,7 @@ export default async function EventosAdmin(){
     <label>Lugar<input name="location"/></label>
     <label>Descripción<textarea name="description" rows={5}/></label>
     <PhotoUploadField folder="events" label="Fotografía del evento"/>
-    <label><input type="checkbox" name="published"/> Publicar en la página</label>
+    <label><input type="checkbox" name="published" defaultChecked/> Publicar en la página de Iglesia y Eventos</label>
     <button className="btn" type="submit">Guardar evento</button>
    </form>
 

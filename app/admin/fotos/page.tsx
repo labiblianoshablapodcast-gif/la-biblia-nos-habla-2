@@ -20,6 +20,7 @@ async function createPhoto(formData:FormData){
  });
  if(error)redirect("/admin/fotos?estado=error");
  revalidatePath("/galeria");
+ revalidatePath("/iglesia");
  revalidatePath("/admin/fotos");
  redirect("/admin/fotos?estado=guardada#biblioteca");
 }
@@ -35,6 +36,7 @@ async function updatePhoto(formData:FormData){
   published:formData.get("published")==="on"
  }).eq("id",id);
  revalidatePath("/galeria");
+ revalidatePath("/iglesia");
  revalidatePath("/admin/fotos");
  redirect("/admin/fotos?estado=actualizada#biblioteca");
 }
@@ -47,12 +49,13 @@ async function deletePhoto(formData:FormData){
  if(path)await supabase.storage.from("site-media").remove([path]);
  if(id)await supabase.from("gallery_items").delete().eq("id",id);
  revalidatePath("/galeria");
+ revalidatePath("/iglesia");
  revalidatePath("/admin/fotos");
  redirect("/admin/fotos?estado=eliminada#biblioteca");
 }
 
 const messages:Record<string,{title:string;text:string;kind:string}>={
- guardada:{title:"Fotografía guardada correctamente",text:"Ya aparece en la biblioteca. Si marcó Publicar, también está visible en la Galería pública.",kind:"success"},
+ guardada:{title:"Fotografía guardada correctamente",text:"Ya aparece en la biblioteca. Si marcó Publicar, ya está visible en la Galería pública. Las fotos de categoría Eventos también aparecen en la página de Iglesia.",kind:"success"},
  actualizada:{title:"Cambios guardados",text:"La información y el estado de publicación fueron actualizados.",kind:"success"},
  eliminada:{title:"Fotografía eliminada",text:"La imagen fue retirada de la biblioteca.",kind:"warning"},
  incompleta:{title:"Falta completar la fotografía",text:"Espere a que la imagen termine de subir y complete el título antes de guardarla.",kind:"error"},
@@ -120,7 +123,7 @@ export default async function FotosAdmin({searchParams}:{searchParams:Promise<{e
        <input type="hidden" name="id" value={photo.id}/>
        <label>Título<input name="title" defaultValue={photo.title}/></label>
        <label>Categoría<input name="category" defaultValue={photo.category}/></label>
-       <label className="adminCheckbox"><input type="checkbox" name="published" defaultChecked={photo.published}/> Visible en Galería</label>
+       <label className="adminCheckbox"><input type="checkbox" name="published" defaultChecked={photo.published}/> Visible en Galería y secciones relacionadas</label>
        <button className="btn" type="submit">Guardar cambios</button>
       </form>
       <form action={deletePhoto}>

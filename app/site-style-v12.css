@@ -1291,3 +1291,9 @@ main img:not([data-no-lightbox]){cursor:zoom-in}
  .globalPhotoViewer figcaption{font-size:12px}
  .globalPhotoViewerClose{top:15px;right:15px}
 }
+
+
+/* Estados claros para eventos administrables. */
+.adminStatusBadge{display:inline-flex;margin:-4px 0 14px;padding:7px 12px;border-radius:999px;font-size:12px;font-weight:850;letter-spacing:.06em;text-transform:uppercase}
+.adminStatusBadge.published{background:#def5e7;color:#17653a;border:1px solid #a7ddbc}
+.adminStatusBadge.draft{background:#f3eee5;color:#765a20;border:1px solid #ddcfb2}

@@ -748,3 +748,34 @@
    linear-gradient(0deg,rgba(3,17,33,.26),transparent 22%)!important;
  }
 }
+
+
+/* Versión 12.23: jerarquía móvil limpia, sin texto sobre el retrato. */
+@media(max-width:720px){
+ .hero h1{
+  max-width:50%!important;
+  font-size:clamp(2rem,9.6vw,2.7rem)!important;
+  line-height:.96!important;
+ }
+ .heroContent>p:not(.eyebrow):not(.pastorNames){
+  max-width:46%!important;
+ }
+ .pastorNames,.heroActions{
+  width:47%!important;
+  max-width:47%!important;
+ }
+}
+@media(max-width:390px){
+ .hero h1{
+  max-width:50%!important;
+  font-size:2.02rem!important;
+ }
+ .heroContent>p:not(.eyebrow):not(.pastorNames){
+  width:46%!important;
+  max-width:46%!important;
+ }
+ .pastorNames,.heroActions{
+  width:48%!important;
+  max-width:48%!important;
+ }
+}

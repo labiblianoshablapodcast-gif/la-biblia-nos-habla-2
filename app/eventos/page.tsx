@@ -12,7 +12,15 @@ const shortDays=[
 
 export default async function Eventos(){
  const supabase=await createClient();
- const {data}=await supabase.from("events").select("*").eq("published",true).order("starts_at",{ascending:true}).limit(12);
+ const [{data:events},{data:eventPhotos}]=await Promise.all([
+  supabase.from("events").select("*").eq("published",true).order("starts_at",{ascending:true}).limit(12),
+  supabase.from("gallery_items").select("id,title,alt_text,image_url,created_at").eq("published",true).ilike("category","evento%").order("created_at",{ascending:false}).limit(12)
+ ]);
+ const eventImages=new Set((events??[]).map(item=>item.image_url).filter(Boolean));
+ const publicEvents=[
+  ...(events??[]).map(item=>({key:`event-${item.id}`,title:item.title,description:item.description,location:item.location,starts_at:item.starts_at,image_url:item.image_url})),
+  ...(eventPhotos??[]).filter(item=>!eventImages.has(item.image_url)).map(item=>({key:`photo-${item.id}`,title:item.title,description:item.alt_text||"Un acontecimiento especial de nuestra iglesia.",location:null,starts_at:null,image_url:item.image_url}))
+ ];
  return <>
   <section className={styles.hero}>
    <div className={styles.heroGlow}/>
@@ -50,14 +58,14 @@ export default async function Eventos(){
   <section className={`section soft ${styles.specialSection}`}>
    <div className={styles.sectionHeading}><div><p className="eyebrow">Próximamente</p><h2>Eventos especiales</h2></div><p>Celebraciones y actividades que fortalecen nuestra comunión y servicio.</p></div>
    <div className="eventPublicGrid">
-    {(data??[]).map(event=><article className="eventPublicCard" key={event.id}>
+    {publicEvents.map(event=><article className="eventPublicCard" key={event.key}>
       {event.image_url&&<img className="eventPublicImage" src={event.image_url} alt={event.title}/>} 
       <div className="eventPublicBody">
        <small>{event.starts_at ? new Date(event.starts_at).toLocaleString("es-US",{dateStyle:"long",timeStyle:"short",timeZone:"America/New_York"}) : "Fecha por confirmar"}</small>
        <h3>{event.title}</h3><p>{event.description}</p>{event.location&&<strong>⌖ {event.location}</strong>}
       </div>
     </article>)}
-    {!data?.length&&<div className={styles.emptyEvent}>
+    {!publicEvents.length&&<div className={styles.emptyEvent}>
      <div className={styles.emptyGraphic} aria-hidden="true"><span>✦</span><b>PRÓXIMO</b><i/></div>
      <div><p className="eyebrow">Calendario en preparación</p><h3>Muy pronto anunciaremos nuestra próxima actividad.</h3><p>Los servicios semanales continúan según el horario regular. También puede visitar la página de Iglesia para conocer nuestra congregación.</p><Link href="/iglesia">Conocer nuestra iglesia →</Link></div>
     </div>}

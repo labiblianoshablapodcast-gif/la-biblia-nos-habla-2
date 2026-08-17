@@ -800,12 +800,19 @@
 }
 
 
-/* Versión 12.27: restaurar la foto original de los Pastores con fondo azul. */
+/* Versión 12.28: portada móvil azul con retrato recortado a la derecha. */
 @media(max-width:720px){
  .heroPortrait{
-  background-image:url("/images/pastor-y-yudelka-hero.jpg")!important;
-  background-position:72% center!important;
-  background-size:cover!important;
-  background-color:#061a30!important;
+  background:#061a30!important;
+ }
+ .heroImage{
+  display:block!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:right bottom!important;
+  transform:none!important;
+  filter:none!important;
  }
 }

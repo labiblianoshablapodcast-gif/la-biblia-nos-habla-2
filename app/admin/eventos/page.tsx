@@ -9,10 +9,11 @@ async function createEvent(formData:FormData){
   const supabase=await createClient();
   const {data:{user}}=await supabase.auth.getUser();
   const title=String(formData.get("title")||"").trim();
-  if(!title) return;
-  await supabase.from("events").insert({
+  const startsAt=String(formData.get("starts_at")||"").trim();
+  if(!user||!title||!startsAt) redirect("/admin/eventos?estado=incompleto");
+  const {error}=await supabase.from("events").insert({
     title,
-    starts_at:String(formData.get("starts_at")||"").trim()||null,
+    starts_at:startsAt,
     location:String(formData.get("location")||"").trim(),
     description:String(formData.get("description")||"").trim(),
     image_url:String(formData.get("image_url")||"").trim()||null,
@@ -20,10 +21,11 @@ async function createEvent(formData:FormData){
     published:formData.get("published")==="on",
     created_by:user?.id
   });
+  if(error) redirect("/admin/eventos?estado=error");
   revalidatePath("/eventos");
   revalidatePath("/iglesia");
   revalidatePath("/admin/eventos");
-  redirect("/admin/eventos");
+  redirect("/admin/eventos?estado=guardado#eventos-guardados");
 }
 
 async function updateEvent(formData:FormData){
@@ -32,7 +34,7 @@ async function updateEvent(formData:FormData){
   const id=Number(formData.get("id"));
   const title=String(formData.get("title")||"").trim();
   if(!id||!title) return;
-  await supabase.from("events").update({
+  const {error}=await supabase.from("events").update({
     title,
     starts_at:String(formData.get("starts_at")||"").trim()||null,
     location:String(formData.get("location")||"").trim(),
@@ -41,9 +43,11 @@ async function updateEvent(formData:FormData){
     image_path:String(formData.get("image_path")||"").trim()||null,
     published:formData.get("published")==="on"
   }).eq("id",id);
+  if(error) redirect("/admin/eventos?estado=error");
   revalidatePath("/eventos");
   revalidatePath("/iglesia");
   revalidatePath("/admin/eventos");
+  redirect("/admin/eventos?estado=actualizado#eventos-guardados");
 }
 
 async function deleteEvent(formData:FormData){
@@ -56,6 +60,7 @@ async function deleteEvent(formData:FormData){
   revalidatePath("/eventos");
   revalidatePath("/iglesia");
   revalidatePath("/admin/eventos");
+  redirect("/admin/eventos?estado=eliminado#eventos-guardados");
 }
 
 function localDateTime(value:string|null){
@@ -65,28 +70,44 @@ function localDateTime(value:string|null){
   return new Date(date.getTime()-offset*60000).toISOString().slice(0,16);
 }
 
-export default async function EventosAdmin(){
+const messages:Record<string,{title:string;text:string;kind:string}>={
+ guardado:{title:"Evento publicado correctamente",text:"El evento quedó guardado y ya puede verse en las páginas de Eventos e Iglesia.",kind:"success"},
+ actualizado:{title:"Cambios guardados",text:"La información del evento fue actualizada correctamente.",kind:"success"},
+ eliminado:{title:"Evento eliminado",text:"El evento fue retirado del calendario.",kind:"warning"},
+ incompleto:{title:"Faltan datos importantes",text:"Complete el título y la fecha del evento antes de guardarlo.",kind:"error"},
+ error:{title:"No se pudo guardar",text:"Inténtelo nuevamente. Si continúa, revise la conexión a internet.",kind:"error"}
+};
+
+export default async function EventosAdmin({searchParams}:{searchParams:Promise<{estado?:string}>}){
+ const {estado}=await searchParams;
+ const message=estado?messages[estado]:null;
  const supabase=await createClient();
  const {data}=await supabase.from("events").select("*").order("starts_at",{ascending:true});
 
  return <div className="adminShell">
   <AdminNav/>
-  <section className="adminMain">
-   <p className="eyebrow">Calendario</p><h1>Eventos</h1>
-   <p>Cree eventos con fotografía y edítelos sin tocar código.</p>
+  <main className="adminMain photoManagerPage">
+   <header className="photoManagerHeader">
+    <div><p className="eyebrow">Calendario ministerial</p><h1>Eventos</h1><p>Cree eventos con fotografía y publíquelos sin tocar código.</p></div>
+    <a className="btn secondaryDark" href="/eventos" target="_blank" rel="noreferrer">Ver página pública ↗</a>
+   </header>
+   {message&&<div className={"photoSaveNotice "+message.kind} role="status">
+    <span>{message.kind==="success"?"✓":message.kind==="error"?"!":"−"}</span>
+    <div><strong>{message.title}</strong><p>{message.text}</p></div>
+   </div>}
    <form action={createEvent} className="adminForm">
     <label>Título<input name="title" required/></label>
-    <label>Fecha y hora<input name="starts_at" type="datetime-local"/></label>
-    <label>Lugar<input name="location"/></label>
+    <label>Fecha y hora<input name="starts_at" type="datetime-local" required/></label>
+    <label>Lugar<input name="location" placeholder="Ej. Iglesia Príncipe de Paz"/></label>
     <label>Descripción<textarea name="description" rows={5}/></label>
     <PhotoUploadField folder="events" label="Fotografía del evento"/>
     <label><input type="checkbox" name="published" defaultChecked/> Publicar en la página de Iglesia y Eventos</label>
     <button className="btn" type="submit">Guardar evento</button>
    </form>
 
-   <div className="eventAdminGrid">
+   <div id="eventos-guardados" className="eventAdminGrid">
     {(data??[]).map(event=><article className="eventAdminCard" key={event.id}>
-      {event.image_url&&<img className="eventAdminImage" src={event.image_url} alt=""/>}
+      {event.image_url&&<img className="eventAdminImage" src={event.image_url} alt={event.title}/>}<span className={"adminStatusBadge "+(event.published?"published":"draft")}>{event.published?"Publicado":"Borrador"}</span>
       <form action={updateEvent} className="adminForm compactAdminForm">
        <input type="hidden" name="id" value={event.id}/>
        <label>Título<input name="title" defaultValue={event.title} required/></label>
@@ -104,6 +125,6 @@ export default async function EventosAdmin(){
       </form>
     </article>)}
    </div>
-  </section>
+  </main>
  </div>;
 }

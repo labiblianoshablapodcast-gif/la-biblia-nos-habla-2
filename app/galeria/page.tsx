@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {createClient} from "@/lib/supabase/server";
 import ManagedGallery from "@/components/ManagedGallery";
+import galleryStyles from "./gallery.module.css";
 
 const albums=[
  {title:"Lanquín 2026",subtitle:"Inauguración del templo en Chicachuy",image:"/images/misiones/lanquin-2026-grupo-misionero.jpg",href:"/misiones/lanquin-2026"},
@@ -12,10 +13,21 @@ export default async function Galeria(){
  const supabase=await createClient();
  const {data}=await supabase.from("gallery_items").select("*").eq("published",true).order("sort_order").order("created_at",{ascending:false});
  return <>
-  <section className="pageHero galleryHero">
-   <p className="eyebrow">Memoria visual del ministerio</p>
-   <h1>Galería</h1>
-   <p>Fotografías organizadas por misiones, acontecimientos y etapas del ministerio.</p>
+  <section className={galleryStyles.hero}>
+   <div className={galleryStyles.heroInner}>
+    <div className={galleryStyles.heroCopy}>
+     <p className="eyebrow">Memoria visual del ministerio</p>
+     <h1>Galería</h1>
+     <p>Fotografías organizadas por misiones, acontecimientos y etapas del ministerio.</p>
+     <div className={galleryStyles.heroDetail}><span>✦</span><strong>Fe, familia y misión en cada imagen</strong></div>
+    </div>
+    <div className={galleryStyles.mosaic} aria-label="Momentos del ministerio">
+     <figure className={galleryStyles.mosaicMain}><img src="/images/misiones/lanquin-2026-grupo-misionero.jpg" alt="Equipo misionero en Lanquín"/></figure>
+     <figure className={galleryStyles.mosaicTop}><img src="/images/iglesia-principe-de-paz-congregacion.jpeg" alt="Congregación de la iglesia"/></figure>
+     <figure className={galleryStyles.mosaicBottom}><img src="/images/pastor-y-yudelka-hero-v2.png" alt="Pastores Gilberto y Yudelka Maldonado"/></figure>
+     <div className={galleryStyles.mosaicBadge}><b>3</b><span>colecciones<br/>destacadas</span></div>
+    </div>
+   </div>
   </section>
 
   <section className="section">

@@ -1,6 +1,6 @@
 'use client';
 
-import {useId,useState} from "react";
+import {useEffect,useId,useRef,useState} from "react";
 import {createClient} from "@/lib/supabase/client";
 
 type Props={
@@ -10,6 +10,7 @@ type Props={
  currentUrl?:string|null;
  currentPath?:string|null;
  label?:string;
+ required?:boolean;
 };
 
 const OPTIMIZABLE_TYPES=new Set(["image/jpeg","image/png","image/webp"]);
@@ -54,13 +55,44 @@ export default function PhotoUploadField({
  pathName="image_path",
  currentUrl="",
  currentPath="",
- label="Fotografía"
+ label="Fotografía",
+ required=true
 }:Props){
  const id=useId();
+ const fieldRef=useRef<HTMLDivElement>(null);
+ const uploadRef=useRef(false);
+ const urlRef=useRef(currentUrl||"");
  const [url,setUrl]=useState(currentUrl||"");
  const [path,setPath]=useState(currentPath||"");
  const [status,setStatus]=useState("");
  const [uploading,setUploading]=useState(false);
+
+ useEffect(()=>{
+  const form=fieldRef.current?.closest("form");
+  if(!form)return;
+
+  function protectSubmit(event:SubmitEvent){
+   if(uploadRef.current){
+    event.preventDefault();
+    setStatus("Espere: la fotografía todavía se está cargando.");
+    fieldRef.current?.scrollIntoView({behavior:"smooth",block:"center"});
+    return;
+   }
+   if(required&&!urlRef.current){
+    event.preventDefault();
+    setStatus("Seleccione una fotografía y espere el mensaje ✓ Fotografía cargada antes de guardar.");
+    fieldRef.current?.scrollIntoView({behavior:"smooth",block:"center"});
+   }
+  }
+
+  form.addEventListener("submit",protectSubmit);
+  return()=>form.removeEventListener("submit",protectSubmit);
+ },[required]);
+
+ function setBusy(value:boolean){
+  uploadRef.current=value;
+  setUploading(value);
+ }
 
  async function upload(file?:File){
   if(!file)return;
@@ -73,7 +105,7 @@ export default function PhotoUploadField({
    return;
   }
 
-  setUploading(true);
+  setBusy(true);
   setStatus("Preparando fotografía…");
 
   const preparedFile=await optimizePhoto(file);
@@ -84,7 +116,7 @@ export default function PhotoUploadField({
   const {data:{user}}=await supabase.auth.getUser();
   if(!user){
    setStatus("La sesión terminó. Inicie sesión nuevamente.");
-   setUploading(false);
+   setBusy(false);
    return;
   }
 
@@ -96,20 +128,21 @@ export default function PhotoUploadField({
 
   if(error){
    setStatus(`No se pudo subir: ${error.message}`);
-   setUploading(false);
+   setBusy(false);
    return;
   }
 
   const {data}=supabase.storage.from("site-media").getPublicUrl(storagePath);
+  urlRef.current=data.publicUrl;
   setUrl(data.publicUrl);
   setPath(storagePath);
   setStatus(wasOptimized
    ?`✓ Fotografía optimizada (${readableSize(file.size)} → ${readableSize(preparedFile.size)}) y cargada. Ahora presione Guardar.`
    :"✓ Fotografía cargada. Ahora complete los datos y presione Guardar.");
-  setUploading(false);
+  setBusy(false);
  }
 
- return <div className={"adminPhotoField professionalDropzone "+(url?"hasPhoto":"")}>
+ return <div ref={fieldRef} className={"adminPhotoField professionalDropzone "+(url?"hasPhoto":"")}>
   <label className="photoDropzoneLabel" htmlFor={id}>
    <input id={id} type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" disabled={uploading} onChange={e=>upload(e.target.files?.[0])}/>
    {!url&&<><span className="photoDropIcon">＋</span><strong>{label}</strong><small>Toque aquí para abrir sus fotos</small></>}

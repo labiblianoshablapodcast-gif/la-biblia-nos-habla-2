@@ -1,7 +1,6 @@
 import {NextResponse,type NextRequest} from "next/server";
 import {createServerClient} from "@supabase/ssr";
-
-const staffRoles=["pastor","secretary","treasurer","media"];
+import {canAccessAdminPath,defaultAdminPathForRole,isAdminRole} from "@/lib/admin-permissions";
 
 export async function middleware(request:NextRequest){
   let response=NextResponse.next({request});
@@ -30,19 +29,37 @@ export async function middleware(request:NextRequest){
       url.searchParams.set("next",request.nextUrl.pathname);
       return NextResponse.redirect(url);
     }
+
     const {data:profile}=await supabase.from("profiles").select("role").eq("id",user.id).single();
-    if(!profile||!staffRoles.includes(profile.role)){
+    const role=profile?.role;
+
+    if(!isAdminRole(role)||role==="member"){
       const url=request.nextUrl.clone();
       url.pathname="/";
       url.search="";
+      return NextResponse.redirect(url);
+    }
+
+    if(request.nextUrl.pathname==="/admin"&&role!=="pastor"){
+      const url=request.nextUrl.clone();
+      url.pathname=defaultAdminPathForRole(role);
+      url.search="";
+      return NextResponse.redirect(url);
+    }
+
+    if(!canAccessAdminPath(role,request.nextUrl.pathname)){
+      const url=request.nextUrl.clone();
+      url.pathname=defaultAdminPathForRole(role);
+      url.searchParams.set("permiso","denegado");
       return NextResponse.redirect(url);
     }
   }
 
   if(request.nextUrl.pathname==="/login"&&user){
     const {data:profile}=await supabase.from("profiles").select("role").eq("id",user.id).single();
+    const role=profile?.role;
     const url=request.nextUrl.clone();
-    url.pathname=profile&&staffRoles.includes(profile.role)?"/admin":"/";
+    url.pathname=isAdminRole(role)&&role!=="member"?defaultAdminPathForRole(role):"/";
     url.search="";
     return NextResponse.redirect(url);
   }

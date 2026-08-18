@@ -26,7 +26,7 @@ export function isAdminRole(value:unknown):value is AdminRole{
 
 export function canAccessAdminPath(role:unknown,pathname:string){
   if(role==="pastor")return true;
-  if(!isAdminRole(role)||role==="member")return false;
+  if(role!=="secretary"&&role!=="media"&&role!=="treasurer")return false;
   if(pathname==="/admin")return true;
   return routePermissions[role].some(route=>pathname===route||pathname.startsWith(route+"/"));
 }

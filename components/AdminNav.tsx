@@ -1,10 +1,13 @@
 import Link from "next/link";
 import SignOutButton from "@/components/SignOutButton";
+import {createClient} from "@/lib/supabase/server";
+import {canAccessAdminPath} from "@/lib/admin-permissions";
 
 const sections=[
   ["Resumen","/admin","⌂"],
   ["Predicaciones","/admin/predicaciones","🎙"],
   ["Organizar sermones","/admin/predicaciones/organizacion","▦"],
+  ["Devocionales","/admin/devocionales","☀"],
   ["Eventos","/admin/eventos","📅"],
   ["Fotos","/admin/fotos","▣"],
   ["Peticiones","/admin/peticiones","🙏"],
@@ -17,14 +20,24 @@ const sections=[
   ["Estado Supabase","/admin/configuracion/supabase","●"]
 ];
 
-export default function AdminNav(){
+export default async function AdminNav(){
+ const supabase=await createClient();
+ const {data:{user}}=await supabase.auth.getUser();
+ const {data:profile}=user
+  ?await supabase.from("profiles").select("role").eq("id",user.id).single()
+  :{data:null};
+ const role=profile?.role;
+ const visibleSections=sections.filter(([,href])=>
+  href==="/admin"?role==="pastor":canAccessAdminPath(role,href)
+ );
+
  return <aside className="adminNav adminNavPro">
   <div className="adminBrand">
    <span>LB</span>
    <div><strong>Panel Pastoral</strong><small>La Biblia Nos Habla</small></div>
   </div>
   <nav>
-   {sections.map(([label,href,icon])=><Link href={href} key={href}><span>{icon}</span>{label}</Link>)}
+   {visibleSections.map(([label,href,icon])=><Link href={href} key={href}><span>{icon}</span>{label}</Link>)}
   </nav>
   <div className="adminNavFooter">
    <Link href="/">Ver sitio público</Link>

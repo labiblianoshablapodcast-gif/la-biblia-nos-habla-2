@@ -11,7 +11,10 @@ async function createEvent(formData:FormData){
   const title=String(formData.get("title")||"").trim();
   const startsAt=String(formData.get("starts_at")||"").trim();
   if(!user||!title||!startsAt) redirect("/admin/eventos?estado=incompleto");
-  const {error}=await supabase.from("events").insert({
+  const parsedDate=new Date(startsAt);
+  if(Number.isNaN(parsedDate.getTime())) redirect("/admin/eventos?estado=fecha");
+
+  const payload={
     title,
     starts_at:startsAt,
     location:String(formData.get("location")||"").trim(),
@@ -19,9 +22,32 @@ async function createEvent(formData:FormData){
     image_url:String(formData.get("image_url")||"").trim()||null,
     image_path:String(formData.get("image_path")||"").trim()||null,
     published:formData.get("published")==="on",
-    created_by:user?.id
-  });
-  if(error) redirect("/admin/eventos?estado=error");
+    created_by:user.id
+  };
+
+  let {error}=await supabase.from("events").insert(payload);
+
+  // Compatibilidad con instalaciones donde image_path todavía no aparece
+  // en la caché del esquema de Supabase. La fotografía pública se conserva.
+  if(error&&/image_path/i.test(error.message||"")){
+    const {image_path:unusedPath,...compatiblePayload}=payload;
+    void unusedPath;
+    ({error}=await supabase.from("events").insert(compatiblePayload));
+  }
+
+  if(error){
+    console.error("No se pudo guardar el evento",{
+      code:error.code,
+      message:error.message,
+      details:error.details,
+      hint:error.hint
+    });
+    const detail=`${error.code||""} ${error.message||""}`.toLowerCase();
+    if(/42501|row-level security|permission|policy/.test(detail)) redirect("/admin/eventos?estado=permiso");
+    if(/pgrst204|42703|column|schema cache/.test(detail)) redirect("/admin/eventos?estado=estructura");
+    if(/22007|22008|date|time zone|timestamp/.test(detail)) redirect("/admin/eventos?estado=fecha");
+    redirect("/admin/eventos?estado=error");
+  }
   revalidatePath("/eventos");
   revalidatePath("/iglesia");
   revalidatePath("/admin/eventos");
@@ -43,7 +69,13 @@ async function updateEvent(formData:FormData){
     image_path:String(formData.get("image_path")||"").trim()||null,
     published:formData.get("published")==="on"
   }).eq("id",id);
-  if(error) redirect("/admin/eventos?estado=error");
+  if(error){
+    const detail=`${error.code||""} ${error.message||""}`.toLowerCase();
+    if(/42501|row-level security|permission|policy/.test(detail)) redirect("/admin/eventos?estado=permiso");
+    if(/pgrst204|42703|column|schema cache/.test(detail)) redirect("/admin/eventos?estado=estructura");
+    if(/22007|22008|date|time zone|timestamp/.test(detail)) redirect("/admin/eventos?estado=fecha");
+    redirect("/admin/eventos?estado=error");
+  }
   revalidatePath("/eventos");
   revalidatePath("/iglesia");
   revalidatePath("/admin/eventos");
@@ -75,7 +107,10 @@ const messages:Record<string,{title:string;text:string;kind:string}>={
  actualizado:{title:"Cambios guardados",text:"La información del evento fue actualizada correctamente.",kind:"success"},
  eliminado:{title:"Evento eliminado",text:"El evento fue retirado del calendario.",kind:"warning"},
  incompleto:{title:"Faltan datos importantes",text:"Complete el título y la fecha del evento antes de guardarlo.",kind:"error"},
- error:{title:"No se pudo guardar",text:"Inténtelo nuevamente. Si continúa, revise la conexión a internet.",kind:"error"}
+ fecha:{title:"Revise la fecha y la hora",text:"Seleccione nuevamente la fecha y la hora del evento y vuelva a guardar.",kind:"error"},
+ permiso:{title:"Falta permiso para publicar",text:"Supabase reconoce su sesión, pero el perfil no tiene permiso para crear eventos. Revise que el rol sea pastor.",kind:"error"},
+ estructura:{title:"La tabla de eventos necesita actualizarse",text:"Supabase todavía no reconoce todas las columnas para fotografías de eventos. Abra Estado Supabase para completar la configuración.",kind:"error"},
+ error:{title:"No se pudo guardar",text:"Ocurrió un error interno al guardar. La fotografía y los demás datos no fueron publicados.",kind:"error"}
 };
 
 export default async function EventosAdmin({searchParams}:{searchParams:Promise<{estado?:string}>}){

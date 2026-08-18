@@ -30,15 +30,16 @@ export default async function SupabaseEstado(){
       </div>
 
       <div className="notice" style={{marginTop:30}}>
-        <strong>Arreglo para fotografías de eventos</strong>
-        <p>Ejecute una sola vez <code>ARREGLAR_EVENTOS_SUPABASE.sql</code> en Supabase → SQL Editor.</p>
+        <strong>Reparación completa de Eventos</strong>
+        <p>Ejecute nuevamente <code>ARREGLAR_EVENTOS_SUPABASE.sql</code> en Supabase → SQL Editor. La versión actual comprueba todas las columnas que utiliza el formulario y no borra eventos existentes.</p>
         <ol>
-          <li>Abra el archivo con el botón de abajo.</li>
+          <li>Abra el archivo actualizado con el botón de abajo.</li>
           <li>Copie todo su contenido.</li>
           <li>Péguelo en una consulta nueva de Supabase y presione <strong>Run</strong>.</li>
+          <li>Confirme que el resultado muestre <strong>estructura_completa: true</strong>.</li>
+          <li>Regrese a Eventos, actualice la página y vuelva a guardar.</li>
         </ol>
-        <p>El resultado debe mostrar <strong>image_url_lista: true</strong> e <strong>image_path_lista: true</strong>.</p>
-        <a className="btn" href="https://github.com/labiblianoshablapodcast-gif/la-biblia-nos-habla-2/blob/main/ARREGLAR_EVENTOS_SUPABASE.sql" target="_blank" rel="noreferrer">Abrir archivo de arreglo ↗</a>
+        <a className="btn" href="https://github.com/labiblianoshablapodcast-gif/la-biblia-nos-habla-2/blob/main/ARREGLAR_EVENTOS_SUPABASE.sql" target="_blank" rel="noreferrer">Abrir reparación completa ↗</a>
       </div>
     </main>
   </div>;

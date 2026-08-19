@@ -37,19 +37,18 @@ export function chapterUrl(code:string, chapter:number) {
 }
 
 function parseVerses(text:string):BibleVerse[]{
-  return text
-    .split(/\r?\n/)
-    .map(line=>line.trim())
-    .filter(Boolean)
-    .map(line=>{
-      const match=line.match(/^(\d+)\s*\|\s*(.+)$/);
-      if(!match)return null;
-      return {number:Number(match[1]),text:match[2].trim()};
-    })
-    .filter((verse):verse is BibleVerse=>Boolean(verse?.text));
+  const verses:BibleVerse[]=[];
+  const marker=/<<<VERSE:(\d+)>>>([\s\S]*?)(?=<<<VERSE:\d+>>>|$)/g;
+  for(const match of text.matchAll(marker)){
+    const clean=match[2]
+      .replace(/^\s*\d+\s*\|\s*/,"")
+      .replace(/\s+/g," ")
+      .trim();
+    if(clean)verses.push({number:Number(match[1]),text:clean});
+  }
+  return verses;
 }
 
-export const {default:booksList}= {default:books};
 export {books};
 
 export async function getChapter(code:string, chapter:number): Promise<BibleChapter | null> {
@@ -65,7 +64,7 @@ export async function getChapter(code:string, chapter:number): Promise<BibleChap
     citation:"false",
     paragraphs:"false",
     header:"",
-    eachVerse:"[VerseNum]|[VerseText]\n",
+    eachVerse:"<<<VERSE:[VerseNum]>>>[VerseText]",
     footer:"",
     key:apiKey
   });

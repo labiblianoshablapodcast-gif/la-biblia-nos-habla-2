@@ -12,7 +12,7 @@ export default async function SupabaseEstado(){
     ["Variables de Vercel",Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL&&process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)],
     ["Sesión iniciada",Boolean(user)],
     ["Perfil pastoral",Boolean(profile)],
-    ["Permiso administrativo",Boolean(profile&&["leader","editor","admin","pastor"].includes(profile.role))]
+    ["Permiso administrativo",Boolean(profile&&["pastor","secretary","media","treasurer"].includes(profile.role))]
   ];
 
   return <div className="adminShell adminShellPro">
@@ -27,6 +27,18 @@ export default async function SupabaseEstado(){
           <span className={ok?"statusOk":"statusPending"}>{ok?"✓":"!"}</span>
           <div><h3>{label}</h3><p>{ok?"Configurado correctamente.":"Todavía necesita configuración."}</p></div>
         </article>)}
+      </div>
+
+      <div className="notice" style={{marginTop:30}}>
+        <strong>Seguridad por responsabilidades</strong>
+        <p>Después de confirmar Eventos, ejecute <code>ENDURECER_SEGURIDAD_SUPABASE.sql</code>. Esta actualización alinea Supabase con los permisos del Panel Pastoral y protege las fotografías para que cada colaborador administre únicamente sus propios archivos.</p>
+        <ol>
+          <li>Abra la actualización de seguridad.</li>
+          <li>Copie todo el archivo y ejecútelo en Supabase → SQL Editor.</li>
+          <li>Confirme que el resultado diga <strong>Seguridad preparada correctamente</strong>.</li>
+          <li>Cierre sesión y vuelva a entrar para renovar los permisos.</li>
+        </ol>
+        <a className="btn" href="https://github.com/labiblianoshablapodcast-gif/la-biblia-nos-habla-2/blob/main/ENDURECER_SEGURIDAD_SUPABASE.sql" target="_blank" rel="noreferrer">Abrir actualización de seguridad ↗</a>
       </div>
 
       <div className="notice" style={{marginTop:30}}>

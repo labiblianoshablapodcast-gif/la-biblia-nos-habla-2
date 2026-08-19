@@ -280,3 +280,9 @@ img[role="button"]{cursor:zoom-in}
  html{scroll-behavior:auto!important}
  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+
+/* RVR60: atribución requerida por Biblia.com. */
+.bibliaAttribution{display:flex;align-items:center;gap:14px;max-width:850px;margin:18px auto 36px;padding:14px 16px;border:1px solid #e0e4e6;border-radius:12px;background:#f8f6f1;color:#64717d;font-size:12px;line-height:1.45}
+.bibliaAttribution img{display:block;width:auto;height:30px}.bibliaAttribution p{margin:0}.bibliaAttribution p a{color:#8d6414;font-weight:800;text-decoration:underline;text-underline-offset:2px}
+@media(max-width:620px){.bibliaAttribution{align-items:flex-start;flex-direction:column}}

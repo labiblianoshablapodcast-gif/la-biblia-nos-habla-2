@@ -26,7 +26,7 @@ import JO3 from "@/data/qeqchi/3JO.json";
 import JUD from "@/data/qeqchi/JUD.json";
 import REV from "@/data/qeqchi/REV.json";
 
-type RawVerse=[number,string];
+type RawVerse=(number|string)[];
 type RawBook=Record<string,RawVerse[]>;
 
 const QEQCHI_DATA:Record<string,RawBook>={

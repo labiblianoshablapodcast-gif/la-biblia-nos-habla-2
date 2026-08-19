@@ -91,8 +91,21 @@ async function deleteEvent(formData:FormData){
   const supabase=await createClient();
   const id=Number(formData.get("id"));
   const imagePath=String(formData.get("image_path")||"");
-  if(imagePath) await supabase.storage.from("site-media").remove([imagePath]);
-  if(id) await supabase.from("events").delete().eq("id",id);
+  if(!id) redirect("/admin/eventos?estado=error#eventos-guardados");
+
+  const {error:deleteError}=await supabase.from("events").delete().eq("id",id);
+  if(deleteError){
+    const detail=`${deleteError.code||""} ${deleteError.message||""}`.toLowerCase();
+    if(/42501|row-level security|permission|policy/.test(detail)) redirect("/admin/eventos?estado=permiso#eventos-guardados");
+    redirect("/admin/eventos?estado=error#eventos-guardados");
+  }
+
+  // Primero retiramos el registro público. La limpieza del archivo es secundaria:
+  // si Storage falla, el evento no reaparece ni se informa una eliminación falsa.
+  if(imagePath){
+    const {error:storageError}=await supabase.storage.from("site-media").remove([imagePath]);
+    if(storageError) console.error("El evento se eliminó, pero no se pudo limpiar su fotografía",storageError);
+  }
   revalidatePath("/eventos");
   revalidatePath("/iglesia");
   revalidatePath("/admin/eventos");

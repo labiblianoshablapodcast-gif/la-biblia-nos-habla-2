@@ -1,6 +1,7 @@
 'use client';
 
 import {useEffect,useMemo,useState} from "react";
+import {useRouter} from "next/navigation";
 
 type Verse={number:number;text:string};
 
@@ -10,12 +11,14 @@ export default function BibleReaderTools({
   bookName:string;bookSlug:string;chapter:number;verses:Verse[];
   translationName?:string;translationKey?:string;
 }) {
+  const router=useRouter();
   const key=`${translationKey}-${bookSlug}-${chapter}`;
   const [dark,setDark]=useState(false);
   const [fontSize,setFontSize]=useState(27);
   const [favorites,setFavorites]=useState<number[]>([]);
   const [notes,setNotes]=useState<Record<string,string>>({});
   const [selected,setSelected]=useState<number|null>(null);
+  const [studyWord,setStudyWord]=useState("");
 
   useEffect(()=>{
     setDark(localStorage.getItem("bible-dark")==="1");
@@ -45,6 +48,12 @@ export default function BibleReaderTools({
     const next={...notes,[noteKey]:value};
     setNotes(next);
     localStorage.setItem("bible-notes",JSON.stringify(next));
+  }
+
+  function openDictionary(){
+    const word=studyWord.trim();
+    if(!word) return;
+    router.push(`/diccionario?q=${encodeURIComponent(word)}`);
   }
 
   async function shareVerse(verse:Verse){
@@ -78,6 +87,7 @@ export default function BibleReaderTools({
             <button title="Guardar favorito" onClick={()=>toggleFavorite(verse.number)}>{favorite?"★":"☆"}</button>
             <button title="Compartir" onClick={()=>shareVerse(verse)}>↗</button>
             <button title="Escribir nota" onClick={()=>setSelected(verse.number)}>📝</button>
+            <button title="Estudiar una palabra" aria-label="Estudiar una palabra en hebreo o griego" onClick={()=>setSelected(verse.number)}>אα</button>
           </div>
           {selected===verse.number && <div className="verseNote">
             <label>Nota personal sobre {bookName} {chapter}:{verse.number}
@@ -88,6 +98,21 @@ export default function BibleReaderTools({
                 placeholder="Escriba aquí su nota..."
               />
             </label>
+            <form className="verseStudy" onSubmit={e=>{e.preventDefault();openDictionary()}}>
+              <div>
+                <strong>Estudiar una palabra</strong>
+                <small>Busque su significado y origen en hebreo o griego.</small>
+              </div>
+              <div className="verseStudyControls">
+                <input
+                  value={studyWord}
+                  onChange={e=>setStudyWord(e.target.value)}
+                  placeholder="Ej. gracia, pacto, amor..."
+                  aria-label="Palabra para estudiar"
+                />
+                <button type="submit" disabled={!studyWord.trim()}>אα Abrir diccionario</button>
+              </div>
+            </form>
           </div>}
         </section>;
       })}
@@ -95,7 +120,7 @@ export default function BibleReaderTools({
 
     {selectedVerse && <div className="selectedVerseBar">
       <strong>{bookName} {chapter}:{selectedVerse.number}</strong>
-      <span>Seleccionado para notas, favorito o compartir.</span>
+      <span>Seleccionado para notas, favoritos, compartir o estudiar palabras.</span>
     </div>}
   </div>;
 }

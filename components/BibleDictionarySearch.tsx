@@ -4,8 +4,8 @@ import {useMemo,useState} from "react";
 import {bibleDictionary,normalizeDictionarySearch} from "@/data/bible-dictionary";
 import styles from "@/app/diccionario/diccionario.module.css";
 
-export default function BibleDictionarySearch(){
-  const [query,setQuery]=useState("");
+export default function BibleDictionarySearch({initialQuery=""}:{initialQuery?:string}){
+  const [query,setQuery]=useState(initialQuery);
   const [language,setLanguage]=useState<"Todos"|"Hebreo"|"Griego">("Todos");
   const normalized=normalizeDictionarySearch(query);
 
@@ -23,13 +23,9 @@ export default function BibleDictionarySearch(){
     <div className={styles.searchBox}>
       <label htmlFor="dictionary-search">Buscar palabra, término original o número Strong</label>
       <div className={styles.searchRow}>
-        <input
-          id="dictionary-search"
-          type="search"
-          value={query}
+        <input id="dictionary-search" type="search" value={query}
           onChange={event=>setQuery(event.target.value)}
-          placeholder="Ej. gracia, agápē, G5485, shalom..."
-        />
+          placeholder="Ej. gracia, agápē, G5485, shalom..."/>
         <span aria-live="polite">{results.length} {results.length===1?"resultado":"resultados"}</span>
       </div>
       <div className={styles.filters} aria-label="Filtrar por idioma">
@@ -44,21 +40,15 @@ export default function BibleDictionarySearch(){
     {results.length ? <div className={styles.grid}>
       {results.map(entry=><article className={styles.card} key={entry.id}>
         <div className={styles.cardTop}>
-          <div>
-            <span className={styles.language}>{entry.language}</span>
-            <h2>{entry.spanish}</h2>
-          </div>
+          <div><span className={styles.language}>{entry.language}</span><h2>{entry.spanish}</h2></div>
           <strong className={styles.strong}>{entry.strong}</strong>
         </div>
-        <p className={entry.language==="Hebreo"?styles.hebrew:styles.original} lang={entry.language==="Hebreo"?"he":"el"} dir={entry.language==="Hebreo"?"rtl":"ltr"}>
-          {entry.original}
-        </p>
+        <p className={entry.language==="Hebreo"?styles.hebrew:styles.original}
+          lang={entry.language==="Hebreo"?"he":"el"} dir={entry.language==="Hebreo"?"rtl":"ltr"}>{entry.original}</p>
         <p className={styles.transliteration}>{entry.transliteration}</p>
         <p className={styles.gloss}>{entry.gloss}</p>
         <p className={styles.explanation}>{entry.explanation}</p>
-        <div className={styles.references}>
-          {entry.references.map(reference=><span key={reference}>{reference}</span>)}
-        </div>
+        <div className={styles.references}>{entry.references.map(reference=><span key={reference}>{reference}</span>)}</div>
         <a className={styles.stepLink} href={`https://www.stepbible.org/?q=strong=${entry.strong}`} target="_blank" rel="noreferrer">
           Abrir estudio completo en STEP Bible <span aria-hidden="true">↗</span>
         </a>

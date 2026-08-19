@@ -268,3 +268,15 @@ footer{background:#03111f;color:#fff;padding:45px clamp(24px,8vw,130px);display:
   .eventPublicImage{height:260px;object-position:center 35%}
   .eventPublicBody{padding:20px}
 }
+
+
+/* Versión 12.17: accesibilidad, enfoque y movimiento reducido. */
+.skipLink{position:fixed;z-index:10000;top:10px;left:10px;padding:11px 15px;border-radius:8px;background:#fff;color:#071829;font-weight:900;box-shadow:0 8px 24px rgba(0,0,0,.22);transform:translateY(-160%);transition:transform .18s}
+.skipLink:focus{transform:translateY(0)}
+:where(a,button,input,select,textarea,[role="button"]):focus-visible{outline:3px solid #d7aa4b;outline-offset:3px}
+.formHoneypot{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important}
+img[role="button"]{cursor:zoom-in}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto!important}
+ *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}

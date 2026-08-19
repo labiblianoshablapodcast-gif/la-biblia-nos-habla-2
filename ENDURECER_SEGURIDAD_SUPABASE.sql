@@ -64,8 +64,10 @@ $$;
 revoke all on function public.current_ministry_role() from public;
 revoke all on function public.can_manage_area(text) from public;
 revoke all on function public.can_manage_site_media(text) from public;
-grant execute on function public.current_ministry_role() to authenticated;
-grant execute on function public.can_manage_area(text) to authenticated;
+-- anon necesita evaluar las políticas públicas; sin sesión estas funciones
+-- siempre devuelven el rol member y no conceden administración.
+grant execute on function public.current_ministry_role() to anon, authenticated;
+grant execute on function public.can_manage_area(text) to anon, authenticated;
 grant execute on function public.can_manage_site_media(text) to authenticated;
 
 -- EVENTOS

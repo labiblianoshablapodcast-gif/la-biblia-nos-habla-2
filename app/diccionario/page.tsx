@@ -7,7 +7,8 @@ export const metadata={
   description:"Estudio de palabras bíblicas en hebreo y griego con transliteración y números Strong."
 };
 
-export default function DictionaryPage(){
+export default async function DictionaryPage({searchParams}:{searchParams:Promise<{q?:string}>}){
+  const {q=""}=await searchParams;
   return <main className={styles.page}>
     <section className={styles.hero}>
       <div>
@@ -20,10 +21,7 @@ export default function DictionaryPage(){
         </div>
       </div>
       <div className={styles.wordArt} aria-hidden="true">
-        <span>חֶסֶד</span>
-        <span>χάρις</span>
-        <span>shalom</span>
-        <span>λόγος</span>
+        <span>חֶסֶד</span><span>χάρις</span><span>shalom</span><span>λόγος</span>
       </div>
     </section>
 
@@ -33,7 +31,7 @@ export default function DictionaryPage(){
         <h2>Busque y compare</h2>
         <p>La definición breve explica el uso bíblico general. El contexto de cada pasaje sigue siendo esencial para interpretar correctamente una palabra.</p>
       </div>
-      <BibleDictionarySearch/>
+      <BibleDictionarySearch initialQuery={q}/>
       <aside className={styles.attribution}>
         <strong>Fuentes y atribución</strong>
         <p>Selección y explicaciones pastorales en español preparadas para La Biblia Nos Habla. Datos léxicos contrastados con TBESH y TBESG de <a href="https://www.stepbible.org/" target="_blank" rel="noreferrer">STEP Bible</a>, creados por Tyndale House, Cambridge y distribuidos bajo <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a>. Los números Strong se usan como identificadores de referencia.</p>

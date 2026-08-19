@@ -157,19 +157,40 @@ export async function getChapter(code:string, chapter:number): Promise<BibleChap
 
 export async function getQeqchiChapter(code:string,chapter:number):Promise<BibleChapter|null>{
   if(!hasQeqchiBook(code))return null;
-  try{
-    const response=await fetch(qeqchiChapterUrl(code,chapter),{next:{revalidate:86400}});
-    if(!response.ok)return null;
-    const verses=parseQeqchiVerses(await response.text());
-    if(!verses.length)return null;
-    return {
-      translation:"QEQCHI",
-      book:BIBLIA_BOOKS[code] ?? code,
-      chapter,
-      verses,
-      source:"Li Santil Hu · Nuevo Testamento en Q’eqchi’ · © 2000 Wycliffe Bible Translators"
-    };
-  }catch{
-    return null;
+
+  // eBible rechaza ocasionalmente solicitudes automáticas sin identificación.
+  // La consulta no se almacena cuando falla, para permitir un reintento limpio.
+  const urls=[
+    qeqchiChapterUrl(code,chapter),
+    qeqchiChapterUrl(code,chapter).replace("https://ebible.org","https://www.ebible.org")
+  ];
+
+  for(const url of urls){
+    try{
+      const response=await fetch(url,{
+        cache:"no-store",
+        redirect:"follow",
+        headers:{
+          "Accept":"text/html,application/xhtml+xml",
+          "Accept-Language":"kek,es;q=0.9,en;q=0.8",
+          "User-Agent":"La-Biblia-Nos-Habla/1.0 (+https://labiblianoshabla.org)"
+        }
+      });
+      if(!response.ok)continue;
+
+      const verses=parseQeqchiVerses(await response.text());
+      if(!verses.length)continue;
+
+      return {
+        translation:"QEQCHI",
+        book:BIBLIA_BOOKS[code] ?? code,
+        chapter,
+        verses,
+        source:"Li Santil Hu · Nuevo Testamento en Q’eqchi’ · © 2000 Wycliffe Bible Translators"
+      };
+    }catch{
+      // Prueba la ruta secundaria.
+    }
   }
+  return null;
 }

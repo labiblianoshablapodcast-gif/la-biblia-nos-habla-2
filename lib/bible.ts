@@ -75,21 +75,42 @@ function decodeHtml(text:string){
 }
 
 function parseQeqchiVerses(html:string):BibleVerse[]{
-  const marked=html
-    .replace(/<span[^>]*class=["'][^"']*verse[^"']*["'][^>]*id=["']V(\d+)["'][^>]*>[\s\S]*?<\/span>/gi,"<<<VERSE:$1>>>")
-    .replace(/<span[^>]*id=["']V(\d+)["'][^>]*class=["'][^"']*verse[^"']*["'][^>]*>[\s\S]*?<\/span>/gi,"<<<VERSE:$1>>>");
+  // Haiola/eBible usa marcadores id="V1" (a veces en enlaces u otros
+  // elementos), no necesariamente un span con la clase "verse".
+  let marked=html
+    .replace(/<[^>]+\bid=["']V(\d+)(?:_[^"']*)?["'][^>]*>/gi,"<<<VERSE:$1>>>")
+    .replace(/<[^>]+\bname=["']V(\d+)(?:_[^"']*)?["'][^>]*>/gi,"<<<VERSE:$1>>>");
+
+  // Compatibilidad con otras salidas de Haiola.
+  if(!marked.includes("<<<VERSE:")){
+    marked=html.replace(/<[^>]+\bdata-number=["'](\d+)["'][^>]*>/gi,"<<<VERSE:$1>>>");
+  }
 
   const first=marked.indexOf("<<<VERSE:");
   if(first<0)return [];
 
-  const scripture=marked
-    .slice(first)
-    .split(/<hr\b|copyright|©\s*2000/i)[0]
-    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi," ")
-    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi," ")
-    .replace(/<[^>]+>/g," ");
+  const scripture=decodeHtml(
+    marked
+      .slice(first)
+      .split(/<hr\b|copyright|©\s*2000|\bContents\b/i)[0]
+      .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi," ")
+      .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi," ")
+      .replace(/<[^>]+>/g," ")
+  );
 
-  return parseVerses(decodeHtml(scripture));
+  const verses:BibleVerse[]=[];
+  const marker=/<<<VERSE:(\d+)>>>([\s\S]*?)(?=<<<VERSE:\d+>>>|$)/g;
+  for(const match of scripture.matchAll(marker)){
+    const number=Number(match[1]);
+    const clean=match[2]
+      .replace(/^\s*\d+\s*/, "")
+      .replace(/\s+/g," ")
+      .trim();
+    if(clean && verses.at(-1)?.number!==number){
+      verses.push({number,text:clean});
+    }
+  }
+  return verses;
 }
 
 export {books};

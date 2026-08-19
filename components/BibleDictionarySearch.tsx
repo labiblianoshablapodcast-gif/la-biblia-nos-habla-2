@@ -8,6 +8,7 @@ export default function BibleDictionarySearch({initialQuery=""}:{initialQuery?:s
   const [query,setQuery]=useState(initialQuery);
   const [language,setLanguage]=useState<"Todos"|"Hebreo"|"Griego">("Todos");
   const normalized=normalizeDictionarySearch(query);
+  const popularWords=["Gracia","Fe","Salvación","Espíritu","Poder","Oración","Pacto","Gloria","Sabiduría","Reino","Adoración","Humildad"];
 
   const results=useMemo(()=>bibleDictionary.filter(entry=>{
     if(language!=="Todos" && entry.language!==language)return false;
@@ -34,6 +35,16 @@ export default function BibleDictionarySearch({initialQuery=""}:{initialQuery?:s
             {value}
           </button>
         )}
+      </div>
+      <div className={styles.popularWords}>
+        <span>Palabras populares</span>
+        <div>
+          {popularWords.map(word=><button key={word} type="button"
+            className={normalizeDictionarySearch(query)===normalizeDictionarySearch(word)?styles.selectedWord:""}
+            onClick={()=>{setQuery(word);setLanguage("Todos")}}>
+            {word}
+          </button>)}
+        </div>
       </div>
     </div>
 

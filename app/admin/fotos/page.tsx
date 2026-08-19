@@ -48,8 +48,17 @@ async function deletePhoto(formData:FormData){
  const supabase=await createClient();
  const id=Number(formData.get("id"));
  const path=String(formData.get("storage_path")||"");
- if(path)await supabase.storage.from("site-media").remove([path]);
- if(id)await supabase.from("gallery_items").delete().eq("id",id);
+ if(!id)redirect("/admin/fotos?estado=error#biblioteca");
+
+ const {error:deleteError}=await supabase.from("gallery_items").delete().eq("id",id);
+ if(deleteError)redirect("/admin/fotos?estado=error#biblioteca");
+
+ // El registro se elimina antes que el archivo para no anunciar una operación
+ // exitosa cuando las políticas de la base de datos la han rechazado.
+ if(path){
+  const {error:storageError}=await supabase.storage.from("site-media").remove([path]);
+  if(storageError)console.error("La fotografía se retiró, pero no se pudo limpiar el archivo",storageError);
+ }
  revalidatePath("/galeria");
  revalidatePath("/iglesia");
  revalidatePath("/eventos");

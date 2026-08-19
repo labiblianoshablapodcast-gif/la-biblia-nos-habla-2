@@ -41,6 +41,27 @@ export default function BibliaPage(){
       <span>Texto bíblico: Reina-Valera Revisada 1960. Este sitio utiliza los servicios web de <a href="https://biblia.com/" target="_blank" rel="noreferrer">Biblia</a> de <a href="https://www.logos.com/" target="_blank" rel="noreferrer">Logos Bible Software</a>.</span>
     </div>
 
+    <section className={styles.studyPlan} aria-labelledby="dictionary-title">
+      <div className={styles.planIntro}>
+        <p>Nuevo · Hebreo y griego</p>
+        <h2 id="dictionary-title">Diccionario bíblico</h2>
+        <span>Busque palabras importantes, vea el término original, su transliteración, significado y número Strong.</span>
+        <Link href="/diccionario">Abrir diccionario <b aria-hidden="true">→</b></Link>
+      </div>
+      <div className={styles.planDays}>
+        {[
+          ["חֶסֶד","ḥésed","Misericordia fiel"],
+          ["χάρις","cháris","Gracia"],
+          ["שָׁלוֹם","shalóm","Paz integral"],
+          ["λόγος","lógos","Palabra"]
+        ].map(([original,transliteration,meaning])=><Link key={original} href={`/diccionario?q=${encodeURIComponent(transliteration)}`}>
+          <span>Palabra original</span>
+          <strong>{original}</strong>
+          <small>{transliteration} · {meaning}</small>
+        </Link>)}
+      </div>
+    </section>
+
     <section className={styles.studyPlan} aria-labelledby="john-plan-title">
       <div className={styles.planIntro}>
         <p>Plan de estudio · 21 días</p>

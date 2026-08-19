@@ -286,3 +286,21 @@ img[role="button"]{cursor:zoom-in}
 .bibliaAttribution{display:flex;align-items:center;gap:14px;max-width:850px;margin:18px auto 36px;padding:14px 16px;border:1px solid #e0e4e6;border-radius:12px;background:#f8f6f1;color:#64717d;font-size:12px;line-height:1.45}
 .bibliaAttribution img{display:block;width:auto;height:30px}.bibliaAttribution p{margin:0}.bibliaAttribution p a{color:#8d6414;font-weight:800;text-decoration:underline;text-underline-offset:2px}
 @media(max-width:620px){.bibliaAttribution{align-items:flex-start;flex-direction:column}}
+
+
+/* Versión 12.18: estudio de palabras integrado al lector bíblico. */
+.verseStudy{display:grid;grid-template-columns:minmax(0,.8fr) minmax(320px,1.2fr);gap:16px;align-items:end;margin-top:14px;padding-top:14px;border-top:1px solid rgba(151,105,13,.22)}
+.verseStudy strong,.verseStudy small{display:block}.verseStudy small{margin-top:3px;color:#65747e;font-size:12px;line-height:1.4}
+.verseStudyControls{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.verseStudy input{width:100%;min-height:44px;padding:10px 12px;border:1px solid #cbd5da;border-radius:9px;background:#fff;color:var(--navy);font:600 14px/1.2 inherit}
+.verseStudy button{min-height:44px;padding:10px 14px;border:1px solid #c89526;border-radius:9px;background:var(--navy);color:#fff;font:800 12px/1.2 inherit;cursor:pointer;white-space:nowrap}
+.verseStudy button:disabled{opacity:.45;cursor:not-allowed}
+.darkReader .verseStudy small{color:#bac5cb}.darkReader .verseStudy input{border-color:#52606a;background:#17232c;color:#fff}
+@media(max-width:700px){
+ .verseStudy{grid-template-columns:1fr;gap:11px}
+ .verseStudyControls{grid-template-columns:1fr}
+ .verseStudy button{width:100%;font-size:13px}
+ .verseActions button{min-width:38px;min-height:38px;border-radius:8px;background:rgba(7,24,41,.05)}
+ .darkReader .verseActions button{background:rgba(255,255,255,.08)}
+ .selectedVerseBar span{display:block;margin-top:4px;line-height:1.4}
+}

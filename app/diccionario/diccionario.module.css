@@ -30,3 +30,51 @@
  .popularWords>div{gap:4px}
  .popularWords button{min-height:24px;padding:3px 7px;font-size:9px}
 }
+
+
+/* Tarjetas de definiciones: formato editorial compacto y sofisticado. */
+.grid{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px;
+  max-width:1240px;
+}
+.card{
+  padding:17px;
+  border-radius:13px;
+  border-color:#d9e0e4;
+  border-top:2px solid rgba(193,137,27,.42);
+  box-shadow:0 8px 22px rgba(7,24,41,.045);
+}
+.cardTop{gap:10px}
+.language{font-size:9px;letter-spacing:.16em}
+.card h2{margin-top:3px;font-size:27px;line-height:1.02}
+.strong{padding:3px 7px;font-size:9px}
+.original,.hebrew{margin-top:11px;font-size:28px;line-height:1.08}
+.transliteration{margin-top:2px;font-size:16px}
+.gloss{margin:8px 0 5px;font-size:12px;line-height:1.35}
+.explanation{font-size:12px;line-height:1.45}
+.references{gap:4px;margin:10px 0 8px}
+.references span{padding:3px 5px;font-size:8px}
+.stepLink{gap:5px;padding:2px 0;font-size:10px;line-height:1.35}
+
+@media(max-width:1100px){
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:820px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:620px){
+  .grid{grid-template-columns:1fr;gap:11px}
+  .card{
+    padding:14px 15px;
+    border-radius:12px;
+    box-shadow:0 6px 16px rgba(7,24,41,.04);
+  }
+  .card h2{font-size:24px}
+  .original,.hebrew{margin-top:8px;font-size:25px}
+  .transliteration{font-size:15px}
+  .gloss{margin-top:7px;font-size:11px}
+  .explanation{font-size:11px;line-height:1.4}
+  .references{margin:8px 0 6px}
+  .stepLink{font-size:9px}
+}

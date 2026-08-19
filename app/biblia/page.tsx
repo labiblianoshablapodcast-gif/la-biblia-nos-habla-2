@@ -41,6 +41,29 @@ export default function BibliaPage(){
       <span>Texto bíblico: Reina-Valera Revisada 1960. Este sitio utiliza los servicios web de <a href="https://biblia.com/" target="_blank" rel="noreferrer">Biblia</a> de <a href="https://www.logos.com/" target="_blank" rel="noreferrer">Logos Bible Software</a>.</span>
     </div>
 
+    <section className={styles.studyPlan} aria-labelledby="qeqchi-title">
+      <div className={styles.planIntro}>
+        <p>Nuevo · Idioma de Guatemala</p>
+        <h2 id="qeqchi-title">Biblia en Q’eqchi’</h2>
+        <span>Lea Li Santil Hu, el Nuevo Testamento en Q’eqchi’, directamente en nuestra biblioteca bíblica.</span>
+        <Link href="/biblia/mateo/1?version=qeqchi">Comenzar a leer <b aria-hidden="true">→</b></Link>
+      </div>
+      <div className={styles.planDays}>
+        {[
+          ["Mateo","mateo","Li resil li Jesucristo"],
+          ["Marcos","marcos","Li chaq’rab sa’ Q’eqchi’"],
+          ["Juan","juan","Li A̱tin ut li yu’am"],
+          ["Hechos","hechos","Li c’anjel li iglesia"],
+          ["Romanos","romanos","Li pa̱ba̱l ut li rusilal"],
+          ["Apocalipsis","apocalipsis","Li xch’ool li colba-ib"]
+        ].map(([name,slug,description])=><Link key={slug} href={`/biblia/${slug}/1?version=qeqchi`}>
+          <span>Q’eqchi’</span>
+          <strong>{name}</strong>
+          <small>{description}</small>
+        </Link>)}
+      </div>
+    </section>
+
     <section className={styles.studyPlan} aria-labelledby="dictionary-title">
       <div className={styles.planIntro}>
         <p>Nuevo · Hebreo y griego</p>

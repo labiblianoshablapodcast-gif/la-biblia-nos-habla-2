@@ -46,7 +46,12 @@ export default async function ChapterPage({params}:{params:Promise<{book:string;
       <p>Este sitio utiliza los servicios web de <a href="https://biblia.com/" target="_blank" rel="noreferrer">Biblia</a> de <a href="https://www.logos.com/" target="_blank" rel="noreferrer">Logos Bible Software</a>.</p>
     </div>
 
-    {book.slug==="juan" && <JohnChapterQuestions key={chapter} chapter={chapter}/>} 
+    <div className="toolbar">
+      <Link className="btn" href="/diccionario">א α Diccionario hebreo y griego</Link>
+      <a className="btn secondary" href={`https://www.stepbible.org/?q=version=RVR60|reference=${encodeURIComponent(`${book.name} ${chapter}`)}`} target="_blank" rel="noreferrer">Estudio interlineal ↗</a>
+    </div>
+
+    {book.slug==="juan" && <JohnChapterQuestions key={chapter} chapter={chapter}/>}
 
     <ChapterControls slug={book.slug} chapter={chapter} total={book.chapters}/>
 

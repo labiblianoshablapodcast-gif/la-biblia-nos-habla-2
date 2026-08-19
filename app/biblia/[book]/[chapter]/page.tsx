@@ -15,7 +15,7 @@ export default async function ChapterPage({params}:{params:Promise<{book:string;
 
  return <>
   <section className="pageHero bibleChapterHero">
-    <p className="eyebrow">Santa Biblia · Reina-Valera 1909</p>
+    <p className="eyebrow">Santa Biblia · Reina-Valera Revisada 1960</p>
     <h1>{book.name} {chapter}</h1>
     <p>{book.testament}</p>
   </section>
@@ -33,10 +33,18 @@ export default async function ChapterPage({params}:{params:Promise<{book:string;
     ) : (
       <div className="notice">
         <strong>No pudimos cargar el capítulo.</strong>
-        <p>Puede abrirlo directamente desde la fuente pública.</p>
-        <a className="btn" href={chapterUrl(book.code,chapter)} target="_blank">Abrir capítulo</a>
+        <p>Verifique que BIBLIA_API_KEY1 esté disponible en Vercel o ábralo directamente en Biblia.com.</p>
+        <a className="btn" href={chapterUrl(book.code,chapter)} target="_blank" rel="noreferrer">Abrir capítulo</a>
       </div>
     )}
+
+    <div className="bibliaAttribution">
+      <a href="https://biblia.com/" target="_blank" rel="noreferrer">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="https://api.biblia.com/v1/PoweredByBiblia_small.png" alt="Powered by Biblia"/>
+      </a>
+      <p>Este sitio utiliza los servicios web de <a href="https://biblia.com/" target="_blank" rel="noreferrer">Biblia</a> de <a href="https://www.logos.com/" target="_blank" rel="noreferrer">Logos Bible Software</a>.</p>
+    </div>
 
     {book.slug==="juan" && <JohnChapterQuestions key={chapter} chapter={chapter}/>} 
 

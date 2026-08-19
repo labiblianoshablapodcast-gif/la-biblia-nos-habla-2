@@ -17,7 +17,7 @@
 .searchPanel :global(.search){min-height:52px;padding:0 18px;border-color:#d7d9d7!important;border-radius:9px!important;background:#fff;font-size:.9rem}
 .searchPanel :global(.continueReading){margin:14px 0 18px;padding:15px 18px;border-radius:10px;background:#0b263b}
 .searchPanel :global(.continueReading .btn){border-radius:999px!important;background:#d5a235!important;color:#071829!important}
-.sourceNote{margin:14px 2px 42px;color:#66737c;font-size:.75rem}
+.sourceNote{display:flex;align-items:center;gap:12px;margin:14px 2px 42px;color:#66737c;font-size:.75rem;line-height:1.5}.sourceNote img{display:block;width:auto;height:30px}.sourceNote a{color:#805b16;text-decoration:underline;text-underline-offset:2px}
 .studyPlan{display:grid;grid-template-columns:minmax(250px,.72fr) 2fr;gap:0;margin:0 0 58px;border:1px solid #dfe3e5;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 15px 40px rgba(7,24,41,.065)}
 .planIntro{display:flex;flex-direction:column;justify-content:center;padding:30px;background:linear-gradient(145deg,#0b2a43,#061827);color:#fff}
 .planIntro>p{margin:0 0 11px;color:#e0aa37;font-size:.62rem;font-weight:850;letter-spacing:.16em;text-transform:uppercase}

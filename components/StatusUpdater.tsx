@@ -25,6 +25,7 @@ export default function StatusUpdater({
   const [message,setMessage]=useState("");
 
   async function updateStatus(nextStatus:string){
+    const previousStatus=status;
     setStatus(nextStatus);
     setSaving(true);
     setMessage("");
@@ -38,7 +39,9 @@ export default function StatusUpdater({
     setSaving(false);
 
     if(error){
-      setMessage("No se pudo guardar.");
+      console.error("No se pudo actualizar el estado",error);
+      setStatus(previousStatus);
+      setMessage("No se guardó. Inténtelo otra vez.");
       return;
     }
 
@@ -52,9 +55,11 @@ export default function StatusUpdater({
       disabled={saving}
       onChange={event=>updateStatus(event.target.value)}
       aria-label="Estado de seguimiento"
+      aria-busy={saving}
     >
       {OPTIONS.map(([value,label])=><option key={value} value={value}>{label}</option>)}
     </select>
-    {message && <small>{message}</small>}
+    {saving && <small role="status">Guardando…</small>}
+    {!saving && message && <small role="status">{message}</small>}
   </div>;
 }

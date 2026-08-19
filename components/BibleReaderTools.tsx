@@ -45,7 +45,7 @@ export default function BibleReaderTools({
   }
 
   async function shareVerse(verse:Verse){
-    const text=`${bookName} ${chapter}:${verse.number} — ${verse.text} (Reina-Valera 1909)`;
+    const text=`${bookName} ${chapter}:${verse.number} — ${verse.text} (Reina-Valera Revisada 1960)`;
     if(navigator.share){
       await navigator.share({title:`${bookName} ${chapter}:${verse.number}`,text});
     }else{

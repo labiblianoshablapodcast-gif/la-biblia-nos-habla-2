@@ -16,7 +16,7 @@ export default function BibliaPage(){
  return <main className={styles.page}>
   <section className={styles.hero}>
     <div className={styles.heroCopy}>
-      <p className={styles.eyebrow}>Reina-Valera 1909 · Dominio público</p>
+      <p className={styles.eyebrow}>Reina-Valera Revisada 1960 · Biblia.com</p>
       <h1>Biblioteca Bíblica</h1>
       <p>Los 66 libros, 1,189 capítulos y herramientas personales para acompañar su lectura.</p>
       <div className={styles.heroDetails} aria-label="Información de la biblioteca">
@@ -33,7 +33,13 @@ export default function BibliaPage(){
 
   <section className={styles.library}>
     <div className={styles.searchPanel}><BibleHomeClient/></div>
-    <p className={styles.sourceNote}>Texto bíblico: Santa Biblia Reina-Valera 1909. Preparada para añadir RVR1960 cuando se obtenga autorización.</p>
+    <div className={styles.sourceNote}>
+      <a href="https://biblia.com/" target="_blank" rel="noreferrer">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="https://api.biblia.com/v1/PoweredByBiblia_small.png" alt="Powered by Biblia"/>
+      </a>
+      <span>Texto bíblico: Reina-Valera Revisada 1960. Este sitio utiliza los servicios web de <a href="https://biblia.com/" target="_blank" rel="noreferrer">Biblia</a> de <a href="https://www.logos.com/" target="_blank" rel="noreferrer">Logos Bible Software</a>.</span>
+    </div>
 
     <section className={styles.studyPlan} aria-labelledby="john-plan-title">
       <div className={styles.planIntro}>

@@ -9,16 +9,17 @@ export default async function Peticiones(){
    .select("*")
    .order("created_at",{ascending:false});
 
+ if(error) console.error("No se pudieron cargar las peticiones",error);
+
  return <div className="adminShell">
   <AdminNav/>
   <section className="adminMain">
     <p className="eyebrow">Seguimiento pastoral</p>
     <h1>Peticiones y solicitudes</h1>
 
-    {error && <div className="notice">
+    {error && <div className="notice" role="alert">
       <strong>No se pudieron cargar los registros.</strong>
-      <p>{error.message}</p>
-      <p>Ejecute el archivo <code>supabase-2-7-security.sql</code> en Supabase.</p>
+      <p>Actualice la página. Si el problema continúa, revise el Estado Supabase del panel.</p>
     </div>}
 
     <div className="adminTable">

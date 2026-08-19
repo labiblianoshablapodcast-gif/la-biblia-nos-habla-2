@@ -1,12 +1,17 @@
 ACTIVAR EL REGISTRO PRIVADO DE DONACIONES
 
 1. En Supabase, abra SQL Editor y ejecute:
-   supabase/supabase-12-3-paypal-donations.sql
+   supabase-12-3-paypal-donations.sql
 
-2. En Vercel, agregue esta variable privada:
+2. En Vercel, agregue estas variables privadas:
    SUPABASE_SERVICE_ROLE_KEY
    Copie el valor desde Supabase > Project Settings > API > service_role.
    Nunca publique ni envíe esta clave por correo o chat.
+
+   PAYPAL_RECEIVER_EMAIL
+   Escriba exactamente el correo de la cuenta PayPal Business que recibe
+   las donaciones. Esta verificación impide registrar pagos dirigidos a
+   otra cuenta.
 
 3. En PayPal Business abra:
    Account Settings > Notifications > Instant payment notifications > Update
@@ -16,5 +21,5 @@ ACTIVAR EL REGISTRO PRIVADO DE DONACIONES
 
 5. Marque Receive IPN messages (Enabled), guarde y vuelva a desplegar el sitio.
 
-El registro estará disponible en:
+El registro estará disponible únicamente para Pastor y Tesorería en:
    /admin/donaciones

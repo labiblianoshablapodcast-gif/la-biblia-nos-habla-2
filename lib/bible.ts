@@ -160,7 +160,7 @@ export async function getQeqchiChapter(code:string,chapter:number):Promise<Bible
   if(!hasQeqchiBook(code))return null;
 
   const verses=getLocalQeqchiVerses(code,chapter)
-    .map(([number,text])=>({number,text}));
+    .map((entry)=>({number:Number(entry[0]),text:String(entry[1])}));
 
   if(!verses.length)return null;
 

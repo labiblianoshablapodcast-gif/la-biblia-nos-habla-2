@@ -16,3 +16,17 @@
  .references span{padding:3px 5px;font-size:9px}
  .stepLink{font-size:11px}
 }
+
+
+/* Accesos rápidos compactos para palabras populares. */
+.popularWords{display:flex;align-items:flex-start;gap:12px;margin-top:14px;padding-top:13px;border-top:1px solid #e7ebed}
+.popularWords>span{flex:0 0 auto;padding-top:5px;color:#66747e;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.popularWords>div{display:flex;flex-wrap:wrap;gap:5px}
+.popularWords button{min-height:25px;padding:3px 8px;border:1px solid #d9e0e4;border-radius:6px;background:#f7f5ef;color:#40515c;font:800 10px/1.2 inherit;cursor:pointer}
+.popularWords button:hover,.popularWords button.selectedWord{border-color:#c69022;background:#071829;color:#e5b243}
+@media(max-width:620px){
+ .popularWords{display:block}
+ .popularWords>span{display:block;margin-bottom:8px;padding:0}
+ .popularWords>div{gap:4px}
+ .popularWords button{min-height:24px;padding:3px 7px;font-size:9px}
+}

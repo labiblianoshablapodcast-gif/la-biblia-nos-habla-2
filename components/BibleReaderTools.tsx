@@ -5,9 +5,12 @@ import {useEffect,useMemo,useState} from "react";
 type Verse={number:number;text:string};
 
 export default function BibleReaderTools({
-  bookName,bookSlug,chapter,verses
-}:{bookName:string;bookSlug:string;chapter:number;verses:Verse[]}) {
-  const key=`${bookSlug}-${chapter}`;
+  bookName,bookSlug,chapter,verses,translationName="Reina-Valera Revisada 1960",translationKey="rvr60"
+}:{
+  bookName:string;bookSlug:string;chapter:number;verses:Verse[];
+  translationName?:string;translationKey?:string;
+}) {
+  const key=`${translationKey}-${bookSlug}-${chapter}`;
   const [dark,setDark]=useState(false);
   const [fontSize,setFontSize]=useState(27);
   const [favorites,setFavorites]=useState<number[]>([]);
@@ -20,9 +23,9 @@ export default function BibleReaderTools({
     setFavorites(JSON.parse(localStorage.getItem(`favorites-${key}`)||"[]"));
     setNotes(JSON.parse(localStorage.getItem("bible-notes")||"{}"));
     localStorage.setItem("last-bible-reading",JSON.stringify({
-      bookName,bookSlug,chapter,at:new Date().toISOString()
+      bookName,bookSlug,chapter,translationKey,at:new Date().toISOString()
     }));
-  },[bookName,bookSlug,chapter,key]);
+  },[bookName,bookSlug,chapter,key,translationKey]);
 
   useEffect(()=>{localStorage.setItem("bible-dark",dark?"1":"0")},[dark]);
   useEffect(()=>{localStorage.setItem("bible-font",String(fontSize))},[fontSize]);
@@ -45,7 +48,7 @@ export default function BibleReaderTools({
   }
 
   async function shareVerse(verse:Verse){
-    const text=`${bookName} ${chapter}:${verse.number} — ${verse.text} (Reina-Valera Revisada 1960)`;
+    const text=`${bookName} ${chapter}:${verse.number} — ${verse.text} (${translationName})`;
     if(navigator.share){
       await navigator.share({title:`${bookName} ${chapter}:${verse.number}`,text});
     }else{
@@ -56,6 +59,7 @@ export default function BibleReaderTools({
 
   return <div className={dark?"readerShell darkReader":"readerShell"}>
     <div className="readerToolbar">
+      <strong>{translationName}</strong>
       <button onClick={()=>setDark(!dark)}>{dark?"☀️ Modo claro":"🌙 Modo oscuro"}</button>
       <button onClick={()=>setFontSize(Math.max(20,fontSize-2))}>A−</button>
       <button onClick={()=>setFontSize(Math.min(40,fontSize+2))}>A+</button>

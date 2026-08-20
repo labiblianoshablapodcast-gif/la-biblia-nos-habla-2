@@ -971,3 +971,101 @@
   box-shadow:inset 3px 0 #d9a52d;
  }
 }
+
+
+/* Versión 12.33: retrato y mensaje unidos; horarios con iconos legibles. */
+@media(max-width:720px){
+ .hero{
+  isolation:isolate;
+  background:
+   radial-gradient(circle at 78% 40%,rgba(31,74,111,.72),transparent 42%),
+   linear-gradient(135deg,#031426,#082440)!important;
+ }
+ .heroPortrait{
+  background-position:center bottom!important;
+  background-size:cover!important;
+ }
+ .heroPortrait::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+   radial-gradient(ellipse at 74% 47%,transparent 0 27%,rgba(3,17,33,.10) 45%,rgba(3,17,33,.48) 72%),
+   linear-gradient(90deg,rgba(3,17,33,.76) 0%,rgba(3,17,33,.18) 48%,transparent 72%);
+  pointer-events:none;
+ }
+ .heroOverlay{
+  background:
+   linear-gradient(90deg,
+    rgba(3,17,33,.99) 0%,
+    rgba(3,17,33,.96) 31%,
+    rgba(3,17,33,.78) 42%,
+    rgba(3,17,33,.36) 54%,
+    rgba(3,17,33,.09) 66%,
+    transparent 78%),
+   linear-gradient(0deg,
+    rgba(3,17,33,.54) 0%,
+    rgba(3,17,33,.12) 31%,
+    transparent 58%)!important;
+ }
+ .heroContent::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  top:34px;
+  bottom:38px;
+  left:-22px;
+  width:59%;
+  background:linear-gradient(90deg,rgba(3,17,33,.28),transparent);
+  filter:blur(18px);
+  pointer-events:none;
+ }
+ .mobileSchedule article{
+  display:grid;
+  grid-template-columns:1fr;
+  align-content:center;
+  justify-items:center;
+  gap:3px;
+  min-height:94px;
+  padding:11px 5px 12px;
+ }
+ .mobileSchedule .scheduleClock{
+  display:grid;
+  width:28px;
+  height:28px;
+  margin:0 0 4px;
+  place-items:center;
+  border:1px solid rgba(185,129,18,.36);
+  border-radius:50%;
+  background:#fff8e7;
+  color:#a96f09;
+ }
+ .scheduleClock svg{
+  width:17px;
+  height:17px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+ }
+ .mobileSchedule small{
+  color:#344354;
+  font-size:.7rem;
+  font-weight:700;
+ }
+ .mobileSchedule strong{
+  display:block;
+  font-size:.88rem;
+  line-height:1.15;
+  white-space:normal;
+ }
+}
+@media(max-width:390px){
+ .heroOverlay{
+  background:
+   linear-gradient(90deg,rgba(3,17,33,.99) 0%,rgba(3,17,33,.96) 34%,rgba(3,17,33,.68) 47%,rgba(3,17,33,.22) 59%,transparent 73%),
+   linear-gradient(0deg,rgba(3,17,33,.52),transparent 38%)!important;
+ }
+ .mobileSchedule strong{font-size:.8rem}
+}

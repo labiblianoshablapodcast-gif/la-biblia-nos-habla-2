@@ -117,7 +117,7 @@ function parseQeqchiVerses(html:string):BibleVerse[]{
 export {books};
 
 export async function getChapter(code:string, chapter:number): Promise<BibleChapter | null> {
-  const apiKey=process.env.BIBLIA_API_KEY1 ?? process.env.BIBLIA_API_KEY;
+  const apiKey=process.env.BIBLIA_API_KEY;
   const book=BIBLIA_BOOKS[code];
   if(!apiKey || !book)return null;
 
@@ -137,7 +137,7 @@ export async function getChapter(code:string, chapter:number): Promise<BibleChap
   try{
     const response=await fetch(
       `https://api.biblia.com/v1/bible/content/RVR60.txt?${query.toString()}`,
-      {next:{revalidate:3600}}
+      {cache:"no-store"}
     );
     if(!response.ok)return null;
 

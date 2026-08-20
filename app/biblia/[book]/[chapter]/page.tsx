@@ -62,7 +62,7 @@ export default async function ChapterPage({
         <strong>No pudimos cargar el capítulo.</strong>
         <p>{version==="qeqchi"
           ?"Puede abrir este capítulo directamente en la fuente Q’eqchi’."
-          :"Verifique que BIBLIA_API_KEY1 esté disponible en Vercel o ábralo directamente en Biblia.com."}</p>
+          :"Verifique que BIBLIA_API_KEY esté disponible en Vercel o ábralo directamente en Biblia.com."}</p>
         <a className="btn" href={version==="qeqchi"?qeqchiChapterUrl(book.code,chapter):chapterUrl(book.code,chapter)} target="_blank" rel="noreferrer">Abrir capítulo</a>
       </div>
     )}

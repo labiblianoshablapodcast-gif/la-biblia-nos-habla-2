@@ -34,7 +34,7 @@ export default function Home(){
    <h2>Iglesia Príncipe de Paz</h2>
    <a href={church.mapsUrl} target="_blank" rel="noreferrer">{church.address}</a>
    <div className={styles.mobileSchedule}>
-    {church.schedule.filter(item=>["Miércoles","Sábado","Domingo"].includes(item.day)).map(item=><article key={item.day}><span>▣</span><small>{item.day}</small><strong>{item.time}</strong></article>)}
+    {church.schedule.filter(item=>["Miércoles","Sábado","Domingo"].includes(item.day)).map(item=><article key={item.day}><span className={styles.scheduleClock} aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v5l3.25 2"/></svg></span><small>{item.day}</small><strong>{item.time}</strong></article>)}
    </div>
   </section>
 

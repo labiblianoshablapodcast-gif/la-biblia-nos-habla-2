@@ -845,3 +845,129 @@
    linear-gradient(0deg,rgba(3,17,33,.14),transparent 18%)!important;
  }
 }
+
+
+/* Versión 12.32: acciones ministeriales unificadas y profesionales. */
+@media(max-width:720px){
+ .mobileConnect{
+  position:relative;
+  overflow:hidden;
+  margin:0 16px 26px;
+  padding:26px 18px 18px;
+  border:1px solid rgba(190,137,29,.22);
+  border-radius:18px;
+  background:
+   radial-gradient(circle at 100% 0,rgba(219,165,45,.12),transparent 38%),
+   linear-gradient(145deg,#fffdf8,#f7f1e7);
+  box-shadow:0 14px 34px rgba(7,24,41,.09);
+ }
+ .mobileConnect::before{
+  content:"";
+  position:absolute;
+  top:0;left:18px;right:18px;
+  height:3px;
+  background:linear-gradient(90deg,#d8a52c,rgba(216,165,44,.12));
+ }
+ .mobileConnect h2{
+  margin:0 0 6px;
+  text-align:left;
+  font-size:1.8rem;
+ }
+ .mobileConnect h2::after{
+  content:"Recursos para crecer y mantenerse conectado";
+  display:block;
+  margin-top:7px;
+  color:#65717d;
+  font:500 .76rem/1.45 system-ui,sans-serif;
+ }
+ .connectGrid{
+  display:flex;
+  margin-top:17px;
+  flex-direction:column;
+  gap:0;
+  overflow:hidden;
+  border:1px solid rgba(7,24,41,.12);
+  border-radius:14px;
+  background:#fff;
+  box-shadow:0 9px 24px rgba(7,24,41,.07);
+ }
+ .connectGrid a{
+  position:relative;
+  display:grid;
+  grid-template-columns:58px minmax(0,1fr);
+  min-height:104px;
+  padding:17px 16px;
+  align-items:center;
+  justify-content:initial;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  color:#071829;
+  text-align:left;
+  text-decoration:none;
+ }
+ .connectGrid a+a{border-top:1px solid #e4e7ea}
+ .connectGrid a::after{
+  content:"›";
+  position:absolute;
+  right:15px;
+  top:50%;
+  color:#b77d12;
+  font:400 1.65rem/1 Georgia,serif;
+  transform:translateY(-50%);
+ }
+ .connectIcon,.youtubeLogo{
+  display:grid;
+  width:46px;
+  height:46px;
+  margin:0;
+  place-items:center;
+  border-radius:12px;
+ }
+ .connectIcon{
+  border:1px solid rgba(211,160,44,.42);
+  background:#082039;
+  color:#edbd4c;
+ }
+ .connectIcon svg{width:29px;height:29px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+ .youtubeLogo{
+  background:#fff;
+  box-shadow:0 3px 12px rgba(40,40,40,.1);
+ }
+ .youtubeLogo svg{width:42px;height:30px;fill:#ff0033}
+ .youtubeLogo .youtubePlay{fill:#fff}
+ .connectCopy{
+  display:flex;
+  min-width:0;
+  padding-right:22px;
+  flex-direction:column;
+ }
+ .connectCopy small{
+  order:0;
+  margin:0 0 3px;
+  color:#a16d0c;
+  font-size:.58rem;
+  font-weight:850;
+  letter-spacing:.13em;
+ }
+ .connectCopy strong{
+  order:1;
+  font-size:.92rem;
+  line-height:1.25;
+ }
+ .connectCopy b{
+  order:2;
+  margin-top:5px;
+  color:#536272;
+  font-size:.67rem;
+  font-weight:650;
+ }
+ .connectCopy b span{color:#b77d12}
+ .mobileConnect blockquote{
+  margin:14px 0 0;
+  border-radius:10px;
+  background:linear-gradient(120deg,#071a2d,#0c2b47);
+  box-shadow:inset 3px 0 #d9a52d;
+ }
+}

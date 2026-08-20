@@ -41,8 +41,14 @@ export default function Home(){
   <section className={styles.mobileConnect} aria-label="Conéctate con nosotros">
    <h2>Conéctate con nosotros</h2>
    <div className={styles.connectGrid}>
-    <a href={church.whatsappVideo} target="_blank" rel="noreferrer"><span className={styles.whatsappIcon}>☎</span><strong>Estudio bíblico</strong><small>Jueves 8–9 PM</small></a>
-    <a href={youtube.pastor.videos} target="_blank" rel="noreferrer"><span className={styles.youtubeIcon}>▶</span><strong>Mensajes en YouTube</strong><small>Vea las enseñanzas</small></a>
+    <a className={styles.studyAction} href={church.whatsappVideo} target="_blank" rel="noopener noreferrer" aria-label="Participar en el estudio bíblico virtual">
+     <span className={styles.connectIcon} aria-hidden="true"><svg viewBox="0 0 48 48" role="img"><path d="M8 11.5c6.2-2.1 11.6-1.2 16 2.6 4.4-3.8 9.8-4.7 16-2.6v25.2c-6-1.9-11.3-1-16 2.7-4.7-3.7-10-4.6-16-2.7V11.5Z"/><path d="M24 14.1v25.3M13 18c3.2-.6 5.8-.1 8 1.4M27 19.4c2.2-1.5 4.8-2 8-1.4M13 24c3.2-.6 5.8-.1 8 1.4M27 25.4c2.2-1.5 4.8-2 8-1.4"/></svg></span>
+     <span className={styles.connectCopy}><small>JUEVES · 8:00–9:00 PM</small><strong>Estudio bíblico virtual</strong><b>Participar por WhatsApp <span aria-hidden="true">→</span></b></span>
+    </a>
+    <a className={styles.youtubeAction} href={youtube.pastor.videos} target="_blank" rel="noopener noreferrer" aria-label="Ver los mensajes pastorales en YouTube">
+     <span className={styles.youtubeLogo} aria-hidden="true"><svg viewBox="0 0 68 48" role="img"><path d="M66.5 7.6a8.5 8.5 0 0 0-6-6C55.2 0 34 0 34 0S12.8 0 7.5 1.6a8.5 8.5 0 0 0-6 6C0 12.9 0 24 0 24s0 11.1 1.5 16.4a8.5 8.5 0 0 0 6 6C12.8 48 34 48 34 48s21.2 0 26.5-1.6a8.5 8.5 0 0 0 6-6C68 35.1 68 24 68 24s0-11.1-1.5-16.4Z"/><path className={styles.youtubePlay} d="m27 34 18-10-18-10v20Z"/></svg></span>
+     <span className={styles.connectCopy}><small>CANAL PASTORAL</small><strong>Mensajes en YouTube</strong><b>Ver las enseñanzas <span aria-hidden="true">→</span></b></span>
+    </a>
    </div>
    <blockquote>“Tu palabra es lámpara a mis pies” <cite>— Salmo 119:105</cite></blockquote>
   </section>

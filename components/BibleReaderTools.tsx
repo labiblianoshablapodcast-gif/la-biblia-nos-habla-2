@@ -5,6 +5,16 @@ import {useRouter} from "next/navigation";
 
 type Verse={number:number;text:string};
 
+function readStoredJson<T>(key:string,fallback:T):T{
+  try{
+    const value=localStorage.getItem(key);
+    return value?JSON.parse(value) as T:fallback;
+  }catch{
+    localStorage.removeItem(key);
+    return fallback;
+  }
+}
+
 export default function BibleReaderTools({
   bookName,bookSlug,chapter,verses,translationName="Reina-Valera Revisada 1960",translationKey="rvr60"
 }:{
@@ -22,9 +32,10 @@ export default function BibleReaderTools({
 
   useEffect(()=>{
     setDark(localStorage.getItem("bible-dark")==="1");
-    setFontSize(Number(localStorage.getItem("bible-font")||27));
-    setFavorites(JSON.parse(localStorage.getItem(`favorites-${key}`)||"[]"));
-    setNotes(JSON.parse(localStorage.getItem("bible-notes")||"{}"));
+    const storedFont=Number(localStorage.getItem("bible-font")||27);
+    setFontSize(Number.isFinite(storedFont)?Math.min(40,Math.max(20,storedFont)):27);
+    setFavorites(readStoredJson<number[]>(`favorites-${key}`,[]));
+    setNotes(readStoredJson<Record<string,string>>("bible-notes",{}));
     localStorage.setItem("last-bible-reading",JSON.stringify({
       bookName,bookSlug,chapter,translationKey,at:new Date().toISOString()
     }));

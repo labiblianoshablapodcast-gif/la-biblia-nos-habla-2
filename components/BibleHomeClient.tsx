@@ -12,7 +12,12 @@ export default function BibleHomeClient(){
 
   useEffect(()=>{
     const saved=localStorage.getItem("last-bible-reading");
-    if(saved) setLast(JSON.parse(saved));
+    if(!saved)return;
+    try{
+      setLast(JSON.parse(saved));
+    }catch{
+      localStorage.removeItem("last-bible-reading");
+    }
   },[]);
 
   const match=query.trim().match(/^(.+?)\s+(\d+)(?::(\d+))?$/);

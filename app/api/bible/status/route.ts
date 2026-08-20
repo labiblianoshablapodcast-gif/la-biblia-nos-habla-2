@@ -1,13 +1,13 @@
 import {NextResponse} from "next/server";
 export async function GET(){
  return NextResponse.json({
-  translation:"Reina-Valera 1909",
+  translation:"Reina-Valera Revisada 1960",
+  abbreviation:"RVR60",
   language:"es",
-  license:"Public Domain",
-  source:"eBible.org",
+  source:"Biblia.com · Logos Bible Software",
   books:66,
   chapters:1189,
-  features:["favorites","notes","last-reading","dark-mode","font-size","share"],
-  futureTranslation:"RVR1960 authorized"
+  configured:Boolean(process.env.BIBLIA_API_KEY),
+  features:["favorites","notes","last-reading","dark-mode","font-size","share","hebrew-greek-dictionary"]
  });
 }

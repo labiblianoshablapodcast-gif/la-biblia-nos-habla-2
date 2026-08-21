@@ -2,6 +2,7 @@ import Link from "next/link";
 import SignOutButton from "@/components/SignOutButton";
 import {createClient} from "@/lib/supabase/server";
 import {canAccessAdminPath} from "@/lib/admin-permissions";
+import AdminScrollReset from "@/components/AdminScrollReset";
 
 const sections=[
   ["Resumen","/admin","⌂"],
@@ -32,6 +33,7 @@ export default async function AdminNav(){
  );
 
  return <aside className="adminNav adminNavPro">
+  <AdminScrollReset/>
   <div className="adminBrand">
    <span>LB</span>
    <div><strong>Panel Pastoral</strong><small>La Biblia Nos Habla</small></div>

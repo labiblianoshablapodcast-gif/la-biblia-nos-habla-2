@@ -1,25 +1,39 @@
 "use client";
 
-import {useLayoutEffect} from "react";
-import {usePathname} from "next/navigation";
+import {useEffect} from "react";
 
 export default function AdminScrollReset(){
- const pathname=usePathname();
+ useEffect(()=>{
+  const goToPanelContent=()=>{
+   const main=document.querySelector<HTMLElement>(".adminMain");
+   if(!main)return;
 
- useLayoutEffect(()=>{
-  const main=document.querySelector<HTMLElement>(".adminMain");
-  if(!main)return;
+   main.scrollTop=0;
+   main.scrollLeft=0;
 
-  main.scrollTop=0;
-  main.scrollLeft=0;
+   if(window.matchMedia("(max-width: 900px)").matches){
+    const top=main.getBoundingClientRect().top+window.scrollY-12;
+    window.scrollTo(0,Math.max(0,top));
+   }else{
+    window.scrollTo(0,0);
+   }
+  };
 
-  if(window.matchMedia("(max-width: 900px)").matches){
-   const top=main.getBoundingClientRect().top+window.scrollY-12;
-   window.scrollTo(0,Math.max(0,top));
-  }else{
-   window.scrollTo(0,0);
-  }
- },[pathname]);
+  const handleAdminNavigation=(event:MouseEvent)=>{
+   if(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+
+   const target=event.target;
+   if(!(target instanceof Element))return;
+
+   const link=target.closest<HTMLAnchorElement>('a[href^="/admin"]');
+   if(!link)return;
+
+   goToPanelContent();
+  };
+
+  document.addEventListener("click",handleAdminNavigation,true);
+  return ()=>document.removeEventListener("click",handleAdminNavigation,true);
+ },[]);
 
  return null;
 }

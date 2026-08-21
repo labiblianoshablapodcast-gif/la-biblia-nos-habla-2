@@ -7,21 +7,29 @@ export default function AdminScrollReset(){
  const pathname=usePathname();
 
  useEffect(()=>{
-  const reset=()=>{
-   window.scrollTo({top:0,left:0,behavior:"auto"});
-   document.documentElement.scrollTop=0;
-   document.body.scrollTop=0;
+  const goToSelectedSection=()=>{
+   const main=document.querySelector<HTMLElement>(".adminMain");
+   if(!main)return;
 
-   document.querySelectorAll<HTMLElement>(".adminShell, .adminMain").forEach(element=>{
-    element.scrollTo({top:0,left:0,behavior:"auto"});
-   });
+   main.scrollTo({top:0,left:0,behavior:"auto"});
 
-   document.querySelector<HTMLElement>(".adminMain h1")?.focus({preventScroll:true});
+   const isStacked=window.matchMedia("(max-width: 900px)").matches;
+   if(isStacked){
+    const top=main.getBoundingClientRect().top+window.scrollY-12;
+    window.scrollTo({top:Math.max(0,top),left:0,behavior:"auto"});
+   }else{
+    window.scrollTo({top:0,left:0,behavior:"auto"});
+   }
   };
 
-  reset();
-  const frame=window.requestAnimationFrame(reset);
-  return ()=>window.cancelAnimationFrame(frame);
+  goToSelectedSection();
+  const frame=window.requestAnimationFrame(()=>window.requestAnimationFrame(goToSelectedSection));
+  const timer=window.setTimeout(goToSelectedSection,160);
+
+  return ()=>{
+   window.cancelAnimationFrame(frame);
+   window.clearTimeout(timer);
+  };
  },[pathname]);
 
  return null;

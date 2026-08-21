@@ -1,35 +1,24 @@
 "use client";
 
-import {useEffect} from "react";
+import {useLayoutEffect} from "react";
 import {usePathname} from "next/navigation";
 
 export default function AdminScrollReset(){
  const pathname=usePathname();
 
- useEffect(()=>{
-  const goToSelectedSection=()=>{
-   const main=document.querySelector<HTMLElement>(".adminMain");
-   if(!main)return;
+ useLayoutEffect(()=>{
+  const main=document.querySelector<HTMLElement>(".adminMain");
+  if(!main)return;
 
-   main.scrollTo({top:0,left:0,behavior:"auto"});
+  main.scrollTop=0;
+  main.scrollLeft=0;
 
-   const isStacked=window.matchMedia("(max-width: 900px)").matches;
-   if(isStacked){
-    const top=main.getBoundingClientRect().top+window.scrollY-12;
-    window.scrollTo({top:Math.max(0,top),left:0,behavior:"auto"});
-   }else{
-    window.scrollTo({top:0,left:0,behavior:"auto"});
-   }
-  };
-
-  goToSelectedSection();
-  const frame=window.requestAnimationFrame(()=>window.requestAnimationFrame(goToSelectedSection));
-  const timer=window.setTimeout(goToSelectedSection,160);
-
-  return ()=>{
-   window.cancelAnimationFrame(frame);
-   window.clearTimeout(timer);
-  };
+  if(window.matchMedia("(max-width: 900px)").matches){
+   const top=main.getBoundingClientRect().top+window.scrollY-12;
+   window.scrollTo(0,Math.max(0,top));
+  }else{
+   window.scrollTo(0,0);
+  }
  },[pathname]);
 
  return null;

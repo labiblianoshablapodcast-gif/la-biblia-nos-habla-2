@@ -1,8 +1,11 @@
 "use client";
 
 import {useEffect} from "react";
+import {useRouter} from "next/navigation";
 
 export default function AdminScrollReset(){
+ const router=useRouter();
+
  useEffect(()=>{
   const goToPanelContent=()=>{
    const main=document.querySelector<HTMLElement>(".adminMain");
@@ -28,12 +31,17 @@ export default function AdminScrollReset(){
    const link=target.closest<HTMLAnchorElement>('a[href^="/admin"]');
    if(!link)return;
 
+   event.preventDefault();
+   link.blur();
    goToPanelContent();
+
+   const href=link.getAttribute("href");
+   if(href)router.push(href,{scroll:false});
   };
 
   document.addEventListener("click",handleAdminNavigation,true);
   return ()=>document.removeEventListener("click",handleAdminNavigation,true);
- },[]);
+ },[router]);
 
  return null;
 }

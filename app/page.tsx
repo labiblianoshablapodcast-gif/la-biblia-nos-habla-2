@@ -50,7 +50,7 @@ export default async function Home(){
      <cite>{dailyVerse.reference}</cite>
      <Link href={dailyVerse.href}>Leer el capítulo <span aria-hidden="true">→</span></Link>
     </div>
-    <p className={styles.dailyVerseSource}>Texto provisto por Biblia.com · Logos Bible Software</p>
+    <p className={styles.dailyVerseSource}>{dailyVerse.source}</p>
    </div>
   </section>
 

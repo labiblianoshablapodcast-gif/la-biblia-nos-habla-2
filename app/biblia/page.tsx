@@ -41,6 +41,26 @@ export default function BibliaPage(){
       <span>Texto bíblico: Reina-Valera Revisada 1960. Este sitio utiliza los servicios web de <a href="https://biblia.com/" target="_blank" rel="noreferrer">Biblia</a> de <a href="https://www.logos.com/" target="_blank" rel="noreferrer">Logos Bible Software</a>.</span>
     </div>
 
+    <section className={styles.studyPlan} aria-labelledby="daily-devotional-title">
+      <div className={styles.planIntro}>
+        <p>Una palabra para hoy</p>
+        <h2 id="daily-devotional-title">Meditación del día de hoy</h2>
+        <span>Lea una reflexión bíblica acompañada de su fecha, versículo y oración final.</span>
+        <Link href="/devocionales">Leer la meditación <b aria-hidden="true">→</b></Link>
+      </div>
+      <div className={styles.planDays}>
+        {[
+          ["Leer","La Palabra","Escuche lo que Dios quiere enseñarle"],
+          ["Meditar","La reflexión","Aplique la verdad a su vida"],
+          ["Orar","La respuesta","Termine hablando con el Señor"]
+        ].map(([step,title,description])=><Link key={step} href="/devocionales">
+          <span>{step}</span>
+          <strong>{title}</strong>
+          <small>{description}</small>
+        </Link>)}
+      </div>
+    </section>
+
     <section className={styles.studyPlan} aria-labelledby="qeqchi-title">
       <div className={styles.planIntro}>
         <p>Nuevo · Idioma de Guatemala</p>

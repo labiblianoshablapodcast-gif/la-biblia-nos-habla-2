@@ -1,4 +1,5 @@
 import {createClient} from "@/lib/supabase/server";
+import {books,getChapter} from "@/lib/bible";
 import styles from "./devocionales.module.css";
 
 export const dynamic="force-dynamic";
@@ -13,6 +14,16 @@ type Devotional={
   created_at:string;
 };
 
+const dailyPassages=[
+  ["PSA",23,1],["PHP",4,13],["JER",29,11],["ISA",41,10],["PRO",3,5],
+  ["ROM",8,28],["PSA",46,1],["JHN",3,16],["MAT",11,28],["JOS",1,9],
+  ["PSA",119,105],["2CO",5,17],["HEB",11,1],["PSA",34,8],["ISA",40,31],
+  ["PHP",4,6],["ROM",12,2],["MAT",6,33],["PSA",37,5],["GAL",2,20],
+  ["1PE",5,7],["JHN",14,6],["PSA",121,1],["EPH",2,8],["PRO",18,10],
+  ["ROM",5,8],["PSA",91,1],["JHN",8,12],["LAM",3,22],["REV",21,4],
+  ["PSA",118,24]
+] as const;
+
 function formatDate(value:Date|string){
   return new Intl.DateTimeFormat("es-US",{
     weekday:"long",
@@ -21,6 +32,14 @@ function formatDate(value:Date|string){
     year:"numeric",
     timeZone:"America/New_York"
   }).format(new Date(value));
+}
+
+function getNewYorkDay(value:Date){
+  const parts=new Intl.DateTimeFormat("en-US",{
+    year:"numeric",month:"numeric",day:"numeric",timeZone:"America/New_York"
+  }).formatToParts(value);
+  const valueOf=(type:string)=>Number(parts.find(part=>part.type===type)?.value);
+  return Math.floor(Date.UTC(valueOf("year"),valueOf("month")-1,valueOf("day"))/86_400_000);
 }
 
 export default async function DevocionalesPage(){
@@ -36,7 +55,14 @@ export default async function DevocionalesPage(){
   const devotionals=(data??[]) as Devotional[];
   const featured=devotionals[0];
   const recent=devotionals.slice(1);
-  const today=formatDate(new Date());
+  const now=new Date();
+  const today=formatDate(now);
+  const [dailyCode,dailyChapter,dailyNumber]=dailyPassages[getNewYorkDay(now)%dailyPassages.length];
+  const dailyChapterText=await getChapter(dailyCode,dailyChapter);
+  const dailyVerse=dailyChapterText?.verses.find(verse=>verse.number===dailyNumber);
+  const dailyBook=books.find(book=>book.code===dailyCode);
+  const dailyReference=`${dailyBook?.name ?? dailyChapterText?.book ?? "Biblia"} ${dailyChapter}:${dailyNumber}`;
+  const scripture=dailyVerse?.text || featured?.scripture;
 
   return <main className={styles.page}>
     <section className={styles.hero}>
@@ -48,17 +74,18 @@ export default async function DevocionalesPage(){
     </section>
 
     <section className={styles.content}>
-      {featured ? <article className={styles.devotional}>
+      {(scripture || featured) ? <article className={styles.devotional}>
         <div className={styles.mainCopy}>
           <span className={styles.badge}>{today}</span>
-          <h2>{featured.title}</h2>
-          <blockquote className={styles.scripture}>{featured.scripture || "El texto bíblico de hoy será publicado muy pronto."}</blockquote>
-          <p className={styles.reflection}>{featured.reflection}</p>
+          <h2>{dailyReference}</h2>
+          <blockquote className={styles.scripture}>{scripture || "El texto bíblico de hoy será publicado muy pronto."}</blockquote>
+          <p className={styles.reflection}>{featured?.reflection || "Lea este texto con calma, medite en lo que Dios quiere hablar a su vida y guarde su Palabra en el corazón durante este día."}</p>
+          {dailyVerse && <p className={styles.source}>Reina-Valera Revisada 1960 · Texto provisto por <a href="https://biblia.com/" target="_blank" rel="noreferrer">Biblia.com</a> y Logos Bible Software.</p>}
         </div>
         <aside className={styles.prayer}>
           <span>Para terminar</span>
           <h3>Oremos juntos</h3>
-          <p>{featured.prayer || "Señor, permite que tu Palabra permanezca en nuestro corazón y dirija cada paso de este día. Amén."}</p>
+          <p>{featured?.prayer || "Señor, permite que tu Palabra permanezca en nuestro corazón y dirija cada paso de este día. Amén."}</p>
         </aside>
       </article> : <div className={styles.empty}>
         <h2>Texto de hoy para meditar</h2>

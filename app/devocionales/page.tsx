@@ -41,8 +41,8 @@ export default async function DevocionalesPage(){
   return <main className={styles.page}>
     <section className={styles.hero}>
       <div className={styles.heroInner}>
-        <p className={styles.eyebrow}>Una palabra para su vida</p>
-        <h1>Meditación del día de hoy</h1>
+        <p className={styles.eyebrow}>Versículo de hoy</p>
+        <h1>Texto de hoy para meditar</h1>
         <p className={styles.date}>{today}</p>
       </div>
     </section>
@@ -50,9 +50,9 @@ export default async function DevocionalesPage(){
     <section className={styles.content}>
       {featured ? <article className={styles.devotional}>
         <div className={styles.mainCopy}>
-          <span className={styles.badge}>{featured.featured ? "Meditación destacada" : "Reflexión bíblica"}</span>
+          <span className={styles.badge}>{today}</span>
           <h2>{featured.title}</h2>
-          {featured.scripture && <blockquote className={styles.scripture}>{featured.scripture}</blockquote>}
+          <blockquote className={styles.scripture}>{featured.scripture || "El texto bíblico de hoy será publicado muy pronto."}</blockquote>
           <p className={styles.reflection}>{featured.reflection}</p>
         </div>
         <aside className={styles.prayer}>
@@ -61,8 +61,8 @@ export default async function DevocionalesPage(){
           <p>{featured.prayer || "Señor, permite que tu Palabra permanezca en nuestro corazón y dirija cada paso de este día. Amén."}</p>
         </aside>
       </article> : <div className={styles.empty}>
-        <h2>Muy pronto compartiremos la meditación de hoy.</h2>
-        <p>Mientras tanto, continúe leyendo y guardando la Palabra de Dios en su corazón.</p>
+        <h2>Texto de hoy para meditar</h2>
+        <p>{today}. El texto bíblico de hoy será publicado muy pronto.</p>
       </div>}
 
       {recent.length>0 && <section className={styles.recent} aria-labelledby="recent-devotionals">

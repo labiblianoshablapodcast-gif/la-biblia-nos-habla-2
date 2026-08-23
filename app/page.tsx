@@ -6,7 +6,7 @@ import styles from "./home.module.css";
 
 const quickLinks=[
  {icon:"▤",title:"Leer la Biblia",text:"Acceda a los libros y encuentre una palabra para hoy.",href:"/biblia",image:"/images/biblia-abierta-portada.png",alt:"Biblia abierta sobre una mesa"},
- {icon:"☀",title:"Meditación del día de hoy",text:"Reciba una reflexión bíblica con su fecha, versículo y oración.",href:"/devocionales",image:"/images/biblia-abierta-portada.png",alt:"Biblia abierta para la meditación diaria"},
+ {icon:"☀",title:"Texto de hoy para meditar",text:"Vea el día, la fecha y el versículo preparado para hoy.",href:"/devocionales",image:"/images/biblia-abierta-portada.png",alt:"Biblia abierta para la meditación diaria"},
  {icon:"♢",title:"Pedir oración",text:"Comparta su necesidad con nuestro equipo pastoral.",href:"/conexion",image:"/images/manos-orando-conexion-v2.png",alt:"Manos unidas en oración"},
  {icon:"✦",title:"Nuevos creyentes",text:"Si aceptó a Cristo, queremos acompañarle en su próximo paso.",href:"/primeros-pasos",image:"/images/nuevos-creyentes-discipulado.jpg",alt:"Nuevo creyente leyendo la Biblia acompañado por un mentor cristiano"},
  {icon:"⌂",title:"Nuestra iglesia",text:"Conozca quiénes somos, nuestros horarios y ubicación.",href:"/iglesia",image:"/images/iglesia-principe-de-paz-congregacion.jpeg",alt:"Congregación de la Iglesia Príncipe de Paz"},

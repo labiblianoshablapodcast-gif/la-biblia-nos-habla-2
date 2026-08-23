@@ -8,6 +8,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileNav from "@/components/MobileNav";
 import GlobalPhotoViewer from "@/components/GlobalPhotoViewer";
+import { Analytics } from '@vercel/analytics/next';
 
 export const viewport = {
   themeColor: "#071829",
@@ -32,5 +33,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({children}:{children:React.ReactNode}) {
-  return <html lang="es"><body><a className="skipLink" href="#contenido-principal">Saltar al contenido principal</a><Header/><main id="contenido-principal">{children}</main><Footer/><MobileNav/><GlobalPhotoViewer/><RegisterServiceWorker/></body></html>;
+  return <html lang="es"><body><a className="skipLink" href="#contenido-principal">Saltar al contenido principal</a><Header/><main id="contenido-principal">{children}</main><Footer/><MobileNav/><GlobalPhotoViewer/><RegisterServiceWorker/><Analytics/></body></html>;
 }

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {church} from "@/data/church";
 import {youtube} from "@/data/youtube";
+import {getDailyVerse} from "@/lib/daily-verse";
 import styles from "./home.module.css";
 
 const quickLinks=[
@@ -12,7 +13,9 @@ const quickLinks=[
  {icon:"◎",title:"Misiones",text:"Vea cómo compartimos el Evangelio y servimos a comunidades.",href:"/misiones",image:"/images/misiones/lanquin-2026-comunidad-02.jpg",alt:"Comunidad reunida durante la misión en Lanquín"}
 ];
 
-export default function Home(){
+export default async function Home(){
+ const dailyVerse=await getDailyVerse();
+
  return <main className={styles.home}>
   <section className={styles.hero}>
    <div className={styles.heroPortrait}><Image className={styles.heroImage} src="/images/pastor-y-yudelka-hero-v2.png" alt="Pastores Gilberto y Yudelka Maldonado" fill priority sizes="100vw"/></div>
@@ -26,6 +29,28 @@ export default function Home(){
      <Link className={styles.goldButton} href="/biblia">▤&nbsp; Leer la Biblia</Link>
      <Link className={styles.outlineButton} href="/conexion">♢&nbsp; Necesito oración</Link>
     </div>
+   </div>
+  </section>
+
+  <section className={styles.dailyVerse} aria-labelledby="daily-verse-title">
+   <div className={styles.dailyVerseOrnament} aria-hidden="true">
+    <span>✦</span>
+    <small>UNA PALABRA PARA HOY</small>
+   </div>
+   <div className={styles.dailyVerseContent}>
+    <div className={styles.dailyVerseHeading}>
+     <div>
+      <p className={styles.dailyVerseEyebrow}>TEXTO DEL DÍA</p>
+      <h2 id="daily-verse-title">{dailyVerse.dateLabel}</h2>
+     </div>
+     <span className={styles.dailyVerseEdition}>{dailyVerse.translation==="RVR60" ? "Reina-Valera 1960" : "Reina-Valera 1909"}</span>
+    </div>
+    <blockquote className={styles.dailyVerseQuote}>“{dailyVerse.text}”</blockquote>
+    <div className={styles.dailyVerseFooter}>
+     <cite>{dailyVerse.reference}</cite>
+     <Link href={dailyVerse.href}>Leer el capítulo <span aria-hidden="true">→</span></Link>
+    </div>
+    <p className={styles.dailyVerseSource}>Texto provisto por Biblia.com · Logos Bible Software</p>
    </div>
   </section>
 

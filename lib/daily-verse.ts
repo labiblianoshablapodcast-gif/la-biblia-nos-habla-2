@@ -13,6 +13,7 @@ export type DailyVerse = {
   href:string;
   dateLabel:string;
   translation:"RVR60" | "RVR1909";
+  source:string;
 };
 
 const DAILY_REFERENCES:DailyReference[]=[
@@ -76,6 +77,9 @@ export async function getDailyVerse(now=new Date()):Promise<DailyVerse>{
     reference:`${book?.name ?? reference.code} ${reference.chapter}:${reference.verse}`,
     href:`/biblia/${book?.slug ?? "salmos"}/${reference.chapter}`,
     dateLabel,
-    translation:verse ? "RVR60" : "RVR1909"
+    translation:verse ? "RVR60" : "RVR1909",
+    source:verse
+      ? "Texto provisto por Biblia.com · Logos Bible Software"
+      : "Texto de respaldo · Reina-Valera 1909 · dominio público"
   };
 }

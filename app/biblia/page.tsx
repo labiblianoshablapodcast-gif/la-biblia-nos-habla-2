@@ -43,10 +43,10 @@ export default function BibliaPage(){
 
     <section className={styles.studyPlan} aria-labelledby="daily-devotional-title">
       <div className={styles.planIntro}>
-        <p>Una palabra para hoy</p>
-        <h2 id="daily-devotional-title">Meditación del día de hoy</h2>
-        <span>Lea una reflexión bíblica acompañada de su fecha, versículo y oración final.</span>
-        <Link href="/devocionales">Leer la meditación <b aria-hidden="true">→</b></Link>
+        <p>Versículo de hoy</p>
+        <h2 id="daily-devotional-title">Texto de hoy para meditar</h2>
+        <span>Vea el día, la fecha y el texto bíblico preparado para su meditación.</span>
+        <Link href="/devocionales">Leer el texto de hoy <b aria-hidden="true">→</b></Link>
       </div>
       <div className={styles.planDays}>
         {[

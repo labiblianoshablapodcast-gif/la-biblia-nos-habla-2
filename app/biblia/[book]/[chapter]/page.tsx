@@ -35,9 +35,9 @@ export default async function ChapterPage({
   </section>
 
   <section className="section bibleReader">
-    <div className="toolbar" aria-label="Seleccionar versión de la Biblia">
-      <Link className={version==="rvr60"?"btn":"btn secondary"} href={`/biblia/${book.slug}/${chapter}`}>Español · RVR1960</Link>
-      <Link className={version==="qeqchi"?"btn":"btn secondary"} href={`/biblia/${book.slug}/${chapter}?version=qeqchi`}>Q’eqchi’ · Li Santil Hu</Link>
+    <div className="toolbar bibleVersionSwitcher" aria-label="Seleccionar versión de la Biblia">
+      <Link className={version==="rvr60"?"btn bibleVersionActive":"btn secondary bibleVersionInactive"} href={`/biblia/${book.slug}/${chapter}`}>Español · RVR1960</Link>
+      <Link className={version==="qeqchi"?"btn bibleVersionActive":"btn secondary bibleVersionInactive"} href={`/biblia/${book.slug}/${chapter}?version=qeqchi`}>Q’eqchi’ · Li Santil Hu</Link>
     </div>
 
     <ChapterControls slug={book.slug} chapter={chapter} total={book.chapters} query={versionQuery}/>

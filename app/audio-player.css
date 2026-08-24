@@ -1,0 +1,11 @@
+.bibleAudioCard{
+  margin:18px 0 22px;
+  padding:18px;
+  border:1px solid rgba(215,170,75,.42);
+  border-radius:22px;
+  background:linear-gradient(145deg,#071829,#0d2a42);
+  color:#fff;
+  box-shadow:0 16px 36px rgba(5,24,39,.18);
+}
+.bibleAudioHeader{display:flex;align-items:center;gap:12px}.bibleAudioHeader>div:nth-child(2){display:flex;flex-direction:column;gap:2px;min-width:0}.bibleAudioHeader small{font-size:.68rem;letter-spacing:.16em;color:#d7aa4b;font-weight:800}.bibleAudioHeader strong{font-size:1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bibleAudioIcon{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:rgba(215,170,75,.12);font-size:1.35rem}.bibleAudioBadge{margin-left:auto;border:1px solid rgba(215,170,75,.55);border-radius:999px;padding:6px 10px;font-size:.72rem;color:#f1d797}.bibleAudioControls{display:grid;grid-template-columns:42px 56px 42px 1fr 44px;align-items:center;gap:10px;margin-top:16px}.bibleAudioControls button{border:0;cursor:pointer}.audioSkip,.audioSpeed{height:42px;border-radius:13px;background:rgba(255,255,255,.09);color:#fff;font-weight:800}.audioPlay{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#e0b454,#c8932b);color:#071829;font-size:1.15rem;box-shadow:0 8px 22px rgba(215,170,75,.26)}.bibleAudioControls button:disabled{opacity:.72;cursor:not-allowed}.audioProgress{height:5px;border-radius:999px;background:rgba(255,255,255,.18);overflow:hidden}.audioProgress span{display:block;width:0;height:100%;background:#d7aa4b}.bibleAudioStatus{margin:12px 0 0;color:rgba(255,255,255,.66);font-size:.78rem;line-height:1.45}.darkReader .bibleAudioCard{background:linear-gradient(145deg,#09141d,#122333)}
+@media(max-width:700px){.bibleAudioCard{padding:15px;border-radius:18px}.bibleAudioControls{grid-template-columns:38px 52px 38px 1fr;gap:8px}.audioSpeed{display:none}.audioPlay{width:52px;height:52px}.bibleAudioHeader strong{font-size:.94rem}.bibleAudioStatus{font-size:.75rem}}

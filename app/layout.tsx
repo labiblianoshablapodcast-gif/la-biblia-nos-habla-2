@@ -8,6 +8,7 @@ import "./site-style-v12.css";
 import "./app-experience.css";
 import "./mobile-app-header.css";
 import "./bible-reader-contrast.css";
+import "./audio-player.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileNav from "@/components/MobileNav";

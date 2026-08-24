@@ -64,6 +64,15 @@ export default function Home(){
    </Link>)}
   </section>
 
+  <section className={styles.mobileChurchCard} aria-label="Oración">
+   <span className={styles.mobilePin}>♢</span>
+   <p className={styles.eyebrow}>ORACIÓN</p>
+   <h2>No tiene que caminar solo.</h2>
+   <p>Comparta su petición con confianza. Queremos orar por usted y acompañarle con cuidado.</p>
+   <p><strong>“Orad sin cesar.”</strong><br/>1 Tesalonicenses 5:17</p>
+   <Link className={styles.goldButton} href="/conexion">Enviar mi petición de oración</Link>
+  </section>
+
   <section className={styles.churchPanel}>
    <a className={styles.locationCard} href={church.mapsUrl} target="_blank" rel="noreferrer" aria-label="Abrir la ubicación de Iglesia Príncipe de Paz en Google Maps">
     <span className={styles.locationPin}>⌖</span>

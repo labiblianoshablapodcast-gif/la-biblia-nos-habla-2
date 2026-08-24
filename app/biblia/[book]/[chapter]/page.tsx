@@ -27,7 +27,9 @@ export default async function ChapterPage({
    ? await getQeqchiChapter(book.code,chapter)
    : await getChapter(book.code,chapter);
  const versionQuery=version==="qeqchi"?"?version=qeqchi":"";
- const translationName=version==="qeqchi"?"Li Santil Hu · Q’eqchi’":"Reina-Valera Revisada 1960";
+ const translationName=version==="qeqchi"
+   ? (qeqchiAvailable?"Li Santil Hu · Q’eqchi’":"Q’eqchi’ · Antiguo Testamento")
+   : "Reina-Valera Revisada 1960";
 
  return <>
   <section className="pageHero bibleChapterHero">
@@ -47,9 +49,10 @@ export default async function ChapterPage({
     {version==="qeqchi" && !qeqchiAvailable ? (
       <div className="notice">
         <strong>Antiguo Testamento en Q’eqchi’</strong>
-        <p>El Antiguo Testamento Q’eqchi’ está disponible ahora mediante Scripture Earth (Kekchí, ortografía tradicional). Mientras obtenemos una fuente autorizada para alojarlo directamente, puede leerlo desde este acceso oficial.</p>
-        <a className="btn" href={QEQCHI_AT_URL} target="_blank" rel="noreferrer">Leer Antiguo Testamento Q’eqchi’ ↗</a>
-        <p><small>Fuente externa: Scripture Earth · código de idioma kek. El Nuevo Testamento Li Santil Hu continúa disponible directamente en esta app.</small></p>
+        <p>Ahora puede leer el Antiguo Testamento dentro de la app mediante un visor integrado de Scripture Earth. El texto permanece alojado por la fuente original.</p>
+        <Link className="btn" href="/biblia/qeqchi-at">Leer aquí en la app</Link>
+        <a className="btn secondary" href={QEQCHI_AT_URL} target="_blank" rel="noreferrer">Abrir fuente original ↗</a>
+        <p><small>Fuente: Scripture Earth · código de idioma kek. El Nuevo Testamento Li Santil Hu continúa disponible directamente en esta app.</small></p>
       </div>
     ) : bibleChapter ? (
       <BibleReaderTools
@@ -75,7 +78,7 @@ export default async function ChapterPage({
         {qeqchiAvailable ? <p><strong>Li Santil Hu — Nuevo Testamento en Q’eqchi’ [kek], Guatemala.</strong><br/>
         © 2000 Wycliffe Bible Translators, Inc. Texto compartido sin modificaciones bajo licencia
         <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noreferrer"> CC BY-NC-ND 4.0</a>.
-        Fuente: <a href="https://ebible.org/kekNT/" target="_blank" rel="noreferrer">eBible.org</a>.</p> : <p><strong>Antiguo Testamento Q’eqchi’.</strong><br/>Acceso de lectura provisto mediante <a href={QEQCHI_AT_URL} target="_blank" rel="noreferrer">Scripture Earth</a>. El texto del AT no se copia ni se almacena en nuestros servidores.</p>}
+        Fuente: <a href="https://ebible.org/kekNT/" target="_blank" rel="noreferrer">eBible.org</a>.</p> : <p><strong>Antiguo Testamento Q’eqchi’.</strong><br/>Lectura integrada mediante <Link href="/biblia/qeqchi-at">Scripture Earth</Link>. El texto del AT no se copia ni se almacena en nuestros servidores.</p>}
       </div>
     ) : (
       <div className="bibliaAttribution">

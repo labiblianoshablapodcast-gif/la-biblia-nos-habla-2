@@ -1,0 +1,7 @@
+/* Ajuste final aprobado: hace visible antes el buscador sin cambiar el diseño. */
+@media (display-mode: standalone) and (max-width: 600px) {
+  [class*="biblia_hero__"] { min-height: 560px !important; }
+  [class*="biblia_heroCopy__"] { min-height: 560px !important; padding-top: 32px !important; padding-bottom: 28px !important; }
+  [class*="biblia_heroImage__"] { min-height: 560px !important; }
+  [class*="biblia_heroDetails__"] { margin-top: 26px !important; padding-top: 20px !important; }
+}

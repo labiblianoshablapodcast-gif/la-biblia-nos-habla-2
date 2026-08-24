@@ -3,6 +3,7 @@ import Image from "next/image";
 import BibleHomeClient from "@/components/BibleHomeClient";
 import {books} from "@/lib/bible";
 import styles from "./biblia.module.css";
+import "./mobile-hero-refinement.css";
 
 const johnPlan=[
  "Jesús, la Palabra de vida","El primer milagro","Nacer de nuevo","Agua viva","El Hijo que da vida","Jesús, el Pan de vida","Ríos de agua viva",

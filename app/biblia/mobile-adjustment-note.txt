@@ -1,0 +1,1 @@
+Reduce hero height in standalone mobile mode.

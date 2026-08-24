@@ -7,6 +7,8 @@ import {getBook,getChapter,getQeqchiChapter,hasQeqchiBook,chapterUrl,qeqchiChapt
 
 type Version="rvr60"|"qeqchi";
 
+const QEQCHI_AT_URL="https://scriptureearth.org/00spa.php?idx=264&iso_code=kek&language=Kekch%C3%AD";
+
 export default async function ChapterPage({
  params,searchParams
 }:{
@@ -44,9 +46,10 @@ export default async function ChapterPage({
 
     {version==="qeqchi" && !qeqchiAvailable ? (
       <div className="notice">
-        <strong>Esta edición Q’eqchi’ contiene el Nuevo Testamento.</strong>
-        <p>Seleccione Mateo, Marcos, Lucas, Juan u otro libro del Nuevo Testamento. La RVR1960 permanece disponible para los 66 libros.</p>
-        <Link className="btn" href="/biblia/mateo/1?version=qeqchi">Comenzar en Mateo</Link>
+        <strong>Antiguo Testamento en Q’eqchi’</strong>
+        <p>El Antiguo Testamento Q’eqchi’ está disponible ahora mediante Scripture Earth (Kekchí, ortografía tradicional). Mientras obtenemos una fuente autorizada para alojarlo directamente, puede leerlo desde este acceso oficial.</p>
+        <a className="btn" href={QEQCHI_AT_URL} target="_blank" rel="noreferrer">Leer Antiguo Testamento Q’eqchi’ ↗</a>
+        <p><small>Fuente externa: Scripture Earth · código de idioma kek. El Nuevo Testamento Li Santil Hu continúa disponible directamente en esta app.</small></p>
       </div>
     ) : bibleChapter ? (
       <BibleReaderTools
@@ -69,10 +72,10 @@ export default async function ChapterPage({
 
     {version==="qeqchi" ? (
       <div className="bibliaAttribution">
-        <p><strong>Li Santil Hu — Nuevo Testamento en Q’eqchi’ [kek], Guatemala.</strong><br/>
+        {qeqchiAvailable ? <p><strong>Li Santil Hu — Nuevo Testamento en Q’eqchi’ [kek], Guatemala.</strong><br/>
         © 2000 Wycliffe Bible Translators, Inc. Texto compartido sin modificaciones bajo licencia
         <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noreferrer"> CC BY-NC-ND 4.0</a>.
-        Fuente: <a href="https://ebible.org/kekNT/" target="_blank" rel="noreferrer">eBible.org</a>.</p>
+        Fuente: <a href="https://ebible.org/kekNT/" target="_blank" rel="noreferrer">eBible.org</a>.</p> : <p><strong>Antiguo Testamento Q’eqchi’.</strong><br/>Acceso de lectura provisto mediante <a href={QEQCHI_AT_URL} target="_blank" rel="noreferrer">Scripture Earth</a>. El texto del AT no se copia ni se almacena en nuestros servidores.</p>}
       </div>
     ) : (
       <div className="bibliaAttribution">

@@ -1,5 +1,5 @@
 import books from "@/data/bible-books.json";
-import {getLocalQeqchiVerses} from "@/lib/qeqchi-data";
+import {getLocalQeqchiVerses,hasLocalQeqchiBook} from "@/lib/qeqchi-data";
 
 export type BibleBook = typeof books[number];
 export type BibleVerse = { number:number; text:string };
@@ -29,18 +29,12 @@ const BIBLIA_BOOKS:Record<string,string>={
   "3JN":"3 John",JUD:"Jude",REV:"Revelation"
 };
 
-const QEQCHI_BOOK_CODES=new Set([
-  "MAT","MRK","LUK","JHN","ACT","ROM","1CO","2CO","GAL","EPH","PHP","COL",
-  "1TH","2TH","1TI","2TI","TIT","PHM","HEB","JAS","1PE","2PE","1JN","2JN",
-  "3JN","JUD","REV"
-]);
-
 export function getBook(slug:string): BibleBook | undefined {
   return books.find((book)=>book.slug===slug);
 }
 
 export function hasQeqchiBook(code:string){
-  return QEQCHI_BOOK_CODES.has(code);
+  return hasLocalQeqchiBook(code);
 }
 
 export function chapterUrl(code:string, chapter:number) {
@@ -48,8 +42,8 @@ export function chapterUrl(code:string, chapter:number) {
   return `https://biblia.com/bible/rvr60/${encodeURIComponent(book)}/${chapter}`;
 }
 
-export function qeqchiChapterUrl(code:string,chapter:number){
-  return `https://ebible.org/kekNT/${code}${String(chapter).padStart(2,"0")}.htm`;
+export function qeqchiChapterUrl(_code:string,_chapter:number){
+  return "https://scriptureearth.org/00spa.php?idx=264&iso_code=kek&language=Kekch%C3%AD";
 }
 
 function parseVerses(text:string):BibleVerse[]{
@@ -61,55 +55,6 @@ function parseVerses(text:string):BibleVerse[]{
       .replace(/\s+/g," ")
       .trim();
     if(clean)verses.push({number:Number(match[1]),text:clean});
-  }
-  return verses;
-}
-
-function decodeHtml(text:string){
-  const named:Record<string,string>={
-    amp:"&",lt:"<",gt:">",quot:'"',apos:"'",nbsp:" "
-  };
-  return text
-    .replace(/&#x([0-9a-f]+);/gi,(_,hex)=>String.fromCodePoint(Number.parseInt(hex,16)))
-    .replace(/&#(\d+);/g,(_,decimal)=>String.fromCodePoint(Number(decimal)))
-    .replace(/&([a-z]+);/gi,(entity,name)=>named[name.toLowerCase()] ?? entity);
-}
-
-function parseQeqchiVerses(html:string):BibleVerse[]{
-  // Haiola/eBible usa marcadores id="V1" (a veces en enlaces u otros
-  // elementos), no necesariamente un span con la clase "verse".
-  let marked=html
-    .replace(/<[^>]+\bid=["']V(\d+)(?:_[^"']*)?["'][^>]*>/gi,"<<<VERSE:$1>>>")
-    .replace(/<[^>]+\bname=["']V(\d+)(?:_[^"']*)?["'][^>]*>/gi,"<<<VERSE:$1>>>");
-
-  // Compatibilidad con otras salidas de Haiola.
-  if(!marked.includes("<<<VERSE:")){
-    marked=html.replace(/<[^>]+\bdata-number=["'](\d+)["'][^>]*>/gi,"<<<VERSE:$1>>>");
-  }
-
-  const first=marked.indexOf("<<<VERSE:");
-  if(first<0)return [];
-
-  const scripture=decodeHtml(
-    marked
-      .slice(first)
-      .split(/<hr\b|copyright|©\s*2000|\bContents\b/i)[0]
-      .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi," ")
-      .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi," ")
-      .replace(/<[^>]+>/g," ")
-  );
-
-  const verses:BibleVerse[]=[];
-  const marker=/<<<VERSE:(\d+)>>>([\s\S]*?)(?=<<<VERSE:\d+>>>|$)/g;
-  for(const match of scripture.matchAll(marker)){
-    const number=Number(match[1]);
-    const clean=match[2]
-      .replace(/^\s*\d+\s*/, "")
-      .replace(/\s+/g," ")
-      .trim();
-    if(clean && verses.at(-1)?.number!==number){
-      verses.push({number,text:clean});
-    }
   }
   return verses;
 }
@@ -169,6 +114,6 @@ export async function getQeqchiChapter(code:string,chapter:number):Promise<Bible
     book:BIBLIA_BOOKS[code] ?? code,
     chapter,
     verses,
-    source:"Li Santil Hu · Nuevo Testamento en Q’eqchi’ · © 2000 Wycliffe Bible Translators"
+    source:"Li Santil Hu · Biblia completa en Q’eqchi’ (ortografía tradicional) · © 1988–2019 Wycliffe Bible Translators, Inc. · CC BY-NC-ND 4.0"
   };
 }

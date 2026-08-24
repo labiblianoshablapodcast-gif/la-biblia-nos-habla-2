@@ -15,7 +15,6 @@ EPUB_NAME = "KekchiBible_epub3.epub"
 OUT_DIR = Path("data/qeqchi")
 MODULE_PATH = Path("lib/qeqchi-data.ts")
 
-# Códigos que usa nuestra aplicación, en el mismo orden de los 66 libros del EPUB.
 CODES = [
     "GEN","EXO","LEV","NUM","DEU","JOS","JDG","RUT","1SA","2SA","1KI","2KI","1CH","2CH","EZR","NEH","EST","JOB","PSA","PRO","ECC","SNG","ISA","JER","LAM","EZK","DAN","HOS","JOL","AMO","OBA","JON","MIC","NAM","HAB","ZEP","HAG","ZEC","MAL",
     "MAT","MRK","LUK","JHN","ACT","ROM","1CO","2CO","GAL","EPH","PHP","COL","1TH","2TH","1TI","2TI","TIT","PHM","HEB","JAS","1PE","2PE","1JN","2JN","3JN","JUD","REV",
@@ -35,18 +34,12 @@ def request_bytes(url: str) -> bytes:
 def discover_epub_url() -> str:
     html = request_bytes(SOURCE_PAGE).decode("utf-8", "replace")
     candidates: list[str] = []
-
-    # Enlace explícito en href/src.
     for match in re.findall(r'''(?:href|src)=["']([^"']+)["']''', html, flags=re.I):
         decoded = urllib.parse.unquote(match)
         if ".epub" in decoded.lower() or EPUB_NAME.lower() in decoded.lower():
             candidates.append(urllib.parse.urljoin(SOURCE_PAGE, match))
-
-    # Si el nombre aparece en JavaScript, captura la ruta alrededor de él.
     for match in re.findall(r'''["']([^"']*KekchiBible_epub3\.epub[^"']*)["']''', html, flags=re.I):
         candidates.append(urllib.parse.urljoin(SOURCE_PAGE, match))
-
-    # Rutas de respaldo usadas históricamente por Scripture Earth.
     candidates.extend([
         f"https://www.scriptureearth.org/data/kek/{EPUB_NAME}",
         f"https://www.scriptureearth.org/data/kek/epub/{EPUB_NAME}",
@@ -67,13 +60,31 @@ def discover_epub_url() -> str:
                 return url
         except Exception as exc:
             print(f"No funcionó {url}: {exc}")
-
-    raise RuntimeError("No se pudo localizar el EPUB de Scripture Earth. Revise la página fuente o la ruta del archivo.")
+    raise RuntimeError("No se pudo localizar el EPUB de Scripture Earth.")
 
 
 def clean_text(value: str) -> str:
-    # Solo compacta espacios de maquetación; no cambia palabras ni puntuación.
     return re.sub(r"\s+", " ", value).strip()
+
+
+def is_editorial_node(node: NavigableString) -> bool:
+    current = node.parent
+    while isinstance(current, Tag):
+        classes = {item.lower() for item in current.get("class", [])}
+        if any(
+            item.startswith("section_head")
+            or item.startswith("title_")
+            or item.startswith("intro_")
+            or "footnote" in item
+            or item.endswith("note")
+            or item in {"chapternumberlink", "scrbookname", "scrbookcode", "chapter_number", "verse_number", "verse_number1"}
+            for item in classes
+        ):
+            return True
+        if "scrBook" in current.get("class", []):
+            break
+        current = current.parent
+    return False
 
 
 def parse_part(raw_html: str) -> dict[str, list[list[object]]]:
@@ -97,17 +108,10 @@ def parse_part(raw_html: str) -> dict[str, list[list[object]]]:
 
         if not isinstance(node, NavigableString) or chapter is None or verse is None:
             continue
-
-        parent = node.parent
-        if parent:
-            classes = set(parent.get("class", []))
-            if classes & {"Verse_Number", "Verse_Number1", "Chapter_Number", "chapternumberlink", "scrBookName", "scrBookCode"}:
-                continue
-            if parent.name in {"script", "style"}:
-                continue
-            # Notas editoriales separadas no se mezclan con el texto del versículo.
-            if any("footnote" in item.lower() or item.lower().endswith("note") for item in classes):
-                continue
+        if is_editorial_node(node):
+            continue
+        if node.parent and node.parent.name in {"script", "style"}:
+            continue
 
         text = str(node)
         if text.strip():
@@ -127,20 +131,16 @@ def parse_part(raw_html: str) -> dict[str, list[list[object]]]:
 
 def build_data() -> None:
     discover_epub_url()
-    epub_path = Path("/tmp/qeqchi.epub")
     books: dict[str, dict[str, list[list[object]]]] = {code: {} for code in CODES}
-
-    with zipfile.ZipFile(epub_path) as archive:
+    with zipfile.ZipFile("/tmp/qeqchi.epub") as archive:
         for name in archive.namelist():
             match = re.match(r"OEBPS/PartFile(\d{5})_(?:\d+)?\.html$", name)
             if not match:
                 continue
             index = int(match.group(1))
-            if not 1 <= index <= 66:
-                continue
-            code = CODES[index - 1]
-            parsed = parse_part(archive.read(name).decode("utf-8-sig", "replace"))
-            books[code].update(parsed)
+            if 1 <= index <= 66:
+                code = CODES[index - 1]
+                books[code].update(parse_part(archive.read(name).decode("utf-8-sig", "replace")))
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     errors: list[str] = []
@@ -149,16 +149,14 @@ def build_data() -> None:
         actual = len(data)
         if actual != expected:
             errors.append(f"{code}: se esperaban {expected} capítulos y se obtuvieron {actual}")
-        (OUT_DIR / f"{code}.json").write_text(
-            json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8"
-        )
+        (OUT_DIR / f"{code}.json").write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
         print(f"{code}: {actual} capítulos, {sum(len(v) for v in data.values())} versículos")
 
     if errors:
         raise RuntimeError("Validación incompleta:\n" + "\n".join(errors))
 
-    imports = []
-    entries = []
+    imports: list[str] = []
+    entries: list[str] = []
     for i, code in enumerate(CODES, start=1):
         var = f"B{i:02d}"
         imports.append(f'import {var} from "@/data/qeqchi/{code}.json";')
@@ -166,7 +164,6 @@ def build_data() -> None:
 
     module = "\n".join(imports) + "\n\n" + '''type RawVerse=(number|string)[];\ntype RawBook=Record<string,RawVerse[]>;\n\nconst QEQCHI_DATA:Record<string,RawBook>={\n''' + ",\n".join(entries) + "\n};\n\n" + '''export function getLocalQeqchiVerses(code:string,chapter:number){\n  return QEQCHI_DATA[code]?.[String(chapter)]??[];\n}\n\nexport function hasLocalQeqchiBook(code:string){\n  return Boolean(QEQCHI_DATA[code]);\n}\n'''
     MODULE_PATH.write_text(module, encoding="utf-8")
-
     print("Importación completa: 66 libros listos para la app.")
 
 

@@ -7,6 +7,12 @@ on:
     paths:
       - scripts/import_qeqchi_full_bible.py
       - .github/workflows/import-qeqchi-full.yml
+  pull_request:
+    branches:
+      - main
+    paths:
+      - scripts/import_qeqchi_full_bible.py
+      - .github/workflows/import-qeqchi-full.yml
 
 permissions:
   contents: write
@@ -19,7 +25,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: feature/qeqchi-full-bible-2019
+          ref: ${{ github.head_ref || github.ref_name }}
           fetch-depth: 0
 
       - name: Setup Python
@@ -43,4 +49,4 @@ jobs:
             exit 0
           fi
           git commit -m "Importar Li Santil Hu completa desde Scripture Earth"
-          git push origin HEAD:feature/qeqchi-full-bible-2019
+          git push origin HEAD:${{ github.head_ref || github.ref_name }}

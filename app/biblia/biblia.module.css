@@ -47,3 +47,40 @@
 @media(max-width:900px){.hero{grid-template-columns:1fr}.heroCopy{position:relative;z-index:2;min-height:390px;padding:58px 38px;background:linear-gradient(90deg,rgba(4,20,34,.96),rgba(4,20,34,.68) 70%,rgba(4,20,34,.24))}.heroImage{position:absolute;inset:0;min-height:390px}.imageShade,.heroImage p{display:none}.bookGrid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.hero{position:relative;min-height:430px}.heroCopy{min-height:430px;padding:50px 22px}.hero h1{max-width:86%;font-size:3.55rem}.heroCopy>p:not(.eyebrow){max-width:78%;font-size:.84rem}.heroDetails{gap:20px}.heroImage img{object-position:62% center}.library{width:calc(100% - 32px);padding:42px 0 70px}.searchPanel{padding:14px 14px 1px}.sourceNote{margin-bottom:34px}.studyPlan{margin-bottom:46px}.planIntro h2{font-size:2rem}.planDays{grid-template-columns:1fr;padding:8px}.planDays>a{grid-template-columns:48px 54px 1fr;min-height:45px}.planDays>a:nth-last-child(-n+2){border-bottom:1px solid #e2dfd8}.planDays>a:last-child{border-bottom:0}.sectionHeading{align-items:start}.sectionHeading h2{font-size:3rem}.bookGrid{grid-template-columns:1fr 1fr;gap:7px}.bookLink{grid-template-columns:1fr auto;min-height:52px;padding:8px 10px}.bookNumber{display:none}.bookLink strong{font-size:.73rem}.bookLink small{font-size:.54rem}.bookGrid+.sectionHeading{margin-top:54px}}
 @media(max-width:390px){.bookGrid{grid-template-columns:1fr}}
+
+/* App móvil: diseño aprobado, oscuro y continuo. */
+@media (display-mode:standalone) and (max-width:600px){
+  .page{background:#051827;color:#fff}
+  .hero{min-height:690px;border-bottom:0;background:#051827}
+  .heroCopy{min-height:690px;padding:42px 22px 34px;background:linear-gradient(90deg,rgba(3,17,29,.98) 0%,rgba(3,17,29,.91) 42%,rgba(3,17,29,.28) 78%,rgba(3,17,29,.08) 100%)}
+  .eyebrow{margin-bottom:20px;color:#e3aa32;font-size:.63rem;letter-spacing:.19em}
+  .hero h1{max-width:72%;font-size:3.75rem;line-height:.86}
+  .heroCopy>p:not(.eyebrow){max-width:68%;margin-top:24px;color:rgba(255,255,255,.84);font-size:.9rem;line-height:1.55}
+  .heroDetails{gap:28px;margin-top:38px;padding-top:26px;border-top:1px solid rgba(255,255,255,.25);font-size:.7rem;color:rgba(255,255,255,.72)}
+  .heroDetails strong{display:block;margin:0 0 4px;color:#e1a82d;font-size:2rem}
+  .heroImage{min-height:690px}
+  .heroImage img{object-position:60% center;filter:saturate(.92) contrast(1.05) brightness(.83)}
+  .library{width:100%;padding:0 18px 78px;background:linear-gradient(180deg,#061a2a 0%,#041522 100%)}
+  .searchPanel{margin:0;padding:22px 0 4px;border:0;border-radius:0;background:transparent;box-shadow:none}
+  .searchPanel :global(.search){min-height:58px;padding:0 20px!important;border:1px solid rgba(255,255,255,.22)!important;border-radius:12px!important;background:#0a2134!important;color:#fff!important;box-shadow:none!important}
+  .searchPanel :global(.search)::placeholder{color:rgba(255,255,255,.5)}
+  .sourceNote{gap:14px;margin:17px 0 30px;color:rgba(255,255,255,.7);font-size:.69rem}
+  .sourceNote a{color:#e0aa37}
+  .studyPlan{display:block;margin:0 0 28px;border:1px solid rgba(224,170,55,.32);border-radius:15px;background:#071d30;box-shadow:none}
+  .planIntro{padding:27px 24px;background:linear-gradient(145deg,#0a2942,#061827)}
+  .planIntro>p{color:#e3aa32;font-size:.62rem}
+  .planIntro h2{font-size:2.15rem}
+  .planIntro>span{font-size:.78rem;color:rgba(255,255,255,.72)}
+  .planIntro>a{padding:8px 0;border:0;border-radius:0;color:#e3aa32;font-size:.78rem}
+  .planDays{padding:8px;background:#081c2d}
+  .planDays>a{border-color:rgba(255,255,255,.08);background:transparent;color:#fff}
+  .planDays>a:hover{background:#0d2a42;color:#e3aa32}
+  .planDays small{color:rgba(255,255,255,.58)}
+  .sectionHeading{border-color:rgba(255,255,255,.12)}
+  .sectionHeading h2{color:#fff}
+  .sectionHeading p{color:#e0aa37}
+  .bookLink{border-color:rgba(255,255,255,.1);background:#0a2032;color:#fff;box-shadow:none}
+  .bookLink:hover{border-color:#c99b3c;background:#0d2940;color:#fff;box-shadow:none}
+  .bookLink small{color:rgba(255,255,255,.55)}
+  .bookNumber{background:#102b40;color:#e3aa32}
+}

@@ -10,7 +10,26 @@
     border-bottom:1px solid rgba(216,164,58,.28)!important;
     box-shadow:0 5px 18px rgba(3,12,22,.18)!important;
   }
-  .siteHeader .siteLogo{display:none!important}
+  .siteHeader .siteLogo{
+    grid-column:2!important;
+    grid-row:1!important;
+    display:flex!important;
+    min-width:0!important;
+    max-width:100%!important;
+    justify-self:center!important;
+    color:#fff!important;
+  }
+  .siteHeader .siteLogo>span{
+    width:38px!important;
+    height:38px!important;
+    flex:0 0 38px!important;
+    border:1px solid rgba(216,164,58,.65)!important;
+    background:#061729!important;
+    color:#e0aa35!important;
+    box-shadow:none!important;
+  }
+  .siteHeader .siteLogo strong{color:#fff!important;font-size:13px!important;white-space:nowrap!important}
+  .siteHeader .siteLogo small{display:none!important}
   .siteHeader .mobileMenuButton{
     grid-column:1!important;
     grid-row:1!important;
@@ -73,12 +92,44 @@
   .appInstallButton small{margin-top:3px!important;color:#fff!important;font-size:9px!important;font-weight:600!important;white-space:nowrap!important}
 }
 
+@media (display-mode:standalone){
+  html,body{background:#071829!important}
+  body{min-height:100dvh!important}
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0 0 auto 0;
+    z-index:99;
+    height:env(safe-area-inset-top);
+    background:#071829;
+    pointer-events:none;
+  }
+}
+
+@media (display-mode:standalone) and (max-width:1050px){
+  .siteHeader{
+    top:0!important;
+    padding-top:calc(10px + env(safe-area-inset-top))!important;
+    min-height:calc(72px + env(safe-area-inset-top))!important;
+    background:linear-gradient(135deg,#071829,#0b263d)!important;
+  }
+}
+
 @media(max-width:430px){
   .siteHeader{grid-template-columns:48px minmax(0,1fr) auto!important;gap:8px!important;padding:8px 10px!important}
+  .siteHeader .siteLogo>span{width:34px!important;height:34px!important;flex-basis:34px!important}
+  .siteHeader .siteLogo strong{font-size:11px!important}
   .appInstallButton{max-width:145px!important;min-height:46px!important;padding:5px 9px!important}
   .appInstallIcon{flex-basis:28px!important;width:28px!important;height:28px!important;font-size:21px!important}
   .appInstallButton strong{font-size:12px!important}
   .appInstallButton small{font-size:8px!important}
+}
+
+@media (display-mode:standalone) and (max-width:430px){
+  .siteHeader{
+    padding:calc(8px + env(safe-area-inset-top)) 10px 8px!important;
+    min-height:calc(64px + env(safe-area-inset-top))!important;
+  }
 }
 
 .installHelpOverlay{

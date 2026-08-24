@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   title: "La Biblia Nos Habla",
   description: "Plataforma ministerial de la Iglesia Príncipe de Paz Philadelphia",
   applicationName: "La Biblia Nos Habla",
-  appleWebApp: {capable:true,statusBarStyle:"black",title:"La Biblia Nos Habla"},
+  appleWebApp: {capable:true,statusBarStyle:"black-translucent",title:"La Biblia Nos Habla"},
   formatDetection: {telephone:true},
   icons: {
     icon: [

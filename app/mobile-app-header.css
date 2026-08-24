@@ -92,11 +92,24 @@
   .appInstallButton small{margin-top:3px!important;color:#fff!important;font-size:9px!important;font-weight:600!important;white-space:nowrap!important}
 }
 
-@media (display-mode:standalone) and (max-width:1050px){
+@media (display-mode:standalone){
   html,body{background:#071829!important}
+  body{min-height:100dvh!important}
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0 0 auto 0;
+    z-index:99;
+    height:env(safe-area-inset-top);
+    background:#071829;
+    pointer-events:none;
+  }
+}
+
+@media (display-mode:standalone) and (max-width:1050px){
   .siteHeader{
     top:0!important;
-    padding-top:max(10px,env(safe-area-inset-top))!important;
+    padding-top:calc(10px + env(safe-area-inset-top))!important;
     min-height:calc(72px + env(safe-area-inset-top))!important;
     background:linear-gradient(135deg,#071829,#0b263d)!important;
   }

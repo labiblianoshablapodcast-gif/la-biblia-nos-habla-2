@@ -27,8 +27,14 @@
 }
 
 @media (display-mode:standalone){
- html,body{overscroll-behavior-y:none}
+ html,body{overscroll-behavior-y:none;background:#071829!important}
  body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+ .siteHeader{
+  top:0!important;
+  padding-top:max(10px,env(safe-area-inset-top))!important;
+  min-height:calc(72px + env(safe-area-inset-top))!important;
+  background:linear-gradient(135deg,#071829,#0b263d)!important;
+ }
  .mobileBottomNav{
   padding-bottom:max(8px,env(safe-area-inset-bottom));
   min-height:calc(64px + env(safe-area-inset-bottom));

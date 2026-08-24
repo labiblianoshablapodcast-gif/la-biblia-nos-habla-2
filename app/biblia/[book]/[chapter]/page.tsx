@@ -3,11 +3,9 @@ import Link from "next/link";
 import ChapterControls from "@/components/ChapterControls";
 import BibleReaderTools from "@/components/BibleReaderTools";
 import JohnChapterQuestions from "@/components/JohnChapterQuestions";
-import {getBook,getChapter,getQeqchiChapter,hasQeqchiBook,chapterUrl,qeqchiChapterUrl} from "@/lib/bible";
+import {getBook,getChapter,getQeqchiChapter,chapterUrl,qeqchiChapterUrl} from "@/lib/bible";
 
 type Version="rvr60"|"qeqchi";
-
-const QEQCHI_AT_URL="https://scriptureearth.org/00spa.php?idx=264&iso_code=kek&language=Kekch%C3%AD";
 
 export default async function ChapterPage({
  params,searchParams
@@ -22,13 +20,12 @@ export default async function ChapterPage({
  const chapter=Number(raw);
  if(!book || !Number.isInteger(chapter) || chapter<1 || chapter>book.chapters) notFound();
 
- const qeqchiAvailable=hasQeqchiBook(book.code);
  const bibleChapter=version==="qeqchi"
    ? await getQeqchiChapter(book.code,chapter)
    : await getChapter(book.code,chapter);
  const versionQuery=version==="qeqchi"?"?version=qeqchi":"";
  const translationName=version==="qeqchi"
-   ? (qeqchiAvailable?"Li Santil Hu · Q’eqchi’":"Q’eqchi’ · Antiguo Testamento")
+   ? "Li Santil Hu · Q’eqchi’ · Ortografía tradicional"
    : "Reina-Valera Revisada 1960";
 
  return <>
@@ -46,15 +43,7 @@ export default async function ChapterPage({
 
     <ChapterControls slug={book.slug} chapter={chapter} total={book.chapters} query={versionQuery}/>
 
-    {version==="qeqchi" && !qeqchiAvailable ? (
-      <div className="notice">
-        <strong>Antiguo Testamento en Q’eqchi’</strong>
-        <p>Ahora puede leer el Antiguo Testamento dentro de la app mediante un visor integrado de Scripture Earth. El texto permanece alojado por la fuente original.</p>
-        <Link className="btn" href="/biblia/qeqchi-at">Leer aquí en la app</Link>
-        <a className="btn secondary" href={QEQCHI_AT_URL} target="_blank" rel="noreferrer">Abrir fuente original ↗</a>
-        <p><small>Fuente: Scripture Earth · código de idioma kek. El Nuevo Testamento Li Santil Hu continúa disponible directamente en esta app.</small></p>
-      </div>
-    ) : bibleChapter ? (
+    {bibleChapter ? (
       <BibleReaderTools
         bookName={book.name}
         bookSlug={book.slug}
@@ -67,18 +56,19 @@ export default async function ChapterPage({
       <div className="notice">
         <strong>No pudimos cargar el capítulo.</strong>
         <p>{version==="qeqchi"
-          ?"Puede abrir este capítulo directamente en la fuente Q’eqchi’."
+          ?"Puede abrir la fuente original Q’eqchi’ mientras revisamos este capítulo."
           :"Verifique que BIBLIA_API_KEY esté disponible en Vercel o ábralo directamente en Biblia.com."}</p>
-        <a className="btn" href={version==="qeqchi"?qeqchiChapterUrl(book.code,chapter):chapterUrl(book.code,chapter)} target="_blank" rel="noreferrer">Abrir capítulo</a>
+        <a className="btn" href={version==="qeqchi"?qeqchiChapterUrl(book.code,chapter):chapterUrl(book.code,chapter)} target="_blank" rel="noreferrer">Abrir fuente original</a>
       </div>
     )}
 
     {version==="qeqchi" ? (
       <div className="bibliaAttribution">
-        {qeqchiAvailable ? <p><strong>Li Santil Hu — Nuevo Testamento en Q’eqchi’ [kek], Guatemala.</strong><br/>
-        © 2000 Wycliffe Bible Translators, Inc. Texto compartido sin modificaciones bajo licencia
+        <p><strong>Li Santil Hu — La Santa Biblia en el idioma Kekchí/Q’eqchi’ de Guatemala [kek], ortografía tradicional.</strong><br/>
+        Texto © 1988–2019 Wycliffe Bible Translators, Inc. Tercera edición revisada © 2019.
+        Compartido sin cambiar las palabras ni la puntuación de las Escrituras bajo licencia
         <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noreferrer"> CC BY-NC-ND 4.0</a>.
-        Fuente: <a href="https://ebible.org/kekNT/" target="_blank" rel="noreferrer">eBible.org</a>.</p> : <p><strong>Antiguo Testamento Q’eqchi’.</strong><br/>Lectura integrada mediante <Link href="/biblia/qeqchi-at">Scripture Earth</Link>. El texto del AT no se copia ni se almacena en nuestros servidores.</p>}
+        Fuente: <a href="https://scriptureearth.org/00spa.php?idx=264&iso_code=kek&language=Kekch%C3%AD" target="_blank" rel="noreferrer">Scripture Earth</a>.</p>
       </div>
     ) : (
       <div className="bibliaAttribution">

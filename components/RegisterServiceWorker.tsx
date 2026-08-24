@@ -3,23 +3,16 @@ import {useEffect} from "react";
 
 export default function RegisterServiceWorker(){
  useEffect(()=>{
-  // Versiones anteriores registraban un service worker que ya no existe.
-  // Safari puede conservarlo y mezclar archivos de despliegues distintos.
-  const removeLegacyWorker=async()=>{
+  const registerWorker=async()=>{
    try{
     if("serviceWorker" in navigator){
-     const registrations=await navigator.serviceWorker.getRegistrations();
-     await Promise.all(registrations.map(registration=>registration.unregister()));
-    }
-    if("caches" in window){
-     const names=await caches.keys();
-     await Promise.all(names.map(name=>caches.delete(name)));
+     await navigator.serviceWorker.register("/sw.js",{scope:"/"});
     }
    }catch{
-    // La limpieza no debe impedir que el sitio cargue.
+    // La app debe seguir funcionando aunque el navegador no permita registrar el worker.
    }
   };
-  void removeLegacyWorker();
+  void registerWorker();
  },[]);
  return null;
 }

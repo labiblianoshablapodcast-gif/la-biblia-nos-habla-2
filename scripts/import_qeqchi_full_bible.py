@@ -112,7 +112,6 @@ def parse_part(raw_html: str) -> dict[str, list[list[object]]]:
             continue
         if node.parent and node.parent.name in {"script", "style"}:
             continue
-
         text = str(node)
         if text.strip():
             chapters[chapter][verse].append(text)
@@ -130,7 +129,7 @@ def parse_part(raw_html: str) -> dict[str, list[list[object]]]:
 
 
 def build_data() -> None:
-    discover_epub_url()
+    source_url = discover_epub_url()
     books: dict[str, dict[str, list[list[object]]]] = {code: {} for code in CODES}
     with zipfile.ZipFile("/tmp/qeqchi.epub") as archive:
         for name in archive.namelist():
@@ -142,18 +141,38 @@ def build_data() -> None:
                 code = CODES[index - 1]
                 books[code].update(parse_part(archive.read(name).decode("utf-8-sig", "replace")))
 
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
     errors: list[str] = []
     for code, expected in zip(CODES, EXPECTED_CHAPTERS):
-        data = books[code]
-        actual = len(data)
+        actual = len(books[code])
         if actual != expected:
             errors.append(f"{code}: se esperaban {expected} capítulos y se obtuvieron {actual}")
-        (OUT_DIR / f"{code}.json").write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-        print(f"{code}: {actual} capítulos, {sum(len(v) for v in data.values())} versículos")
+
+    genesis_24 = dict((int(v[0]), str(v[1])) for v in books["GEN"].get("2", [] )).get(4, "")
+    if not genesis_24:
+        errors.append("GEN 2:4 no fue importado")
+    if "Saꞌ li naꞌajej Edén xcꞌabaꞌ" in genesis_24:
+        errors.append("GEN 2:4 contiene un encabezado editorial; el parser debe excluirlo")
 
     if errors:
         raise RuntimeError("Validación incompleta:\n" + "\n".join(errors))
+
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    for code in CODES:
+        data = books[code]
+        (OUT_DIR / f"{code}.json").write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+        print(f"{code}: {len(data)} capítulos, {sum(len(v) for v in data.values())} versículos")
+
+    metadata = {
+        "parserVersion": 2,
+        "books": 66,
+        "edition": "Li Santil Hu · tercera edición revisada 2019 · ortografía tradicional",
+        "copyright": "© 1988-2019 Wycliffe Bible Translators, Inc.",
+        "license": "CC BY-NC-ND 4.0",
+        "sourcePage": SOURCE_PAGE,
+        "epubSource": source_url,
+        "validation": "66 books/chapter counts verified; editorial headings excluded from verse text"
+    }
+    (OUT_DIR / "import-metadata.json").write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     imports: list[str] = []
     entries: list[str] = []
@@ -164,7 +183,7 @@ def build_data() -> None:
 
     module = "\n".join(imports) + "\n\n" + '''type RawVerse=(number|string)[];\ntype RawBook=Record<string,RawVerse[]>;\n\nconst QEQCHI_DATA:Record<string,RawBook>={\n''' + ",\n".join(entries) + "\n};\n\n" + '''export function getLocalQeqchiVerses(code:string,chapter:number){\n  return QEQCHI_DATA[code]?.[String(chapter)]??[];\n}\n\nexport function hasLocalQeqchiBook(code:string){\n  return Boolean(QEQCHI_DATA[code]);\n}\n'''
     MODULE_PATH.write_text(module, encoding="utf-8")
-    print("Importación completa: 66 libros listos para la app.")
+    print("Importación completa y validada: 66 libros listos para la app.")
 
 
 if __name__ == "__main__":

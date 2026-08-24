@@ -1,9 +1,11 @@
 import RegisterServiceWorker from "@/components/RegisterServiceWorker";
+import AppExperience from "@/components/AppExperience";
 import type { Metadata } from "next";
 import "./globals.css";
 import "./button-refinement.css";
 import "./controls-refinement.css";
 import "./site-style-v12.css";
+import "./app-experience.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileNav from "@/components/MobileNav";
@@ -33,5 +35,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({children}:{children:React.ReactNode}) {
-  return <html lang="es"><body><a className="skipLink" href="#contenido-principal">Saltar al contenido principal</a><Header/><main id="contenido-principal">{children}</main><Footer/><MobileNav/><GlobalPhotoViewer/><RegisterServiceWorker/><Analytics/></body></html>;
+  return <html lang="es"><body><AppExperience/><a className="skipLink" href="#contenido-principal">Saltar al contenido principal</a><Header/><main id="contenido-principal">{children}</main><Footer/><MobileNav/><GlobalPhotoViewer/><RegisterServiceWorker/><Analytics/></body></html>;
 }

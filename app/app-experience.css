@@ -1,0 +1,41 @@
+.appLaunchScreen{
+ position:fixed;
+ inset:0;
+ z-index:99999;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ gap:14px;
+ padding:32px;
+ text-align:center;
+ color:#fff;
+ background:radial-gradient(circle at 50% 36%,#123f70 0,#071829 58%,#04101c 100%);
+ animation:appLaunchFade 1.4s ease forwards;
+}
+.appLaunchScreen img{
+ width:112px;
+ height:112px;
+ border-radius:26px;
+ box-shadow:0 18px 45px rgba(0,0,0,.34);
+}
+.appLaunchTitle{font-size:1.55rem;font-weight:800;letter-spacing:.01em}
+.appLaunchTagline{max-width:290px;font-size:.93rem;line-height:1.45;color:rgba(255,255,255,.78)}
+@keyframes appLaunchFade{
+ 0%,72%{opacity:1}
+ 100%{opacity:0;visibility:hidden}
+}
+
+@media (display-mode:standalone){
+ html,body{overscroll-behavior-y:none}
+ body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+ .mobileBottomNav{
+  padding-bottom:max(8px,env(safe-area-inset-bottom));
+  min-height:calc(64px + env(safe-area-inset-bottom));
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+ }
+ .mobileBottomNav a[aria-current="page"]{
+  transform:translateY(-2px);
+ }
+}

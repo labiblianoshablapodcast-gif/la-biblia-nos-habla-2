@@ -1,0 +1,56 @@
+/* Legibilidad móvil aprobada para la Biblioteca Bíblica. */
+@media (max-width:700px){
+  [class*="biblia_planDays__"] > a{
+    min-height:64px !important;
+    padding:12px 14px !important;
+    grid-template-columns:64px 76px minmax(0,1fr) !important;
+    gap:10px !important;
+  }
+  [class*="biblia_planDays__"] span{
+    font-size:.72rem !important;
+    line-height:1.2 !important;
+  }
+  [class*="biblia_planDays__"] strong{
+    font-size:.92rem !important;
+    line-height:1.2 !important;
+  }
+  [class*="biblia_planDays__"] small{
+    color:rgba(255,255,255,.78) !important;
+    font-size:.78rem !important;
+    line-height:1.35 !important;
+    white-space:normal !important;
+    overflow:visible !important;
+    text-overflow:clip !important;
+  }
+  [class*="biblia_bookGrid__"]{
+    gap:10px !important;
+  }
+  [class*="biblia_bookLink__"]{
+    min-height:78px !important;
+    padding:14px 16px !important;
+    border-radius:12px !important;
+    gap:12px !important;
+  }
+  [class*="biblia_bookLink__"] strong{
+    font-size:1rem !important;
+    line-height:1.2 !important;
+  }
+  [class*="biblia_bookLink__"] small{
+    margin-top:4px !important;
+    font-size:.76rem !important;
+    line-height:1.25 !important;
+    color:rgba(255,255,255,.72) !important;
+  }
+  [class*="biblia_arrow__"]{
+    font-size:1.45rem !important;
+  }
+}
+
+@media (max-width:390px){
+  [class*="biblia_planDays__"] > a{
+    grid-template-columns:58px 70px minmax(0,1fr) !important;
+  }
+  [class*="biblia_bookLink__"]{
+    min-height:72px !important;
+  }
+}

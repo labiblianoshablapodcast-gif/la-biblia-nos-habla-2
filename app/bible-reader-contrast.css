@@ -48,6 +48,35 @@
   color:#10202d!important;
 }
 
+/* Selector de versión: el activo siempre debe verse claramente. */
+.bibleVersionSwitcher{
+  gap:12px!important;
+}
+.bibleVersionSwitcher .bibleVersionActive{
+  background:#d7aa4b!important;
+  border:1px solid #d7aa4b!important;
+  color:#071829!important;
+  box-shadow:0 5px 18px rgba(215,170,75,.2)!important;
+}
+.bibleVersionSwitcher .bibleVersionInactive{
+  background:#071829!important;
+  border:1px solid #d7aa4b!important;
+  color:#fff!important;
+}
+.bibleVersionSwitcher .bibleVersionInactive:hover{
+  background:#0d2a42!important;
+  color:#fff!important;
+}
+
+@media (max-width:700px){
+  .bibleVersionSwitcher .btn{
+    min-height:54px!important;
+    padding:13px 18px!important;
+    font-size:.92rem!important;
+    border-radius:12px!important;
+  }
+}
+
 @media (display-mode:standalone) and (max-width:620px){
   .readerShell{
     margin-left:0;

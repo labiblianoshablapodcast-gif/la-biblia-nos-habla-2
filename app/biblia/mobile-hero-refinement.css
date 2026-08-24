@@ -1,0 +1,6 @@
+/* Ajuste final aprobado: hace visible antes el buscador sin cambiar el diseño. */
+@media (display-mode: standalone) and (max-width: 600px) {
+  .mobileBibleHeroRefinement {
+    display: none;
+  }
+}

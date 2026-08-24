@@ -1,0 +1,57 @@
+/* Contraste del lector bíblico en móvil/PWA: mantiene ambos modos legibles. */
+.readerShell{
+  background:#f7f3ea;
+  color:#10202d;
+  padding:25px;
+}
+.readerShell .scriptureText,
+.readerShell .verseRow>p{
+  color:#10202d;
+}
+.readerShell .readerToolbar{
+  color:#10202d;
+}
+.readerShell .verseActions button{
+  color:#0b7bdc;
+}
+
+.darkReader{
+  background:#0d1720!important;
+  color:#f5f0e7!important;
+}
+.darkReader .scriptureText,
+.darkReader .verseRow>p,
+.darkReader .readerToolbar strong,
+.darkReader .readerToolbar span,
+.darkReader .verseNote label,
+.darkReader .verseStudy strong,
+.darkReader .verseStudy small{
+  color:#f5f0e7!important;
+}
+.darkReader .scriptureText sup{
+  color:#d7aa4b!important;
+}
+.darkReader .readerToolbar{
+  background:#1f2a33!important;
+  color:#f5f0e7!important;
+}
+.darkReader .verseActions button{
+  color:#1f9cff!important;
+}
+.darkReader .verseNote{
+  background:#182733!important;
+  color:#f5f0e7!important;
+}
+.darkReader .verseNote textarea,
+.darkReader .verseStudy input{
+  background:#fff!important;
+  color:#10202d!important;
+}
+
+@media (display-mode:standalone) and (max-width:620px){
+  .readerShell{
+    margin-left:0;
+    margin-right:0;
+    border-radius:18px;
+  }
+}

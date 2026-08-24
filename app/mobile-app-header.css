@@ -1,0 +1,139 @@
+@media(max-width:1050px){
+  .siteHeader{
+    display:grid!important;
+    grid-template-columns:auto minmax(0,1fr) auto!important;
+    align-items:center!important;
+    gap:10px!important;
+    min-height:72px!important;
+    padding:10px 14px!important;
+    background:linear-gradient(135deg,#071829,#0b263d)!important;
+    border-bottom:1px solid rgba(216,164,58,.28)!important;
+    box-shadow:0 5px 18px rgba(3,12,22,.18)!important;
+  }
+  .siteHeader .siteLogo{display:none!important}
+  .siteHeader .mobileMenuButton{
+    grid-column:1!important;
+    grid-row:1!important;
+    position:relative!important;
+    z-index:1101!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:5px!important;
+    width:48px!important;
+    height:48px!important;
+    margin:0!important;
+    padding:0!important;
+    border:1px solid #d7a338!important;
+    border-radius:12px!important;
+    background:#071829!important;
+    box-shadow:0 3px 10px rgba(0,0,0,.15)!important;
+  }
+  .siteHeader .mobileMenuButton span{
+    display:block!important;
+    width:24px!important;
+    height:3px!important;
+    margin:0!important;
+    border-radius:999px!important;
+    background:#e0aa35!important;
+  }
+  .appInstallButton{
+    grid-column:3!important;
+    grid-row:1!important;
+    display:flex!important;
+    align-items:center!important;
+    gap:8px!important;
+    min-height:48px!important;
+    max-width:180px!important;
+    padding:6px 11px!important;
+    border:1px solid #d7a338!important;
+    border-radius:14px!important;
+    background:rgba(7,24,41,.9)!important;
+    color:#fff!important;
+    text-align:left!important;
+    box-shadow:none!important;
+  }
+  .appInstallButton:hover{background:#0c2b46!important}
+  .appInstallIcon{
+    display:grid!important;
+    place-items:center!important;
+    flex:0 0 31px!important;
+    width:31px!important;
+    height:31px!important;
+    border:1px solid #d7a338!important;
+    border-radius:50%!important;
+    color:#e0aa35!important;
+    font-size:24px!important;
+    font-weight:900!important;
+    line-height:1!important;
+  }
+  .appInstallButton strong,.appInstallButton small{display:block!important;line-height:1.05!important}
+  .appInstallButton strong{color:#e0aa35!important;font-size:13px!important;font-weight:900!important;white-space:nowrap!important}
+  .appInstallButton small{margin-top:3px!important;color:#fff!important;font-size:9px!important;font-weight:600!important;white-space:nowrap!important}
+}
+
+@media(max-width:430px){
+  .siteHeader{grid-template-columns:48px minmax(0,1fr) auto!important;gap:8px!important;padding:8px 10px!important}
+  .appInstallButton{max-width:145px!important;min-height:46px!important;padding:5px 9px!important}
+  .appInstallIcon{flex-basis:28px!important;width:28px!important;height:28px!important;font-size:21px!important}
+  .appInstallButton strong{font-size:12px!important}
+  .appInstallButton small{font-size:8px!important}
+}
+
+.installHelpOverlay{
+  position:fixed!important;
+  inset:0!important;
+  z-index:2200!important;
+  display:grid!important;
+  place-items:end center!important;
+  padding:18px!important;
+  background:rgba(2,11,20,.66)!important;
+  backdrop-filter:blur(6px)!important;
+}
+.installHelpCard{
+  position:relative!important;
+  width:min(460px,100%)!important;
+  padding:30px 24px 24px!important;
+  border:1px solid rgba(216,164,58,.55)!important;
+  border-radius:20px!important;
+  background:#fff!important;
+  color:#071829!important;
+  box-shadow:0 24px 70px rgba(0,0,0,.3)!important;
+}
+.installHelpClose{
+  position:absolute!important;
+  top:10px!important;
+  right:12px!important;
+  width:34px!important;
+  height:34px!important;
+  border:0!important;
+  background:transparent!important;
+  color:#071829!important;
+  font-size:28px!important;
+}
+.installHelpIcon{
+  display:grid!important;
+  place-items:center!important;
+  width:52px!important;
+  height:52px!important;
+  margin-bottom:12px!important;
+  border-radius:50%!important;
+  background:#071829!important;
+  color:#e0aa35!important;
+  font-size:30px!important;
+  font-weight:900!important;
+}
+.installHelpCard h2{margin:0 0 8px!important;font-size:26px!important;line-height:1.05!important}
+.installHelpCard p{margin:0 0 14px!important;color:#4c5964!important}
+.installHelpCard ol{margin:0 0 20px 20px!important;padding:0!important}
+.installHelpCard li{margin:8px 0!important}
+.installHelpDone{
+  width:100%!important;
+  min-height:46px!important;
+  border:1px solid #b98220!important;
+  border-radius:10px!important;
+  background:#071829!important;
+  color:#fff!important;
+  font-weight:900!important;
+}

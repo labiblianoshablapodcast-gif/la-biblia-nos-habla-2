@@ -1,6 +1,7 @@
 import {notFound} from "next/navigation";
 import Link from "next/link";
 import ChapterControls from "@/components/ChapterControls";
+import BibleAudioControls from "@/components/BibleAudioControls";
 import BibleReaderTools from "@/components/BibleReaderTools";
 import JohnChapterQuestions from "@/components/JohnChapterQuestions";
 import {getBook,getChapter,getQeqchiChapter,chapterUrl,qeqchiChapterUrl} from "@/lib/bible";
@@ -42,6 +43,7 @@ export default async function ChapterPage({
     </div>
 
     <ChapterControls slug={book.slug} chapter={chapter} total={book.chapters} query={versionQuery}/>
+    <BibleAudioControls language={version}/>
 
     {bibleChapter ? (
       <BibleReaderTools

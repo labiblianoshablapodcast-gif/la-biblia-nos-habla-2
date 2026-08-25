@@ -67,7 +67,7 @@ export default function BibliaPage(){
       <div className={styles.planIntro}>
         <p>Nuevo · Idioma de Guatemala</p>
         <h2 id="qeqchi-title">Biblia en Q’eqchi’</h2>
-        <span>Lea Li Santil Hu, el Nuevo Testamento en Q’eqchi’, directamente en nuestra biblioteca bíblica.</span>
+        <span>Lea Li Santil Hu, la Biblia completa en Q’eqchi’, directamente en nuestra biblioteca bíblica.</span>
         <Link href="/biblia/mateo/1?version=qeqchi">Comenzar a leer <b aria-hidden="true">→</b></Link>
       </div>
       <div className={styles.planDays}>

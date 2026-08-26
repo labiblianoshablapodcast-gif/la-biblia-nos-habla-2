@@ -37,6 +37,8 @@ export default async function Iglesia(){
  ].slice(0,6);
 
  return <>
+  <AssembliesAffiliation/>
+
   <section className={styles.hero} aria-label="Iglesia Príncipe de Paz">
    <div className={styles.heroPhoto}>
     <Image src="/images/iglesia-portada-congregacion-v2.png" alt="Congregación de la Iglesia Príncipe de Paz" fill priority sizes="100vw"/>
@@ -68,8 +70,6 @@ export default async function Iglesia(){
     </div>
    </div>
   </section>
-
-  <AssembliesAffiliation/>
 
   <section className="section churchScheduleSection">
    <div>

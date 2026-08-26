@@ -3,7 +3,7 @@
 import {useEffect,useMemo,useState} from "react";
 import {useRouter} from "next/navigation";
 
-type Verse={number:number;text:string};
+type Verse={number:number;text:string;heading?:string};
 
 function readStoredJson<T>(key:string,fallback:T):T{
   try{
@@ -90,17 +90,22 @@ export default function BibleReaderTools({
       {verses.map(verse=>{
         const noteKey=`${key}-${verse.number}`;
         const favorite=favorites.includes(verse.number);
-        return <section className={favorite?"verseRow favoriteVerse":"verseRow"} key={verse.number}>
-          <p onClick={()=>setSelected(selected===verse.number?null:verse.number)}>
-            <sup>{verse.number}</sup> {verse.text}
-          </p>
-          <div className="verseActions">
-            <button title="Guardar favorito" onClick={()=>toggleFavorite(verse.number)}>{favorite?"★":"☆"}</button>
-            <button title="Compartir" onClick={()=>shareVerse(verse)}>↗</button>
-            <button title="Escribir nota" onClick={()=>setSelected(verse.number)}>📝</button>
-            <button title="Estudiar una palabra" aria-label="Estudiar una palabra en hebreo o griego" onClick={()=>setSelected(verse.number)}>אα</button>
-          </div>
-          {selected===verse.number && <div className="verseNote">
+        return <div className="verseGroup" key={verse.number}>
+          {verse.heading && <h2 className="bibleSectionHeading">
+            <span>Subtítulo editorial</span>
+            {verse.heading}
+          </h2>}
+          <section className={favorite?"verseRow favoriteVerse":"verseRow"}>
+            <p onClick={()=>setSelected(selected===verse.number?null:verse.number)}>
+              <sup>{verse.number}</sup> {verse.text}
+            </p>
+            <div className="verseActions">
+              <button title="Guardar favorito" onClick={()=>toggleFavorite(verse.number)}>{favorite?"★":"☆"}</button>
+              <button title="Compartir" onClick={()=>shareVerse(verse)}>↗</button>
+              <button title="Escribir nota" onClick={()=>setSelected(verse.number)}>📝</button>
+              <button title="Estudiar una palabra" aria-label="Estudiar una palabra en hebreo o griego" onClick={()=>setSelected(verse.number)}>אα</button>
+            </div>
+            {selected===verse.number && <div className="verseNote">
             <label>Nota personal sobre {bookName} {chapter}:{verse.number}
               <textarea
                 rows={3}
@@ -124,8 +129,9 @@ export default function BibleReaderTools({
                 <button type="submit" disabled={!studyWord.trim()}>אα Abrir diccionario</button>
               </div>
             </form>
-          </div>}
-        </section>;
+            </div>}
+          </section>
+        </div>;
       })}
     </article>
 

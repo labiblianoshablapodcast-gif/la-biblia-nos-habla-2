@@ -103,6 +103,8 @@ input:focus,textarea:focus,select:focus{outline:3px solid rgba(191,134,32,.18);b
 .siteFooter{padding:46px clamp(24px,6vw,84px)}
 .siteFooter h3{font-size:16px;color:var(--gold-bright)}
 .siteFooter a{font-size:13px}
+.footerAgLogo{display:block;width:min(260px,82%);margin-top:27px;padding:17px 0;text-decoration:none}
+.footerAgLogo img{display:block;width:100%;height:auto}
 
 @media(max-width:1050px){
   .siteHeader{min-height:64px}

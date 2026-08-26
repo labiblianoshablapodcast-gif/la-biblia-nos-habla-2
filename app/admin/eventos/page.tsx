@@ -4,6 +4,34 @@ import {createClient} from "@/lib/supabase/server";
 import {revalidatePath} from "next/cache";
 import {redirect} from "next/navigation";
 
+const EVENT_TIME_ZONE="America/New_York";
+
+function newYorkLocalToIso(value:string){
+  const match=value.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/);
+  if(!match) return null;
+  const [,year,month,day,hour,minute]=match.map(Number);
+  const requestedUtc=Date.UTC(year,month-1,day,hour,minute);
+  const formatter=new Intl.DateTimeFormat("en-US",{
+    timeZone:EVENT_TIME_ZONE,
+    year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",
+    hourCycle:"h23"
+  });
+  const zonedParts=(instant:number)=>{
+    const parts=formatter.formatToParts(new Date(instant));
+    const number=(type:string)=>Number(parts.find(part=>part.type===type)?.value);
+    return {year:number("year"),month:number("month"),day:number("day"),hour:number("hour"),minute:number("minute")};
+  };
+  let instant=requestedUtc;
+  for(let attempt=0;attempt<2;attempt++){
+    const displayed=zonedParts(instant);
+    const displayedAsUtc=Date.UTC(displayed.year,displayed.month-1,displayed.day,displayed.hour,displayed.minute);
+    instant+=requestedUtc-displayedAsUtc;
+  }
+  const confirmed=zonedParts(instant);
+  if(confirmed.year!==year||confirmed.month!==month||confirmed.day!==day||confirmed.hour!==hour||confirmed.minute!==minute) return null;
+  return new Date(instant).toISOString();
+}
+
 async function createEvent(formData:FormData){
   "use server";
   const supabase=await createClient();
@@ -13,12 +41,12 @@ async function createEvent(formData:FormData){
   const imageUrl=String(formData.get("image_url")||"").trim();
   if(!user||!title||!startsAt) redirect("/admin/eventos?estado=incompleto");
   if(!imageUrl) redirect("/admin/eventos?estado=foto");
-  const parsedDate=new Date(startsAt);
-  if(Number.isNaN(parsedDate.getTime())) redirect("/admin/eventos?estado=fecha");
+  const startsAtIso=newYorkLocalToIso(startsAt);
+  if(!startsAtIso) redirect("/admin/eventos?estado=fecha");
 
   const payload={
     title,
-    starts_at:startsAt,
+    starts_at:startsAtIso,
     location:String(formData.get("location")||"").trim(),
     description:String(formData.get("description")||"").trim(),
     image_url:imageUrl,
@@ -61,12 +89,15 @@ async function updateEvent(formData:FormData){
   const supabase=await createClient();
   const id=Number(formData.get("id"));
   const title=String(formData.get("title")||"").trim();
+  const startsAt=String(formData.get("starts_at")||"").trim();
+  const startsAtIso=newYorkLocalToIso(startsAt);
   const imageUrl=String(formData.get("image_url")||"").trim();
   if(!id||!title) return;
+  if(!startsAtIso) redirect("/admin/eventos?estado=fecha#eventos-guardados");
   if(!imageUrl) redirect("/admin/eventos?estado=foto#eventos-guardados");
   const {error}=await supabase.from("events").update({
     title,
-    starts_at:String(formData.get("starts_at")||"").trim()||null,
+    starts_at:startsAtIso,
     location:String(formData.get("location")||"").trim(),
     description:String(formData.get("description")||"").trim(),
     image_url:imageUrl,
@@ -115,8 +146,14 @@ async function deleteEvent(formData:FormData){
 function localDateTime(value:string|null){
   if(!value) return "";
   const date=new Date(value);
-  const offset=date.getTimezoneOffset();
-  return new Date(date.getTime()-offset*60000).toISOString().slice(0,16);
+  if(Number.isNaN(date.getTime())) return "";
+  const parts=new Intl.DateTimeFormat("en-US",{
+    timeZone:EVENT_TIME_ZONE,
+    year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",
+    hourCycle:"h23"
+  }).formatToParts(date);
+  const part=(type:string)=>parts.find(item=>item.type===type)?.value||"";
+  return `${part("year")}-${part("month")}-${part("day")}T${part("hour")}:${part("minute")}`;
 }
 
 const messages:Record<string,{title:string;text:string;kind:string}>={

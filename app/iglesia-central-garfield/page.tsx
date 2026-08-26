@@ -1,6 +1,8 @@
 import Link from "next/link";
 import styles from "./garfield.module.css";
 import media from "./garfield-media.module.css";
+import refine from "./garfield-refinement.module.css";
+import ChurchGallery from "./ChurchGallery";
 
 export const metadata={
  title:"Iglesia Central Príncipe de Paz | Garfield, NJ",
@@ -23,13 +25,13 @@ const social={
 
 export default function IglesiaCentralGarfield(){
  return <div className={styles.page}>
-  <section className={styles.hero}>
-   <div className={styles.heroShade}/>
-   <div className={styles.heroCopy}>
+  <section className={`${styles.hero} ${refine.hero}`}>
+   <div className={`${styles.heroShade} ${refine.heroShade}`}/>
+   <div className={`${styles.heroCopy} ${refine.heroCopy}`}>
     <p>Iglesia Internacional Príncipe de Paz</p>
     <h1>Una familia de fe en el corazón de <em>Garfield.</em></h1>
     <span>Iglesia Central · 132 Palisade Ave</span>
-    <div className={styles.heroActions}>
+    <div className={`${styles.heroActions} ${refine.heroActions}`}>
      <a href={mapsUrl} target="_blank" rel="noopener noreferrer">Cómo llegar <b aria-hidden="true">↗</b></a>
      <a href={`tel:${phone}`}>Llamar: (201) 709-1364</a>
     </div>
@@ -46,9 +48,9 @@ export default function IglesiaCentralGarfield(){
    <div><p className={styles.eyebrow}>Liderazgo pastoral</p><h2>Rev. Rodolfo Solórzano<br/><em>y Pastora Masiel Solórzano</em></h2><p>Con fidelidad y amor pastoral sirven a la iglesia central, guiando a la congregación en la fe, la enseñanza bíblica y el servicio cristiano.</p></div>
   </section>
 
-  <section className={styles.schedule}>
+  <section className={refine.schedule}>
    <header><p className={styles.eyebrow}>Horarios semanales</p><h2>Hay un lugar para usted.</h2><p>Le esperamos para adorar juntos y recibir la Palabra de Dios.</p></header>
-   <div>{schedule.map(item=><article key={item.day}><small>{item.day}</small><strong>{item.time}</strong><span>{item.title}</span></article>)}</div>
+   <div className={refine.schedulePanel}>{schedule.map(item=><article key={item.day}><small>{item.day}</small><div><strong>{item.time}</strong><span>{item.title}</span></div></article>)}</div>
   </section>
 
   <section className={styles.visit}>
@@ -58,12 +60,7 @@ export default function IglesiaCentralGarfield(){
 
   <section className={media.life}>
    <header><p className={styles.eyebrow}>Nuestra familia de fe</p><h2>Una iglesia viva para todas las generaciones.</h2><p>Conozca nuestros espacios, la adoración congregacional, la predicación de la Palabra y el ministerio dedicado a los niños.</p></header>
-   <div className={media.photoGrid}>
-    <figure className={`${media.photo} ${media.photoExterior}`}><span role="img" aria-label="Edificio de Iglesia Cristiana Príncipe de Paz"/><figcaption>Nuestra iglesia en Garfield</figcaption></figure>
-    <figure className={`${media.photo} ${media.photoWorship}`}><span role="img" aria-label="Congregación reunida para adorar"/><figcaption>Adoración en familia</figcaption></figure>
-    <figure className={`${media.photo} ${media.photoPreaching}`}><span role="img" aria-label="Rev. Rodolfo Solórzano predicando"/><figcaption>Predicación de la Palabra</figcaption></figure>
-    <figure className={`${media.photo} ${media.photoChildren}`}><span role="img" aria-label="Niños y líderes del ministerio infantil"/><figcaption>Ministerio para nuestros niños</figcaption></figure>
-   </div>
+   <ChurchGallery/>
   </section>
 
   <section className={media.social}>

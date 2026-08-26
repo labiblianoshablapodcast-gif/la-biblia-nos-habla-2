@@ -24,7 +24,7 @@ const ministryHighlights=[
  {year:"2023",title:"Crecimiento ministerial",text:"En julio recibió su credencial ministerial como reverendo. Ese mismo año comenzó la remodelación del templo para crear seis salones dedicados a la enseñanza de niños y jóvenes."},
  {year:"2024",title:"Una iglesia que da fruto",text:"En mayo, Príncipe de Paz se convirtió oficialmente en iglesia madre de una nueva congregación en la ciudad de Filadelfia."},
  {year:"Educación",title:"Formación bíblica",text:"La iglesia recibió el privilegio de servir como una extensión del Instituto Bíblico bajo el Departamento de Educación del Distrito Hispano del Este."},
- {year:"Misiones",title:"Servicio en Guatemala",text:"Dos viajes misioneros llevaron apoyo espiritual, social y económico a Santa Cruz y Lanquín, incluyendo ayuda al instituto bíblico, a la construcción de un templo y a la adquisición de una van."}
+ {year:"Misiones",title:"Servicio en Guatemala",text:"Dos viajes misioneros llevaron apoyo espiritual, social y económico a Cobán y Lanquín, Guatemala, incluyendo ayuda al instituto bíblico, a la construcción de un templo y a la adquisición de una van."}
 ] as const;
 
 const social={
@@ -73,7 +73,7 @@ export default function IglesiaCentralGarfield(){
      <p>Durante su pastorado, la iglesia comenzó a celebrar servicios al aire libre para acercarse a la comunidad. También nació la Academia de Discipulado, donde los hermanos reciben preparación para desarrollar un liderazgo bíblico y sólido. La academia ha celebrado tres graduaciones de sus cinco niveles de formación.</p>
      <p>En julio de 2023, el pastor Solórzano avanzó en su trayectoria ministerial al recibir la credencial de reverendo. Ante el crecimiento de la iglesia, impulsó la remodelación y construcción de las instalaciones para habilitar seis salones en los que niños y jóvenes pudieran recibir enseñanza cristiana.</p>
      <p>En mayo de 2024, Príncipe de Paz se convirtió oficialmente en iglesia madre de una nueva congregación en Filadelfia. Asimismo, el Departamento de Educación del Distrito Hispano del Este concedió a la iglesia el privilegio de servir como una extensión del Instituto Bíblico.</p>
-     <p>La visión misionera también ha llevado a la congregación a realizar dos viajes a Guatemala bajo el liderazgo del reverendo. Allí se brindó apoyo para la reestructuración del instituto bíblico en Santa Cruz, la construcción de un templo en Lanquín, distintas iniciativas de ayuda social y económica, y la adquisición de una van para el instituto. Cada logro refleja el esfuerzo de una iglesia que continúa buscando la dirección de Dios y sirviendo a los demás.</p>
+     <p>La visión misionera también ha llevado a la congregación a realizar dos viajes a Guatemala bajo el liderazgo del reverendo. Allí se brindó apoyo para la reestructuración del instituto bíblico en Cobán; la construcción de un templo en Lanquín; distintas iniciativas de ayuda social y económica; y la adquisición de una van para el instituto. Cada logro refleja el esfuerzo de una iglesia que continúa buscando la dirección de Dios y sirviendo a los demás.</p>
     </div>
    </details>
   </section>

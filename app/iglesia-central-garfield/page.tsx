@@ -18,6 +18,15 @@ const schedule=[
  {day:"Viernes",time:"7:30 PM",title:"Culto de Ministerios y Misioneritas"}
 ] as const;
 
+const ministryHighlights=[
+ {year:"2019",title:"Llamado al pastorado",text:"En mayo, la congregación eligió al entonces ministro certificado Rodolfo Solórzano. En junio comenzó su administración pastoral y el 7 de septiembre recibió el ungimiento oficial como pastor."},
+ {year:"Formación",title:"Discipulado y liderazgo",text:"Se estableció la Academia de Discipulado, con cinco niveles de formación y tres graduaciones, preparando nuevos líderes para servir con una fe más sólida."},
+ {year:"2023",title:"Crecimiento ministerial",text:"En julio recibió su credencial ministerial como reverendo. Ese mismo año comenzó la remodelación del templo para crear seis salones dedicados a la enseñanza de niños y jóvenes."},
+ {year:"2024",title:"Una iglesia que da fruto",text:"En mayo, Príncipe de Paz se convirtió oficialmente en iglesia madre de una nueva congregación en la ciudad de Filadelfia."},
+ {year:"Educación",title:"Formación bíblica",text:"La iglesia recibió el privilegio de servir como una extensión del Instituto Bíblico bajo el Departamento de Educación del Distrito Hispano del Este."},
+ {year:"Misiones",title:"Servicio en Guatemala",text:"Dos viajes misioneros llevaron apoyo espiritual, social y económico a Santa Cruz y Lanquín, incluyendo ayuda al instituto bíblico, a la construcción de un templo y a la adquisición de una van."}
+] as const;
+
 const social={
  youtube:"https://youtube.com/@principedepazgarfieldnj?si=za5-Wi99nEq-Vz5T",
  facebook:"https://www.facebook.com/share/1M9LCypc57/?mibextid=wwXIfr"
@@ -46,6 +55,27 @@ export default function IglesiaCentralGarfield(){
   <section className={styles.leadership}>
    <span className={media.leadershipLogo} role="img" aria-label="Logo de Iglesia Cristiana Príncipe de Paz"/>
    <div><p className={styles.eyebrow}>Liderazgo pastoral</p><h2>Rev. Rodolfo Solórzano<br/><em>y Pastora Masiel Solórzano</em></h2><p>Con fidelidad y amor pastoral sirven a la iglesia central, guiando a la congregación en la fe, la enseñanza bíblica y el servicio cristiano.</p></div>
+  </section>
+
+  <section className={refine.ministryStory}>
+   <header className={refine.storyHeader}>
+    <div><p className={styles.eyebrow}>Trayectoria y logros ministeriales</p><h2>Una historia de llamado, formación y servicio.</h2></div>
+    <p>Desde 2019, el ministerio del Rev. Rodolfo Solórzano ha acompañado el crecimiento espiritual de Príncipe de Paz, la preparación de nuevos líderes y una obra que hoy alcanza más allá de Garfield.</p>
+   </header>
+   <div className={refine.storyLayout}>
+    <figure className={refine.storyPortrait}><figcaption><small>Sirviendo desde 2019</small><strong>Rev. Rodolfo Solórzano</strong></figcaption></figure>
+    <div className={refine.timeline}>{ministryHighlights.map(item=><article key={`${item.year}-${item.title}`}><small>{item.year}</small><div><h3>{item.title}</h3><p>{item.text}</p></div></article>)}</div>
+   </div>
+   <details className={refine.fullStory}>
+    <summary><span>Leer la historia completa</span><b aria-hidden="true">＋</b></summary>
+    <div className={refine.storyBody}>
+     <p>En mayo de 2019, bajo la dirección del Espíritu Santo, la congregación Príncipe de Paz eligió al entonces ministro certificado Rodolfo Solórzano como pastor. A partir de junio de ese año, la iglesia quedó bajo su administración junto a la Junta de Diáconos y los síndicos. El 7 de septiembre de 2019 se celebró su ungimiento oficial como pastor de la congregación.</p>
+     <p>Durante su pastorado, la iglesia comenzó a celebrar servicios al aire libre para acercarse a la comunidad. También nació la Academia de Discipulado, donde los hermanos reciben preparación para desarrollar un liderazgo bíblico y sólido. La academia ha celebrado tres graduaciones de sus cinco niveles de formación.</p>
+     <p>En julio de 2023, el pastor Solórzano avanzó en su trayectoria ministerial al recibir la credencial de reverendo. Ante el crecimiento de la iglesia, impulsó la remodelación y construcción de las instalaciones para habilitar seis salones en los que niños y jóvenes pudieran recibir enseñanza cristiana.</p>
+     <p>En mayo de 2024, Príncipe de Paz se convirtió oficialmente en iglesia madre de una nueva congregación en Filadelfia. Asimismo, el Departamento de Educación del Distrito Hispano del Este concedió a la iglesia el privilegio de servir como una extensión del Instituto Bíblico.</p>
+     <p>La visión misionera también ha llevado a la congregación a realizar dos viajes a Guatemala bajo el liderazgo del reverendo. Allí se brindó apoyo para la reestructuración del instituto bíblico en Santa Cruz, la construcción de un templo en Lanquín, distintas iniciativas de ayuda social y económica, y la adquisición de una van para el instituto. Cada logro refleja el esfuerzo de una iglesia que continúa buscando la dirección de Dios y sirviendo a los demás.</p>
+    </div>
+   </details>
   </section>
 
   <section className={refine.schedule}>

@@ -1069,3 +1069,213 @@
  }
  .mobileSchedule strong{font-size:.8rem}
 }
+
+
+/* Texto del día */
+.dailyVerse{
+ width:min(1180px,calc(100% - 72px));
+ margin:clamp(42px,6vw,82px) auto;
+ display:grid;
+ grid-template-columns:minmax(220px,.72fr) minmax(0,1.72fr);
+ overflow:hidden;
+ border:1px solid rgba(216,164,53,.48);
+ border-radius:24px;
+ background:#061a2c;
+ box-shadow:0 24px 70px rgba(4,19,33,.18);
+ color:#fff;
+}
+.dailyVerseOrnament{
+ position:relative;
+ min-height:330px;
+ padding:38px 34px;
+ display:flex;
+ flex-direction:column;
+ justify-content:space-between;
+ overflow:hidden;
+ background:
+  radial-gradient(circle at 48% 38%,rgba(220,169,57,.18),transparent 23%),
+  linear-gradient(145deg,#071b2d 0%,#123c58 100%);
+ color:#e1aa2f;
+}
+.dailyVerseOrnament::before,
+.dailyVerseOrnament::after{
+ content:"";
+ position:absolute;
+ width:230px;
+ height:230px;
+ right:-86px;
+ bottom:-98px;
+ border:1px solid rgba(224,174,57,.34);
+ border-radius:50%;
+}
+.dailyVerseOrnament::after{
+ width:170px;
+ height:170px;
+ right:-54px;
+ bottom:-66px;
+}
+.dailyVerseOrnament span{
+ font-size:46px;
+ line-height:1;
+ text-shadow:0 0 32px rgba(227,172,48,.45);
+}
+.dailyVerseOrnament small{
+ position:relative;
+ z-index:1;
+ font-size:12px;
+ font-weight:800;
+ letter-spacing:.2em;
+}
+.dailyVerseContent{
+ padding:clamp(34px,5vw,62px);
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ min-width:0;
+ background:
+  linear-gradient(120deg,rgba(255,255,255,.035),transparent 42%),
+  #061a2c;
+}
+.dailyVerseHeading{
+ display:flex;
+ align-items:flex-start;
+ justify-content:space-between;
+ gap:24px;
+ padding-bottom:22px;
+ border-bottom:1px solid rgba(255,255,255,.14);
+}
+.dailyVerseEyebrow{
+ margin:0 0 7px;
+ color:#dca82f;
+ font-size:12px;
+ font-weight:800;
+ letter-spacing:.2em;
+}
+.dailyVerseHeading h2{
+ margin:0;
+ color:#c8d1d9;
+ font-family:var(--font-sans);
+ font-size:clamp(15px,1.5vw,20px);
+ font-weight:600;
+}
+.dailyVerseEdition{
+ flex:0 0 auto;
+ padding:8px 12px;
+ border:1px solid rgba(220,168,47,.42);
+ border-radius:999px;
+ color:#e6bd62;
+ font-size:12px;
+ font-weight:700;
+}
+.dailyVerseQuote{
+ margin:clamp(26px,4vw,42px) 0 24px;
+ color:#fff;
+ font-family:var(--font-serif);
+ font-size:clamp(30px,3.2vw,50px);
+ font-style:normal;
+ font-weight:600;
+ line-height:1.12;
+ letter-spacing:-.025em;
+}
+.dailyVerseFooter{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:22px;
+}
+.dailyVerseFooter cite{
+ color:#e1ad39;
+ font-family:var(--font-serif);
+ font-size:clamp(21px,2vw,28px);
+ font-style:normal;
+ font-weight:700;
+}
+.dailyVerseFooter a{
+ display:inline-flex;
+ align-items:center;
+ gap:8px;
+ color:#eef4f8;
+ font-size:14px;
+ font-weight:800;
+ text-decoration:none;
+}
+.dailyVerseFooter a:hover{
+ color:#e1ad39;
+}
+.dailyVerseSource{
+ margin:24px 0 0;
+ color:#8796a4;
+ font-size:11px;
+ letter-spacing:.04em;
+}
+
+@media(max-width:760px){
+ .dailyVerse{
+  width:calc(100% - 32px);
+  margin:30px 16px 44px;
+  grid-template-columns:1fr;
+  border-radius:18px;
+ }
+ .dailyVerseOrnament{
+  min-height:112px;
+  padding:22px 24px;
+  flex-direction:row;
+  align-items:center;
+ }
+ .dailyVerseOrnament::before{
+  width:170px;
+  height:170px;
+  right:-55px;
+  bottom:-115px;
+ }
+ .dailyVerseOrnament::after{
+  width:120px;
+  height:120px;
+  right:-26px;
+  bottom:-88px;
+ }
+ .dailyVerseOrnament span{
+  font-size:32px;
+ }
+ .dailyVerseOrnament small{
+  max-width:170px;
+  text-align:right;
+  line-height:1.5;
+ }
+ .dailyVerseContent{
+  padding:28px 24px 30px;
+ }
+ .dailyVerseHeading{
+  display:block;
+  padding-bottom:18px;
+ }
+ .dailyVerseHeading h2{
+  font-size:15px;
+ }
+ .dailyVerseEdition{
+  display:inline-block;
+  margin-top:14px;
+  padding:6px 10px;
+  font-size:11px;
+ }
+ .dailyVerseQuote{
+  margin:26px 0 22px;
+  font-size:clamp(29px,9vw,40px);
+  line-height:1.08;
+ }
+ .dailyVerseFooter{
+  align-items:flex-start;
+  flex-direction:column;
+  gap:16px;
+ }
+ .dailyVerseFooter cite{
+  font-size:23px;
+ }
+ .dailyVerseFooter a{
+  min-height:44px;
+ }
+ .dailyVerseSource{
+  margin-top:18px;
+  line-height:1.5;
+ }
+}

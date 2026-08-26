@@ -3,6 +3,7 @@ import styles from "./garfield.module.css";
 import media from "./garfield-media.module.css";
 import refine from "./garfield-refinement.module.css";
 import ChurchGallery from "./ChurchGallery";
+import AssembliesAffiliation from "@/components/AssembliesAffiliation";
 
 export const metadata={
  title:"Iglesia Central Príncipe de Paz | Garfield, NJ",
@@ -51,6 +52,8 @@ export default function IglesiaCentralGarfield(){
    <div><p className={styles.eyebrow}>Bienvenidos a la sede central</p><h2>Un lugar para toda la familia.</h2></div>
    <div><p>El Ministerio Internacional Príncipe de Paz en Garfield es una congregación donde puede adorar a Dios, crecer en la Palabra y encontrar una familia espiritual que le reciba con amor.</p><p>Si vive en Garfield o sus alrededores, queremos invitarle a visitarnos y conocer lo que Dios está haciendo en esta comunidad.</p></div>
   </section>
+
+  <AssembliesAffiliation/>
 
   <section className={styles.leadership}>
    <span className={media.leadershipLogo} role="img" aria-label="Logo de Iglesia Cristiana Príncipe de Paz"/>

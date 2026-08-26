@@ -3,6 +3,7 @@ import Link from "next/link";
 import {church} from "@/data/church";
 import {createClient} from "@/lib/supabase/server";
 import styles from "./iglesia.module.css";
+import AssembliesAffiliation from "@/components/AssembliesAffiliation";
 
 const churchPhotos = [
  ["iglesia-congregacion-adorando.jpeg", "Congregación adorando unida"],
@@ -67,6 +68,8 @@ export default async function Iglesia(){
     </div>
    </div>
   </section>
+
+  <AssembliesAffiliation/>
 
   <section className="section churchScheduleSection">
    <div>

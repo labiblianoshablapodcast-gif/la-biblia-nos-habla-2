@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {church} from "@/data/church";
 import {youtube} from "@/data/youtube";
+import {agLogoWhite} from "@/data/ag-logos";
 
 export default function Footer(){
   return <footer className="siteFooter">
@@ -8,6 +9,9 @@ export default function Footer(){
       <strong>La Biblia Nos Habla</strong>
       <p>Predicando la Palabra. Formando discípulos. Documentando la obra de Dios.</p>
       <small>Toda la gloria sea para Jesucristo.</small>
+      <a className="footerAgLogo" href="https://ag.org/es-ES" target="_blank" rel="noopener noreferrer" aria-label="Visitar el sitio oficial de las Asambleas de Dios">
+        <img src={agLogoWhite} alt="Asambleas de Dios" width="1100" height="343"/>
+      </a>
     </div>
 
     <div>

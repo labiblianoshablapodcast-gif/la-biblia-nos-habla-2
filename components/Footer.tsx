@@ -10,7 +10,7 @@ export default function Footer(){
       <p>Predicando la Palabra. Formando discípulos. Documentando la obra de Dios.</p>
       <small>Toda la gloria sea para Jesucristo.</small>
       <a className="footerAgLogo" href="https://ag.org/es-ES" target="_blank" rel="noopener noreferrer" aria-label="Visitar el sitio oficial de las Asambleas de Dios">
-        <img src={agLogoWhite} alt="Asambleas de Dios" width="1100" height="343"/>
+        <img src={agLogoWhite} alt="AD — Asambleas de Dios" width="520" height="289"/>
       </a>
     </div>
 

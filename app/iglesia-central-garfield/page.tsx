@@ -6,7 +6,7 @@ import ChurchGallery from "./ChurchGallery";
 
 export const metadata={
  title:"Iglesia Central Príncipe de Paz | Garfield, NJ",
- description:"Conozca la Iglesia Internacional Príncipe de Paz en 132 Palisade Ave, Garfield, New Jersey."
+ description:"Conozca el Ministerio Internacional Príncipe de Paz en 132 Palisade Ave, Garfield, New Jersey."
 };
 
 const mapsUrl="https://www.google.com/maps/search/?api=1&query=132+Palisade+Ave+Garfield+NJ";
@@ -37,7 +37,7 @@ export default function IglesiaCentralGarfield(){
   <section className={`${styles.hero} ${refine.hero}`}>
    <div className={`${styles.heroShade} ${refine.heroShade}`}/>
    <div className={`${styles.heroCopy} ${refine.heroCopy}`}>
-    <p>Iglesia Internacional Príncipe de Paz</p>
+    <p>Ministerio Internacional Príncipe de Paz</p>
     <h1>Una familia de fe en el corazón de <em>Garfield.</em></h1>
     <span>Iglesia Central · 132 Palisade Ave</span>
     <div className={`${styles.heroActions} ${refine.heroActions}`}>
@@ -49,7 +49,7 @@ export default function IglesiaCentralGarfield(){
 
   <section className={styles.welcome}>
    <div><p className={styles.eyebrow}>Bienvenidos a la sede central</p><h2>Un lugar para toda la familia.</h2></div>
-   <div><p>La Iglesia Internacional Príncipe de Paz en Garfield es una congregación donde puede adorar a Dios, crecer en la Palabra y encontrar una familia espiritual que le reciba con amor.</p><p>Si vive en Garfield o sus alrededores, queremos invitarle a visitarnos y conocer lo que Dios está haciendo en esta comunidad.</p></div>
+   <div><p>El Ministerio Internacional Príncipe de Paz en Garfield es una congregación donde puede adorar a Dios, crecer en la Palabra y encontrar una familia espiritual que le reciba con amor.</p><p>Si vive en Garfield o sus alrededores, queremos invitarle a visitarnos y conocer lo que Dios está haciendo en esta comunidad.</p></div>
   </section>
 
   <section className={styles.leadership}>

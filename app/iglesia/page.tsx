@@ -59,7 +59,7 @@ export default async function Iglesia(){
     <p className={styles.mobileWelcome}>Un lugar para adorar, crecer y servir en comunidad. Toda persona es bienvenida, tal como es.</p>
     <div className={styles.campusGrid}>
      <a href={church.mapsUrl} target="_blank" rel="noopener noreferrer"><strong>Philadelphia, PA</strong><span>3661 N Marvine St</span></a>
-     <a href="https://www.google.com/maps/search/?api=1&query=132+Palisade+Ave+Garfield+NJ" target="_blank" rel="noopener noreferrer"><strong>Garfield, NJ</strong><span>132 Palisade Ave</span></a>
+     <Link href="/iglesia-central-garfield"><strong>Garfield, NJ</strong><span>132 Palisade Ave · Conocer la sede central</span></Link>
     </div>
     <div className={styles.mobileActions}>
      <a className="btn" href={church.mapsUrl} target="_blank" rel="noopener noreferrer">Cómo llegar <span aria-hidden="true">↗</span></a>

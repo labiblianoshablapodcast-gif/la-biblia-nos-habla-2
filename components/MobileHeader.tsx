@@ -9,6 +9,7 @@ const links=[
   ["Misiones","/misiones"],
   ["Nuestros Pastores","/el-pastor"],
   ["Iglesia","/iglesia"],
+  ["Iglesia Central – Garfield","/iglesia-central-garfield"],
   ["Eventos","/eventos"],
   ["Galería","/galeria"],
   ["Contacto y oración","/conexion"]

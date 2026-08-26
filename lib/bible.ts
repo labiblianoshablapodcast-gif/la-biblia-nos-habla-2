@@ -2,7 +2,7 @@ import books from "@/data/bible-books.json";
 import {getLocalQeqchiVerses,hasLocalQeqchiBook} from "@/lib/qeqchi-data";
 
 export type BibleBook = typeof books[number];
-export type BibleVerse = { number:number; text:string };
+export type BibleVerse = { number:number; text:string; heading?:string };
 export type BibleTranslation = "RVR60" | "QEQCHI";
 export type BibleChapter = {
   translation:BibleTranslation;
@@ -46,15 +46,32 @@ export function qeqchiChapterUrl(_code:string,_chapter:number){
   return "https://scriptureearth.org/00spa.php?idx=264&iso_code=kek&language=Kekch%C3%AD";
 }
 
+function cleanEditorialHeading(value:string):string|undefined{
+  const heading=value
+    .replace(/\r/g,"")
+    .split("\n")
+    .map((line)=>line.replace(/\s+/g," ").trim())
+    .filter(Boolean)
+    .at(-1);
+
+  if(!heading || heading.length<3 || heading.length>140)return undefined;
+  return heading;
+}
+
 function parseVerses(text:string):BibleVerse[]{
   const verses:BibleVerse[]=[];
-  const marker=/<<<VERSE:(\d+)>>>([\s\S]*?)(?=<<<VERSE:\d+>>>|$)/g;
+  const marker=/__LBHN_VERSE_(\d+)_START__([\s\S]*?)__LBHN_VERSE_END__/g;
+  let previousEnd=0;
   for(const match of text.matchAll(marker)){
     const clean=match[2]
       .replace(/^\s*\d+\s*\|\s*/,"")
       .replace(/\s+/g," ")
       .trim();
-    if(clean)verses.push({number:Number(match[1]),text:clean});
+    if(clean){
+      const heading=cleanEditorialHeading(text.slice(previousEnd,match.index));
+      verses.push({number:Number(match[1]),text:clean,...(heading?{heading}:{})});
+    }
+    previousEnd=(match.index??0)+match[0].length;
   }
   return verses;
 }
@@ -68,13 +85,14 @@ export async function getChapter(code:string, chapter:number): Promise<BibleChap
 
   const query=new URLSearchParams({
     passage:`${book} ${chapter}`,
-    formatting:"none",
+    formatting:"all",
     redLetter:"false",
     footnotes:"false",
     citation:"false",
-    paragraphs:"false",
+    paragraphs:"true",
+    fullText:"true",
     header:"",
-    eachVerse:"<<<VERSE:[VerseNum]>>>[VerseText]",
+    eachVerse:"__LBHN_VERSE_[VerseNum]_START__[VerseText]__LBHN_VERSE_END__",
     footer:"",
     key:apiKey
   });

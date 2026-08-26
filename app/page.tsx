@@ -2,18 +2,51 @@ import Image from "next/image";
 import Link from "next/link";
 import {church} from "@/data/church";
 import {youtube} from "@/data/youtube";
+import {books,getChapter} from "@/lib/bible";
 import styles from "./home.module.css";
 
-const quickLinks=[
+export const dynamic="force-dynamic";
+
+const dailyPassages=[
+ ["PSA",23,1],["PHP",4,13],["JER",29,11],["ISA",41,10],["PRO",3,5],
+ ["ROM",8,28],["PSA",46,1],["JHN",3,16],["MAT",11,28],["JOS",1,9],
+ ["PSA",119,105],["2CO",5,17],["HEB",11,1],["PSA",34,8],["ISA",40,31],
+ ["PHP",4,6],["ROM",12,2],["MAT",6,33],["PSA",37,5],["GAL",2,20],
+ ["1PE",5,7],["JHN",14,6],["PSA",121,1],["EPH",2,8],["PRO",18,10],
+ ["ROM",5,8],["PSA",91,1],["JHN",8,12],["LAM",3,22],["REV",21,4],
+ ["PSA",118,24]
+] as const;
+
+function getNewYorkDay(value:Date){
+ const parts=new Intl.DateTimeFormat("en-US",{year:"numeric",month:"numeric",day:"numeric",timeZone:"America/New_York"}).formatToParts(value);
+ const number=(type:string)=>Number(parts.find(part=>part.type===type)?.value);
+ return Math.floor(Date.UTC(number("year"),number("month")-1,number("day"))/86_400_000);
+}
+
+function formatDailyDate(value:Date){
+ return new Intl.DateTimeFormat("es-US",{weekday:"long",day:"numeric",month:"long",timeZone:"America/New_York"}).format(value);
+}
+
+const baseQuickLinks=[
  {icon:"▤",title:"Leer la Biblia",text:"Acceda a los libros y encuentre una palabra para hoy.",href:"/biblia",image:"/images/biblia-abierta-portada.png",alt:"Biblia abierta sobre una mesa"},
- {icon:"☀",title:"Texto de hoy para meditar",text:"Vea el día, la fecha y el versículo preparado para hoy.",href:"/devocionales",image:"/images/biblia-abierta-portada.png",alt:"Biblia abierta para la meditación diaria"},
  {icon:"♢",title:"Pedir oración",text:"Comparta su necesidad con nuestro equipo pastoral.",href:"/conexion",image:"/images/manos-orando-conexion-v2.png",alt:"Manos unidas en oración"},
  {icon:"✦",title:"Nuevos creyentes",text:"Si aceptó a Cristo, queremos acompañarle en su próximo paso.",href:"/primeros-pasos",image:"/images/nuevos-creyentes-discipulado.jpg",alt:"Nuevo creyente leyendo la Biblia acompañado por un mentor cristiano"},
  {icon:"⌂",title:"Nuestra iglesia",text:"Conozca quiénes somos, nuestros horarios y ubicación.",href:"/iglesia",image:"/images/iglesia-principe-de-paz-congregacion.jpeg",alt:"Congregación de la Iglesia Príncipe de Paz"},
  {icon:"◎",title:"Misiones",text:"Vea cómo compartimos el Evangelio y servimos a comunidades.",href:"/misiones",image:"/images/misiones/lanquin-2026-comunidad-02.jpg",alt:"Comunidad reunida durante la misión en Lanquín"}
 ];
 
-export default function Home(){
+export default async function Home(){
+ const now=new Date();
+ const [dailyCode,dailyChapter,dailyNumber]=dailyPassages[getNewYorkDay(now)%dailyPassages.length];
+ const chapter=await getChapter(dailyCode,dailyChapter);
+ const verse=chapter?.verses.find(item=>item.number===dailyNumber)?.text || "Tu palabra es lámpara a mis pies, y lumbrera a mi camino.";
+ const book=books.find(item=>item.code===dailyCode);
+ const reference=`${book?.name ?? chapter?.book ?? "Salmos"} ${dailyChapter}:${dailyNumber}`;
+ const quickLinks=[
+  baseQuickLinks[0],
+  {icon:"☀",title:"Texto de hoy para meditar",text:verse,href:"/devocionales",image:"/images/biblia-abierta-portada.png",alt:"Biblia abierta junto a un camino al amanecer",daily:true,date:formatDailyDate(now),reference},
+  ...baseQuickLinks.slice(1)
+ ];
  return <main className={styles.home}>
   <section className={styles.hero}>
    <div className={styles.heroPortrait}><Image className={styles.heroImage} src="/images/pastor-y-yudelka-hero-v2.png" alt="Pastores Gilberto y Yudelka Maldonado" fill priority sizes="100vw"/></div>
@@ -55,11 +88,14 @@ export default function Home(){
   </section>
 
   <section className={styles.quickGrid} aria-label="Accesos principales">
-   {quickLinks.map(item=><Link className={styles.quickCard} href={item.href} key={item.href}>
+   {quickLinks.map(item=><Link className={`${styles.quickCard} ${"daily" in item ? styles.dailyCard : ""}`} href={item.href} key={item.href}>
     <div className={styles.cardImage}><Image src={item.image} alt={item.alt} fill sizes="(max-width: 700px) 100vw, 17vw"/></div>
     <div className={styles.cardCopy}>
      <h2><span>{item.icon}</span>{item.title}</h2>
-     <p>{item.text}</p><b aria-hidden="true">→</b>
+     {"daily" in item && <small className={styles.dailyDate}>{item.date}</small>}
+     <p>{item.text}</p>
+     {"daily" in item && <strong className={styles.dailyReference}>{item.reference}</strong>}
+     <b aria-hidden="true">→</b>
     </div>
    </Link>)}
   </section>

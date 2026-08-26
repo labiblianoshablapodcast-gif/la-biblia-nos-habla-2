@@ -1,3 +1,4 @@
+.hero{background-image:url("/images/garfield-pastors-hero-v2.webp")!important}
 .schedule{display:grid;grid-template-columns:minmax(260px,.72fr) minmax(460px,1.28fr);gap:clamp(42px,6vw,90px);align-items:center;padding:clamp(72px,9vw,126px) max(6vw,32px);background:linear-gradient(135deg,#f8f4eb 0%,#fff 48%,#f2ede3 100%)}
 .schedule header{max-width:460px}.schedule header h2{margin:12px 0 18px;color:#071b30;font-family:Georgia,serif;font-size:clamp(2.2rem,4vw,4rem);font-weight:500;line-height:1.02}.schedule header>p:last-child{max-width:390px;color:#5d6670;font-size:1.06rem;line-height:1.75}
 .schedulePanel{overflow:hidden;border:1px solid rgba(216,165,45,.36);border-radius:22px;background:linear-gradient(145deg,#071d32,#0b2b48);box-shadow:0 24px 60px rgba(4,21,38,.17)}

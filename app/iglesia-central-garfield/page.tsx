@@ -55,7 +55,7 @@ export default function IglesiaCentralGarfield(){
 
   <section className={styles.visit}>
    <div className={styles.visitCopy}><p className={styles.eyebrow}>Planifique su visita</p><h2>Estamos en Garfield, New Jersey.</h2><address><small>Dirección</small><strong>132 Palisade Ave<br/>Garfield, NJ</strong></address><p>¿Tiene alguna pregunta antes de llegar? Puede comunicarse directamente con la iglesia.</p><div><a href={mapsUrl} target="_blank" rel="noopener noreferrer">Ver ruta en Google Maps ↗</a><a href={`tel:${phone}`}>☎ (201) 709-1364</a></div></div>
-   <div className={styles.mapCard}><span aria-hidden="true">⌖</span><small>Iglesia Central</small><strong>Príncipe de Paz</strong><p>132 Palisade Ave · Garfield, NJ</p></div>
+   <a className={`${styles.mapCard} ${refine.churchCard}`} href={mapsUrl} target="_blank" rel="noopener noreferrer" aria-label="Ver la Iglesia Central Príncipe de Paz en Google Maps"><span className={refine.churchCardCaption}><small>Iglesia Central</small><strong>Príncipe de Paz</strong><b>132 Palisade Ave · Garfield, NJ&nbsp; ↗</b></span></a>
   </section>
 
   <section className={media.life}>
@@ -65,7 +65,7 @@ export default function IglesiaCentralGarfield(){
 
   <section className={media.social}>
    <span className={media.socialLogo} role="img" aria-label="Logo de Iglesia Cristiana Príncipe de Paz"/>
-   <div><p className={styles.eyebrow}>Conéctese con la iglesia central</p><h2>Vea los servicios y siga nuestras actividades.</h2><p>Encuentre predicaciones, transmisiones y momentos de la vida congregacional en nuestros canales oficiales.</p><div className={media.socialActions}><a className={media.youtube} href={social.youtube} target="_blank" rel="noopener noreferrer">▶ Ver en YouTube</a><a className={media.facebook} href={social.facebook} target="_blank" rel="noopener noreferrer">f&nbsp; Seguir en Facebook</a></div></div>
+   <div><p className={styles.eyebrow}>Conéctese con la iglesia central</p><h2>Vea los servicios y siga nuestras actividades.</h2><p>Encuentre predicaciones, transmisiones y momentos de la vida congregacional en nuestros canales oficiales.</p><div className={media.socialActions}><a className={`${media.youtube} ${refine.socialButton}`} href={social.youtube} target="_blank" rel="noopener noreferrer"><svg className={refine.socialIcon} viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#ff0033"/><path d="M22.8 15.1 12.9 9.6c-.7-.4-1.6.1-1.6.9v11c0 .8.9 1.3 1.6.9l9.9-5.5c.7-.4.7-1.4 0-1.8Z" fill="#fff"/></svg><span><small>YouTube</small><strong>Ver canal oficial</strong></span><b aria-hidden="true">↗</b></a><a className={`${media.facebook} ${refine.socialButton}`} href={social.facebook} target="_blank" rel="noopener noreferrer"><svg className={refine.socialIcon} viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#1877f2"/><path d="M18.2 27v-9h3l.5-3.5h-3.5v-2.2c0-1 .3-1.7 1.8-1.7h1.9V7.5c-.3 0-1.5-.1-2.8-.1-2.8 0-4.7 1.7-4.7 4.8v2.3h-3.1V18h3.1v9h3.8Z" fill="#fff"/></svg><span><small>Facebook</small><strong>Seguir la página</strong></span><b aria-hidden="true">↗</b></a></div></div>
   </section>
 
   <section className={styles.referral}><p>Una iglesia cerca de usted</p><h2>¿Conoce a alguien en el área de Garfield?</h2><span>Comparta esta página e invítele a encontrar una familia de fe en la Iglesia Príncipe de Paz.</span><div><a href={mapsUrl} target="_blank" rel="noopener noreferrer">Visitar la iglesia central</a><Link href="/iglesia">Conocer la iglesia de Filadelfia</Link></div></section>

@@ -36,5 +36,6 @@ test('resend is an explicit consented action, rate-limited locally and never cre
  assert.ok(notice.includes('href="/kids/padres#confirmacion"'));
  assert.ok(!notice.includes('dangerouslySetInnerHTML'));assert.ok(!notice.includes('auth.'));assert.ok(!notice.includes('fetch('));
  assert.ok(file('components/KidsParents.tsx').includes('!signedIn&&<KidsConfirmationHelp/>'));
+ assert.ok(file('components/KidsParents.tsx').includes('await withTimeout(createClient().auth.getUser())'));
  assert.ok(file('app/layout.tsx').includes('<EmailConfirmationNotice/>'));
 });

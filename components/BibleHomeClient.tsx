@@ -3,10 +3,12 @@
 import Link from "next/link";
 import {useEffect,useMemo,useState} from "react";
 import books from "@/data/bible-books.json";
+import {readerVersion,versionQuery,type ReaderVersion} from "@/lib/bible-version";
 
-type LastReading={bookName:string;bookSlug:string;chapter:number;at:string};
+type LastReading={bookName:string;bookSlug:string;chapter:number;at:string;translationKey?:string};
 
-export default function BibleHomeClient(){
+export default function BibleHomeClient({version="rvr60"}:{version?:ReaderVersion}){
+  const suffix=versionQuery(version);
   const [query,setQuery]=useState("");
   const [last,setLast]=useState<LastReading|null>(null);
 
@@ -32,7 +34,7 @@ export default function BibleHomeClient(){
     const name=match[1].toLowerCase();
     const book=books.find(b=>b.name.toLowerCase()===name || b.name.toLowerCase().startsWith(name));
     const chapter=Number(match[2]);
-    if(book && chapter>=1 && chapter<=book.chapters) directHref=`/biblia/${book.slug}/${chapter}`;
+    if(book && chapter>=1 && chapter<=book.chapters) directHref=`/biblia/${book.slug}/${chapter}${suffix}`;
   }
 
   return <div>
@@ -45,13 +47,13 @@ export default function BibleHomeClient(){
       />
       {query && <div className="searchResults">
         {directHref && <Link href={directHref}><strong>Abrir referencia</strong><small>{query}</small></Link>}
-        {filtered.map(b=><Link key={b.slug} href={`/biblia/${b.slug}/1`}><strong>{b.name}</strong><small>{b.chapters} capítulos</small></Link>)}
+        {filtered.map(b=><Link key={b.slug} href={`/biblia/${b.slug}/1${suffix}`}><strong>{b.name}</strong><small>{b.chapters} capítulos</small></Link>)}
       </div>}
     </div>
 
     {last && <div className="continueReading">
       <div><small>Última lectura</small><strong>{last.bookName} {last.chapter}</strong></div>
-      <Link className="btn" href={`/biblia/${last.bookSlug}/${last.chapter}`}>Continuar leyendo</Link>
+      <Link className="btn" href={`/biblia/${last.bookSlug}/${last.chapter}${versionQuery(readerVersion(last.translationKey))}`}>Continuar leyendo</Link>
     </div>}
   </div>;
 }

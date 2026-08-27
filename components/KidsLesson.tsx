@@ -1,22 +1,30 @@
 "use client";
 import Link from "next/link";
-import {useEffect,useState} from "react";
+import {useEffect,useRef,useState} from "react";
 import KidsArt,{KidsIcon,Lumi} from "@/components/KidsArt";
 import {kidsLesson,kidsQuestions,gradeKidsQuiz} from "@/lib/kids";
 import type {KidsAge} from "@/lib/kids";
+import {createKidsNarrator,kidsQuestionScenes,questionNarration} from "@/lib/kids-narration";
 import styles from "@/app/kids/kids.module.css";
 
 export default function KidsLesson({age,slot}:{age:KidsAge;slot:number}){
  const [scene,setScene]=useState(0),[playing,setPlaying]=useState(false),[voice,setVoice]=useState(false);
  const [answers,setAnswers]=useState<number[]>([-1,-1,-1]),[checked,setChecked]=useState(false),[consent,setConsent]=useState(false),[saving,setSaving]=useState(false),[message,setMessage]=useState("");
  const [selectedSlot,setSelectedSlot]=useState(slot);
+ const [activeAudio,setActiveAudio]=useState<string|null>(null),[audioError,setAudioError]=useState("");
+ const narrator=useRef<ReturnType<typeof createKidsNarrator>|null>(null);
  const text=age==="4-6"?kidsLesson.scenes[scene].young:kidsLesson.scenes[scene].older;
  const score=gradeKidsQuiz(age,answers);
- useEffect(()=>{setVoice("speechSynthesis" in window);return()=>{if("speechSynthesis" in window)window.speechSynthesis.cancel();};},[]);
+ useEffect(()=>{
+  let live=true;
+  const available="speechSynthesis" in window&&"SpeechSynthesisUtterance" in window;setVoice(available);
+  if(available)narrator.current=createKidsNarrator(window.speechSynthesis,text=>new SpeechSynthesisUtterance(text),key=>{if(live)setActiveAudio(key);},()=>{if(live)setAudioError("No pudimos reproducir la voz. Puede leer el texto o intentarlo de nuevo.");});
+  return()=>{live=false;narrator.current?.stop();narrator.current=null;};
+ },[]);
  useEffect(()=>{if(!playing)return;const timer=window.setTimeout(()=>{if(scene===5)setPlaying(false);else setScene(value=>value+1);},age==="4-6"?14000:20000);return()=>window.clearTimeout(timer);},[playing,scene,age]);
- useEffect(()=>{if("speechSynthesis" in window)window.speechSynthesis.cancel();},[scene]);
- function move(next:number){setPlaying(false);setScene(next);}
- function speak(){setPlaying(false);window.speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(text);utterance.lang="es";utterance.rate=age==="4-6"?.8:.9;window.speechSynthesis.speak(utterance);}
+ useEffect(()=>{narrator.current?.stop();},[scene]);
+ function move(next:number){setPlaying(false);narrator.current?.stop();setScene(next);}
+ function speak(key:string,content:string){setPlaying(false);setAudioError("");narrator.current?.toggle(key,content,age==="4-6"?.8:.9);}
  async function save(){
   setSaving(true);setMessage("");
   try{const response=await fetch("/api/kids/progreso",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({lesson:kidsLesson.id,age,slot:selectedSlot,answers,adultConsent:consent})});const result=await response.json();setMessage(response.ok?"Progreso guardado. Puede verlo en el espacio para padres.":result.error||"No se pudo guardar. Intente nuevamente.");}
@@ -26,13 +34,32 @@ export default function KidsLesson({age,slot}:{age:KidsAge;slot:number}){
   <section className={styles.story} aria-label="Historia animada">
    <div className={styles.stage} key={scene}><KidsArt scene={scene}/></div>
    <div className={styles.storyText}><p className={styles.eyebrow}>Escena {scene+1} de 6 · {age} años</p><h2>{kidsLesson.scenes[scene].title}</h2><p>{text}</p>
-    <div className={styles.controls}><button onClick={()=>move(Math.max(0,scene-1))} disabled={scene===0}>← Anterior</button><button onClick={()=>{if(scene===5)setScene(0);setPlaying(value=>!value);}} aria-pressed={playing}>{playing?"Pausar":"Reproducir historia"}</button><button onClick={()=>move(Math.min(5,scene+1))} disabled={scene===5}>Siguiente →</button>{voice&&<button onClick={speak}>Escuchar escena</button>}</div>
-    <p className={styles.hint}>La historia avanza sin sonido. “Escuchar escena” usa la voz disponible en su dispositivo. Puede leer y cambiar las escenas a su ritmo.</p>
+    <div className={styles.controls}><button onClick={()=>move(Math.max(0,scene-1))} disabled={scene===0}>← Anterior</button><button onClick={()=>{narrator.current?.stop();if(scene===5)setScene(0);setPlaying(value=>!value);}} aria-pressed={playing}>{playing?"Pausar escenas":"Ver escenas automáticamente"}</button><button onClick={()=>move(Math.min(5,scene+1))} disabled={scene===5}>Siguiente →</button>{voice&&<button onClick={()=>speak(`scene-${scene}`,`Escena ${scene+1}. ${kidsLesson.scenes[scene].title}. ${text}`)} aria-pressed={activeAudio===`scene-${scene}`}>{activeAudio===`scene-${scene}`?`Detener audio de escena ${scene+1}`:`Escuchar escena ${scene+1}`}</button>}</div>
+    <p className={styles.hint}>El avance automático cambia las imágenes sin sonido. Cada pregunta, más abajo, tiene su audio y la parte de la historia que le corresponde.</p>
+    <p className={styles.audioStatus} role="status">{activeAudio===`scene-${scene}`?`Audio de escena ${scene+1}: ${kidsLesson.scenes[scene].title}`:""}</p>
    </div>
   </section>
   <aside className={styles.lumi}><Lumi/><p><strong>¡Soy Lumi!</strong> Recordemos juntos: podemos confiar en Dios y pedir ayuda. Nunca imites el uso de una honda ni lances piedras a personas o animales.</p></aside>
-  <section className={styles.panel} aria-labelledby="kids-quiz"><p className={styles.eyebrow}>Aprendemos jugando</p><h2 id="kids-quiz">¿Qué descubriste?</h2><p>Elige una respuesta en cada pregunta. Un adulto puede ayudarte a leer.</p>
-   {kidsQuestions[age].map((question,index)=><fieldset key={index} className={styles.question}><legend>{index+1}. {question.prompt}</legend><div className={styles.options}>{question.options.map((option,choice)=><label key={choice} className={answers[index]===choice?styles.selected:""}><input type="radio" name={`kids-q-${index}`} checked={answers[index]===choice} onChange={()=>{setAnswers(previous=>previous.map((value,i)=>i===index?choice:value));setChecked(false);setMessage("");}}/><KidsIcon kind={option.icon}/><span>{option.text}</span></label>)}</div>{checked&&<p className={styles.explanation}>{answers[index]===question.answer?"✓ ¡Bien! ":"Vamos a aprender: "}{question.explanation}</p>}</fieldset>)}
+  <p role="status">{audioError}</p>
+  <section className={styles.panel} aria-labelledby="kids-quiz"><p className={styles.eyebrow}>Aprendemos jugando</p><h2 id="kids-quiz">¿Qué descubriste?</h2><p>Primero escucha o lee la pregunta y sus opciones. Si necesitas recordar, escucha la parte de la historia indicada en esa misma tarjeta. Luego elige A, B o C.</p>
+   {!voice&&<p className={styles.hint}>La lectura en voz no está disponible en este navegador. Todo el contenido se puede leer con un adulto.</p>}
+   {kidsQuestions[age].map((question,index)=>{
+    const related=kidsQuestionScenes[age][index],story=kidsLesson.scenes[related],questionKey=`question-${index}`,storyKey=`context-${index}`;
+    const isActive=activeAudio===questionKey||activeAudio===storyKey;
+    return <fieldset key={index} className={`${styles.question} ${isActive?styles.questionPlaying:""}`} aria-describedby={`kids-related-${index}`}>
+     <legend>Pregunta {index+1}. {question.prompt}</legend>
+     <div className={styles.questionAudio}>
+      <p id={`kids-related-${index}`} className={styles.hint}><strong>Historia para esta pregunta:</strong> escena {related+1} · {story.title}</p>
+      {voice&&<div className={styles.controls}>
+       <button type="button" aria-pressed={activeAudio===questionKey} onClick={()=>speak(questionKey,questionNarration(question,index))}>{activeAudio===questionKey?`Detener audio de pregunta ${index+1}`:`Escuchar pregunta ${index+1} y opciones`}</button>
+       <button type="button" aria-label={`${activeAudio===storyKey?"Detener":"Escuchar"} historia para pregunta ${index+1}: escena ${related+1}, ${story.title}`} aria-pressed={activeAudio===storyKey} onClick={()=>speak(storyKey,`Historia para la pregunta ${index+1}. Escena ${related+1}: ${story.title}. ${age==="4-6"?story.young:story.older}`)}>{activeAudio===storyKey?"Detener parte de la historia":`Escuchar parte de la historia · escena ${related+1}`}</button>
+      </div>}
+      <p className={styles.audioStatus} role="status">{isActive?`Audio de pregunta ${index+1}: ${activeAudio===questionKey?"pregunta y opciones":`historia · escena ${related+1}`}`:""}</p>
+     </div>
+     <div className={styles.options}>{question.options.map((option,choice)=><label key={choice} className={answers[index]===choice?styles.selected:""}><input type="radio" name={`kids-q-${index}`} checked={answers[index]===choice} onChange={()=>{setAnswers(previous=>previous.map((value,i)=>i===index?choice:value));setChecked(false);setMessage("");}}/><KidsIcon kind={option.icon}/><span><b className={styles.optionLetter}>{String.fromCharCode(65+choice)}</b>{option.text}</span></label>)}</div>
+     {checked&&<p className={styles.explanation}>{answers[index]===question.answer?"✓ ¡Bien! ":"Vamos a aprender: "}{question.explanation}</p>}
+    </fieldset>;
+   })}
    <button className={styles.primary} disabled={score===null} onClick={()=>setChecked(true)}>Ver mis respuestas</button>
    {checked&&<div className={styles.result} role="status"><strong>{score} de 3 respuestas correctas</strong><p>{score===3?"¡Muy bien! Ahora comparte con tu familia lo que aprendiste.":"¡Gracias por intentarlo! Lee las explicaciones y vuelve a elegir si lo deseas."}</p></div>}
   </section>

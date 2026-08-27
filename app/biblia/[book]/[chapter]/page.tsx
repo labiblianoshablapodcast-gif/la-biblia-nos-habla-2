@@ -75,6 +75,7 @@ export default async function ChapterPage({
         <p><strong>American Standard Version (ASV, 1901) · English.</strong><br/>
         Fuente: <a href={asvChapterUrl(book.code,chapter)} target="_blank" rel="noreferrer">YouVersion</a>.
         {bibleChapter && "copyright" in bibleChapter && bibleChapter.copyright ? ` ${bibleChapter.copyright}` : ""}</p>
+        <p lang="en">Section headings are editorial reading aids from the <a href="https://berean.bible/terms.htm" target="_blank" rel="noreferrer">Berean Standard Bible (public domain)</a>, not part of the ASV text. Scripture text remains ASV from YouVersion.</p>
       </div>
     ) : version==="qeqchi" ? (
       <div className="bibliaAttribution">

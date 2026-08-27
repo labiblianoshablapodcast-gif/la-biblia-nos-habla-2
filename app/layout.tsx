@@ -13,6 +13,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileNav from "@/components/MobileNav";
 import GlobalPhotoViewer from "@/components/GlobalPhotoViewer";
+import EmailConfirmationNotice from "@/components/EmailConfirmationNotice";
 import { Analytics } from '@vercel/analytics/next';
 
 export const viewport = {
@@ -38,5 +39,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({children}:{children:React.ReactNode}) {
-  return <html lang="es"><body><AppExperience/><a className="skipLink" href="#contenido-principal">Saltar al contenido principal</a><Header/><main id="contenido-principal">{children}</main><Footer/><MobileNav/><GlobalPhotoViewer/><RegisterServiceWorker/><Analytics/></body></html>;
+  return <html lang="es"><body><AppExperience/><a className="skipLink" href="#contenido-principal">Saltar al contenido principal</a><Header/><EmailConfirmationNotice/><main id="contenido-principal">{children}</main><Footer/><MobileNav/><GlobalPhotoViewer/><RegisterServiceWorker/><Analytics/></body></html>;
 }

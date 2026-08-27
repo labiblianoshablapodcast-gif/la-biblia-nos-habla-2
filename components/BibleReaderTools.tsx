@@ -91,8 +91,8 @@ export default function BibleReaderTools({
         const noteKey=`${key}-${verse.number}`;
         const favorite=favorites.includes(verse.number);
         return <div className="verseGroup" key={verse.number}>
-          {verse.heading && <h2 className="bibleSectionHeading">
-            <span>Subtítulo editorial</span>
+          {verse.heading && <h2 className="bibleSectionHeading" lang={translationKey==="asv"?"en":undefined}>
+            <span>{translationKey==="asv"?"Section heading":"Subtítulo editorial"}</span>
             {verse.heading}
           </h2>}
           <section className={favorite?"verseRow favoriteVerse":"verseRow"}>

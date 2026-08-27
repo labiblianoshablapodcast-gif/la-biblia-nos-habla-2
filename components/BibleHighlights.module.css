@@ -1,0 +1,13 @@
+.help,.status{font-family:Arial,sans-serif;font-size:14px;line-height:1.6;max-width:900px;margin:12px auto;color:inherit}
+.status:empty{display:none}
+.text{user-select:text;-webkit-user-select:text}
+.mark{background:#f5d974!important;color:#182632!important;border-radius:3px;padding:0;box-decoration-break:clone;-webkit-box-decoration-break:clone;cursor:pointer}
+.mark:focus-visible{outline:3px solid #2374ad;outline-offset:3px}
+:global(.darkReader) .mark{background:#d8b74e!important;color:#101b25!important}
+.toolbar{position:fixed;z-index:1100;bottom:calc(112px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);width:min(520px,calc(100% - 24px));padding:14px;background:#112b3c;color:#fff;border:1px solid #d5ad51;border-radius:16px;box-shadow:0 8px 32px #0005;font-family:Arial,sans-serif;box-sizing:border-box}
+.preview{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:15px;line-height:1.5;margin-bottom:10px;color:#fff!important}
+.actions{display:flex;gap:8px}
+.toolbar .actions button{min-height:44px!important;margin:0!important;padding:10px 12px!important;border:1px solid #d5ad51!important;border-radius:9px!important;background:#f5d974!important;color:#182632!important;font-family:Arial,sans-serif!important;font-size:14px!important;font-weight:700!important;line-height:1.2!important;cursor:pointer}
+.toolbar .actions button:disabled{opacity:.45;cursor:not-allowed}
+.toolbar .actions button:last-child{margin-left:auto!important;min-width:44px;background:#112b3c!important;color:white!important}
+.toolbar .actions button:focus-visible{outline:3px solid white;outline-offset:3px}

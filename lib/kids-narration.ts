@@ -1,0 +1,31 @@
+import type {KidsAge,KidsQuestion} from "./kids";
+
+// Zero-based scene for each question, in quiz order.
+export const kidsQuestionScenes:Record<KidsAge,readonly number[]>={"4-6":[0,3,5],"7-10":[2,3,5]};
+export function questionNarration(question:KidsQuestion,index:number){
+ return `Pregunta ${index+1}. ${question.prompt} ${question.options.map((option,i)=>`Opción ${String.fromCharCode(65+i)}: ${option.text}.`).join(" ")}`;
+}
+
+// One narrator for the story and quiz. Ignore late events from cancelled audio.
+export function createKidsNarrator(
+ synthesis:Pick<SpeechSynthesis,"speak"|"cancel">,
+ makeUtterance:(text:string)=>SpeechSynthesisUtterance,
+ onActive:(key:string|null)=>void,
+ onError:()=>void,
+){
+ let current:{key:string;utterance:SpeechSynthesisUtterance}|null=null;
+ function stop(){current=null;synthesis.cancel();onActive(null);}
+ function toggle(key:string,text:string,rate:number){
+  const wasActive=current?.key===key;
+  stop();if(wasActive)return;
+  try{
+   const utterance=makeUtterance(text);
+   utterance.lang="es";utterance.rate=rate;
+   const entry={key,utterance};current=entry;
+   utterance.onend=()=>{if(current!==entry)return;current=null;onActive(null);};
+   utterance.onerror=()=>{if(current!==entry)return;current=null;onActive(null);onError();};
+   onActive(key);synthesis.speak(utterance);
+  }catch{stop();onError();}
+ }
+ return {toggle,stop};
+}

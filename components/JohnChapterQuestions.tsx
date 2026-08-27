@@ -81,7 +81,7 @@ export default function JohnChapterQuestions({chapter}:{chapter:number}){
 
     <footer className="johnStudyFooter">
       <button type="button" className="btn" onClick={finishStudy} disabled={saving}>{saving?"Registrando…":completed?"✓ Estudio completado":"Completar estudio"}</button>
-      {chapter<21&&completed&&<Link className="textLink" href={`/biblia/juan/${chapter+1}`}>Continuar con Juan {chapter+1} →</Link>}
+      {chapter<21&&completed&&<Link className="textLink" href={`/estudios/juan/${chapter+1}`}>Continuar con Juan {chapter+1} →</Link>}
       {chapter===21&&completed&&<Link className="textLink" href="/primeros-pasos">Continuar mis primeros pasos →</Link>}
       <p className={message.startsWith("Faltan")||message.startsWith("Escriba")||message.startsWith("Sus respuestas")?"studyMessage warning":"studyMessage"} aria-live="polite">{message}</p>
     </footer>

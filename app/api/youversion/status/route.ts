@@ -1,9 +1,14 @@
 import { NextResponse } from 'next/server'
+import {checkNkjvAccess,youVersionCatalogUrl} from '@/lib/nkjv-access'
 
-const YVP_BASE = 'https://api.youversion.com/v1'
-
-export async function GET() {
+export async function GET(request:Request) {
   const appKey = process.env.YOUVERSION_API_KEY
+
+  if (new URL(request.url).searchParams.get('check') === 'nkjv') {
+    return NextResponse.json(await checkNkjvAccess('youversion',appKey),{
+      headers:{'Cache-Control':'public, s-maxage=3600'},
+    })
+  }
 
   if (!appKey) {
     return NextResponse.json(
@@ -13,17 +18,18 @@ export async function GET() {
   }
 
   try {
-    const response = await fetch(`${YVP_BASE}/bibles?language_ranges=es&page_size=99`, {
+    const response = await fetch(youVersionCatalogUrl('es'), {
       headers: {
         'X-YVP-App-Key': appKey,
         Accept: 'application/json',
       },
-      cache: 'no-store',
+      next: {revalidate:3600},
+      signal: AbortSignal.timeout(10000),
     })
 
     if (!response.ok) {
       return NextResponse.json(
-        { ok: false, authenticated: response.status !== 401, status: response.status },
+        { ok: false, authenticated: response.status === 401 ? false : null, status: response.status },
         { status: response.status }
       )
     }

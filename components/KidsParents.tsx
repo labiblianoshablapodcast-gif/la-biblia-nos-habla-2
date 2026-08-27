@@ -20,9 +20,9 @@ export default function KidsParents(){
  useEffect(()=>{
   let live=true;
   (async()=>{try{
-   const response=await fetch("/api/kids/progreso?estado=1",{cache:"no-store"});const data=await response.json();
+   const response=await withTimeout(fetch("/api/kids/progreso?estado=1",{cache:"no-store"}));const data=await response.json();
    if(!live)return;setReady(data.ready===true);
-   if(data.ready){const {data:{user}}=await createClient().auth.getUser();if(live){setSignedIn(Boolean(user));if(user)await loadProgress();}}
+   if(data.ready){const {data:{user}}=await withTimeout(createClient().auth.getUser());if(live){setSignedIn(Boolean(user));if(user)await loadProgress();}}
   }catch{if(live)setMessage("No pudimos comprobar la conexión. Vuelva a intentar más tarde.");}finally{if(live)setChecked(true);}})();
   return()=>{live=false;};
  },[]);

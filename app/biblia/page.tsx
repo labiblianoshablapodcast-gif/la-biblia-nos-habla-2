@@ -4,7 +4,6 @@ import BibleHomeClient from "@/components/BibleHomeClient";
 import {books} from "@/lib/bible";
 import {readerVersion,versionQuery} from "@/lib/bible-version";
 import styles from "./biblia.module.css";
-import "./mobile-hero-refinement.css";
 import "./mobile-readability.css";
 
 const johnPlan=[
@@ -23,7 +22,7 @@ export default async function BibliaPage({searchParams}:{searchParams:Promise<{v
     <div className={styles.heroCopy}>
       <p className={styles.eyebrow}>RVR1960 · Q’eqchi’ · English ASV</p>
       <h1>Biblioteca Bíblica</h1>
-      <p>Los 66 libros, 1,189 capítulos y herramientas personales para acompañar su lectura.</p>
+      <p>La Palabra de Dios y herramientas para acompañar su lectura.</p>
       <div className={styles.heroDetails} aria-label="Información de la biblioteca">
         <span><strong>66</strong> libros</span>
         <span><strong>1,189</strong> capítulos</span>
@@ -37,11 +36,11 @@ export default async function BibliaPage({searchParams}:{searchParams:Promise<{v
   </section>
 
   <section className={styles.library}>
-    <div className="toolbar bibleVersionSwitcher" aria-label="Seleccionar versión de la Biblia">
-      <Link className={version==="rvr60"?"btn bibleVersionActive":"btn secondary bibleVersionInactive"} aria-current={version==="rvr60"?"page":undefined} href="/biblia">Español · RVR1960</Link>
-      <Link className={version==="qeqchi"?"btn bibleVersionActive":"btn secondary bibleVersionInactive"} aria-current={version==="qeqchi"?"page":undefined} href="/biblia?version=qeqchi">Q’eqchi’ · Li Santil Hu</Link>
-      <Link className={version==="asv"?"btn bibleVersionActive":"btn secondary bibleVersionInactive"} aria-current={version==="asv"?"page":undefined} href="/biblia?version=asv">English · ASV</Link>
-    </div>
+    <nav className={styles.versionSwitcher} aria-label="Seleccionar versión de la Biblia">
+      <Link className={`${styles.versionButton} ${version==="rvr60"?styles.versionActive:styles.versionInactive}`} aria-label="RVR1960 — Biblia en español" aria-current={version==="rvr60"?"page":undefined} href="/biblia">RVR1960</Link>
+      <Link className={`${styles.versionButton} ${version==="qeqchi"?styles.versionActive:styles.versionInactive}`} aria-label="Q’eqchi’ — Li Santil Hu" aria-current={version==="qeqchi"?"page":undefined} href="/biblia?version=qeqchi">Q’eqchi’</Link>
+      <Link className={`${styles.versionButton} ${version==="asv"?styles.versionActive:styles.versionInactive}`} aria-label="ASV — Bible in English" aria-current={version==="asv"?"page":undefined} href="/biblia?version=asv">ASV</Link>
+    </nav>
     <div className={styles.searchPanel}><BibleHomeClient version={version}/></div>
     <div className={styles.sourceNote}>
       <a href="https://biblia.com/" target="_blank" rel="noreferrer">

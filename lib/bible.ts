@@ -116,23 +116,10 @@ export async function getChapter(code:string, chapter:number): Promise<BibleChap
     key:apiKey
   });
 
-  const headingQuery=new URLSearchParams({
-    passage:`${book} ${chapter}`,
-    formatting:"all",
-    redLetter:"false",
-    footnotes:"false",
-    citation:"false",
-    paragraphs:"true",
-    fullText:"true",
-    header:"",
-    footer:"",
-    key:apiKey
-  });
-
   try{
     const [response,headingResponse]=await Promise.all([
       fetch(`https://api.biblia.com/v1/bible/content/RVR60.txt?${textQuery.toString()}`,{cache:"no-store"}),
-      fetch(`https://api.biblia.com/v1/bible/content/RVR60.html?${headingQuery.toString()}`,{cache:"no-store"})
+      fetch(chapterUrl(code,chapter),{next:{revalidate:86400}})
     ]);
     if(!response.ok)return null;
 

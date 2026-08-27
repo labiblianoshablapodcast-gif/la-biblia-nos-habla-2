@@ -46,34 +46,54 @@ export function qeqchiChapterUrl(_code:string,_chapter:number){
   return "https://scriptureearth.org/00spa.php?idx=264&iso_code=kek&language=Kekch%C3%AD";
 }
 
-function cleanEditorialHeading(value:string):string|undefined{
-  const heading=value
-    .replace(/\r/g,"")
-    .split("\n")
-    .map((line)=>line.replace(/\s+/g," ").trim())
-    .filter(Boolean)
-    .at(-1);
-
-  if(!heading || heading.length<3 || heading.length>140)return undefined;
-  return heading;
-}
-
 function parseVerses(text:string):BibleVerse[]{
   const verses:BibleVerse[]=[];
-  const marker=/__LBHN_VERSE_(\d+)_START__([\s\S]*?)__LBHN_VERSE_END__/g;
-  let previousEnd=0;
+  const marker=/<<<VERSE:(\d+)>>>([\s\S]*?)(?=<<<VERSE:\d+>>>|$)/g;
   for(const match of text.matchAll(marker)){
     const clean=match[2]
       .replace(/^\s*\d+\s*\|\s*/,"")
       .replace(/\s+/g," ")
       .trim();
-    if(clean){
-      const heading=cleanEditorialHeading(text.slice(previousEnd,match.index));
-      verses.push({number:Number(match[1]),text:clean,...(heading?{heading}:{})});
-    }
-    previousEnd=(match.index??0)+match[0].length;
+    if(clean)verses.push({number:Number(match[1]),text:clean});
   }
   return verses;
+}
+
+function decodeHtml(value:string){
+  return value
+    .replace(/&#(\d+);/g,(_,code)=>String.fromCodePoint(Number(code)))
+    .replace(/&#x([0-9a-f]+);/gi,(_,code)=>String.fromCodePoint(Number.parseInt(code,16)))
+    .replace(/&nbsp;/gi," ")
+    .replace(/&amp;/gi,"&")
+    .replace(/&quot;/gi,'"')
+    .replace(/&#39;|&apos;/gi,"'")
+    .replace(/&lt;/gi,"<")
+    .replace(/&gt;/gi,">");
+}
+
+function parseEditorialHeadings(html:string):Map<number,string>{
+  const headings=new Map<number,string>();
+  const block=/<(p|h[1-6])\b([^>]*)>([\s\S]*?)<\/\1>/gi;
+
+  for(const match of html.matchAll(block)){
+    const tag=match[1].toLowerCase();
+    const attributes=match[2];
+    const contents=match[3];
+    const isHeadingBlock=tag!=="p" || /text-align\s*:\s*center/i.test(attributes);
+    if(!isHeadingBlock)continue;
+
+    const reference=contents.match(/data-reference=["'][^"']*:(\d+)["']/i);
+    if(!reference)continue;
+
+    const heading=decodeHtml(contents.replace(/<[^>]+>/g," "))
+      .replace(/\s+/g," ")
+      .trim();
+    if(!heading || heading.length<3 || heading.length>140 || /LBHN_VERSE/i.test(heading))continue;
+
+    headings.set(Number(reference[1]),heading);
+  }
+
+  return headings;
 }
 
 export {books};
@@ -83,7 +103,20 @@ export async function getChapter(code:string, chapter:number): Promise<BibleChap
   const book=BIBLIA_BOOKS[code];
   if(!apiKey || !book)return null;
 
-  const query=new URLSearchParams({
+  const textQuery=new URLSearchParams({
+    passage:`${book} ${chapter}`,
+    formatting:"none",
+    redLetter:"false",
+    footnotes:"false",
+    citation:"false",
+    paragraphs:"false",
+    header:"",
+    eachVerse:"<<<VERSE:[VerseNum]>>>[VerseText]",
+    footer:"",
+    key:apiKey
+  });
+
+  const headingQuery=new URLSearchParams({
     passage:`${book} ${chapter}`,
     formatting:"all",
     redLetter:"false",
@@ -92,20 +125,27 @@ export async function getChapter(code:string, chapter:number): Promise<BibleChap
     paragraphs:"true",
     fullText:"true",
     header:"",
-    eachVerse:"__LBHN_VERSE_[VerseNum]_START__[VerseText]__LBHN_VERSE_END__",
     footer:"",
     key:apiKey
   });
 
   try{
-    const response=await fetch(
-      `https://api.biblia.com/v1/bible/content/RVR60.txt?${query.toString()}`,
-      {cache:"no-store"}
-    );
+    const [response,headingResponse]=await Promise.all([
+      fetch(`https://api.biblia.com/v1/bible/content/RVR60.txt?${textQuery.toString()}`,{cache:"no-store"}),
+      fetch(`https://api.biblia.com/v1/bible/content/RVR60.html?${headingQuery.toString()}`,{cache:"no-store"})
+    ]);
     if(!response.ok)return null;
 
-    const verses=parseVerses(await response.text());
+    let verses=parseVerses(await response.text());
     if(!verses.length)return null;
+
+    if(headingResponse.ok){
+      const headings=parseEditorialHeadings(await headingResponse.text());
+      verses=verses.map((verse)=>({
+        ...verse,
+        ...(headings.has(verse.number)?{heading:headings.get(verse.number)}:{})
+      }));
+    }
 
     return {
       translation:"RVR60",

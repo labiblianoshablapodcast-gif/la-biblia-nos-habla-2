@@ -6,6 +6,7 @@ import {useEffect,useRef,useState} from "react";
 const links=[
   ["Inicio","/"],
   ["Biblia","/biblia"],
+  ["Estudios bíblicos","/estudios"],
   ["Misiones","/misiones"],
   ["Nuestros Pastores","/el-pastor"],
   ["Iglesia","/iglesia"],

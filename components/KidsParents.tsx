@@ -5,10 +5,17 @@ import type {FormEvent} from "react";
 import {createClient} from "@/lib/supabase/client";
 import styles from "@/app/kids/kids.module.css";
 type Progress={lesson_id:string;age_group:string;learner_slot:number;score:number;total:number;completed_at:string};
+class RequestTimeoutError extends Error{}
+function withTimeout<T>(request:Promise<T>,milliseconds=15000){
+ return new Promise<T>((resolve,reject)=>{
+  const timer=setTimeout(()=>reject(new RequestTimeoutError()),milliseconds);
+  request.then(value=>{clearTimeout(timer);resolve(value);},error=>{clearTimeout(timer);reject(error);});
+ });
+}
 export default function KidsParents(){
  const [ready,setReady]=useState(false),[checked,setChecked]=useState(false),[signedIn,setSignedIn]=useState(false),[register,setRegister]=useState(false),[adult,setAdult]=useState(false),[loading,setLoading]=useState(false);
  const [email,setEmail]=useState(""),[password,setPassword]=useState(""),[message,setMessage]=useState(""),[progress,setProgress]=useState<Progress[]>([]),[deleteConfirm,setDeleteConfirm]=useState(false);
- async function loadProgress(){try{const response=await fetch("/api/kids/progreso",{cache:"no-store"});const data=await response.json();if(response.ok)setProgress(data.progress||[]);else setMessage(data.error||"No se pudo consultar el progreso.");}catch{setMessage("No se pudo consultar el progreso. Intente nuevamente.");}}
+ async function loadProgress(){try{const response=await withTimeout(fetch("/api/kids/progreso",{cache:"no-store"}));const data=await response.json();if(response.ok)setProgress(data.progress||[]);else setMessage(data.error||"No se pudo consultar el progreso.");}catch{setMessage("No se pudo consultar el progreso. Intente nuevamente.");}}
  useEffect(()=>{
   let live=true;
   (async()=>{try{
@@ -19,15 +26,15 @@ export default function KidsParents(){
   return()=>{live=false;};
  },[]);
  async function submit(event:FormEvent){
-  event.preventDefault();if(!ready||!adult)return;setLoading(true);setMessage("");
+  event.preventDefault();if(!ready||!adult||loading)return;setLoading(true);setMessage("");
   try{
    const client=createClient();
-   const result=register?await client.auth.signUp({email:email.trim(),password}):await client.auth.signInWithPassword({email:email.trim(),password});
+   const result=await withTimeout(register?client.auth.signUp({email:email.trim(),password}):client.auth.signInWithPassword({email:email.trim(),password}));
    if(result.error){setMessage(register?"No se pudo crear la cuenta. Verifique los datos o intente iniciar sesión si ya tiene cuenta.":"No se pudo entrar. Revise su correo, contraseña y confirmación de correo.");return;}
    setPassword("");
    if(register&&!result.data.session){setMessage("Revise su correo para confirmar la cuenta. Después vuelva aquí y elija Entrar. No comparta su contraseña con los niños.");setRegister(false);return;}
    setSignedIn(true);await loadProgress();
-  }catch{setMessage("No se pudo conectar. Intente nuevamente.");}finally{setLoading(false);}
+  }catch(error){setMessage(error instanceof RequestTimeoutError?(register?"No recibimos confirmación a tiempo. Revise si llegó el correo de confirmación antes de volver a crear la cuenta. Si ya llegó, confirme su correo y elija Entrar.":"El acceso tardó demasiado. Revise su conexión e intente nuevamente."):"No se pudo conectar. Intente nuevamente.");}finally{setLoading(false);}
  }
  async function signOut(){setLoading(true);try{const {error}=await createClient().auth.signOut({scope:"local"});if(error)throw error;setSignedIn(false);setProgress([]);setMessage("");setDeleteConfirm(false);}catch{setMessage("No se pudo cerrar la sesión. Intente nuevamente.");}finally{setLoading(false);}}
  async function removeProgress(){setLoading(true);try{const response=await fetch("/api/kids/progreso",{method:"DELETE"});const data=await response.json();if(!response.ok)throw Error(data.error);setProgress([]);setDeleteConfirm(false);setMessage("Se borró el progreso Kids de esta cuenta. Puede empezar nuevamente cuando lo desee.");}catch{setMessage("No se pudo borrar el progreso. Intente nuevamente.");}finally{setLoading(false);}}

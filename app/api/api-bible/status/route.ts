@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import {checkNkjvAccess} from "@/lib/nkjv-access";
 
 const API_BIBLE_BASE = "https://rest.api.bible/v1";
 
@@ -55,8 +56,14 @@ function publicAudioDetails(bible: AudioBible) {
   };
 }
 
-export async function GET() {
+export async function GET(request:Request) {
   const apiKey = process.env.API_BIBLE_KEY;
+
+  if (new URL(request.url).searchParams.get("check") === "nkjv") {
+    return NextResponse.json(await checkNkjvAccess("api-bible",apiKey),{
+      headers:{"Cache-Control":"public, s-maxage=3600"},
+    });
+  }
 
   if (!apiKey) {
     return NextResponse.json(
@@ -71,8 +78,8 @@ export async function GET() {
       fetchAudioBibles("kek", apiKey),
     ]);
 
-    const authenticated =
-      spanish.status !== 401 && qeqchi.status !== 401;
+    const authenticated = spanish.ok || qeqchi.ok ? true
+      : spanish.status === 401 || qeqchi.status === 401 ? false : null;
 
     return NextResponse.json(
       {
@@ -93,7 +100,7 @@ export async function GET() {
         note:
           "La llave permanece solamente en el servidor. Los resultados se almacenan en caché durante una hora para reducir llamadas.",
       },
-      { status: authenticated ? 200 : 401 }
+      { status: authenticated === false ? 401 : 200 }
     );
   } catch {
     return NextResponse.json(

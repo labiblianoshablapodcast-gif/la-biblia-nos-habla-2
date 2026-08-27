@@ -5,8 +5,8 @@ import BibleAudioControls from "@/components/BibleAudioControls";
 import BibleReaderTools from "@/components/BibleReaderTools";
 import JohnChapterQuestions from "@/components/JohnChapterQuestions";
 import {getBook,getChapter,getQeqchiChapter,chapterUrl,qeqchiChapterUrl} from "@/lib/bible";
-
-type Version="rvr60"|"qeqchi";
+import {getAsvChapter,asvChapterUrl} from "@/lib/asv-chapter";
+import {readerVersion,versionQuery as queryForVersion} from "@/lib/bible-version";
 
 export default async function ChapterPage({
  params,searchParams
@@ -16,23 +16,26 @@ export default async function ChapterPage({
 }){
  const {book:slug,chapter:raw}=await params;
  const query=await searchParams;
- const version:Version=query.version==="qeqchi"?"qeqchi":"rvr60";
+ const version=readerVersion(query.version);
  const book=getBook(slug);
  const chapter=Number(raw);
  if(!book || !Number.isInteger(chapter) || chapter<1 || chapter>book.chapters) notFound();
 
  const bibleChapter=version==="qeqchi"
    ? await getQeqchiChapter(book.code,chapter)
+   : version==="asv" ? await getAsvChapter(book.code,chapter)
    : await getChapter(book.code,chapter);
- const versionQuery=version==="qeqchi"?"?version=qeqchi":"";
+ const versionQuery=queryForVersion(version);
  const translationName=version==="qeqchi"
    ? "Li Santil Hu · Q’eqchi’ · Ortografía tradicional"
+   : version==="asv" ? "American Standard Version (ASV) · English"
    : "Reina-Valera Revisada 1960";
+ const displayBook=version==="asv"&&bibleChapter?bibleChapter.book:book.name;
 
  return <>
   <section className="pageHero bibleChapterHero">
     <p className="eyebrow">Santa Biblia · {translationName}</p>
-    <h1>{book.name} {chapter}</h1>
+    <h1>{displayBook} {chapter}</h1>
     <p>{book.testament}</p>
   </section>
 
@@ -40,14 +43,16 @@ export default async function ChapterPage({
     <div className="toolbar bibleVersionSwitcher" aria-label="Seleccionar versión de la Biblia">
       <Link className={version==="rvr60"?"btn bibleVersionActive":"btn secondary bibleVersionInactive"} href={`/biblia/${book.slug}/${chapter}`}>Español · RVR1960</Link>
       <Link className={version==="qeqchi"?"btn bibleVersionActive":"btn secondary bibleVersionInactive"} href={`/biblia/${book.slug}/${chapter}?version=qeqchi`}>Q’eqchi’ · Li Santil Hu</Link>
+      <Link className={version==="asv"?"btn bibleVersionActive":"btn secondary bibleVersionInactive"} aria-current={version==="asv"?"page":undefined} href={`/biblia/${book.slug}/${chapter}?version=asv`}>English · ASV</Link>
     </div>
 
     <ChapterControls slug={book.slug} chapter={chapter} total={book.chapters} query={versionQuery}/>
-    <BibleAudioControls language={version}/>
+    {version!=="asv" && <BibleAudioControls language={version}/>}
 
     {bibleChapter ? (
       <BibleReaderTools
-        bookName={book.name}
+        key={`${version}-${book.slug}-${chapter}`}
+        bookName={displayBook}
         bookSlug={book.slug}
         chapter={chapter}
         verses={bibleChapter.verses}
@@ -59,12 +64,19 @@ export default async function ChapterPage({
         <strong>No pudimos cargar el capítulo.</strong>
         <p>{version==="qeqchi"
           ?"Puede abrir la fuente original Q’eqchi’ mientras revisamos este capítulo."
+          :version==="asv"?"No pudimos obtener este capítulo ASV de YouVersion en este momento. Puede abrir la fuente original."
           :"Verifique que BIBLIA_API_KEY esté disponible en Vercel o ábralo directamente en Biblia.com."}</p>
-        <a className="btn" href={version==="qeqchi"?qeqchiChapterUrl(book.code,chapter):chapterUrl(book.code,chapter)} target="_blank" rel="noreferrer">Abrir fuente original</a>
+        <a className="btn" href={version==="qeqchi"?qeqchiChapterUrl(book.code,chapter):version==="asv"?asvChapterUrl(book.code,chapter):chapterUrl(book.code,chapter)} target="_blank" rel="noreferrer">Abrir fuente original</a>
       </div>
     )}
 
-    {version==="qeqchi" ? (
+    {version==="asv" ? (
+      <div className="bibliaAttribution">
+        <p><strong>American Standard Version (ASV, 1901) · English.</strong><br/>
+        Fuente: <a href={asvChapterUrl(book.code,chapter)} target="_blank" rel="noreferrer">YouVersion</a>.
+        {bibleChapter && "copyright" in bibleChapter && bibleChapter.copyright ? ` ${bibleChapter.copyright}` : ""}</p>
+      </div>
+    ) : version==="qeqchi" ? (
       <div className="bibliaAttribution">
         <p><strong>Li Santil Hu — La Santa Biblia en el idioma Kekchí/Q’eqchi’ de Guatemala [kek], ortografía tradicional.</strong><br/>
         Texto © 1988–2019 Wycliffe Bible Translators, Inc. Tercera edición revisada © 2019.
@@ -97,7 +109,7 @@ export default async function ChapterPage({
       <p>Preparado para comentarios del Pastor Gilberto, preguntas de estudio y predicaciones relacionadas.</p>
     </section>
 
-    <Link className="textLink" href="/biblia">← Volver a todos los libros</Link>
+    <Link className="textLink" href={`/biblia${versionQuery}`}>← Volver a todos los libros</Link>
   </section>
  </>;
 }

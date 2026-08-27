@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import BibleHomeClient from "@/components/BibleHomeClient";
 import {books} from "@/lib/bible";
+import {readerVersion,versionQuery} from "@/lib/bible-version";
 import styles from "./biblia.module.css";
 import "./mobile-hero-refinement.css";
 import "./mobile-readability.css";
@@ -12,13 +13,15 @@ const johnPlan=[
  "Permanecer en Cristo","La promesa del Espíritu Santo","Jesús ora por los suyos","El Rey ante Pilato","La cruz y el amor consumado","El Señor resucitado","Sígueme"
 ];
 
-export default function BibliaPage(){
+export default async function BibliaPage({searchParams}:{searchParams:Promise<{version?:string}>}){
+ const version=readerVersion((await searchParams).version);
+ const suffix=versionQuery(version);
  const old=books.filter(b=>b.testament==="Antiguo Testamento");
  const fresh=books.filter(b=>b.testament==="Nuevo Testamento");
  return <main className={styles.page}>
   <section className={styles.hero}>
     <div className={styles.heroCopy}>
-      <p className={styles.eyebrow}>Reina-Valera Revisada 1960 · Biblia.com</p>
+      <p className={styles.eyebrow}>RVR1960 · Q’eqchi’ · English ASV</p>
       <h1>Biblioteca Bíblica</h1>
       <p>Los 66 libros, 1,189 capítulos y herramientas personales para acompañar su lectura.</p>
       <div className={styles.heroDetails} aria-label="Información de la biblioteca">
@@ -34,13 +37,18 @@ export default function BibliaPage(){
   </section>
 
   <section className={styles.library}>
-    <div className={styles.searchPanel}><BibleHomeClient/></div>
+    <div className="toolbar bibleVersionSwitcher" aria-label="Seleccionar versión de la Biblia">
+      <Link className={version==="rvr60"?"btn bibleVersionActive":"btn secondary bibleVersionInactive"} aria-current={version==="rvr60"?"page":undefined} href="/biblia">Español · RVR1960</Link>
+      <Link className={version==="qeqchi"?"btn bibleVersionActive":"btn secondary bibleVersionInactive"} aria-current={version==="qeqchi"?"page":undefined} href="/biblia?version=qeqchi">Q’eqchi’ · Li Santil Hu</Link>
+      <Link className={version==="asv"?"btn bibleVersionActive":"btn secondary bibleVersionInactive"} aria-current={version==="asv"?"page":undefined} href="/biblia?version=asv">English · ASV</Link>
+    </div>
+    <div className={styles.searchPanel}><BibleHomeClient version={version}/></div>
     <div className={styles.sourceNote}>
       <a href="https://biblia.com/" target="_blank" rel="noreferrer">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="https://api.biblia.com/v1/PoweredByBiblia_small.png" alt="Powered by Biblia"/>
       </a>
-      <span>Texto bíblico: Reina-Valera Revisada 1960. Este sitio utiliza los servicios web de <a href="https://biblia.com/" target="_blank" rel="noreferrer">Biblia</a> de <a href="https://www.logos.com/" target="_blank" rel="noreferrer">Logos Bible Software</a>.</span>
+      <span>RVR1960 mediante <a href="https://biblia.com/" target="_blank" rel="noreferrer">Biblia.com</a> de Logos Bible Software. ASV en inglés mediante <a href="https://www.bible.com/versions/12-asv-american-standard-version" target="_blank" rel="noreferrer">YouVersion</a>. Li Santil Hu en Q’eqchi’ mediante Scripture Earth.</span>
     </div>
 
     <section className={styles.studyPlan} aria-labelledby="daily-devotional-title">
@@ -125,7 +133,7 @@ export default function BibliaPage(){
 
     <div className={styles.sectionHeading}><p>39 libros</p><h2>Antiguo Testamento</h2></div>
     <div className={styles.bookGrid}>{old.map((b,index)=>
-      <Link className={styles.bookLink} key={b.slug} href={`/biblia/${b.slug}/1`}>
+      <Link className={styles.bookLink} key={b.slug} href={`/biblia/${b.slug}/1${suffix}`}>
         <span className={styles.bookNumber}>{String(index+1).padStart(2,"0")}</span>
         <span><strong>{b.name}</strong><small>{b.chapters} capítulos</small></span>
         <span className={styles.arrow} aria-hidden="true">→</span>
@@ -134,7 +142,7 @@ export default function BibliaPage(){
 
     <div className={styles.sectionHeading}><p>27 libros</p><h2>Nuevo Testamento</h2></div>
     <div className={styles.bookGrid}>{fresh.map((b,index)=>
-      <Link className={styles.bookLink} key={b.slug} href={`/biblia/${b.slug}/1`}>
+      <Link className={styles.bookLink} key={b.slug} href={`/biblia/${b.slug}/1${suffix}`}>
         <span className={styles.bookNumber}>{String(index+1).padStart(2,"0")}</span>
         <span><strong>{b.name}</strong><small>{b.chapters} capítulos</small></span>
         <span className={styles.arrow} aria-hidden="true">→</span>

@@ -1,8 +1,27 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
+import ts from 'typescript';
+import vm from 'node:vm';
 import {kidsAge,learnerSlot,kidsLesson,kidsQuestions,gradeKidsQuiz,validKidsSubmission} from '../lib/kids.ts';
 const file=path=>readFileSync(new URL('../'+path,import.meta.url),'utf8');
+test('parent authentication stops waiting, handles errors and ignores late completion',async()=>{
+ const source=file('components/KidsParents.tsx');
+ const helper=source.slice(source.indexOf('class RequestTimeoutError'),source.indexOf('export default function'));
+ const code=ts.transpileModule(helper,{compilerOptions:{target:ts.ScriptTarget.ES2020}}).outputText;
+ const context=vm.createContext({setTimeout,clearTimeout});
+ vm.runInContext(code,context);
+ assert.equal(await context.withTimeout(Promise.resolve('ok'),20),'ok');
+ const failure=new Error('connection');
+ await assert.rejects(context.withTimeout(Promise.reject(failure),20),error=>error===failure);
+ let complete;
+ const pending=new Promise(resolve=>{complete=resolve;});
+ await assert.rejects(context.withTimeout(pending,5));
+ complete('late');
+ assert.ok(source.includes('finally{setLoading(false);}'));
+ assert.ok(source.includes('await withTimeout(register?client.auth.signUp'));
+ assert.ok(source.includes('if(!ready||!adult||loading)return'));
+});
 test('two age groups have distinct questions and six readable scenes',()=>{
  assert.equal(kidsAge('7-10'),'7-10');assert.equal(kidsAge('anything'),'4-6');
  assert.equal(learnerSlot('3'),3);assert.equal(learnerSlot('999'),1);

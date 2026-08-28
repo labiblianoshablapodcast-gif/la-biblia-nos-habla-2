@@ -9,6 +9,7 @@ type InstallPromptEvent = Event & {
 };
 
 const INSTALL_TRACK_KEY='lbnh_pwa_install_tracked_v1';
+const INSTALL_ID_KEY='lbnh_pwa_install_id_v1';
 
 function getPlatform(){
   const ua=navigator.userAgent.toLowerCase();
@@ -17,13 +18,43 @@ function getPlatform(){
   return 'desktop';
 }
 
+function getInstallId(){
+  try{
+    const existing=localStorage.getItem(INSTALL_ID_KEY);
+    if(existing)return existing;
+    const id=crypto.randomUUID();
+    localStorage.setItem(INSTALL_ID_KEY,id);
+    return id;
+  }catch{
+    return crypto.randomUUID();
+  }
+}
+
+async function registerInstall(source:string){
+  try{
+    await fetch('/api/pwa-install',{
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body:JSON.stringify({installId:getInstallId(),platform:getPlatform(),source}),
+      keepalive:true
+    });
+  }catch{
+    // Analytics no debe interferir con la instalación.
+  }
+}
+
 function trackInstalledOnce(source:string){
   try{
-    if(localStorage.getItem(INSTALL_TRACK_KEY)==='1')return;
+    if(localStorage.getItem(INSTALL_TRACK_KEY)==='1'){
+      void registerInstall(source);
+      return;
+    }
     track('pwa_install',{platform:getPlatform(),source});
     localStorage.setItem(INSTALL_TRACK_KEY,'1');
+    void registerInstall(source);
   }catch{
     track('pwa_install',{platform:getPlatform(),source});
+    void registerInstall(source);
   }
 }
 

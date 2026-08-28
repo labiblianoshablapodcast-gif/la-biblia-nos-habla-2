@@ -29,16 +29,19 @@ export default async function Admin(){
 
  let studyParticipants=0;
  let studyNotices=0;
+ let appInstalls=0;
  try{
   const admin=createAdminClient();
-  const [{count:participantCount},{count:noticeCount}]=await Promise.all([
+  const [{count:participantCount},{count:noticeCount},{count:installCount}]=await Promise.all([
    admin.from("john_study_participants").select("*",{count:"exact",head:true}),
-   admin.from("john_study_milestones").select("*",{count:"exact",head:true}).is("seen_at",null)
+   admin.from("john_study_milestones").select("*",{count:"exact",head:true}).is("seen_at",null),
+   admin.from("pwa_installs").select("*",{count:"exact",head:true})
   ]);
   studyParticipants=participantCount??0;
   studyNotices=noticeCount??0;
+  appInstalls=installCount??0;
  }catch{
-  // La sección aparecerá en cero hasta activar las tablas del estudio en Supabase.
+  // Las métricas que aún no tengan tabla activada aparecerán en cero.
  }
 
  return <div className="adminShell adminShellPro">
@@ -67,6 +70,7 @@ export default async function Admin(){
     <Link href="/admin/eventos"><strong>{events??0}</strong><span>Eventos</span></Link>
     <Link href="/admin/donaciones"><strong>{donations??0}</strong><span>Donaciones</span></Link>
     <Link href="/admin/estudio-juan"><strong>{studyParticipants}</strong><span>Estudiantes de Juan{studyNotices?` · ${studyNotices} aviso${studyNotices===1?"":"s"}`:""}</span></Link>
+    <div><strong>{appInstalls}</strong><span>📱 Apps instaladas</span></div>
    </section>
 
    <section className="adminDashboardGrid">

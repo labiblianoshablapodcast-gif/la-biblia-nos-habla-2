@@ -1,11 +1,31 @@
 'use client';
 
 import {useEffect,useState} from 'react';
+import {track} from '@vercel/analytics';
 
 type InstallPromptEvent = Event & {
   prompt:()=>Promise<void>;
   userChoice:Promise<{outcome:'accepted'|'dismissed';platform:string}>;
 };
+
+const INSTALL_TRACK_KEY='lbnh_pwa_install_tracked_v1';
+
+function getPlatform(){
+  const ua=navigator.userAgent.toLowerCase();
+  if(/iphone|ipad|ipod/.test(ua))return 'ios';
+  if(/android/.test(ua))return 'android';
+  return 'desktop';
+}
+
+function trackInstalledOnce(source:string){
+  try{
+    if(localStorage.getItem(INSTALL_TRACK_KEY)==='1')return;
+    track('pwa_install',{platform:getPlatform(),source});
+    localStorage.setItem(INSTALL_TRACK_KEY,'1');
+  }catch{
+    track('pwa_install',{platform:getPlatform(),source});
+  }
+}
 
 export default function AppInstallButton(){
   const [promptEvent,setPromptEvent]=useState<InstallPromptEvent|null>(null);
@@ -15,12 +35,16 @@ export default function AppInstallButton(){
   useEffect(()=>{
     const standalone=window.matchMedia('(display-mode: standalone)').matches || (window.navigator as Navigator & {standalone?:boolean}).standalone===true;
     setInstalled(standalone);
+    if(standalone)trackInstalledOnce('standalone_open');
 
     const handlePrompt=(event:Event)=>{
       event.preventDefault();
       setPromptEvent(event as InstallPromptEvent);
     };
-    const handleInstalled=()=>setInstalled(true);
+    const handleInstalled=()=>{
+      setInstalled(true);
+      trackInstalledOnce('appinstalled_event');
+    };
     window.addEventListener('beforeinstallprompt',handlePrompt);
     window.addEventListener('appinstalled',handleInstalled);
     return()=>{
@@ -33,7 +57,10 @@ export default function AppInstallButton(){
     if(promptEvent){
       await promptEvent.prompt();
       const choice=await promptEvent.userChoice;
-      if(choice.outcome==='accepted')setInstalled(true);
+      if(choice.outcome==='accepted'){
+        setInstalled(true);
+        trackInstalledOnce('install_prompt_accepted');
+      }
       setPromptEvent(null);
       return;
     }
@@ -41,6 +68,7 @@ export default function AppInstallButton(){
     const ua=navigator.userAgent.toLowerCase();
     const isIos=/iphone|ipad|ipod/.test(ua);
     if(isIos){
+      track('pwa_install_help_opened',{platform:'ios'});
       setShowIosHelp(true);
       return;
     }

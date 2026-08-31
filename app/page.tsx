@@ -143,6 +143,25 @@ export default async function Home(){
      </div>}
   </section>
 
+  <section className={shortStyles.section} aria-labelledby="mensaje-completo-heading">
+   <header className={shortStyles.header}>
+    <div>
+     <p className={shortStyles.eyebrow}>MENSAJE COMPLETO · SANTIAGO 1:1–9</p>
+     <h2 id="mensaje-completo-heading">Sabiduría para la prueba</h2>
+     <p>Vea la predicación completa y descubra cómo pedir a Dios sabiduría para atravesar las pruebas con fe.</p>
+    </div>
+   </header>
+   <div className={shortStyles.featured}>
+    <div className={shortStyles.videoWrap}><ShortVideoPlayer url="https://github.com/labiblianoshablapodcast-gif/la-biblia-nos-habla-2/releases/download/mensaje-completo-2026/sabiduria-para-la-prueba-mensaje-completo-web.mp4" title="Sabiduría para la prueba — Mensaje completo" poster="/media/60-segundos-sabiduria-para-la-prueba.jpg"/></div>
+    <div className={shortStyles.copy}>
+     <small>PREDICACIÓN · 17 MINUTOS</small>
+     <h3>Sabiduría para la prueba</h3>
+     <p className={shortStyles.scripture}>Santiago 1:1–9</p>
+     <p>Dios no siempre quita la prueba de inmediato, pero promete dar sabiduría al que la pide con fe.</p>
+    </div>
+   </div>
+  </section>
+
   <section className={styles.mobileChurchCard} aria-label="Oración">
    <span className={styles.mobilePin}>♢</span>
    <p className={styles.eyebrow}>ORACIÓN</p>

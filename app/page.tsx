@@ -3,7 +3,10 @@ import Link from "next/link";
 import {church} from "@/data/church";
 import {youtube} from "@/data/youtube";
 import {books,getChapter} from "@/lib/bible";
+import {createClient} from "@/lib/supabase/server";
+import ShortVideoPlayer from "@/components/ShortVideoPlayer";
 import styles from "./home.module.css";
+import shortStyles from "./shorts.module.css";
 
 export const dynamic="force-dynamic";
 
@@ -42,6 +45,16 @@ export default async function Home(){
  const verse=chapter?.verses.find(item=>item.number===dailyNumber)?.text || "Tu palabra es lámpara a mis pies, y lumbrera a mi camino.";
  const book=books.find(item=>item.code===dailyCode);
  const reference=`${book?.name ?? chapter?.book ?? "Salmos"} ${dailyChapter}:${dailyNumber}`;
+ const supabase=await createClient();
+ const {data:featuredShort}=await supabase
+  .from("media_items")
+  .select("id,title,description,scripture,media_url,thumbnail_url,created_at,featured")
+  .eq("published",true)
+  .eq("media_type","short")
+  .order("featured",{ascending:false})
+  .order("created_at",{ascending:false})
+  .limit(1)
+  .maybeSingle();
  const quickLinks=[
   baseQuickLinks[0],
   {icon:"☀",title:"Texto de hoy para meditar",text:verse,href:"/devocionales",image:"/images/biblia-abierta-portada.png",alt:"Biblia abierta junto a un camino al amanecer",daily:true,date:formatDailyDate(now),reference},
@@ -98,6 +111,31 @@ export default async function Home(){
      <b aria-hidden="true">→</b>
     </div>
    </Link>)}
+  </section>
+
+  <section className={shortStyles.section} aria-labelledby="shorts-heading">
+   <header className={shortStyles.header}>
+    <div>
+     <p className={shortStyles.eyebrow}>UNA PALABRA BREVE PARA SU DÍA</p>
+     <h2 id="shorts-heading">60 Segundos de Fe</h2>
+     <p>Una palabra breve para fortalecer su día y compartir la esperanza de Cristo.</p>
+    </div>
+    <Link className={shortStyles.allLink} href="/cortos">Ver más cortos →</Link>
+   </header>
+   {featuredShort
+    ?<div className={shortStyles.featured}>
+      <div className={shortStyles.videoWrap}><ShortVideoPlayer url={featuredShort.media_url} title={featuredShort.title} poster={featuredShort.thumbnail_url}/></div>
+      <div className={shortStyles.copy}>
+       <small>VIDEO DESTACADO</small>
+       <h3>{featuredShort.title}</h3>
+       {featuredShort.scripture&&<p className={shortStyles.scripture}>{featuredShort.scripture}</p>}
+       {featuredShort.description&&<p>{featuredShort.description}</p>}
+      </div>
+     </div>
+    :<div className={shortStyles.empty}>
+      <strong>60 Segundos de Fe está listo.</strong>
+      <p>El primer corto publicado desde el Panel Pastoral aparecerá automáticamente aquí.</p>
+     </div>}
   </section>
 
   <section className={styles.mobileChurchCard} aria-label="Oración">

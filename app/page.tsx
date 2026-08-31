@@ -2,35 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import {church} from "@/data/church";
 import {youtube} from "@/data/youtube";
-import {books,getChapter} from "@/lib/bible";
-import {createClient} from "@/lib/supabase/server";
-import ShortVideoPlayer from "@/components/ShortVideoPlayer";
 import styles from "./home.module.css";
-import shortStyles from "./shorts.module.css";
 
-export const dynamic="force-dynamic";
-
-const dailyPassages=[
- ["PSA",23,1],["PHP",4,13],["JER",29,11],["ISA",41,10],["PRO",3,5],
- ["ROM",8,28],["PSA",46,1],["JHN",3,16],["MAT",11,28],["JOS",1,9],
- ["PSA",119,105],["2CO",5,17],["HEB",11,1],["PSA",34,8],["ISA",40,31],
- ["PHP",4,6],["ROM",12,2],["MAT",6,33],["PSA",37,5],["GAL",2,20],
- ["1PE",5,7],["JHN",14,6],["PSA",121,1],["EPH",2,8],["PRO",18,10],
- ["ROM",5,8],["PSA",91,1],["JHN",8,12],["LAM",3,22],["REV",21,4],
- ["PSA",118,24]
-] as const;
-
-function getNewYorkDay(value:Date){
- const parts=new Intl.DateTimeFormat("en-US",{year:"numeric",month:"numeric",day:"numeric",timeZone:"America/New_York"}).formatToParts(value);
- const number=(type:string)=>Number(parts.find(part=>part.type===type)?.value);
- return Math.floor(Date.UTC(number("year"),number("month")-1,number("day"))/86_400_000);
-}
-
-function formatDailyDate(value:Date){
- return new Intl.DateTimeFormat("es-US",{weekday:"long",day:"numeric",month:"long",timeZone:"America/New_York"}).format(value);
-}
-
-const baseQuickLinks=[
+const quickLinks=[
  {icon:"▤",title:"Leer la Biblia",text:"Acceda a los libros y encuentre una palabra para hoy.",href:"/biblia",image:"/images/biblia-abierta-portada.png",alt:"Biblia abierta sobre una mesa"},
  {icon:"♢",title:"Pedir oración",text:"Comparta su necesidad con nuestro equipo pastoral.",href:"/conexion",image:"/images/manos-orando-conexion-v2.png",alt:"Manos unidas en oración"},
  {icon:"✦",title:"Nuevos creyentes",text:"Si aceptó a Cristo, queremos acompañarle en su próximo paso.",href:"/primeros-pasos",image:"/images/nuevos-creyentes-discipulado.jpg",alt:"Nuevo creyente leyendo la Biblia acompañado por un mentor cristiano"},
@@ -38,28 +12,7 @@ const baseQuickLinks=[
  {icon:"◎",title:"Misiones",text:"Vea cómo compartimos el Evangelio y servimos a comunidades.",href:"/misiones",image:"/images/misiones/lanquin-2026-comunidad-02.jpg",alt:"Comunidad reunida durante la misión en Lanquín"}
 ];
 
-export default async function Home(){
- const now=new Date();
- const [dailyCode,dailyChapter,dailyNumber]=dailyPassages[getNewYorkDay(now)%dailyPassages.length];
- const chapter=await getChapter(dailyCode,dailyChapter);
- const verse=chapter?.verses.find(item=>item.number===dailyNumber)?.text || "Tu palabra es lámpara a mis pies, y lumbrera a mi camino.";
- const book=books.find(item=>item.code===dailyCode);
- const reference=`${book?.name ?? chapter?.book ?? "Salmos"} ${dailyChapter}:${dailyNumber}`;
- const supabase=await createClient();
- const {data:featuredShort}=await supabase
-  .from("media_items")
-  .select("id,title,description,scripture,media_url,thumbnail_url,created_at,featured")
-  .eq("published",true)
-  .eq("media_type","short")
-  .order("featured",{ascending:false})
-  .order("created_at",{ascending:false})
-  .limit(1)
-  .maybeSingle();
- const quickLinks=[
-  baseQuickLinks[0],
-  {icon:"☀",title:"Texto de hoy para meditar",text:verse,href:"/devocionales",image:"/images/biblia-abierta-portada.png",alt:"Biblia abierta junto a un camino al amanecer",daily:true,date:formatDailyDate(now),reference},
-  ...baseQuickLinks.slice(1)
- ];
+export default function Home(){
  return <main className={styles.home}>
   <section className={styles.hero}>
    <div className={styles.heroPortrait}><Image className={styles.heroImage} src="/images/pastor-y-yudelka-hero-v2.png" alt="Pastores Gilberto y Yudelka Maldonado" fill priority sizes="100vw"/></div>
@@ -81,70 +34,43 @@ export default async function Home(){
    <h2>Iglesia Príncipe de Paz</h2>
    <a href={church.mapsUrl} target="_blank" rel="noreferrer">{church.address}</a>
    <div className={styles.mobileSchedule}>
-    {church.schedule.filter(item=>["Miércoles","Sábado","Domingo"].includes(item.day)).map(item=><article key={item.day}><span className={styles.scheduleClock} aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v5l3.25 2"/></svg></span><small>{item.day}</small><strong>{item.time}</strong></article>)}
+    {church.schedule.filter(item=>["Miércoles","Sábado","Domingo"].includes(item.day)).map(item=><article key={item.day}><span>▣</span><small>{item.day}</small><strong>{item.time}</strong></article>)}
    </div>
   </section>
 
   <section className={styles.mobileConnect} aria-label="Conéctate con nosotros">
    <h2>Conéctate con nosotros</h2>
    <div className={styles.connectGrid}>
-    <a className={styles.studyAction} href={church.whatsappVideo} target="_blank" rel="noopener noreferrer" aria-label="Participar en el estudio bíblico virtual">
-     <span className={styles.connectIcon} aria-hidden="true"><svg viewBox="0 0 48 48" role="img"><path d="M8 11.5c6.2-2.1 11.6-1.2 16 2.6 4.4-3.8 9.8-4.7 16-2.6v25.2c-6-1.9-11.3-1-16 2.7-4.7-3.7-10-4.6-16-2.7V11.5Z"/><path d="M24 14.1v25.3M13 18c3.2-.6 5.8-.1 8 1.4M27 19.4c2.2-1.5 4.8-2 8-1.4M13 24c3.2-.6 5.8-.1 8 1.4M27 25.4c2.2-1.5 4.8-2 8-1.4"/></svg></span>
-     <span className={styles.connectCopy}><small>JUEVES · 8:00–9:00 PM</small><strong>Estudio bíblico virtual</strong><b>Participar por WhatsApp <span aria-hidden="true">→</span></b></span>
-    </a>
-    <a className={styles.youtubeAction} href={youtube.pastor.videos} target="_blank" rel="noopener noreferrer" aria-label="Ver los mensajes pastorales en YouTube">
-     <span className={styles.youtubeLogo} aria-hidden="true"><svg viewBox="0 0 68 48" role="img"><path d="M66.5 7.6a8.5 8.5 0 0 0-6-6C55.2 0 34 0 34 0S12.8 0 7.5 1.6a8.5 8.5 0 0 0-6 6C0 12.9 0 24 0 24s0 11.1 1.5 16.4a8.5 8.5 0 0 0 6 6C12.8 48 34 48 34 48s21.2 0 26.5-1.6a8.5 8.5 0 0 0 6-6C68 35.1 68 24 68 24s0-11.1-1.5-16.4Z"/><path className={styles.youtubePlay} d="m27 34 18-10-18-10v20Z"/></svg></span>
-     <span className={styles.connectCopy}><small>CANAL PASTORAL</small><strong>Mensajes en YouTube</strong><b>Ver las enseñanzas <span aria-hidden="true">→</span></b></span>
-    </a>
+    <a href={church.whatsappVideo} target="_blank" rel="noreferrer"><span className={styles.whatsappIcon}>☎</span><strong>Estudio bíblico</strong><small>Jueves 8–9 PM</small></a>
+    <a href={youtube.ministry.videos} target="_blank" rel="noreferrer"><span className={styles.youtubeIcon}>▶</span><strong>Mensajes en YouTube</strong><small>Vea las enseñanzas</small></a>
    </div>
    <blockquote>“Tu palabra es lámpara a mis pies” <cite>— Salmo 119:105</cite></blockquote>
   </section>
 
+  <section className={styles.sixtySeconds} aria-labelledby="sixty-seconds-title">
+   <div className={styles.sixtySecondsCopy}>
+    <p className={styles.sixtySecondsEyebrow}>60 SEGUNDOS CON LA PALABRA</p>
+    <h2 id="sixty-seconds-title">Sabiduría para la prueba</h2>
+    <p>Cuando la prueba no desaparece, Dios puede darle la sabiduría necesaria para atravesarla con fe.</p>
+    <span>Santiago 1:5–6</span>
+   </div>
+   <div className={styles.sixtySecondsVideo}>
+    <video controls preload="metadata" playsInline poster="/media/60-segundos-sabiduria-para-la-prueba.jpg">
+     <source src="/media/60-segundos-sabiduria-para-la-prueba.mp4" type="video/mp4"/>
+     <track kind="captions" src="/media/60-segundos-sabiduria-para-la-prueba.vtt" srcLang="es" label="Español" default/>
+     Su navegador no puede reproducir este video.
+    </video>
+   </div>
+  </section>
+
   <section className={styles.quickGrid} aria-label="Accesos principales">
-   {quickLinks.map(item=><Link className={`${styles.quickCard} ${"daily" in item ? styles.dailyCard : ""}`} href={item.href} key={item.href}>
+   {quickLinks.map(item=><Link className={styles.quickCard} href={item.href} key={item.href}>
     <div className={styles.cardImage}><Image src={item.image} alt={item.alt} fill sizes="(max-width: 700px) 100vw, 17vw"/></div>
     <div className={styles.cardCopy}>
      <h2><span>{item.icon}</span>{item.title}</h2>
-     {"daily" in item && <small className={styles.dailyDate}>{item.date}</small>}
-     <p>{item.text}</p>
-     {"daily" in item && <strong className={styles.dailyReference}>{item.reference}</strong>}
-     <b aria-hidden="true">→</b>
+     <p>{item.text}</p><b aria-hidden="true">→</b>
     </div>
    </Link>)}
-  </section>
-
-  <section className={shortStyles.section} aria-labelledby="shorts-heading">
-   <header className={shortStyles.header}>
-    <div>
-     <p className={shortStyles.eyebrow}>UNA PALABRA BREVE PARA SU DÍA</p>
-     <h2 id="shorts-heading">60 Segundos de Fe</h2>
-     <p>Una palabra breve para fortalecer su día y compartir la esperanza de Cristo.</p>
-    </div>
-    <Link className={shortStyles.allLink} href="/cortos">Ver más cortos →</Link>
-   </header>
-   {featuredShort
-    ?<div className={shortStyles.featured}>
-      <div className={shortStyles.videoWrap}><ShortVideoPlayer url={featuredShort.media_url} title={featuredShort.title} poster={featuredShort.thumbnail_url}/></div>
-      <div className={shortStyles.copy}>
-       <small>VIDEO DESTACADO</small>
-       <h3>{featuredShort.title}</h3>
-       {featuredShort.scripture&&<p className={shortStyles.scripture}>{featuredShort.scripture}</p>}
-       {featuredShort.description&&<p>{featuredShort.description}</p>}
-      </div>
-     </div>
-    :<div className={shortStyles.empty}>
-      <strong>60 Segundos de Fe está listo.</strong>
-      <p>El primer corto publicado desde el Panel Pastoral aparecerá automáticamente aquí.</p>
-     </div>}
-  </section>
-
-  <section className={styles.mobileChurchCard} aria-label="Oración">
-   <span className={styles.mobilePin}>♢</span>
-   <p className={styles.eyebrow}>ORACIÓN</p>
-   <h2>No tiene que caminar solo.</h2>
-   <p>Comparta su petición con confianza. Queremos orar por usted y acompañarle con cuidado.</p>
-   <p><strong>“Orad sin cesar.”</strong><br/>1 Tesalonicenses 5:17</p>
-   <Link className={styles.goldButton} href="/conexion">Enviar mi petición de oración</Link>
   </section>
 
   <section className={styles.churchPanel}>

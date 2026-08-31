@@ -1,4 +1,5 @@
 import AdminNav from "@/components/AdminNav";
+import VideoUploadField from "@/components/VideoUploadField";
 import {createClient} from "@/lib/supabase/server";
 import {getYouTubeThumbnail} from "@/lib/youtube";
 import {revalidatePath} from "next/cache";
@@ -11,11 +12,13 @@ async function createMedia(formData:FormData){
 
   const title=String(formData.get("title")||"").trim();
   const description=String(formData.get("description")||"").trim();
-  const media_type=String(formData.get("media_type")||"video");
+  const media_type=String(formData.get("media_type")||"short");
   const category=String(formData.get("category")||"").trim();
   const series_name=String(formData.get("series_name")||"").trim();
   const scripture=String(formData.get("scripture")||"").trim();
-  const media_url=String(formData.get("media_url")||"").trim();
+  const uploadedMedia=String(formData.get("media_upload_url")||"").trim();
+  const manualMedia=String(formData.get("media_url")||"").trim();
+  const media_url=uploadedMedia||manualMedia;
   const manualThumbnail=String(formData.get("thumbnail_url")||"").trim();
   const thumbnail_url=manualThumbnail || getYouTubeThumbnail(media_url);
   const published=formData.get("published")==="on";
@@ -32,6 +35,8 @@ async function createMedia(formData:FormData){
     media_url,thumbnail_url,published,featured,created_by:user?.id
   });
 
+  revalidatePath("/");
+  revalidatePath("/cortos");
   revalidatePath("/multimedia");
   revalidatePath("/admin/multimedia");
   redirect("/admin/multimedia");
@@ -42,6 +47,8 @@ async function deleteMedia(formData:FormData){
   const supabase=await createClient();
   const id=Number(formData.get("id"));
   if(id) await supabase.from("media_items").delete().eq("id",id);
+  revalidatePath("/");
+  revalidatePath("/cortos");
   revalidatePath("/multimedia");
   revalidatePath("/admin/multimedia");
 }
@@ -53,36 +60,40 @@ export default async function MultimediaAdmin(){
   return <div className="adminShell adminShellPro">
     <AdminNav/>
     <main className="adminMain">
-      <p className="eyebrow">Videos, audio y podcast</p>
-      <h1>Centro Multimedia</h1>
+      <p className="eyebrow">VIDEOS CORTOS, AUDIO Y PODCAST</p>
+      <h1>60 Segundos de Fe</h1>
+      <p>Suba un corto directamente desde su teléfono o pegue un enlace de YouTube. El contenido marcado como destacado aparecerá primero en Inicio.</p>
 
       {error&&<div className="notice">
         <strong>Falta crear la tabla multimedia.</strong>
-        <p>Ejecute el SQL de la versión 7.0A en Supabase.</p>
+        <p>Ejecute el SQL de multimedia en Supabase antes de publicar.</p>
       </div>}
 
       <form action={createMedia} className="adminForm">
-        <label>Título<input name="title" required/></label>
+        <label>Título<input name="title" required placeholder="Ej. Dios todavía tiene el control"/></label>
         <label>Tipo de contenido
-          <select name="media_type">
+          <select name="media_type" defaultValue="short">
+            <option value="short">60 Segundos de Fe · Short</option>
             <option value="video">Video</option>
-            <option value="short">Short</option>
             <option value="podcast">Podcast</option>
             <option value="audio">Audio</option>
             <option value="live">Transmisión en vivo</option>
           </select>
         </label>
-        <label>Categoría<input name="category" placeholder="Salvación, Fe, Misiones…"/></label>
-        <label>Serie<input name="series_name" placeholder="Ej. Evangelio de Juan"/></label>
-        <label>Texto bíblico<input name="scripture" placeholder="Ej. Juan 3:16"/></label>
-        <label>Descripción<textarea name="description" rows={5}/></label>
-        <label>Enlace del video o audio<input name="media_url" type="url" required/></label>
+        <label>Texto bíblico<input name="scripture" placeholder="Ej. Salmo 46:1"/></label>
+        <label>Descripción<textarea name="description" rows={4} placeholder="Una frase breve que acompañe el video"/></label>
+
+        <VideoUploadField label="Subir video desde el teléfono"/>
+
+        <label>O pegue un enlace de YouTube / video<input name="media_url" type="url" placeholder="https://youtube.com/shorts/..."/></label>
         <label>Miniatura opcional<input name="thumbnail_url" type="url" placeholder="YouTube se detecta automáticamente"/></label>
+        <label>Categoría<input name="category" placeholder="Fe, Salvación, Oración, Misiones…"/></label>
+        <label>Serie<input name="series_name" placeholder="Ej. 60 Segundos de Fe" defaultValue="60 Segundos de Fe"/></label>
         <div className="adminChecks">
           <label><input type="checkbox" name="published" defaultChecked/> Publicar</label>
-          <label><input type="checkbox" name="featured"/> Destacar</label>
+          <label><input type="checkbox" name="featured" defaultChecked/> Destacar en Inicio</label>
         </div>
-        <button className="btn" type="submit">Publicar contenido</button>
+        <button className="btn" type="submit">Publicar corto</button>
       </form>
 
       <div className="adminContentList">
@@ -90,7 +101,7 @@ export default async function MultimediaAdmin(){
           <div>
             <small>{item.media_type} · {item.published?"Publicado":"Borrador"} {item.featured?"· Destacado":""}</small>
             <h3>{item.title}</h3>
-            <p>{item.category||"Sin categoría"} {item.series_name?`· ${item.series_name}`:""}</p>
+            <p>{item.scripture||item.category||"Sin texto bíblico"} {item.series_name?`· ${item.series_name}`:""}</p>
           </div>
           <form action={deleteMedia}>
             <input type="hidden" name="id" value={item.id}/>

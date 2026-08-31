@@ -9,6 +9,7 @@ const sections=[
   ["Predicaciones","/admin/predicaciones","🎙"],
   ["Organizar sermones","/admin/predicaciones/organizacion","▦"],
   ["Devocionales","/admin/devocionales","☀"],
+  ["60 Segundos de Fe","/admin/multimedia","▶"],
   ["Eventos","/admin/eventos","📅"],
   ["Fotos","/admin/fotos","▣"],
   ["Peticiones","/admin/peticiones","🙏"],

@@ -15,7 +15,8 @@ const routePermissions:Record<Exclude<AdminRole,"pastor"|"member">,string[]>={
     "/admin/devocionales",
     "/admin/eventos",
     "/admin/fotos",
-    "/admin/misiones"
+    "/admin/misiones",
+    "/admin/multimedia"
   ],
   treasurer:["/admin/donaciones"]
 };

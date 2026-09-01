@@ -10,8 +10,10 @@ export default function AppExperience(){
   if(!standalone) return;
 
   document.documentElement.classList.add("pwaStandalone");
+  if(sessionStorage.getItem("lbn-splash-shown")) return;
+  sessionStorage.setItem("lbn-splash-shown","1");
   setShowSplash(true);
-  const timer=window.setTimeout(()=>setShowSplash(false),1400);
+  const timer=window.setTimeout(()=>setShowSplash(false),700);
   return ()=>window.clearTimeout(timer);
  },[]);
 

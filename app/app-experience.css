@@ -11,7 +11,7 @@
  text-align:center;
  color:#fff;
  background:radial-gradient(circle at 50% 36%,#123f70 0,#071829 58%,#04101c 100%);
- animation:appLaunchFade 1.4s ease forwards;
+ animation:appLaunchFade .7s ease forwards;
 }
 .appLaunchScreen img{
  width:112px;

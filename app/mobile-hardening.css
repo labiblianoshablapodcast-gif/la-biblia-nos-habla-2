@@ -1,0 +1,101 @@
+/* Final cross-browser mobile layer. Keep this import last in app/layout.tsx. */
+html{
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+  overflow-x:clip;
+}
+body{
+  min-width:320px;
+  overflow-x:clip;
+  -webkit-font-smoothing:antialiased;
+}
+img,video,svg,canvas{max-width:100%}
+button,a,input,select,textarea{touch-action:manipulation}
+button,input,select,textarea{font:inherit}
+
+@media(max-width:800px){
+  body{
+    padding-bottom:calc(78px + env(safe-area-inset-bottom))!important;
+    overscroll-behavior-x:none;
+  }
+
+  /* One authoritative five-item phone navigation for iOS and Android. */
+  .mobileBottomNav{
+    position:fixed!important;
+    z-index:1000!important;
+    left:0!important;
+    right:0!important;
+    bottom:0!important;
+    display:grid!important;
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+    width:100%!important;
+    min-height:calc(70px + env(safe-area-inset-bottom))!important;
+    margin:0!important;
+    padding:5px max(4px,env(safe-area-inset-right)) max(5px,env(safe-area-inset-bottom)) max(4px,env(safe-area-inset-left))!important;
+    border:0!important;
+    border-top:1px solid rgba(180,129,32,.28)!important;
+    border-radius:0!important;
+    background:rgba(255,255,255,.97)!important;
+    box-shadow:0 -8px 28px rgba(7,24,41,.12)!important;
+    -webkit-backdrop-filter:blur(18px)!important;
+    backdrop-filter:blur(18px)!important;
+  }
+  .mobileBottomNav a{
+    display:flex!important;
+    min-width:0!important;
+    min-height:58px!important;
+    padding:5px 1px!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:1px!important;
+    color:#111b28!important;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .mobileBottomNav span{font-size:1.25rem!important;line-height:1!important}
+  .mobileBottomNav small{
+    max-width:100%;
+    overflow:hidden;
+    color:inherit!important;
+    font-size:clamp(.58rem,2.7vw,.7rem)!important;
+    font-weight:750!important;
+    line-height:1.15!important;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+  .mobileBottomNav a[aria-current="page"]{
+    border-radius:14px!important;
+    background:linear-gradient(180deg,#fff9eb,#f5e5bd)!important;
+    color:#071829!important;
+    box-shadow:inset 0 0 0 1px rgba(190,137,37,.32)!important;
+  }
+
+  /* Reliable finger-size targets. Excludes inline verse tools and range sliders. */
+  main button:not(.verseActions button):not([role="switch"]),
+  main a.btn,
+  main input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),
+  main select{
+    min-height:44px!important;
+  }
+  .verseActions button{min-width:44px!important;min-height:44px!important}
+  input,select,textarea{font-size:16px!important}
+
+  main,section,article,aside,form{min-width:0}
+  pre,table{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  [id]{scroll-margin-top:96px}
+}
+
+@media(max-width:380px){
+  .mobileBottomNav small{font-size:.56rem!important}
+}
+
+@media(orientation:landscape) and (max-height:520px){
+  body{padding-bottom:calc(58px + env(safe-area-inset-bottom))!important}
+  .mobileBottomNav{min-height:calc(54px + env(safe-area-inset-bottom))!important;padding-top:2px!important}
+  .mobileBottomNav a{min-height:48px!important;flex-direction:row!important;gap:5px!important}
+  .mobileBottomNav span{font-size:1.05rem!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}

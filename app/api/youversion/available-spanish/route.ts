@@ -26,7 +26,8 @@ export async function GET() {
 
   try {
     const url = new URL(`${BASE_URL}/bibles`);
-    url.searchParams.set("language_ranges", "es");
+    // YouVersion/FastAPI expects this query parameter as an array field.
+    url.searchParams.append("language_ranges[]", "es");
     url.searchParams.set("page_size", "99");
 
     const response = await fetch(url, {
@@ -48,6 +49,7 @@ export async function GET() {
         ok: false,
         status: response.status,
         error: "YouVersion rechazó la consulta de Biblias disponibles.",
+        request: { language_ranges: ["es"] },
         response: body,
       });
     }

@@ -30,9 +30,10 @@ export default async function BibliaPage({searchParams}:{searchParams:Promise<{v
   </section>
 
   <section className={styles.library}>
-    <nav className={styles.versionSwitcher} aria-label="Seleccionar versión de la Biblia">
+    <nav className={styles.versionSwitcher} aria-label="Seleccionar versión de la Biblia o recursos Q’eqchi’">
       <Link className={`${styles.versionButton} ${version==="rvr60"?styles.versionActive:styles.versionInactive}`} aria-label="RVR1960 — Biblia en español" aria-current={version==="rvr60"?"page":undefined} href="/biblia">RVR1960</Link>
       <Link className={`${styles.versionButton} ${version==="qeqchi"?styles.versionActive:styles.versionInactive}`} aria-label="Q’eqchi’ — Li Santil Hu" aria-current={version==="qeqchi"?"page":undefined} href="/biblia?version=qeqchi">Q’eqchi’</Link>
+      <Link className={`${styles.versionButton} ${styles.versionInactive}`} aria-label="Videos bíblicos en Q’eqchi’" href="/biblia/qeqchi-videos">▶ Videos Q’eqchi’</Link>
       <Link className={`${styles.versionButton} ${version==="asv"?styles.versionActive:styles.versionInactive}`} aria-label="ASV — Bible in English" aria-current={version==="asv"?"page":undefined} href="/biblia?version=asv">ASV</Link>
     </nav>
     <div className={styles.searchPanel}><BibleHomeClient version={version}/></div>
@@ -41,7 +42,7 @@ export default async function BibliaPage({searchParams}:{searchParams:Promise<{v
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="https://api.biblia.com/v1/PoweredByBiblia_small.png" alt="Powered by Biblia"/>
       </a>
-      <span>RVR1960 mediante <a href="https://biblia.com/" target="_blank" rel="noreferrer">Biblia.com</a> de Logos Bible Software. ASV en inglés mediante <a href="https://www.bible.com/versions/12-asv-american-standard-version" target="_blank" rel="noreferrer">YouVersion</a>. Li Santil Hu en Q’eqchi’ mediante Scripture Earth.</span>
+      <span>RVR1960 mediante <a href="https://biblia.com/" target="_blank" rel="noreferrer">Biblia.com</a> de Logos Bible Software. ASV en inglés mediante <a href="https://www.bible.com/versions/12-asv-american-standard-version" target="_blank" rel="noreferrer">YouVersion</a>. Li Santil Hu y recursos multimedia en Q’eqchi’ mediante Scripture Earth.</span>
     </div>
 
     <p><Link className="textLink" href="/estudios">¿Busca planes y preguntas? Ir a Estudios bíblicos →</Link></p>

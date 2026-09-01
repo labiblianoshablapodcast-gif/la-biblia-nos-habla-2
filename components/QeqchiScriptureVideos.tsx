@@ -31,7 +31,7 @@ export default function QeqchiScriptureVideos(){
  const [videos,setVideos]=useState<string[]>([]),[selected,setSelected]=useState(0),[loading,setLoading]=useState(true),[error,setError]=useState(""),[query,setQuery]=useState("");
  useEffect(()=>{let active=true;fetch("/api/scripture-earth/qeqchi?lang=kek&view=summary",{cache:"no-store"}).then(async r=>{if(!r.ok)throw new Error();return await r.json() as ApiResponse}).then(body=>{if(active)setVideos([...new Set((body.targets||[]).flatMap(t=>t.resources?.video||[]).map(normalizeVideoUrl))])}).catch(()=>active&&setError("No se pudieron cargar los videos en este momento.")).finally(()=>active&&setLoading(false));return()=>{active=false}},[]);
  const current=videos[selected]||"",title=useMemo(()=>spanishTitle(current,selected),[current,selected]);
- const scene=selected===0?"/images/qeqchi/nativity-pilot.svg?v=2":"";
+ const scene=selected===0?"/images/qeqchi/nativity-approved.jpg?v=1":"";
  const filtered=useMemo(()=>{const n=query.trim().toLowerCase();return videos.map((video,index)=>({video,index,title:spanishTitle(video,index)})).filter(x=>!n||x.title.toLowerCase().includes(n))},[videos,query]);
  return <section className="shell">
   <header><span className="eyebrow">🎬 VIDEOS EN Q’EQCHI’</span><h2>Enseñanzas de la Biblia</h2><p>Escucha la Palabra de Dios en Q’eqchi’ con una presentación renovada para nuestra comunidad.</p></header>

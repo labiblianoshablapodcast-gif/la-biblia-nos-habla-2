@@ -1,105 +1,67 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const BASE_URL = "https://www.scriptureearth.org/api";
-
-const LANGUAGES = [
-  { iso: "kek", label: "Q’eqchi’" },
-  { iso: "spa", label: "Español" },
-  { iso: "eng", label: "English" },
+const TARGETS = [
+  { query: { idx: "264" }, iso: "kek", label: "Q’eqchi’ tradicional", idx: 264 },
+  { query: { iso: "kek" }, iso: "kek", label: "Q’eqchi’ por ISO", idx: null },
 ] as const;
+const ENDPOINTS = ["records.php", "media_se.php", "download_media.php", "general_links.php", "other_se.php", "website_links.php"] as const;
 
-async function scriptureEarthRequest(endpoint: string, key: string, iso: string) {
+async function requestSE(endpoint: string, key: string, query: Record<string, string>) {
   const url = new URL(`${BASE_URL}/${endpoint}`);
   url.searchParams.set("v", "1");
   url.searchParams.set("key", key);
-  url.searchParams.set("iso", iso);
-
-  const response = await fetch(url.toString(), {
-    cache: "no-store",
-    headers: { Accept: "application/json" },
-  });
-
-  if (!response.ok) throw new Error(`${endpoint} (${iso}) respondió ${response.status}`);
+  Object.entries(query).forEach(([name, value]) => url.searchParams.set(name, value));
+  const response = await fetch(url.toString(), { cache: "no-store", headers: { Accept: "application/json" } });
+  if (!response.ok) throw new Error(`${endpoint} respondió ${response.status}`);
   return response.json();
 }
 
-async function safeRequest(endpoint: string, key: string, iso: string) {
-  try {
-    return { ok: true as const, data: await scriptureEarthRequest(endpoint, key, iso) };
-  } catch (error) {
-    return { ok: false as const, error: error instanceof Error ? error.message : `No se pudo consultar ${endpoint}` };
-  }
+async function safeRequest(endpoint: string, key: string, query: Record<string, string>) {
+  try { return { ok: true as const, data: await requestSE(endpoint, key, query) }; }
+  catch (error) { return { ok: false as const, error: error instanceof Error ? error.message : `No se pudo consultar ${endpoint}` }; }
 }
 
-function hasAsv(value: unknown) {
-  const text = JSON.stringify(value ?? {}).toLowerCase();
-  return text.includes("american standard version") || /(^|[^a-z])asv([^a-z]|$)/i.test(text);
-}
-
-function collectMedia(value: unknown, result: { audio: string[]; video: string[]; pdf: string[] }) {
+function collect(value: unknown, out: { audio: string[]; video: string[]; pdf: string[]; bibleIs: string[]; grn: string[] }) {
   if (typeof value === "string") {
-    const text = value.trim();
-    if (/\.(mp3|m4a|wav|ogg)(\?|$)/i.test(text)) result.audio.push(text);
-    else if (/\.(mp4|webm|mov)(\?|$)/i.test(text)) result.video.push(text);
-    else if (/\.pdf(\?|$)/i.test(text)) result.pdf.push(text);
+    const s = value.trim();
+    if (/\.(mp3|m4a|wav|ogg)(\?|$)/i.test(s)) out.audio.push(s);
+    if (/\.(mp4|webm|mov)(\?|$)/i.test(s)) out.video.push(s);
+    if (/\.pdf(\?|$)/i.test(s)) out.pdf.push(s);
+    if (/bible\.is/i.test(s)) out.bibleIs.push(s);
+    if (/globalrecordings|global-recordings|\bgrn\b/i.test(s)) out.grn.push(s);
     return;
   }
-  if (Array.isArray(value)) {
-    value.forEach((item) => collectMedia(item, result));
-    return;
-  }
-  if (value && typeof value === "object") {
-    Object.values(value as Record<string, unknown>).forEach((item) => collectMedia(item, result));
-  }
+  if (Array.isArray(value)) return value.forEach((item) => collect(item, out));
+  if (value && typeof value === "object") Object.values(value as Record<string, unknown>).forEach((item) => collect(item, out));
 }
-
-function unique(items: string[]) {
-  return [...new Set(items)];
-}
+const unique = (items: string[]) => [...new Set(items)];
 
 export async function GET(request: NextRequest) {
   const key = process.env.SCRIPTURE_EARTH_API_KEY;
   if (!key) return NextResponse.json({ ok: false, error: "SCRIPTURE_EARTH_API_KEY no está configurada." }, { status: 503 });
 
-  const languages = await Promise.all(
-    LANGUAGES.map(async ({ iso, label }) => {
-      const [record, media, downloads, generalLinks] = await Promise.all([
-        safeRequest("records.php", key, iso),
-        safeRequest("media_se.php", key, iso),
-        safeRequest("download_media.php", key, iso),
-        safeRequest("general_links.php", key, iso),
-      ]);
-      const payloads = [record, media, downloads, generalLinks].filter((x) => x.ok).map((x) => x.ok ? x.data : null);
-      const resources = { audio: [] as string[], video: [] as string[], pdf: [] as string[] };
-      payloads.forEach((payload) => collectMedia(payload, resources));
-      const cleanResources = {
-        audio: unique(resources.audio),
-        video: unique(resources.video),
-        pdf: unique(resources.pdf),
-      };
-      return {
-        iso,
-        label,
-        available: payloads.length > 0,
-        counts: { audio: cleanResources.audio.length, video: cleanResources.video.length, pdf: cleanResources.pdf.length },
-        resources: cleanResources,
-        asvDetected: iso === "eng" ? hasAsv(payloads) : undefined,
-        endpointStatus: {
-          records: record.ok,
-          media: media.ok,
-          downloads: downloads.ok,
-          generalLinks: generalLinks.ok,
-        },
-        raw: { record, media, downloads, generalLinks },
-      };
-    }),
-  );
+  const targets = await Promise.all(TARGETS.map(async (target) => {
+    const responses = await Promise.all(ENDPOINTS.map(async (endpoint) => [endpoint, await safeRequest(endpoint, key, target.query)] as const));
+    const endpointStatus = Object.fromEntries(responses.map(([endpoint, result]) => [endpoint, result.ok]));
+    const payloads = responses.filter(([, result]) => result.ok).map(([, result]) => result.ok ? result.data : null);
+    const found = { audio: [] as string[], video: [] as string[], pdf: [] as string[], bibleIs: [] as string[], grn: [] as string[] };
+    payloads.forEach((payload) => collect(payload, found));
+    const resources = { audio: unique(found.audio), video: unique(found.video), pdf: unique(found.pdf), bibleIs: unique(found.bibleIs), grn: unique(found.grn) };
+    return {
+      iso: target.iso, idx: target.idx, label: target.label,
+      counts: Object.fromEntries(Object.entries(resources).map(([name, values]) => [name, values.length])),
+      resources, endpointStatus,
+      raw: Object.fromEntries(responses),
+    };
+  }));
 
   const summary = request.nextUrl.searchParams.get("view") === "summary";
   return NextResponse.json({
-    ok: languages.some((language) => language.available),
+    ok: true,
     source: "Scripture Earth",
-    languages: summary ? languages.map(({ raw, ...language }) => language) : languages,
-    attribution: { name: "Scripture Earth", qeqchiPage: "https://www.scriptureearth.org/00spa.php?iso=kek" },
+    targets: summary ? targets.map(({ raw, ...target }) => target) : targets,
+    note: "El índice 264 se consulta explícitamente para localizar audio y enlaces Q’eqchi’ de la ortografía tradicional.",
+    attribution: { name: "Scripture Earth", qeqchiPage: "https://www.scriptureearth.org/00spa.php?idx=264&iso=kek" },
   });
 }

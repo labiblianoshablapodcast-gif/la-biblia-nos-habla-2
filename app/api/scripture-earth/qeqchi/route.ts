@@ -44,7 +44,10 @@ export async function GET(request: NextRequest) {
   const key = process.env.SCRIPTURE_EARTH_API_KEY;
   if (!key) return NextResponse.json({ ok: false, error: "SCRIPTURE_EARTH_API_KEY no está configurada." }, { status: 503 });
 
-  const targets = await Promise.all(TARGETS.map(async (target) => {
+  const lang = request.nextUrl.searchParams.get("lang")?.toLowerCase();
+  const selectedTargets = lang === "spa" || lang === "kek" ? TARGETS.filter((target) => target.iso === lang) : TARGETS;
+
+  const targets = await Promise.all(selectedTargets.map(async (target) => {
     const responses = await Promise.all(ENDPOINTS.map(async (endpoint) => [endpoint, await safeRequest(endpoint, key, target.query)] as const));
     const endpointStatus = Object.fromEntries(responses.map(([endpoint, result]) => [endpoint, result.ok]));
     const payloads = responses.filter(([, result]) => result.ok).map(([, result]) => result.ok ? result.data : null);
@@ -63,6 +66,7 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({
     ok: true,
     source: "Scripture Earth",
+    filter: lang || "all",
     targets: summary ? targets.map(({ raw, ...target }) => target) : targets,
     note: "Prueba Q’eqchi’ (idx 264) y español (idx 240), incluyendo detección de audio y referencias RVR1960.",
     attribution: {

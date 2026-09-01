@@ -26,6 +26,18 @@ async function scriptureEarthRequest(endpoint: string, key: string, iso: string)
   return response.json();
 }
 
+async function safeScriptureEarthRequest(endpoint: string, key: string, iso: string) {
+  try {
+    const data = await scriptureEarthRequest(endpoint, key, iso);
+    return { ok: true, data };
+  } catch (error) {
+    return {
+      ok: false,
+      error: error instanceof Error ? error.message : `No se pudo consultar ${endpoint}`,
+    };
+  }
+}
+
 function hasAsv(value: unknown) {
   const text = JSON.stringify(value ?? {}).toLowerCase();
   return text.includes("american standard version") || /(^|[^a-z])asv([^a-z]|$)/i.test(text);
@@ -41,44 +53,49 @@ export async function GET() {
     );
   }
 
-  try {
-    const languages = await Promise.all(
-      LANGUAGES.map(async ({ iso, label }) => {
-        const [record, media, downloads, generalLinks] = await Promise.all([
-          scriptureEarthRequest("records.php", key, iso),
-          scriptureEarthRequest("media_se.php", key, iso),
-          scriptureEarthRequest("download_media.php", key, iso),
-          scriptureEarthRequest("general_links.php", key, iso),
-        ]);
+  const languages = await Promise.all(
+    LANGUAGES.map(async ({ iso, label }) => {
+      const [record, media, downloads, generalLinks] = await Promise.all([
+        safeScriptureEarthRequest("records.php", key, iso),
+        safeScriptureEarthRequest("media_se.php", key, iso),
+        safeScriptureEarthRequest("download_media.php", key, iso),
+        safeScriptureEarthRequest("general_links.php", key, iso),
+      ]);
 
-        return {
-          iso,
-          label,
-          record,
-          media,
-          downloads,
-          generalLinks,
-          asvDetected: iso === "eng" ? hasAsv({ record, media, downloads, generalLinks }) : false,
-        };
-      }),
-    );
+      const successfulPayloads = [record, media, downloads, generalLinks]
+        .filter((item) => item.ok && "data" in item)
+        .map((item) => ("data" in item ? item.data : null));
 
-    return NextResponse.json({
-      ok: true,
-      source: "Scripture Earth",
-      languages,
-      attribution: {
-        name: "Scripture Earth",
-        qeqchiPage: "https://www.scriptureearth.org/00spa.php?iso=kek",
-      },
-    });
-  } catch (error) {
-    return NextResponse.json(
-      {
-        ok: false,
-        error: error instanceof Error ? error.message : "No se pudo consultar Scripture Earth.",
-      },
-      { status: 502 },
-    );
-  }
+      return {
+        iso,
+        label,
+        record,
+        media,
+        downloads,
+        generalLinks,
+        asvDetected: iso === "eng" ? hasAsv(successfulPayloads) : false,
+      };
+    }),
+  );
+
+  const hasAnySuccess = languages.some((language) =>
+    [language.record, language.media, language.downloads, language.generalLinks].some(
+      (endpoint) => endpoint.ok,
+    ),
+  );
+
+  return NextResponse.json({
+    ok: hasAnySuccess,
+    partial: languages.some((language) =>
+      [language.record, language.media, language.downloads, language.generalLinks].some(
+        (endpoint) => !endpoint.ok,
+      ),
+    ),
+    source: "Scripture Earth",
+    languages,
+    attribution: {
+      name: "Scripture Earth",
+      qeqchiPage: "https://www.scriptureearth.org/00spa.php?iso=kek",
+    },
+  });
 }

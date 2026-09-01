@@ -15,10 +15,11 @@ function clock(value:number){if(!Number.isFinite(value))return"0:00";const m=Mat
 export default function QeqchiScriptureVideos(){
  const mediaRef=useRef<HTMLVideoElement>(null);
  const [videos,setVideos]=useState<string[]>([]),[selected,setSelected]=useState(0),[loading,setLoading]=useState(true),[error,setError]=useState(""),[query,setQuery]=useState("");
- const [playing,setPlaying]=useState(false),[time,setTime]=useState(0),[duration,setDuration]=useState(0),[volume,setVolume]=useState(1);
+ const [playing,setPlaying]=useState(false),[time,setTime]=useState(0),[duration,setDuration]=useState(0),[volume,setVolume]=useState(1),[sceneData,setSceneData]=useState("");
  useEffect(()=>{let active=true;fetch("/api/scripture-earth/qeqchi?lang=kek&view=summary",{cache:"no-store"}).then(async r=>{if(!r.ok)throw new Error();return await r.json() as ApiResponse}).then(body=>{if(active)setVideos([...new Set((body.targets||[]).flatMap(t=>t.resources?.video||[]).map(normalizeVideoUrl))])}).catch(()=>active&&setError("No se pudieron cargar los videos en este momento.")).finally(()=>active&&setLoading(false));return()=>{active=false}},[]);
+ useEffect(()=>{fetch("/images/qeqchi/nativity-inline.txt",{cache:"no-store"}).then(r=>r.ok?r.text():Promise.reject()).then(t=>setSceneData(`data:image/jpeg;base64,${t.trim()}`)).catch(()=>setSceneData(""))},[]);
  const current=videos[selected]||"",title=useMemo(()=>spanishTitle(current,selected),[current,selected]);
- const scene=selected===0?"/images/qeqchi/nativity-approved.jpg?v=2":"";
+ const scene=selected===0?sceneData:"";
  useEffect(()=>{setPlaying(false);setTime(0);setDuration(0)},[current]);
  const toggle=()=>{const m=mediaRef.current;if(!m)return;if(m.paused)m.play();else m.pause()};
  const filtered=useMemo(()=>{const n=query.trim().toLowerCase();return videos.map((video,index)=>({video,index,title:spanishTitle(video,index)})).filter(x=>!n||x.title.toLowerCase().includes(n))},[videos,query]);

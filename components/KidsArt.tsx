@@ -1,5 +1,4 @@
 "use client";
-import {useRef,useState} from "react";
 import styles from "@/app/kids/kids.module.css";
 
 export function Lumi(){return <svg viewBox="0 0 100 115" role="img" aria-label="Lumi, nuestra linterna amiga"><path d="M31 26V18C31 0 69 0 69 18V26" fill="none" stroke="#173b50" strokeWidth="7"/><path d="M25 25H75L82 88H18Z" fill="#f7c552" stroke="#173b50" strokeWidth="5"/><path d="M34 38H66L70 74H30Z" fill="#fff2b2"/><circle cx="40" cy="56" r="4" fill="#173b50"/><circle cx="60" cy="56" r="4" fill="#173b50"/><path d="M43 67Q50 74 57 67" fill="none" stroke="#173b50" strokeWidth="3" strokeLinecap="round"/><path d="M16 89H84M24 99H76M19 57L7 47M80 57L93 44" fill="none" stroke="#173b50" strokeWidth="6" strokeLinecap="round"/></svg>;}
@@ -46,9 +45,8 @@ function IllustratedScene({scene}:{scene:number}){
  </svg>;
 }
 
-export default function KidsArt({scene=0,onVideoPlay,onVideoPause}:{scene?:number;onVideoPlay?:()=>void;onVideoPause?:()=>void}){
- const videoRef=useRef<HTMLVideoElement|null>(null),[videoPlaying,setVideoPlaying]=useState(false);
+export default function KidsArt({scene=0}:{scene?:number}){
  const video=sceneVideos[scene];
- if(video)return <div className={styles.videoPlayer}><video ref={videoRef} className={styles.art} src={video} muted playsInline preload="metadata" onPlay={()=>{setVideoPlaying(true);onVideoPlay?.();}} onPause={()=>{setVideoPlaying(false);onVideoPause?.();}} onEnded={()=>{setVideoPlaying(false);onVideoPause?.();}} aria-label={`${sceneLabels[scene]}. Al reproducir, se escucha la narración en español.`}/><button type="button" className={styles.videoPlayButton} aria-pressed={videoPlaying} onClick={()=>{const element=videoRef.current;if(!element)return;if(element.paused)void element.play();else element.pause();}}>{videoPlaying?"⏸ Pausar video":"▶ Reproducir con audio en español"}</button></div>;
+ if(video)return <video className={styles.art} src={video} autoPlay controls loop playsInline preload="metadata" aria-label={sceneLabels[scene]}/>;
  return <IllustratedScene scene={Math.min(7,Math.max(4,scene))}/>;
 }

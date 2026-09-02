@@ -46,6 +46,6 @@ function IllustratedScene({scene}:{scene:number}){
 
 export default function KidsArt({scene=0}:{scene?:number}){
  const video=sceneVideos[scene];
- if(video)return <video className={styles.art} src={video} autoPlay controls loop playsInline preload="metadata" aria-label={sceneLabels[scene]}/>;
+ if(video)return <video className={styles.art} src={video} autoPlay muted loop playsInline preload="metadata" aria-label={`${sceneLabels[scene]}. Video sin audio original; use Escuchar escena en español.`}/>;
  return <IllustratedScene scene={Math.min(7,Math.max(4,scene))}/>;
 }

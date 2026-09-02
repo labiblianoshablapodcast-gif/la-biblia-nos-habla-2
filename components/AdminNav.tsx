@@ -33,18 +33,31 @@ export default async function AdminNav(){
   href==="/admin"?role==="pastor":canAccessAdminPath(role,href)
  );
 
+ const links=visibleSections.map(([label,href,icon])=><Link href={href} key={href}><span aria-hidden="true">{icon}</span>{label}</Link>);
+
  return <aside className="adminNav adminNavPro">
   <AdminScrollReset/>
-  <div className="adminBrand">
-   <span>LB</span>
-   <div><strong>Panel Pastoral</strong><small>La Biblia Nos Habla</small></div>
+  <div className="adminDesktopMenu">
+   <div className="adminBrand">
+    <span>LB</span>
+    <div><strong>Panel Pastoral</strong><small>La Biblia Nos Habla</small></div>
+   </div>
+   <nav>{links}</nav>
+   <div className="adminNavFooter">
+    <Link href="/">Ver sitio público</Link>
+    <SignOutButton/>
+   </div>
   </div>
-  <nav>
-   {visibleSections.map(([label,href,icon])=><Link href={href} key={href}><span>{icon}</span>{label}</Link>)}
-  </nav>
-  <div className="adminNavFooter">
-   <Link href="/">Ver sitio público</Link>
-   <SignOutButton/>
-  </div>
+  <details className="adminMobileMenu">
+   <summary>
+    <span className="adminMobileBrand"><b>LB</b><span><strong>Panel Pastoral</strong><small>La Biblia Nos Habla</small></span></span>
+    <span className="adminMobileMenuLabel">Menú <i aria-hidden="true">⌄</i></span>
+   </summary>
+   <nav>{links}</nav>
+   <div className="adminNavFooter">
+    <Link href="/">Ver sitio público</Link>
+    <SignOutButton/>
+   </div>
+  </details>
  </aside>;
 }

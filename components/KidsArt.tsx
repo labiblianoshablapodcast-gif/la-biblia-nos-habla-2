@@ -1,3 +1,4 @@
+"use client";
 import styles from "@/app/kids/kids.module.css";
 
 export function Lumi(){return <svg viewBox="0 0 100 115" role="img" aria-label="Lumi, nuestra linterna amiga"><path d="M31 26V18C31 0 69 0 69 18V26" fill="none" stroke="#173b50" strokeWidth="7"/><path d="M25 25H75L82 88H18Z" fill="#f7c552" stroke="#173b50" strokeWidth="5"/><path d="M34 38H66L70 74H30Z" fill="#fff2b2"/><circle cx="40" cy="56" r="4" fill="#173b50"/><circle cx="60" cy="56" r="4" fill="#173b50"/><path d="M43 67Q50 74 57 67" fill="none" stroke="#173b50" strokeWidth="3" strokeLinecap="round"/><path d="M16 89H84M24 99H76M19 57L7 47M80 57L93 44" fill="none" stroke="#173b50" strokeWidth="6" strokeLinecap="round"/></svg>;}
@@ -44,8 +45,8 @@ function IllustratedScene({scene}:{scene:number}){
  </svg>;
 }
 
-export default function KidsArt({scene=0}:{scene?:number}){
+export default function KidsArt({scene=0,onVideoPlay,onVideoPause}:{scene?:number;onVideoPlay?:()=>void;onVideoPause?:()=>void}){
  const video=sceneVideos[scene];
- if(video)return <video className={styles.art} src={video} autoPlay muted loop playsInline preload="metadata" aria-label={`${sceneLabels[scene]}. Video sin audio original; use Escuchar escena en español.`}/>;
+ if(video)return <video className={styles.art} src={video} controls muted loop playsInline preload="metadata" onPlay={onVideoPlay} onPause={onVideoPause} onVolumeChange={event=>{event.currentTarget.muted=true;}} aria-label={`${sceneLabels[scene]}. Al reproducir, se escucha la narración en español.`}/>;
  return <IllustratedScene scene={Math.min(7,Math.max(4,scene))}/>;
 }

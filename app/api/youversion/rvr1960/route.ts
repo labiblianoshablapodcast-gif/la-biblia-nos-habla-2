@@ -9,7 +9,7 @@ async function probe(path: string, key: string) {
     cache: "no-store",
     headers: {
       Accept: "application/json",
-      "X-YV-API-Key": key,
+      "X-YVP-App-Key": key,
     },
   });
   const text = await response.text();

@@ -20,7 +20,11 @@ export default function QeqchiChapterAudio({src, bookName, chapter, verseCount}:
   function syncVerse(){
     const audio=player.current;
     if(!audio || !verseCount || !Number.isFinite(audio.duration) || audio.duration<=0) return;
-    const progress=Math.max(0,Math.min(0.999999,audio.currentTime/audio.duration));
+    // Mantiene el versículo actual un poco más para evitar cambiar antes
+    // de que la narración termine. Los audios no incluyen timestamps por versículo.
+    const VERSE_FOLLOW_DELAY_SECONDS=1.8;
+    const adjustedTime=Math.max(0,audio.currentTime-VERSE_FOLLOW_DELAY_SECONDS);
+    const progress=Math.max(0,Math.min(0.999999,adjustedTime/audio.duration));
     const verse=Math.min(verseCount,Math.max(1,Math.floor(progress*verseCount)+1));
     if(verse!==activeVerse) publishVerse(verse);
   }

@@ -29,6 +29,7 @@ export default function BibleReaderTools({
   const [notes,setNotes]=useState<Record<string,string>>({});
   const [selected,setSelected]=useState<number|null>(null);
   const [studyWord,setStudyWord]=useState("");
+  const [audioVerse,setAudioVerse]=useState<number|null>(null);
 
   useEffect(()=>{
     setDark(localStorage.getItem("bible-dark")==="1");
@@ -40,6 +41,21 @@ export default function BibleReaderTools({
       bookName,bookSlug,chapter,translationKey,at:new Date().toISOString()
     }));
   },[bookName,bookSlug,chapter,key,translationKey]);
+
+  useEffect(()=>{
+    const onAudioVerse=(event:Event)=>{
+      const detail=(event as CustomEvent<{verse:number|null}>).detail;
+      const verse=detail?.verse ?? null;
+      setAudioVerse(verse);
+      if(verse){
+        requestAnimationFrame(()=>{
+          document.getElementById(`bible-verse-${verse}`)?.scrollIntoView({behavior:"smooth",block:"center"});
+        });
+      }
+    };
+    window.addEventListener("bible-audio-verse",onAudioVerse);
+    return ()=>window.removeEventListener("bible-audio-verse",onAudioVerse);
+  },[]);
 
   useEffect(()=>{localStorage.setItem("bible-dark",dark?"1":"0")},[dark]);
   useEffect(()=>{localStorage.setItem("bible-font",String(fontSize))},[fontSize]);
@@ -95,7 +111,15 @@ export default function BibleReaderTools({
             <span>{translationKey==="asv"?"Section heading":"Subtítulo editorial"}</span>
             {verse.heading}
           </h2>}
-          <section className={favorite?"verseRow favoriteVerse":"verseRow"}>
+          <section
+            id={`bible-verse-${verse.number}`}
+            aria-current={audioVerse===verse.number?"true":undefined}
+            className={[
+              "verseRow",
+              favorite?"favoriteVerse":"",
+              audioVerse===verse.number?"audioActiveVerse":""
+            ].filter(Boolean).join(" ")}
+          >
             <p onClick={()=>setSelected(selected===verse.number?null:verse.number)}>
               <sup>{verse.number}</sup> {verse.text}
             </p>

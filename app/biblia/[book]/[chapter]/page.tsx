@@ -57,7 +57,7 @@ export default async function ChapterPage({
     {version==="qeqchi" ? <QeqchiChapterAudio
       key={`${book.code}-${chapter}`}
       src={getQeqchiAudio(book.code,chapter)} bookName={book.name} chapter={chapter}
-      verseCount={bibleChapter?.verses.length ?? 0}
+      verses={bibleChapter?.verses ?? []}
     /> : version==="rvr60" ? <BibleAudioControls language="rvr60"/> : null}
 
     {bibleChapter ? (

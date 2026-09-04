@@ -162,8 +162,9 @@ export async function GET(request: NextRequest) {
 
   for (const filesetId of filesetIds) {
     const media = await requestBibleBrain(
-      `/bibles/filesets/${encodeURIComponent(filesetId)}/${book}/${chapter}`,
+      `/bibles/filesets/${encodeURIComponent(filesetId)}/${book}`,
       key,
+      { chapter: String(chapter) },
     );
 
     if (!media.ok) continue;

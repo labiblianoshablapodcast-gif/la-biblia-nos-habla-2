@@ -4,8 +4,10 @@ import {useRef, useState} from "react";
 
 const AUDIO_VERSE_EVENT = "bible-audio-verse";
 
-export default function QeqchiChapterAudio({src, bookName, chapter, verseCount}: {
-  src?: string; bookName: string; chapter: number; verseCount: number;
+type VerseTimingInput={number:number;text:string};
+
+export default function QeqchiChapterAudio({src, bookName, chapter, verses}: {
+  src?: string; bookName: string; chapter: number; verses: VerseTimingInput[];
 }) {
   const player = useRef<HTMLAudioElement>(null);
   const [failed, setFailed] = useState(false);
@@ -19,14 +21,32 @@ export default function QeqchiChapterAudio({src, bookName, chapter, verseCount}:
 
   function syncVerse(){
     const audio=player.current;
-    if(!audio || !verseCount || !Number.isFinite(audio.duration) || audio.duration<=0) return;
-    // Mantiene el versículo actual un poco más para evitar cambiar antes
-    // de que la narración termine. Los audios no incluyen timestamps por versículo.
-    const VERSE_FOLLOW_DELAY_SECONDS=1.8;
-    const adjustedTime=Math.max(0,audio.currentTime-VERSE_FOLLOW_DELAY_SECONDS);
-    const progress=Math.max(0,Math.min(0.999999,adjustedTime/audio.duration));
-    const verse=Math.min(verseCount,Math.max(1,Math.floor(progress*verseCount)+1));
-    if(verse!==activeVerse) publishVerse(verse);
+    if(!audio || !verses.length || !Number.isFinite(audio.duration) || audio.duration<=0) return;
+
+    // Estimamos la duración de cada versículo por la cantidad de texto que contiene.
+    // Los versículos largos reciben más tiempo y los cortos menos.
+    const PAUSE_WEIGHT=7;
+    const weights=verses.map(v=>{
+      const text=v.text.trim();
+      const words=text.split(/\s+/).filter(Boolean).length;
+      const punctuation=(text.match(/[,.!?;:—-]/g)||[]).length;
+      return Math.max(1,words + punctuation*PAUSE_WEIGHT/10);
+    });
+    const totalWeight=weights.reduce((sum,w)=>sum+w,0);
+
+    // Pequeño retraso global para evitar adelantar el resaltado a la voz.
+    const FOLLOW_DELAY_SECONDS=0.7;
+    const t=Math.max(0,audio.currentTime-FOLLOW_DELAY_SECONDS);
+    const target=t/audio.duration*totalWeight;
+
+    let cumulative=0;
+    let current=verses[0]?.number ?? 1;
+    for(let i=0;i<verses.length;i++){
+      cumulative+=weights[i];
+      current=verses[i].number;
+      if(target<cumulative) break;
+    }
+    if(current!==activeVerse) publishVerse(current);
   }
 
   return <section className="bibleAudioCard" aria-label={`Audio bíblico ${label}`}>

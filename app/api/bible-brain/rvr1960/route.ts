@@ -141,7 +141,7 @@ export async function GET(request: NextRequest) {
 
   const [bible, filesets] = await Promise.all([
     requestBibleBrain(`/bibles/${BIBLE_ID}`, key),
-    requestBibleBrain("/filesets", key, { bible_id: BIBLE_ID }),
+    requestBibleBrain("/bibles", key, { bible_id: BIBLE_ID, language_code: "spa", media: "audio" }),
   ]);
 
   const discovered = [

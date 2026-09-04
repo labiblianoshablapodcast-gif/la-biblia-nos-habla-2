@@ -180,14 +180,17 @@ export async function GET(request: NextRequest) {
 
   const [bible, bibleSearch, filesets] = await Promise.all([
     requestBibleBrain(`/bibles/${BIBLE_ID}`, key),
-    requestBibleBrain("/bibles", key, { bible_id: BIBLE_ID, language_code: "spa" }),
+    requestBibleBrain("/bibles", key, { language_code: "spa", media: "audio" }),
     requestBibleBrain("/filesets", key, { bible_id: BIBLE_ID }),
   ]);
 
+  const allSpanishAudio = audioFilesetIdsFrom(bibleSearch.data);
+  const rvr1960SpanishAudio = allSpanishAudio.filter((id) => /^SPA.*60/i.test(id));
+
   const discoveredAudio = [
     ...audioFilesetIdsFrom(bible.data),
-    ...audioFilesetIdsFrom(bibleSearch.data),
     ...audioFilesetIdsFrom(filesets.data),
+    ...rvr1960SpanishAudio,
   ];
 
   const discoveredAny = [
@@ -252,6 +255,7 @@ export async function GET(request: NextRequest) {
       book,
       chapter,
       discoveredAudioFilesets: discoveredAudio.slice(0, 20),
+      spanishAudioCandidates: allSpanishAudio.slice(0, 60),
       discoveredFilesets: discoveredAny.slice(0, 30),
     },
     { status: 404, headers: { "Cache-Control": "no-store" } },

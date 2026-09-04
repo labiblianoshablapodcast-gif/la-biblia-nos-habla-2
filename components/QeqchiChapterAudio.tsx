@@ -34,10 +34,19 @@ export default function QeqchiChapterAudio({src, bookName, chapter, verses}: {
     });
     const totalWeight=weights.reduce((sum,w)=>sum+w,0);
 
-    // Pequeño retraso global para evitar adelantar el resaltado a la voz.
+    // Estos audios comienzan con una introducción hablada (libro + capítulo).
+    // No avanzamos los versículos hasta que esa introducción termine.
+    const INTRO_SECONDS=10;
     const FOLLOW_DELAY_SECONDS=0.7;
-    const t=Math.max(0,audio.currentTime-FOLLOW_DELAY_SECONDS);
-    const target=t/audio.duration*totalWeight;
+    const readingDuration=Math.max(1,audio.duration-INTRO_SECONDS);
+    const t=Math.max(0,audio.currentTime-INTRO_SECONDS-FOLLOW_DELAY_SECONDS);
+
+    if(audio.currentTime<INTRO_SECONDS){
+      if(activeVerse!==verses[0]?.number) publishVerse(verses[0]?.number ?? 1);
+      return;
+    }
+
+    const target=Math.min(totalWeight,(t/readingDuration)*totalWeight);
 
     let cumulative=0;
     let current=verses[0]?.number ?? 1;

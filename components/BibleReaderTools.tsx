@@ -2,6 +2,7 @@
 
 import {useEffect,useMemo,useState} from "react";
 import {useRouter} from "next/navigation";
+import {BibleHighlights,BibleHighlightedText} from "./BibleHighlights";
 
 type Verse={number:number;text:string;heading?:string};
 
@@ -86,6 +87,7 @@ export default function BibleReaderTools({
       <span>{favorites.length} favoritos en este capítulo</span>
     </div>
 
+    <BibleHighlights chapterKey={key}>
     <article className="scriptureText interactiveText" style={{fontSize}}>
       {verses.map(verse=>{
         const noteKey=`${key}-${verse.number}`;
@@ -96,8 +98,8 @@ export default function BibleReaderTools({
             {verse.heading}
           </h2>}
           <section className={favorite?"verseRow favoriteVerse":"verseRow"}>
-            <p onClick={()=>setSelected(selected===verse.number?null:verse.number)}>
-              <sup>{verse.number}</sup> {verse.text}
+            <p>
+              <sup>{verse.number}</sup> <BibleHighlightedText number={verse.number} text={verse.text}/>
             </p>
             <div className="verseActions">
               <button title="Guardar favorito" onClick={()=>toggleFavorite(verse.number)}>{favorite?"★":"☆"}</button>
@@ -134,6 +136,7 @@ export default function BibleReaderTools({
         </div>;
       })}
     </article>
+    </BibleHighlights>
 
     {selectedVerse && <div className="selectedVerseBar">
       <strong>{bookName} {chapter}:{selectedVerse.number}</strong>

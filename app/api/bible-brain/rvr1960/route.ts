@@ -61,18 +61,57 @@ function filesetIdsFrom(value: unknown): string[] {
     if (Array.isArray(item)) return item.forEach(visit);
     if (!item || typeof item !== "object") return;
     const object = item as Record<string, unknown>;
-    for (const [key, raw] of Object.entries(object)) {
-      if (
-        typeof raw === "string" &&
-        /fileset|fileset_id|id/i.test(key) &&
-        /^SPAR60/i.test(raw) &&
-        /(DA|SA)(-|$)/i.test(raw)
-      ) {
-        ids.add(raw);
-      }
-      visit(raw);
+
+    const directIds = [
+      object.fileset_id,
+      object.filesetId,
+      object.id,
+      object.fileset,
+    ];
+
+    for (const raw of directIds) {
+      if (typeof raw === "string" && raw.length >= 6) ids.add(raw);
     }
+
+    Object.values(object).forEach(visit);
   };
+  visit(value);
+  return [...ids];
+}
+
+function audioFilesetIdsFrom(value: unknown): string[] {
+  const ids = new Set<string>();
+
+  const visit = (item: unknown) => {
+    if (Array.isArray(item)) return item.forEach(visit);
+    if (!item || typeof item !== "object") return;
+
+    const object = item as Record<string, unknown>;
+    const id = String(
+      object.fileset_id ??
+      object.filesetId ??
+      object.id ??
+      object.fileset ??
+      ""
+    );
+
+    const media = String(
+      object.media_type ??
+      object.media ??
+      object.type ??
+      object.content_type ??
+      ""
+    ).toLowerCase();
+
+    const strings = stringsFrom(object).join(" ").toLowerCase();
+    const looksAudio =
+      /audio|mp3|opus|aac|streaming audio|digital audio/.test(media) ||
+      /audio|mp3|opus|aac|streaming audio|digital audio/.test(strings);
+
+    if (id && looksAudio) ids.add(id);
+    Object.values(object).forEach(visit);
+  };
+
   visit(value);
   return [...ids];
 }
@@ -139,13 +178,21 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const [bible, filesets] = await Promise.all([
+  const [bible, bibleSearch, filesets] = await Promise.all([
     requestBibleBrain(`/bibles/${BIBLE_ID}`, key),
-    requestBibleBrain("/bibles", key, { bible_id: BIBLE_ID, language_code: "spa", media: "audio" }),
+    requestBibleBrain("/bibles", key, { bible_id: BIBLE_ID, language_code: "spa" }),
+    requestBibleBrain("/filesets", key, { bible_id: BIBLE_ID }),
   ]);
 
-  const discovered = [
+  const discoveredAudio = [
+    ...audioFilesetIdsFrom(bible.data),
+    ...audioFilesetIdsFrom(bibleSearch.data),
+    ...audioFilesetIdsFrom(filesets.data),
+  ];
+
+  const discoveredAny = [
     ...filesetIdsFrom(bible.data),
+    ...filesetIdsFrom(bibleSearch.data),
     ...filesetIdsFrom(filesets.data),
   ];
 
@@ -158,7 +205,11 @@ export async function GET(request: NextRequest) {
     `SPAR60${testament}2DA-opus16`,
   ];
 
-  const filesetIds = [...new Set([...discovered, ...fallback])];
+  const filesetIds = [...new Set([
+    ...discoveredAudio,
+    ...discoveredAny.filter((id)=>/DA|SA|opus|aac/i.test(id)),
+    ...fallback,
+  ])];
 
   for (const filesetId of filesetIds) {
     const media = await requestBibleBrain(
@@ -200,6 +251,8 @@ export async function GET(request: NextRequest) {
       bibleId: BIBLE_ID,
       book,
       chapter,
+      discoveredAudioFilesets: discoveredAudio.slice(0, 20),
+      discoveredFilesets: discoveredAny.slice(0, 30),
     },
     { status: 404, headers: { "Cache-Control": "no-store" } },
   );

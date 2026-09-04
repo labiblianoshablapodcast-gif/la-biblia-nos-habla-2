@@ -2,6 +2,8 @@ import {notFound} from "next/navigation";
 import Link from "next/link";
 import ChapterControls from "@/components/ChapterControls";
 import BibleAudioControls from "@/components/BibleAudioControls";
+import QeqchiChapterAudio from "@/components/QeqchiChapterAudio";
+import {getQeqchiAudio} from "@/lib/qeqchi-audio";
 import BibleReaderTools from "@/components/BibleReaderTools";
 import StudyReadingNav from "@/components/StudyReadingNav";
 import {getStudyPlan,readingStudyContext,studyDayUrl,studyReadingUrl} from "@/lib/study-plans";
@@ -52,7 +54,10 @@ export default async function ChapterPage({
     </div>
 
     {study?<StudyReadingNav plan={study.plan} day={study.day} chapter={chapter} version={version}/>:<ChapterControls slug={book.slug} chapter={chapter} total={book.chapters} query={versionQuery}/>}
-    {version!=="asv" && <BibleAudioControls language={version}/>}
+    {version==="qeqchi" ? <QeqchiChapterAudio
+      key={`${book.code}-${chapter}`}
+      src={getQeqchiAudio(book.code,chapter)} bookName={book.name} chapter={chapter}
+    /> : version==="rvr60" ? <BibleAudioControls language="rvr60"/> : null}
 
     {bibleChapter ? (
       <BibleReaderTools

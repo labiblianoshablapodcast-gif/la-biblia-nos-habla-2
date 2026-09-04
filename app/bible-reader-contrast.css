@@ -84,3 +84,16 @@
     border-radius:18px;
   }
 }
+
+
+/* Versículo que sigue el audio bíblico */
+.audioActiveVerse {
+  border-radius: 14px;
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+  scroll-margin-block: 35vh;
+  transition: background-color .25s ease, outline-color .25s ease, transform .25s ease;
+}
+.audioActiveVerse > p {
+  font-weight: 700;
+}

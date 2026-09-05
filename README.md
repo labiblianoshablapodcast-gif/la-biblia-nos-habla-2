@@ -19,3 +19,6 @@ Ejecute una vez [`supabase/002_version_8_pastor_gallery.sql`](supabase/002_versi
 ## Integración con la versión 7.1
 
 Este proyecto se preparó como entrega independiente porque la carpeta recibida no contenía el código de la versión 7.1. Al contar con ese proyecto, copie los archivos de `src/`, `public/images/`, `supabase/` y `vercel.json` según corresponda, y conecte los enlaces de Multimedia, Biblia, Misiones y Oración a las rutas ya existentes de la 7.1.
+
+
+<!-- redeploy estable 2026-09-05 -->

@@ -44,7 +44,7 @@ export default async function ChapterPage({
 
  return <>
   <section className={styles.hero}>
-    <div className={styles.heroCopy}><h1>La Biblia</h1></div>
+    <div className={styles.heroCopy}><h1 lang={version==="asv"?"en":version==="qeqchi"?"kek":"es"}>{version==="asv"?"The Bible":version==="qeqchi"?"Li Santil Hu":"La Biblia"}</h1></div>
     <div className={styles.heroImage}>
       <Image src="/images/biblia-abierta-portada.png" alt="Biblia abierta sobre una mesa" fill priority sizes="(max-width: 760px) 100vw, 48vw"/>
       <div className={styles.imageShade}/>

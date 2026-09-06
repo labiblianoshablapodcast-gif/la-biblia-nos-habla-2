@@ -188,3 +188,14 @@
   color:#fff!important;
   font-weight:900!important;
 }
+
+/* Match the app header palette on every screen. */
+.siteHeader{background:linear-gradient(135deg,#071829,#0b263d)!important;border-bottom:2px solid #d7a338!important;color:#fff!important}
+.siteHeader .siteLogo,.siteHeader .siteLogo strong{color:#fff!important}
+.siteHeader .siteLogo small{color:#becbd5!important}
+.siteHeader .siteLogo>span{background:#061729!important;color:#e0aa35!important;border:1px solid #d7a338!important}
+.siteHeader nav a{color:#fff!important}
+.siteHeader nav a:hover,.siteHeader nav a[aria-current="page"]{color:#e0aa35!important}
+.siteHeader nav a[href="/donaciones"]{background:#d7aa4b!important;color:#071829!important}
+.siteHeader .appInstallButton{border:1px solid #d7a338!important;border-radius:14px!important;background:#071829!important;color:#e0aa35!important;min-height:44px;gap:8px}
+.siteHeader .appInstallIcon{display:grid;place-items:center;width:28px;height:28px;border:1px solid #d7a338;border-radius:50%;color:#e0aa35;flex:0 0 28px}

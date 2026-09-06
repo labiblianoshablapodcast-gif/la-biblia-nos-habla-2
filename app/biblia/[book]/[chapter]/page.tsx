@@ -1,5 +1,7 @@
 import {notFound} from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
+import styles from "../../biblia.module.css";
 import ChapterControls from "@/components/ChapterControls";
 import BibleAudioControls from "@/components/BibleAudioControls";
 import QeqchiChapterAudio from "@/components/QeqchiChapterAudio";
@@ -41,10 +43,12 @@ export default async function ChapterPage({
  const displayBook=version==="asv"&&bibleChapter?bibleChapter.book:book.name;
 
  return <>
-  <section className="pageHero bibleChapterHero">
-    <p className="eyebrow">Santa Biblia · {translationName}</p>
-    <h1>{displayBook} {chapter}</h1>
-    <p>{book.testament}</p>
+  <section className={styles.hero}>
+    <div className={styles.heroCopy}><h1>La Biblia</h1></div>
+    <div className={styles.heroImage}>
+      <Image src="/images/biblia-abierta-portada.png" alt="Biblia abierta sobre una mesa" fill priority sizes="(max-width: 760px) 100vw, 48vw"/>
+      <div className={styles.imageShade}/>
+    </div>
   </section>
 
   <section className="section bibleReader">

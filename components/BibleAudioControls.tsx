@@ -1,6 +1,7 @@
 'use client';
 
 import {useEffect,useMemo,useRef,useState} from "react";
+import {getRvr60Audio} from "@/lib/rvr60-audio";
 
 type Timing={verse:number;start:number};
 type AudioPayload={
@@ -23,27 +24,16 @@ export default function BibleAudioControls({
  const [payload,setPayload]=useState<AudioPayload|null>(null);
  const [loading,setLoading]=useState(language==="rvr60");
  const [speed,setSpeed]=useState(1);
+ const [playing,setPlaying]=useState(false);
+ const [progress,setProgress]=useState(0);
 
  useEffect(()=>{
-   if(language!=="rvr60" || !bookCode || !chapter)return;
-   const controller=new AbortController();
-   setLoading(true);
-   setPayload(null);
-   fetch(`/api/bible-brain/rvr1960?book=${encodeURIComponent(bookCode)}&chapter=${chapter}`,{
-     signal:controller.signal,
-     cache:"no-store"
-   })
-     .then(async response=>{
-       const data=await response.json() as AudioPayload;
-       if(!response.ok)throw new Error(data.error||"No se pudo cargar el audio.");
-       return data;
-     })
-     .then(data=>setPayload(data))
-     .catch(error=>{
-       if((error as Error).name!=="AbortError")setPayload({ok:false,error:(error as Error).message});
-     })
-     .finally(()=>setLoading(false));
-   return ()=>controller.abort();
+   setPlaying(false);
+   setProgress(0);
+   setLoading(false);
+   const audioUrl=language==="rvr60" && bookCode && chapter?getRvr60Audio(bookCode,chapter):null;
+   setPayload(audioUrl?{ok:true,audioUrl,timings:[]}:{ok:false,error:"Todavía no hemos subido el audio de este capítulo."});
+   return ()=>window.dispatchEvent(new CustomEvent("bible-audio-verse",{detail:{verse:null}}));
  },[language,bookCode,chapter]);
 
  const timings=useMemo(()=>payload?.timings??[],[payload?.timings]);
@@ -54,7 +44,9 @@ export default function BibleAudioControls({
 
  function syncVerse(){
    const audio=audioRef.current;
-   if(!audio || !timings.length)return;
+   if(!audio)return;
+   setProgress(Number.isFinite(audio.duration)&&audio.duration>0?audio.currentTime/audio.duration*100:0);
+   if(!timings.length)return;
    const current=audio.currentTime;
    let active:number|null=null;
    for(const timing of timings){
@@ -92,12 +84,17 @@ export default function BibleAudioControls({
    </div>
 
    {ready && <audio
+     key={payload!.audioUrl}
      ref={audioRef}
      src={payload!.audioUrl}
      preload="metadata"
+     onPlay={()=>setPlaying(true)}
+     onPause={()=>setPlaying(false)}
+     onLoadedMetadata={()=>{if(audioRef.current)audioRef.current.playbackRate=speed;}}
+     onError={()=>{setPlaying(false);setPayload({ok:false,error:"No pudimos cargar el audio. Recarga la página para intentarlo de nuevo."});}}
      onTimeUpdate={syncVerse}
      onSeeked={syncVerse}
-     onEnded={()=>emitVerse(null)}
+     onEnded={()=>{setPlaying(false);emitVerse(null);}}
    />}
 
    <div className="bibleAudioControls">
@@ -105,17 +102,17 @@ export default function BibleAudioControls({
      <button
        type="button"
        className="audioPlay"
-       aria-label={audioRef.current?.paused===false?"Pausar":"Reproducir"}
+       aria-label={playing?"Pausar":"Reproducir"}
        disabled={!ready}
        onClick={()=>{
          const audio=audioRef.current;
          if(!audio)return;
-         if(audio.paused)void audio.play();
+         if(audio.paused)void audio.play().catch(()=>{setPlaying(false);setPayload({ok:false,error:"No pudimos reproducir el audio. Recarga la página para intentarlo de nuevo."});});
          else audio.pause();
        }}
-     >▶</button>
+     >{playing?"❚❚":"▶"}</button>
      <button type="button" className="audioSkip" aria-label="Adelantar 10 segundos" onClick={()=>skip(10)} disabled={!ready}>↷</button>
-     <div className="audioProgress" aria-hidden="true"><span/></div>
+     <div className="audioProgress" aria-hidden="true"><span style={{width:`${progress}%`}}/></div>
      <button type="button" className="audioSpeed" disabled={!ready} onClick={toggleSpeed}>{speed}×</button>
    </div>
 

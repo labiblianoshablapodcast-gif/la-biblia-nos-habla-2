@@ -3,6 +3,7 @@ import Link from "next/link";
 import ChapterControls from "@/components/ChapterControls";
 import BibleAudioControls from "@/components/BibleAudioControls";
 import QeqchiChapterAudio from "@/components/QeqchiChapterAudio";
+import AsvReadAloud from "@/components/AsvReadAloud";
 import {getQeqchiAudio} from "@/lib/qeqchi-audio";
 import BibleReaderTools from "@/components/BibleReaderTools";
 import StudyReadingNav from "@/components/StudyReadingNav";
@@ -58,7 +59,7 @@ export default async function ChapterPage({
       key={`${book.code}-${chapter}`}
       src={getQeqchiAudio(book.code,chapter)} bookName={book.name} chapter={chapter}
       verses={bibleChapter?.verses ?? []}
-    /> : version==="rvr60" ? <BibleAudioControls language="rvr60" bookCode={book.code} chapter={chapter}/> : null}
+    /> : version==="rvr60" ? <BibleAudioControls language="rvr60" bookCode={book.code} chapter={chapter}/> : version==="asv" && bibleChapter ? <AsvReadAloud key={`asv-${book.code}-${chapter}`} bookName={displayBook} chapter={chapter} verses={bibleChapter.verses}/> : null}
 
     {bibleChapter ? (
       <BibleReaderTools

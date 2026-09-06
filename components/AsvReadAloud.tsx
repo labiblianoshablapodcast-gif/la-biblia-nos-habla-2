@@ -76,7 +76,7 @@ export default function AsvReadAloud({bookName,chapter,verses}:{bookName:string;
    <button type="button" className="audioPlay" aria-label={state==='playing'?'Pausar':'Escuchar en inglés'} onClick={play} disabled={!supported||!verses.length}>{state==='playing'?'❚❚':'▶'}</button>
    <button type="button" className="audioSkip" aria-label="Versículo siguiente" disabled={!supported||!verses.length} onClick={()=>{const p=Math.min(verses.length-1,index.current+1);cancel();index.current=p;setProgress(p/verses.length*100);if(state==='playing')speak(p,generation.current);}}>↷</button>
    <div className="audioProgress" aria-hidden="true"><span style={{width:`${progress}%`}}/></div>
-   <button type="button" className="audioSpeed" disabled={!supported||!verses.length} onClick={()=>{const rates=[1,1.25,1.5,.75];const next=rates[(rates.indexOf(speed)+1)%rates.length];rate.current=next;setSpeed(next);if(state==='playing'){cancel();speak(index.current,generation.current);}}>{speed}×</button>
+   <button type="button" className="audioSpeed" disabled={!supported||!verses.length} onClick={()=>{const rates=[1,1.25,1.5,.75];const next=rates[(rates.indexOf(speed)+1)%rates.length];rate.current=next;setSpeed(next);if(state==='playing'){cancel();speak(index.current,generation.current);}}}>{speed}×</button>
   </div>
   <button type="button" className="audioSkip" style={{marginTop:12,padding:"0 14px"}} onClick={stop} disabled={state==='idle'}>■ Detener</button>
   <p className="bibleAudioStatus" role="status">{error||(!supported?'La lectura en voz alta no está disponible en este navegador.':state==='paused'?'Lectura pausada. Continuar reinicia el versículo actual.':`Voz del dispositivo · ${bookName} ${chapter}.`)}</p>

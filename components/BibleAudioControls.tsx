@@ -33,7 +33,7 @@ export default function BibleAudioControls({
    setLoading(false);
    const audioUrl=language==="rvr60" && bookCode && chapter?getRvr60Audio(bookCode,chapter):null;
    setPayload(audioUrl?{ok:true,audioUrl,timings:[]}:{ok:false,error:"Todavía no hemos subido el audio de este capítulo."});
-   return ()=>window.dispatchEvent(new CustomEvent("bible-audio-verse",{detail:{verse:null}}));
+   return ()=>{window.dispatchEvent(new CustomEvent("bible-audio-verse",{detail:{verse:null}}));};
  },[language,bookCode,chapter]);
 
  const timings=useMemo(()=>payload?.timings??[],[payload?.timings]);

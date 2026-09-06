@@ -11,6 +11,9 @@ export default function QeqchiChapterAudio({src, bookName, chapter, verses}: {
 }) {
   const player = useRef<HTMLAudioElement>(null);
   const [failed, setFailed] = useState(false);
+  const [playing,setPlaying]=useState(false);
+  const [progress,setProgress]=useState(0);
+  const [speed,setSpeed]=useState(1);
   const [activeVerse, setActiveVerse] = useState<number|null>(null);
   const label = `${bookName} ${chapter} · Q’eqchi’`;
 
@@ -21,6 +24,7 @@ export default function QeqchiChapterAudio({src, bookName, chapter, verses}: {
 
   function syncVerse(){
     const audio=player.current;
+    if(audio)setProgress(Number.isFinite(audio.duration)&&audio.duration>0?audio.currentTime/audio.duration*100:0);
     if(!audio || !verses.length || !Number.isFinite(audio.duration) || audio.duration<=0) return;
 
     // Estimamos la duración de cada versículo por la cantidad de texto que contiene.
@@ -64,17 +68,24 @@ export default function QeqchiChapterAudio({src, bookName, chapter, verses}: {
       <div><small>ESCUCHAR LA BIBLIA</small><strong>{label}</strong></div>
       <span className="bibleAudioBadge">Audio original</span>
     </div>
+    <div className="bibleAudioControls">
+      <button type="button" className="audioSkip" aria-label="Retroceder 10 segundos" disabled={!src||failed} onClick={()=>{const a=player.current;if(a)a.currentTime=Math.max(0,a.currentTime-10);}}>↶</button>
+      <button type="button" className="audioPlay" aria-label={playing?"Pausar":"Reproducir"} disabled={!src||failed} onClick={()=>{const a=player.current;if(!a)return;if(a.paused)void a.play().catch(()=>setFailed(true));else a.pause();}}>{playing?"❚❚":"▶"}</button>
+      <button type="button" className="audioSkip" aria-label="Adelantar 10 segundos" disabled={!src||failed} onClick={()=>{const a=player.current;if(a&&Number.isFinite(a.duration))a.currentTime=Math.min(a.duration,a.currentTime+10);}}>↷</button>
+      <div className="audioProgress" aria-hidden="true"><span style={{width:`${progress}%`}}/></div>
+      <button type="button" className="audioSpeed" disabled={!src||failed} onClick={()=>{const rates=[1,1.25,1.5,.75];const next=rates[(rates.indexOf(speed)+1)%rates.length];setSpeed(next);if(player.current)player.current.playbackRate=next;}}>{speed}×</button>
+    </div>
     {src ? <>
-      <audio ref={player} controls preload="metadata" src={src}
+      <audio ref={player} preload="metadata" src={src}
         aria-label={`Escuchar ${label}`} style={{width:"100%", marginTop:"16px"}}
         onError={() => setFailed(true)}
         onCanPlay={() => {setFailed(false);syncVerse()}}
         onLoadedMetadata={syncVerse}
         onTimeUpdate={syncVerse}
         onSeeked={syncVerse}
-        onPlay={syncVerse}
-        onPause={syncVerse}
-        onEnded={() => publishVerse(null)}>
+        onPlay={()=>{setPlaying(true);syncVerse();}}
+        onPause={()=>{setPlaying(false);syncVerse();}}
+        onEnded={() => {setPlaying(false);publishVerse(null);}}>
         Su navegador no admite la reproducción de audio.
       </audio>
       {failed && <div role="status" className="bibleAudioStatus">

@@ -42,10 +42,15 @@ export default function BibleAudioControls({
    window.dispatchEvent(new CustomEvent("bible-audio-verse",{detail:{verse}}));
  }
 
+ function startOffset(audio:HTMLAudioElement){
+   return language==="rvr60" && Number.isFinite(audio.duration) && audio.duration>15?15:0;
+ }
+
  function syncVerse(){
    const audio=audioRef.current;
    if(!audio)return;
-   setProgress(Number.isFinite(audio.duration)&&audio.duration>0?audio.currentTime/audio.duration*100:0);
+   const offset=startOffset(audio);
+   setProgress(Number.isFinite(audio.duration)&&audio.duration>offset?Math.max(0,Math.min(100,(audio.currentTime-offset)/(audio.duration-offset)*100)):0);
    if(!timings.length)return;
    const current=audio.currentTime;
    let active:number|null=null;
@@ -59,7 +64,7 @@ export default function BibleAudioControls({
  function skip(seconds:number){
    const audio=audioRef.current;
    if(!audio)return;
-   audio.currentTime=Math.max(0,Math.min(audio.duration||Infinity,audio.currentTime+seconds));
+   audio.currentTime=Math.max(startOffset(audio),Math.min(audio.duration||Infinity,audio.currentTime+seconds));
    syncVerse();
  }
 
@@ -90,7 +95,7 @@ export default function BibleAudioControls({
      preload="metadata"
      onPlay={()=>setPlaying(true)}
      onPause={()=>setPlaying(false)}
-     onLoadedMetadata={()=>{if(audioRef.current)audioRef.current.playbackRate=speed;}}
+     onLoadedMetadata={()=>{const audio=audioRef.current;if(audio){audio.playbackRate=speed;audio.currentTime=startOffset(audio);syncVerse();}}}
      onError={()=>{setPlaying(false);setPayload({ok:false,error:"No pudimos cargar el audio. Recarga la página para intentarlo de nuevo."});}}
      onTimeUpdate={syncVerse}
      onSeeked={syncVerse}
@@ -107,7 +112,7 @@ export default function BibleAudioControls({
        onClick={()=>{
          const audio=audioRef.current;
          if(!audio)return;
-         if(audio.paused)void audio.play().catch(()=>{setPlaying(false);setPayload({ok:false,error:"No pudimos reproducir el audio. Recarga la página para intentarlo de nuevo."});});
+         if(audio.paused){if(audio.currentTime<startOffset(audio)||audio.ended)audio.currentTime=startOffset(audio);void audio.play().catch(()=>{setPlaying(false);setPayload({ok:false,error:"No pudimos reproducir el audio. Recarga la página para intentarlo de nuevo."});});}
          else audio.pause();
        }}
      >{playing?"❚❚":"▶"}</button>

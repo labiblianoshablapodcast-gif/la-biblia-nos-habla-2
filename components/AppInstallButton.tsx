@@ -110,9 +110,16 @@ export default function AppInstallButton(){
   if(installed)return null;
 
   return <>
-    <button className="appInstallButton" type="button" onClick={handleInstall} aria-label="Bajar la app La Biblia Nos Habla">
-      <span className="appInstallIcon" aria-hidden="true">↓</span>
-      <span><strong>Bajar la app</strong><small>Instalar para acceso rápido</small></span>
+    <style jsx>{`
+      .appInstallButton{appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:9px;flex:0 0 auto;min-height:44px;margin:0;padding:10px 15px;border:1px solid #c99b3c;border-radius:12px;background:#071829;color:#fff;font-family:inherit;font-size:12px;font-weight:700;line-height:1.2;white-space:nowrap;cursor:pointer;box-shadow:0 3px 10px rgba(7,24,41,.1);transition:background .15s ease,box-shadow .15s ease}
+      .appInstallButton:hover{background:#12334b;box-shadow:0 4px 14px rgba(7,24,41,.18)}
+      .appInstallButton:focus-visible{outline:3px solid #d7aa4b;outline-offset:3px}
+      .appInstallIcon{display:flex;align-items:center;justify-content:center;color:#e0b454}
+      @media(max-width:700px){.appInstallButton{padding:9px 11px;gap:7px;font-size:11px}}
+    `}</style>
+    <button className="appInstallButton" type="button" onClick={handleInstall} aria-label="Instalar La Biblia Nos Habla">
+      <span className="appInstallIcon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4"/></svg></span>
+      <span>Instalar app</span>
     </button>
 
     {showIosHelp&&<div className="installHelpOverlay" role="dialog" aria-modal="true" aria-label="Cómo instalar la app" onClick={()=>setShowIosHelp(false)}>

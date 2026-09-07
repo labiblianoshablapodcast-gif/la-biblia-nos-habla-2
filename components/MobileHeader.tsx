@@ -7,7 +7,7 @@ const links=[
   ["Inicio","/"],
   ["Biblia","/biblia"],
   ["Estudios bíblicos","/estudios"],
-  ["Estudio Kids","/kids"],
+  // Estudio Kids oculto temporalmente hasta su lanzamiento.
   ["Misiones","/misiones"],
   ["Nuestros Pastores","/el-pastor"],
   ["Iglesia","/iglesia"],

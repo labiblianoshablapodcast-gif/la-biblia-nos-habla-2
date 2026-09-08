@@ -30,19 +30,10 @@ async function bb(path: string, key: string, params: Record<string, string> = {}
   try {
     data = text ? JSON.parse(text) : null;
   } catch {
-    data = text.slice(0, 2000);
+    data = text.slice(0, 2500);
   }
 
   return { ok: res.ok, status: res.status, data };
-}
-
-function unwrap(value: unknown): unknown[] {
-  if (Array.isArray(value)) return value;
-  if (value && typeof value === "object") {
-    const o = value as Record<string, unknown>;
-    if (Array.isArray(o.data)) return o.data;
-  }
-  return [];
 }
 
 function allStrings(value: unknown, out: string[] = []): string[] {
@@ -54,14 +45,14 @@ function allStrings(value: unknown, out: string[] = []): string[] {
   return out;
 }
 
-function filesetIds(value: unknown): string[] {
+function collectBibleIds(value: unknown): string[] {
   const ids = new Set<string>();
   const visit = (v: unknown) => {
     if (Array.isArray(v)) return v.forEach(visit);
     if (!v || typeof v !== "object") return;
     const o = v as Record<string, unknown>;
-    for (const raw of [o.fileset_id, o.filesetId, o.id, o.fileset]) {
-      if (typeof raw === "string" && raw.length >= 6) ids.add(raw);
+    for (const raw of [o.bible_id, o.bibleId, o.id]) {
+      if (typeof raw === "string" && /^[A-Z0-9]{6}$/i.test(raw)) ids.add(raw.toUpperCase());
     }
     Object.values(o).forEach(visit);
   };
@@ -69,19 +60,31 @@ function filesetIds(value: unknown): string[] {
   return [...ids];
 }
 
-function audioFilesets(value: unknown): string[] {
-  const ids = new Set<string>();
+function collectFilesets(value: unknown) {
+  const rows: Array<{ id: string; audio: boolean; oldOrCompleteHint: boolean; sample: string }> = [];
+  const seen = new Set<string>();
+
   const visit = (v: unknown) => {
     if (Array.isArray(v)) return v.forEach(visit);
     if (!v || typeof v !== "object") return;
     const o = v as Record<string, unknown>;
-    const id = String(o.fileset_id ?? o.filesetId ?? o.id ?? o.fileset ?? "");
-    const haystack = allStrings(o).join(" ").toLowerCase();
-    if (id && /audio|mp3|opus|aac|streaming audio|digital audio/.test(haystack)) ids.add(id);
+    const id = String(o.fileset_id ?? o.filesetId ?? o.fileset ?? "");
+    if (id && !seen.has(id)) {
+      const text = allStrings(o).join(" ");
+      const lower = text.toLowerCase();
+      const audio = /audio|mp3|opus|aac|streaming audio|digital audio/.test(lower) || /DA(?:-|$)/i.test(id);
+      const oldOrCompleteHint =
+        /old testament|antiguo testamento|complete bible|full bible|whole bible|entire bible/.test(lower) ||
+        /(?:^|[A-Z0-9])O[12]D?A/i.test(id) ||
+        /(?:^|[A-Z0-9])C[12]D?A/i.test(id);
+      rows.push({ id, audio, oldOrCompleteHint, sample: text.slice(0, 300) });
+      seen.add(id);
+    }
     Object.values(o).forEach(visit);
   };
+
   visit(value);
-  return [...ids];
+  return rows;
 }
 
 export async function GET() {
@@ -94,50 +97,48 @@ export async function GET() {
     );
   }
 
-  const [lower, upper, knownBible, knownFilesets] = await Promise.all([
+  const seedQueries = await Promise.all([
+    bb("/bibles", key, { language_code: "kek" }),
+    bb("/bibles", key, { language_code: "KEK" }),
     bb("/bibles", key, { language_code: "kek", media: "audio" }),
-    bb("/bibles", key, { language_code: "KEK", media: "audio" }),
-    bb("/bibles/KEKIBS", key),
-    bb("/filesets", key, { bible_id: "KEKIBS" }),
+    bb("/bibles", key, { language: "kek" }),
+    bb("/bibles", key, { search: "Q'eqchi'" }),
+    bb("/bibles", key, { search: "Kekchi" }),
+    bb("/bibles", key, { search: "Quecchi" }),
+    bb("/languages", key, { language_code: "kek" }),
   ]);
 
-  const candidates = [
-    ...unwrap(lower.data),
-    ...unwrap(upper.data),
-  ];
+  const ids = new Set<string>(["KEKIBS"]);
+  for (const result of seedQueries) {
+    for (const id of collectBibleIds(result.data)) ids.add(id);
+  }
 
-  const allCandidateFilesets = [
-    ...audioFilesets(lower.data),
-    ...audioFilesets(upper.data),
-    ...audioFilesets(knownBible.data),
-    ...audioFilesets(knownFilesets.data),
-  ];
+  const bibleIds = [...ids].slice(0, 25);
+  const bibleDetails = await Promise.all(
+    bibleIds.map(async (id) => {
+      const detail = await bb(`/bibles/${id}`, key);
+      return { bibleId: id, status: detail.status, data: detail.data };
+    })
+  );
 
-  const allKnownFilesets = [
-    ...filesetIds(lower.data),
-    ...filesetIds(upper.data),
-    ...filesetIds(knownBible.data),
-    ...filesetIds(knownFilesets.data),
-  ];
+  const filesets = bibleDetails.flatMap((item) => collectFilesets(item.data));
+  const audioFilesets = filesets.filter((item) => item.audio);
+  const possibleOtOrCompleteAudio = audioFilesets.filter((item) => item.oldOrCompleteHint);
 
   return NextResponse.json(
     {
-      ok: lower.ok || upper.ok || knownBible.ok || knownFilesets.ok,
+      ok: seedQueries.some((r) => r.ok) || bibleDetails.some((r) => r.status === 200),
       language: "Q'eqchi'",
       iso639_3: "kek",
-      expectedBibleId: "KEKIBS",
-      expectedNtAudioFileset: "KEKIBSN2DA",
-      candidateBibles: candidates,
-      audioFilesets: [...new Set(allCandidateFilesets)],
-      filesets: [...new Set(allKnownFilesets)],
-      rawStatus: {
-        lower: lower.status,
-        upper: upper.status,
-        knownBible: knownBible.status,
-        knownFilesets: knownFilesets.status,
-      },
-      knownBible: knownBible.data,
-      knownFilesets: knownFilesets.data,
+      bibleIds,
+      audioFilesets,
+      possibleOtOrCompleteAudio,
+      seedStatuses: seedQueries.map((r) => r.status),
+      bibleDetails,
+      conclusionHint:
+        possibleOtOrCompleteAudio.length > 0
+          ? "Se encontraron candidatos de audio que podrían cubrir el AT o la Biblia completa."
+          : "No apareció todavía un fileset de audio claramente identificado como AT o Biblia completa en las Biblias Q'eqchi' encontradas.",
     },
     { headers: { "Cache-Control": "no-store" } }
   );

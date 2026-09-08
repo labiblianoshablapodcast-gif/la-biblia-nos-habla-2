@@ -79,6 +79,27 @@ function filesetIdsFrom(value: unknown): string[] {
   return [...ids];
 }
 
+function summarizeMatchingBibleEntries(value: unknown, filesetIds: string[]) {
+  const wanted = new Set(filesetIds);
+  const rows = unwrapData(value);
+  return rows
+    .filter((raw) => {
+      if (!raw || typeof raw !== "object") return false;
+      const ids = filesetIdsFrom(raw);
+      return ids.some((id) => wanted.has(id));
+    })
+    .map((raw) => {
+      const obj = raw as Record<string, unknown>;
+      return {
+        id: obj.id ?? obj.bible_id ?? null,
+        name: obj.name ?? obj.name_local ?? obj.nameLocal ?? obj.title ?? null,
+        abbreviation: obj.abbreviation ?? obj.abbr ?? null,
+        language: obj.language ?? obj.language_name ?? obj.languageName ?? obj.language_code ?? null,
+        filesetIds: filesetIdsFrom(obj).filter((id) => wanted.has(id)),
+      };
+    });
+}
+
 function audioFilesetIdsFrom(value: unknown): string[] {
   const ids = new Set<string>();
 
@@ -262,6 +283,7 @@ export async function GET(request: NextRequest) {
       discoveredFilesets: discoveredAny.slice(0, 30),
       timestampFilesetsAvailable: timestampIds.slice(0, 100),
       spanishTimestampCandidates: spanishTimestampCandidates.slice(0, 60),
+      spanishTimestampBibleMatches: summarizeMatchingBibleEntries(bibleSearch.data, spanishTimestampCandidates),
     },
     { status: 404, headers: { "Cache-Control": "no-store" } },
   );

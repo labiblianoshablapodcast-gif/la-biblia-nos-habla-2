@@ -178,14 +178,17 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const [bible, bibleSearch, filesets] = await Promise.all([
+  const [bible, bibleSearch, filesets, timestampFilesets] = await Promise.all([
     requestBibleBrain(`/bibles/${BIBLE_ID}`, key),
     requestBibleBrain("/bibles", key, { language_code: "spa", media: "audio" }),
     requestBibleBrain("/filesets", key, { bible_id: BIBLE_ID }),
+    requestBibleBrain("/timestamps", key),
   ]);
 
   const allSpanishAudio = audioFilesetIdsFrom(bibleSearch.data);
   const rvr1960SpanishAudio = allSpanishAudio.filter((id) => /^SPA.*60/i.test(id));
+  const timestampIds = filesetIdsFrom(timestampFilesets.data);
+  const spanishTimestampCandidates = allSpanishAudio.filter((id) => timestampIds.includes(id));
 
   const discoveredAudio = [
     ...audioFilesetIdsFrom(bible.data),
@@ -257,6 +260,8 @@ export async function GET(request: NextRequest) {
       discoveredAudioFilesets: discoveredAudio.slice(0, 20),
       spanishAudioCandidates: allSpanishAudio.slice(0, 60),
       discoveredFilesets: discoveredAny.slice(0, 30),
+      timestampFilesetsAvailable: timestampIds.slice(0, 100),
+      spanishTimestampCandidates: spanishTimestampCandidates.slice(0, 60),
     },
     { status: 404, headers: { "Cache-Control": "no-store" } },
   );

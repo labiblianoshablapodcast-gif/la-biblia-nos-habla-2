@@ -1,145 +1,100 @@
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
+const BASE = "https://4.dbt.io/api";
 
-const BASE_URL = "https://4.dbt.io/api";
-
-function getApiKey() {
-  return (
-    process.env.BIBLE_BRAIN_API_KEY ||
-    process.env.BIBLEBRAIN_API_KEY ||
-    process.env.DBP_API_KEY ||
-    process.env.FCBH_API_KEY ||
-    ""
-  );
+function key() {
+  return process.env.BIBLE_BRAIN_API_KEY || process.env.BIBLEBRAIN_API_KEY || process.env.DBP_API_KEY || process.env.FCBH_API_KEY || "";
 }
-
-async function bb(path: string, key: string, params: Record<string, string> = {}) {
-  const url = new URL(`${BASE_URL}${path}`);
-  url.searchParams.set("v", "4");
-  url.searchParams.set("key", key);
-  for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v);
-
-  const res = await fetch(url.toString(), {
-    cache: "no-store",
-    headers: { Accept: "application/json" },
-  });
-
-  const text = await res.text();
-  let data: unknown = null;
-  try {
-    data = text ? JSON.parse(text) : null;
-  } catch {
-    data = text.slice(0, 2500);
-  }
-
-  return { ok: res.ok, status: res.status, data };
+async function call(path: string, k: string, params: Record<string,string> = {}) {
+  const u = new URL(BASE + path);
+  u.searchParams.set("v","4"); u.searchParams.set("key",k);
+  Object.entries(params).forEach(([a,b]) => u.searchParams.set(a,b));
+  const r = await fetch(u.toString(), {cache:"no-store", headers:{Accept:"application/json"}});
+  const t = await r.text(); let d:any;
+  try { d = JSON.parse(t); } catch { d = t.slice(0,1200); }
+  return {status:r.status, ok:r.ok, data:d};
 }
-
-function allStrings(value: unknown, out: string[] = []): string[] {
-  if (typeof value === "string") out.push(value);
-  else if (Array.isArray(value)) value.forEach((v) => allStrings(v, out));
-  else if (value && typeof value === "object") {
-    Object.values(value as Record<string, unknown>).forEach((v) => allStrings(v, out));
-  }
+function strings(v:any, out:string[]=[]):string[] {
+  if(typeof v==="string") out.push(v);
+  else if(Array.isArray(v)) v.forEach(x=>strings(x,out));
+  else if(v && typeof v==="object") Object.values(v).forEach(x=>strings(x,out));
   return out;
 }
-
-function collectBibleIds(value: unknown): string[] {
-  const ids = new Set<string>();
-  const visit = (v: unknown) => {
-    if (Array.isArray(v)) return v.forEach(visit);
-    if (!v || typeof v !== "object") return;
-    const o = v as Record<string, unknown>;
-    for (const raw of [o.bible_id, o.bibleId, o.id]) {
-      if (typeof raw === "string" && /^[A-Z0-9]{6}$/i.test(raw)) ids.add(raw.toUpperCase());
-    }
-    Object.values(o).forEach(visit);
-  };
-  visit(value);
-  return [...ids];
+function ids(v:any):string[] {
+  const s=new Set<string>();
+  const walk=(x:any)=>{
+    if(Array.isArray(x)) return x.forEach(walk);
+    if(!x||typeof x!=="object") return;
+    for(const z of [x.fileset_id,x.filesetId,x.fileset]) if(typeof z==="string") s.add(z);
+    Object.values(x).forEach(walk);
+  }; walk(v); return [...s];
 }
-
-function collectFilesets(value: unknown) {
-  const rows: Array<{ id: string; audio: boolean; oldOrCompleteHint: boolean; sample: string }> = [];
-  const seen = new Set<string>();
-
-  const visit = (v: unknown) => {
-    if (Array.isArray(v)) return v.forEach(visit);
-    if (!v || typeof v !== "object") return;
-    const o = v as Record<string, unknown>;
-    const id = String(o.fileset_id ?? o.filesetId ?? o.fileset ?? "");
-    if (id && !seen.has(id)) {
-      const text = allStrings(o).join(" ");
-      const lower = text.toLowerCase();
-      const audio = /audio|mp3|opus|aac|streaming audio|digital audio/.test(lower) || /DA(?:-|$)/i.test(id);
-      const oldOrCompleteHint =
-        /old testament|antiguo testamento|complete bible|full bible|whole bible|entire bible/.test(lower) ||
-        /(?:^|[A-Z0-9])O[12]D?A/i.test(id) ||
-        /(?:^|[A-Z0-9])C[12]D?A/i.test(id);
-      rows.push({ id, audio, oldOrCompleteHint, sample: text.slice(0, 300) });
-      seen.add(id);
-    }
-    Object.values(o).forEach(visit);
-  };
-
-  visit(value);
-  return rows;
-}
-
 export async function GET() {
-  const key = getApiKey();
+  const k=key();
+  if(!k) return NextResponse.json({ok:false,error:"Falta BIBLE_BRAIN_API_KEY"},{status:503});
 
-  if (!key) {
-    return NextResponse.json(
-      { ok: false, error: "Bible Brain no está configurado en el servidor." },
-      { status: 503, headers: { "Cache-Control": "no-store" } }
-    );
-  }
+  // KEKIBS is the confirmed Q'eqchi' Bible from the prior API response.
+  const bible=await call("/bibles/KEKIBS",k);
+  const bibleText=strings(bible.data).join(" ");
+  const confirmed=/Q.?eqchi|Kekchi|Quecchi|Cacce|Kekch/i.test(bibleText);
 
-  const seedQueries = await Promise.all([
-    bb("/bibles", key, { language_code: "kek" }),
-    bb("/bibles", key, { language_code: "KEK" }),
-    bb("/bibles", key, { language_code: "kek", media: "audio" }),
-    bb("/bibles", key, { language: "kek" }),
-    bb("/bibles", key, { search: "Q'eqchi'" }),
-    bb("/bibles", key, { search: "Kekchi" }),
-    bb("/bibles", key, { search: "Quecchi" }),
-    bb("/languages", key, { language_code: "kek" }),
+  // Probe the documented fileset/file discovery shapes and known NT fileset,
+  // then explicitly test representative OT books.
+  const discovery=await Promise.all([
+    call("/bibles/KEKIBS/filesets",k),
+    call("/filesets/KEKIBSN2DA",k),
+    call("/bibles/KEKIBS",k,{media:"audio"}),
   ]);
 
-  const ids = new Set<string>(["KEKIBS"]);
-  for (const result of seedQueries) {
-    for (const id of collectBibleIds(result.data)) ids.add(id);
+  const discovered=[...new Set(discovery.flatMap(x=>ids(x.data)))];
+  if(!discovered.includes("KEKIBSN2DA")) discovered.push("KEKIBSN2DA");
+
+  const candidateOt=[
+    "KEKIBSO1DA","KEKIBSO2DA","KEKIBSO1DA-opus16","KEKIBSO2DA-opus16",
+    "KEKIBSC1DA","KEKIBSC2DA","KEKIBSC1DA-opus16","KEKIBSC2DA-opus16"
+  ];
+
+  const probeFileset=async(fs:string, book:string, chapter:string)=>{
+    const variants=await Promise.all([
+      call(`/bibles/filesets/${fs}/${book}/${chapter}`,k),
+      call(`/bibles/filesets/${fs}/${book}/${chapter}`,k,{verse_start:"1"}),
+      call(`/bibles/filesets/${fs}`,k,{book_id:book,chapter}),
+    ]);
+    const text=variants.map(v=>strings(v.data).join(" ")).join(" ");
+    const hasMedia=/https?:\/\/|\.mp3|\.opus|\.m4a|audio/i.test(text);
+    return {fileset:fs,book,chapter,statuses:variants.map(v=>v.status),hasMedia,sample:hasMedia?text.slice(0,450):undefined};
+  };
+
+  // Genesis, Psalms and Malachi prove coverage across beginning/middle/end of OT.
+  const otTests:any[]=[];
+  for(const fs of candidateOt){
+    const g=await probeFileset(fs,"GEN","1");
+    if(g.hasMedia || g.statuses.some((x:number)=>x===200)) otTests.push(g);
+  }
+  // Control: known NT audio should succeed if endpoint/key access is healthy.
+  const ntControl=await probeFileset("KEKIBSN2DA","MAT","1");
+
+  const usableOt=otTests.filter(x=>x.hasMedia);
+  let breadth:any[]=[];
+  for(const hit of usableOt.slice(0,2)){
+    breadth.push(await probeFileset(hit.fileset,"PSA","1"));
+    breadth.push(await probeFileset(hit.fileset,"MAL","1"));
   }
 
-  const bibleIds = [...ids].slice(0, 25);
-  const bibleDetails = await Promise.all(
-    bibleIds.map(async (id) => {
-      const detail = await bb(`/bibles/${id}`, key);
-      return { bibleId: id, status: detail.status, data: detail.data };
-    })
-  );
-
-  const filesets = bibleDetails.flatMap((item) => collectFilesets(item.data));
-  const audioFilesets = filesets.filter((item) => item.audio);
-  const possibleOtOrCompleteAudio = audioFilesets.filter((item) => item.oldOrCompleteHint);
-
-  return NextResponse.json(
-    {
-      ok: seedQueries.some((r) => r.ok) || bibleDetails.some((r) => r.status === 200),
-      language: "Q'eqchi'",
-      iso639_3: "kek",
-      bibleIds,
-      audioFilesets,
-      possibleOtOrCompleteAudio,
-      seedStatuses: seedQueries.map((r) => r.status),
-      bibleDetails,
-      conclusionHint:
-        possibleOtOrCompleteAudio.length > 0
-          ? "Se encontraron candidatos de audio que podrían cubrir el AT o la Biblia completa."
-          : "No apareció todavía un fileset de audio claramente identificado como AT o Biblia completa en las Biblias Q'eqchi' encontradas.",
-    },
-    { headers: { "Cache-Control": "no-store" } }
-  );
+  return NextResponse.json({
+    ok:bible.ok,
+    language:"Q'eqchi'",
+    iso639_3:"kek",
+    confirmedQeqchiBible:confirmed,
+    bibleId:"KEKIBS",
+    bibleStatus:bible.status,
+    discoveredFilesets:discovered,
+    ntControl,
+    otGenesisCandidates:otTests,
+    otBreadthTests:breadth,
+    conclusion: usableOt.length
+      ? "Se encontro audio candidato del AT. Revise Genesis/Salmos/Malaquias para confirmar cobertura."
+      : "La API aprobada funciona, pero no se encontro un fileset de audio del AT bajo KEKIBS con los identificadores estandar probados."
+  },{headers:{"Cache-Control":"no-store"}});
 }

@@ -85,7 +85,6 @@
   }
 }
 
-
 /* Versículo que sigue el audio bíblico */
 .audioActiveVerse {
   border-radius: 14px;
@@ -96,4 +95,27 @@
 }
 .audioActiveVerse > p {
   font-weight: 700;
+}
+
+/* Protección de visibilidad del texto bíblico durante el refactor CSS.
+   Afecta únicamente al contenido de los versículos, no al audio. */
+.readerShell .scriptureText,
+.readerShell .verseGroup,
+.readerShell .verseRow,
+.readerShell .verseRow > p,
+.readerShell .verseRow > p > sup {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+.readerShell:not(.darkReader) .verseRow > p {
+  color: #10202d !important;
+}
+.readerShell:not(.darkReader) .verseRow > p > sup {
+  color: #a4761e !important;
+}
+.darkReader .verseRow > p {
+  color: #f5f0e7 !important;
+}
+.darkReader .verseRow > p > sup {
+  color: #d7aa4b !important;
 }

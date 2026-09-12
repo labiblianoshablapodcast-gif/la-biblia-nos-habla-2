@@ -1,6 +1,7 @@
 import books from "@/data/bible-books.json";
 import {getLocalQeqchiVerses,hasLocalQeqchiBook} from "@/lib/qeqchi-data";
 
+// Preview refresh marker: Bible environment variables enabled in Vercel Preview.
 export type BibleBook = typeof books[number];
 export type BibleVerse = { number:number; text:string; heading?:string };
 export type BibleTranslation = "RVR60" | "QEQCHI";

@@ -1,0 +1,13 @@
+/* ============================================================
+   Sección aprobada 'Conozca a sus Pastores'
+   ============================================================ */
+
+.pastoresAprobados{background:#f7f4ee;padding:clamp(18px,3vw,46px)}
+.pastoresAprobadosMarco{max-width:1800px;margin:0 auto;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 22px 65px rgba(7,24,41,.13)}
+.pastoresAprobadosImagen{display:block;width:100%;height:auto}
+
+@media(max-width:700px) {
+  .pastoresAprobados{padding:10px 0;background:#fff}
+  .pastoresAprobadosMarco{border-radius:0;box-shadow:none;overflow-x:auto;overscroll-behavior-inline:contain}
+  .pastoresAprobadosImagen{width:1120px;max-width:none;height:auto}
+}

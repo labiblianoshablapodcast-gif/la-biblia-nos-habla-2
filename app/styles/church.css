@@ -1,0 +1,75 @@
+/* ============================================================
+   Página Iglesia (horarios, ubicación, galería)
+   ============================================================ */
+
+.churchScheduleSection{display:grid;grid-template-columns:.8fr 1.2fr;gap:55px}
+.scheduleGrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.scheduleCard{padding:24px;border:1px solid #dde3e7;border-radius:18px;background:#fff}
+.scheduleCard small,.scheduleCard strong{display:block}
+.scheduleCard small{color:#a4761e;font-weight:800}
+.scheduleCard strong{font:700 37px "Cormorant Garamond",serif;margin:7px 0}
+.scheduleCard p{margin:0;color:var(--muted)}
+.churchLocationSection{display:grid;grid-template-columns:1fr .8fr;gap:55px;align-items:center}
+.churchActions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.mapPlaceholder{min-height:360px;border-radius:24px;background:linear-gradient(135deg,#d9e4db,#f6f1e8);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.mapPlaceholder span{font-size:64px}
+.virtualStudySection{text-align:center}
+.homeChurchFeature{display:grid;grid-template-columns:1.15fr .85fr;gap:55px;align-items:center}
+.homeScheduleList{display:grid;gap:11px;margin:24px 0}
+.homeScheduleList div{display:flex;justify-content:space-between;padding-bottom:10px;border-bottom:1px solid #dde3e7}
+.homeChurchAddress{min-height:380px;border-radius:24px;background:#071829;color:#fff;padding:45px;display:flex;flex-direction:column;justify-content:center}
+.homeChurchAddress span{font-size:58px}
+.homeChurchAddress strong{font:700 43px/1.05 "Cormorant Garamond",serif;margin:14px 0}
+.churchAddressCard{display:flex;align-items:center;gap:17px;max-width:650px;margin:26px 0 12px;padding:20px 22px;border:1px solid #d4dce0;border-left:4px solid #c49a45;border-radius:12px;background:#fff;font-style:normal;box-shadow:0 12px 32px rgba(7,24,41,.07)}
+.churchAddressMarker{display:grid;place-items:center;flex:0 0 43px;width:43px;height:43px;border-radius:50%;background:#071829;color:#d7aa4b;font-size:22px}
+.churchAddressCard small,.churchAddressCard strong,.churchAddressCard em{display:block}
+.churchAddressCard small{margin-bottom:2px;color:#8a671f;font-size:11px;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
+.churchAddressCard strong{color:#071829;font-size:17px;line-height:1.4}
+.churchAddressCard em{color:var(--muted);font-size:13px;font-style:normal}
+.churchLocationNote{color:var(--muted);font-size:14px}
+.churchActions{gap:10px}
+.mapPlaceholder{padding:35px;border:1px solid #d2ddd7;border-radius:20px;box-shadow:inset 0 0 0 8px rgba(255,255,255,.42)}
+.mapPlaceholder>span{display:grid;place-items:center;width:64px;height:64px;margin-bottom:19px;border-radius:50%;background:#071829;color:#d7aa4b;font-size:32px}
+.mapPlaceholder small{color:#68756f;font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.mapPlaceholder strong{margin:4px 0;font:700 35px/1 "Cormorant Garamond",serif;color:#071829}
+.mapPlaceholder p{margin:5px 0 0;color:#5f6d67}
+.churchScheduleSection>div:first-child{max-width:510px}
+.churchScheduleSection>div:first-child h2{font-size:clamp(42px,5vw,64px)}
+.scheduleGrid{display:block;overflow:hidden;border:1px solid #d7dee2;border-radius:14px;background:#fff;box-shadow:0 12px 32px rgba(7,24,41,.06)}
+.scheduleCard{display:grid;grid-template-columns:105px 125px 1fr;gap:18px;align-items:center;min-height:0;padding:14px 18px;border:0;border-bottom:1px solid #e7ebed;border-radius:0;background:#fff}
+.scheduleCard:last-child{border-bottom:0}
+.scheduleCard:hover{background:#faf8f3}
+.scheduleCard small{font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.scheduleCard strong{margin:0;font:700 22px/1.1 "Cormorant Garamond",serif;color:#071829}
+.scheduleCard p{margin:0;font-size:14px;color:#5f6b73}
+.scheduleCard:nth-child(4){border-left:3px solid #c49a45;padding-left:15px}
+.churchGalleryHeading{max-width:780px;margin:0 auto 36px;text-align:center}
+.churchGalleryHeading h2{margin:.25rem 0 .8rem;font-size:clamp(42px,5vw,68px)}
+.churchPhotoGrid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:250px;gap:14px}
+.churchPhotoGrid figure{position:relative;margin:0;overflow:hidden;border-radius:16px;background:#071829;box-shadow:0 10px 28px rgba(7,24,41,.1)}
+.churchPhotoGrid figure.churchPhotoFeatured{grid-column:span 2;grid-row:span 2}
+.churchPhotoGrid img{object-fit:cover;transition:transform .3s ease}
+.churchPhotoGrid figure:hover img{transform:scale(1.035)}
+.churchPhotoGrid figcaption{position:absolute;inset:auto 0 0;padding:45px 18px 16px;background:linear-gradient(transparent,rgba(3,16,29,.88));color:#fff;font-size:.82rem;font-weight:800}
+
+@media(max-width:900px) {
+  .churchScheduleSection,.churchLocationSection,.homeChurchFeature{grid-template-columns:1fr}
+}
+@media(max-width:620px) {
+  .scheduleGrid,.donationCampaignGrid,.eventPublicGrid{grid-template-columns:1fr}
+  .homeScheduleList div{display:block}
+}
+@media(max-width:950px) {
+  .churchScheduleSection{grid-template-columns:1fr;gap:30px}
+  .scheduleGrid{max-width:720px}
+  .churchPhotoGrid{grid-template-columns:repeat(2,1fr);grid-auto-rows:260px}
+}
+@media(max-width:600px) {
+  .churchScheduleSection{padding-top:55px;padding-bottom:55px}
+  .scheduleCard{grid-template-columns:92px 1fr;gap:4px 12px;padding:13px 14px}
+  .scheduleCard p{grid-column:2}
+  .scheduleCard strong{font-size:20px}
+  .churchPhotoGrid{grid-template-columns:1fr;grid-auto-rows:285px}
+  .churchPhotoGrid figure.churchPhotoFeatured{grid-column:auto;grid-row:auto}
+  .churchGalleryHeading{text-align:left}
+}

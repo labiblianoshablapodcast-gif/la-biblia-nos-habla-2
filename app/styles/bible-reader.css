@@ -1,0 +1,90 @@
+/* ============================================================
+   Lector y buscador de la Biblia
+   ============================================================ */
+
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin:25px 0}
+.search{width:min(700px,100%);padding:14px 16px;border:1px solid #ccd4da;border-radius:12px;font:inherit}
+.bookGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.bookLink{padding:16px;border-radius:12px;background:var(--cream);font-weight:700}
+.bookLink:hover{background:#eadfc9}
+.bookLink{display:flex;flex-direction:column;gap:2px}
+.bookLink small{font-size:11px;color:var(--muted);font-weight:500}
+.bibleSearch{position:relative;max-width:760px;margin-bottom:22px}
+.searchResults{position:absolute;z-index:10;top:58px;left:0;right:0;background:#fff;border:1px solid #d7dde2;border-radius:12px;box-shadow:0 18px 45px rgba(7,24,41,.14);overflow:hidden}
+.searchResults button{width:100%;display:flex;justify-content:space-between;padding:12px 15px;background:#fff;border:0;border-bottom:1px solid #eef1f3;text-align:left;cursor:pointer;font:inherit}
+.searchResults button:hover{background:var(--cream)}
+.searchResults small{color:var(--muted)}
+.sourceNote{font-size:13px;color:var(--muted);margin-bottom:40px}
+.bibleReader{max-width:1050px;margin:auto}
+.chapterControls{display:flex;align-items:center;justify-content:space-between;gap:15px;margin:0 0 35px;padding:14px;background:var(--cream);border-radius:14px}
+.chapterControls button{border:0;background:var(--navy);color:#fff;padding:11px 16px;border-radius:999px;font-weight:700;cursor:pointer}
+.chapterControls button:disabled{opacity:.3;cursor:not-allowed}
+.chapterControls select{width:auto;padding:8px}
+.scriptureText{font-family:Georgia,'Times New Roman',serif;font-size:27px;font-weight:400;line-height:1.82;letter-spacing:.002em;max-width:800px;margin:0 auto 45px}
+.scriptureText p{margin:0 0 20px}
+.pastoralNotes{margin:50px 0;padding:35px;background:var(--cream);border-radius:20px}
+.pastoralNotes h2{font-size:48px}
+.textLink{font-weight:800;color:#9b6d12}
+.scriptureText sup{font-family:Inter,Arial,sans-serif;font-size:12px;color:#a4761e;font-weight:800;margin-right:5px}
+.bibleSectionHeading{margin:42px 12px 18px!important;padding:0 0 13px;border-bottom:1px solid rgba(164,118,30,.28);color:#17354a;font:700 clamp(1.45rem,3vw,1.85rem)/1.15 Georgia,'Times New Roman',serif!important;letter-spacing:-.01em}
+.bibleSectionHeading:first-child{margin-top:12px!important}
+.bibleSectionHeading span{display:block;margin-bottom:7px;color:#a4761e;font:800 .62rem/1.2 Inter,Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.darkReader .bibleSectionHeading{color:#fff;border-bottom-color:rgba(215,170,75,.35)}
+.searchResults small{color:var(--muted)}
+.continueReading{display:flex;align-items:center;justify-content:space-between;gap:20px;background:var(--navy);color:#fff;padding:22px;border-radius:18px;margin:20px 0 35px}
+.continueReading small,.continueReading strong{display:block}
+.continueReading small{color:var(--gold)}
+.continueReading strong{font:700 32px 'Cormorant Garamond',serif}
+.readerShell{border-radius:20px;transition:.2s;margin-bottom:38px}
+.darkReader{background:#101820;color:#edf2f5;padding:25px}
+.readerToolbar{position:sticky;top:76px;z-index:15;display:flex;gap:9px;align-items:center;flex-wrap:wrap;background:var(--cream);padding:12px;border-radius:14px;margin-bottom:28px;box-shadow:0 8px 25px rgba(7,24,41,.08)}
+.darkReader .readerToolbar{background:#1f2a33}
+.readerToolbar button{border:0;border-radius:999px;background:var(--navy);color:#fff;padding:9px 13px;font-weight:700;cursor:pointer}
+.readerToolbar span{font-size:12px;margin-left:auto}
+.interactiveText{max-width:900px}
+.verseRow{position:relative;border-radius:12px;padding:6px 92px 6px 12px;transition:.15s}
+.verseRow:hover{background:rgba(215,170,75,.09)}
+.favoriteVerse{background:#fff4ce}
+.darkReader .favoriteVerse{background:#3d3522}
+.verseRow>p{cursor:pointer;margin:0 0 10px}
+.verseActions{position:absolute;right:10px;top:8px;display:flex;gap:4px;opacity:.25}
+.verseRow:hover .verseActions,.favoriteVerse .verseActions{opacity:1}
+.verseActions button{border:0;background:transparent;font-size:18px;cursor:pointer}
+.verseNote{grid-column:1/-1;padding:12px;background:rgba(215,170,75,.12);border-radius:10px;margin-bottom:12px}
+.selectedVerseBar{position:sticky;bottom:15px;display:flex;justify-content:space-between;gap:15px;background:var(--navy);color:#fff;padding:13px 18px;border-radius:999px;box-shadow:0 12px 30px rgba(0,0,0,.2);font-size:13px}
+.selectedVerseBar strong{color:var(--gold)}
+.skipLink:focus{transform:translateY(0)}
+img[role="button"]{cursor:zoom-in}
+.bibliaAttribution img{display:block;width:auto;height:30px}
+.bibliaAttribution p{margin:0}
+.verseStudy strong,.verseStudy small{display:block}
+.verseStudy small{margin-top:3px;color:#65747e;font-size:12px;line-height:1.4}
+.verseStudyControls{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.verseStudy input{width:100%;min-height:44px;padding:10px 12px;border:1px solid #cbd5da;border-radius:9px;background:#fff;color:var(--navy);font:600 14px/1.2 inherit}
+.verseStudy button{min-height:44px;padding:10px 14px;border:1px solid #c89526;border-radius:9px;background:var(--navy);color:#fff;font:800 12px/1.2 inherit;cursor:pointer;white-space:nowrap}
+.verseStudy button:disabled{opacity:.45;cursor:not-allowed}
+.darkReader .verseStudy small{color:#bac5cb}
+.darkReader .verseStudy input{border-color:#52606a;background:#17232c;color:#fff}
+
+@media(max-width:950px) {
+  .bookGrid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:620px) {
+  .chapterControls{flex-wrap:wrap}
+  .scriptureText{font-size:23px}
+  .continueReading{display:block}
+  .readerToolbar{top:120px}
+  .readerToolbar span{width:100%;margin-left:0}
+  .verseRow{padding-right:12px}
+  .verseActions{position:static;opacity:1;margin-bottom:8px}
+  .selectedVerseBar{border-radius:16px;display:block}
+  .bibliaAttribution{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:700px) {
+  .verseStudy{grid-template-columns:1fr;gap:11px}
+  .verseStudyControls{grid-template-columns:1fr}
+  .verseStudy button{width:100%;font-size:13px}
+  .verseActions button{min-width:38px;min-height:38px;border-radius:8px;background:rgba(7,24,41,.05)}
+  .darkReader .verseActions button{background:rgba(255,255,255,.08)}
+  .selectedVerseBar span{display:block;margin-top:4px;line-height:1.4}
+}

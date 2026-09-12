@@ -1,0 +1,50 @@
+/* ============================================================
+   Estudio interactivo del Evangelio de Juan
+   ============================================================ */
+
+.johnStudyHeader{display:flex;justify-content:space-between;gap:28px;align-items:center;padding:30px 34px;border-bottom:3px solid var(--gold);background:var(--navy);color:#fff}
+.johnStudyHeader h2{margin:5px 0 7px;font:700 clamp(36px,4.5vw,52px)/.95 "Cormorant Garamond",serif}
+.johnStudyHeader p:last-child{margin:0;color:rgba(255,255,255,.74)}
+.johnStudyProgress{display:grid;place-items:center;flex:0 0 82px;width:82px;height:82px;border:1px solid rgba(215,170,75,.6);border-radius:50%;background:rgba(255,255,255,.05);font-weight:900;color:var(--gold)}
+.johnStudyProgress strong,.johnStudyProgress span{display:block;line-height:1}
+.johnStudyProgress strong{font-size:20px}
+.johnStudyProgress span{font-size:10px;letter-spacing:.04em}
+.johnWrittenQuestions{display:grid;gap:14px;padding:28px 34px 18px}
+.johnWrittenQuestions .johnQuestionNumber{grid-row:1 / span 2;display:grid;place-items:center;align-self:start;width:34px;height:34px;border-radius:50%;background:#f3ead7;color:#986a10;font-weight:900}
+.johnChoiceQuestions{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:0 34px 25px}
+.johnChoiceQuestions fieldset{width:100%;min-width:0;max-width:100%;margin:0;padding:18px;border:1px solid #dce2e5;border-radius:15px;background:#fff;overflow:hidden}
+.johnChoiceQuestions legend{padding:0 8px;color:#9a6b12;font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.johnChoiceQuestions fieldset>b{display:block;margin:4px 0 12px;line-height:1.45}
+.johnChoiceQuestions .johnChoiceOption{display:grid!important;grid-template-columns:18px minmax(0,1fr)!important;align-items:start!important;gap:10px!important;width:100%!important;min-width:0!important;min-height:0!important;margin:7px 0!important;padding:11px 12px!important;border:1px solid #e2e6e8;border-radius:9px;cursor:pointer;transition:.15s}
+.johnChoiceQuestions .johnChoiceOption:hover{border-color:#d1a33d;background:#fbf7ed}
+.johnChoiceQuestions .johnChoiceRadio{appearance:auto!important;-webkit-appearance:radio!important;display:block!important;flex:none!important;width:18px!important;height:18px!important;min-width:18px!important;min-height:18px!important;margin:2px 0 0!important;padding:0!important;border:0!important;border-radius:50%!important;box-shadow:none!important;accent-color:#a87618}
+.johnChoiceQuestions .johnChoiceText{display:block!important;width:auto!important;min-width:0!important;max-width:100%!important;line-height:1.45;overflow-wrap:anywhere;word-break:normal}
+.johnChoiceQuestions .correctChoice{border-color:#77b28e;background:#e9f6ee;color:#18583d}
+.johnChoiceQuestions .incorrectChoice{border-color:#d59aa3;background:#fff0f2;color:#8d1f31}
+.choiceExplanation{margin:11px 2px 0;color:#52616b;font-size:13px;line-height:1.5}
+.johnStudyFooter{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 34px 26px;border-top:1px solid #e2e6e8}
+.studyMessage{margin:0;color:#18583d;font-weight:800}
+.studyMessage.warning{color:#8b5e08}
+.johnParticipantPanel>div:first-child{display:flex;flex-direction:column;gap:5px}
+.johnParticipantPanel>div:first-child span{color:#586873;font-size:13px;line-height:1.5}
+.johnParticipantFields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.johnParticipantFields input{width:100%;min-height:42px;padding:9px 11px;border:1px solid #cbd4d9;border-radius:9px;background:#fff;font:inherit;color:var(--navy)}
+.chapterPills,.milestonePills{display:flex;flex-wrap:wrap;gap:5px}
+.chapterPills span{display:grid;place-items:center;width:27px;height:27px;border-radius:50%;background:#f2ead8;color:#90630b;font-weight:900}
+.milestonePills span{padding:5px 8px;border-radius:99px;background:#edf1f3;white-space:nowrap;font-size:11px;font-weight:800}
+.milestonePills .newMilestone{background:#fff0bd;color:#765006}
+.milestonePills em{margin-left:5px;font-style:normal;text-transform:uppercase}
+
+@media(max-width:700px) {
+  .johnStudy{margin:36px 0 28px;border-radius:17px}
+  .johnStudyHeader{align-items:flex-start;padding:24px 20px}
+  .johnStudyProgress{flex-basis:62px;width:62px;height:62px;font-size:13px}
+  .johnStudyProgress strong{font-size:16px}
+  .johnWrittenQuestions{padding:20px 16px 14px}
+  .johnWrittenQuestions .johnQuestionNumber{width:28px;height:28px;font-size:12px}
+  .johnChoiceQuestions{grid-template-columns:1fr;padding:0 16px 18px}
+  .johnStudyFooter{display:block;padding:18px 16px 22px}
+  .studyMessage{font-size:14px}
+  .johnParticipantPanel{grid-template-columns:1fr;padding:16px}
+  .johnParticipantFields{grid-template-columns:1fr}
+}

@@ -1,0 +1,41 @@
+/* ============================================================
+   Encabezado, navegación y pie de página
+   ============================================================ */
+
+.siteHeader{position:sticky;top:0;z-index:40;background:rgba(7,24,41,.96);color:#fff;min-height:76px;padding:0 clamp(18px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:30px}
+.brand{display:flex;align-items:center;gap:12px}
+.mark{color:var(--gold);font-size:28px}
+.brand strong,.brand small{display:block}
+.brand strong{font-family:'Cormorant Garamond',serif;font-size:24px}
+.brand small{font-size:10px;opacity:.7}
+.siteHeader nav{display:flex;gap:22px;align-items:center;font-size:14px}
+.adminLink{border:1px solid var(--gold);padding:8px 13px;border-radius:999px}
+.footerNav{display:flex;flex-direction:column;gap:8px}
+.siteHeader{position:sticky;top:0;z-index:900;display:flex;align-items:center;justify-content:space-between;gap:25px;padding:14px clamp(18px,5vw,70px);background:rgba(255,255,255,.96);border-bottom:1px solid #e1e6e9;backdrop-filter:blur(16px)}
+.siteLogo{display:flex;align-items:center;gap:11px;color:#071829;text-decoration:none}
+.siteLogo>span{display:grid;place-items:center;width:43px;height:43px;border-radius:13px;background:#071829;color:#d1a33d;font-weight:900}
+.siteLogo strong,.siteLogo small{display:block}
+.siteLogo small{color:#6a747b;font-size:11px}
+.desktopNav{display:flex;align-items:center;gap:18px}
+.navDonate{padding:10px 15px;border-radius:999px;background:#071829!important;color:#fff!important}
+.mobileMenuButton{display:none;border:0;background:transparent;width:44px;height:44px;padding:10px;cursor:pointer}
+.mobileMenuButton span{display:block;height:3px;background:#071829;margin:5px 0;border-radius:5px}
+.mobileMenuOverlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.55);display:flex;justify-content:flex-end}
+.mobileMenuPanel{width:min(360px,88vw);height:100%;padding:24px;background:#071829;display:flex;flex-direction:column;overflow:auto}
+.mobileMenuTop{display:flex;align-items:center;justify-content:space-between;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.15);margin-bottom:12px}
+.mobileMenuTop strong{color:#fff;font-size:20px}
+.mobileMenuTop button{border:0;background:transparent;color:#fff;font-size:38px;cursor:pointer}
+.mobileMenuAdmin{margin-top:20px;border:1px solid #d1a33d!important;border-radius:12px;text-align:center;color:#d1a33d!important}
+
+@media(max-width:950px) {
+  .siteHeader{align-items:flex-start;padding-top:18px;padding-bottom:18px}
+  .siteHeader nav{flex-wrap:wrap;justify-content:flex-end}
+}
+@media(max-width:620px) {
+  .siteHeader{display:block}
+  .siteHeader nav{margin-top:15px;justify-content:flex-start}
+}
+@media(max-width:1050px) {
+  .desktopNav{display:none}
+  .mobileMenuButton{display:block}
+}

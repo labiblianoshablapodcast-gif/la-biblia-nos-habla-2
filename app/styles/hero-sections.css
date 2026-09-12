@@ -1,0 +1,124 @@
+/* ============================================================
+   Secciones hero genéricas
+   ============================================================ */
+
+.hero{min-height:620px;padding:100px clamp(24px,8vw,130px);display:flex;align-items:center;color:#fff;background:linear-gradient(90deg,rgba(3,14,25,.97),rgba(3,14,25,.55)),radial-gradient(circle at 80% 20%,#d7aa4b55,transparent 30%),#0e3048}
+.hero>div{max-width:900px}
+.eyebrow{text-transform:uppercase;letter-spacing:.2em;color:var(--gold);font-size:12px;font-weight:800}
+.hero h1,.pageHero h1,.section h2{font-family:'Cormorant Garamond',serif;line-height:.9;margin:10px 0}
+.hero h1{font-size:clamp(58px,9vw,112px)}
+.hero p{font-size:20px;max-width:720px;color:rgba(255,255,255,.8)}
+.section{padding:90px clamp(24px,8vw,130px)}
+.section.soft{background:var(--cream)}
+.section.dark{background:var(--navy);color:#fff}
+.section h2{font-size:clamp(44px,6vw,76px)}
+.lead{font-size:21px}
+.pageHero{padding:90px clamp(24px,8vw,130px);background:linear-gradient(135deg,#071829,#17415f);color:#fff}
+.pageHero h1{font-size:clamp(54px,8vw,96px)}
+.pageHero p{max-width:760px;font-size:19px;color:rgba(255,255,255,.78)}
+.missionsHero,.missionDetailHero{position:relative;min-height:720px;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
+.missionsHero>img,.missionDetailHero>img{object-fit:cover}
+.pastorHero{display:grid;grid-template-columns:48% 52%;min-height:760px;background:#071827;color:#fff}
+.youtubeHero{background:linear-gradient(135deg,#350909,#071829)}
+.multimediaHero{background:linear-gradient(135deg,#4b0909,#071829)}
+.churchHero{background:linear-gradient(135deg,#071829,#164b3a)}
+.donationsHero{background:linear-gradient(135deg,#5c3d08,#071829)}
+.premiumHero{position:relative;min-height:760px;display:flex;align-items:flex-end;overflow:hidden;background:#071829}
+.premiumHeroContent>p:not(.eyebrow){max-width:720px;font-size:21px;color:rgba(255,255,255,.82)}
+.premiumClosing .lead{max-width:760px;margin-left:auto;margin-right:auto}
+.podcastHero{background:linear-gradient(135deg,#151047,#071829)}
+.mapHero{background:linear-gradient(135deg,#164b3a,#071829)}
+.galleryHero{background:linear-gradient(135deg,#51320b,#071829)}
+.devotionalsHero{background:linear-gradient(135deg,#8c5a0a,#071829)}
+.sermonsHero{background:linear-gradient(135deg,#29124e,#071829)}
+.visitorHero{position:relative;min-height:720px;display:flex;align-items:center;overflow:hidden;background:#071829}
+.visitorHero>img{object-fit:cover;object-position:center 20%}
+.visitorHeroContent>p:not(.eyebrow){max-width:720px;font-size:21px;color:rgba(255,255,255,.8)}
+.multimediaHero{background:linear-gradient(135deg,#520d14,#071829)}
+.sermonDetailHero{position:relative;min-height:600px;display:flex;align-items:flex-end;background:#071829;overflow:hidden}
+.sermonDetailHero>img{object-fit:cover}
+.churchScheduleSection .lead{font-size:17px;color:var(--muted)}
+.churchHero>img{object-fit:cover;object-position:center 68%}
+.churchHeroOverlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,18,30,.98) 0%,rgba(4,30,35,.9) 45%,rgba(4,31,31,.35) 100%),linear-gradient(0deg,rgba(3,18,30,.7),transparent 55%)}
+.churchHeroContent{position:relative;z-index:2;width:min(1150px,calc(100% - 48px));margin:auto;color:#fff}
+.churchHeroContent h1{max-width:850px;font-size:clamp(56px,7.5vw,96px)}
+.churchHeroContent>p:last-child{max-width:680px;color:rgba(255,255,255,.82)}
+.churchGalleryHeading .lead{color:var(--muted)}
+.churchHero>img{object-position:center 43%}
+.donationsHero>img{object-fit:cover;object-position:center 54%}
+.donationsHeroOverlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(37,22,3,.96) 0%,rgba(31,24,8,.82) 48%,rgba(4,20,28,.35) 100%),linear-gradient(0deg,rgba(4,16,29,.68),transparent 56%)}
+.donationsHeroContent{position:relative;z-index:2;width:min(1150px,calc(100% - 48px));margin:auto;color:#fff}
+.donationsHeroContent h1{max-width:900px;font-size:clamp(58px,7.5vw,96px);line-height:.9}
+.donationsHeroContent>p:last-child{max-width:720px;color:rgba(255,255,255,.84)}
+.churchHero>img{object-position:center center}
+.churchHeroOverlay{background:linear-gradient(90deg,rgba(3,18,30,.58) 0%,rgba(3,18,30,.2) 36%,rgba(3,18,30,.03) 62%,transparent 100%),linear-gradient(0deg,rgba(3,18,30,.22),transparent 50%)}
+.churchHeroContent{width:min(1180px,calc(100% - 56px))}
+.churchHeroContent::before{content:"";position:absolute;z-index:-1;inset:-34px auto -34px -34px;width:min(590px,52vw);border:1px solid rgba(255,255,255,.12);border-radius:24px;background:rgba(3,18,30,.56);box-shadow:0 24px 70px rgba(0,0,0,.24);backdrop-filter:blur(8px)}
+.churchHeroContent h1{max-width:560px;font-size:clamp(54px,5.6vw,78px);line-height:.92;text-wrap:balance;text-shadow:0 3px 20px rgba(0,0,0,.45)}
+.churchHeroContent>p:last-child{max-width:510px;font-size:18px;color:rgba(255,255,255,.9)}
+.johnStudyHeader .eyebrow{margin:0;color:var(--gold)}
+.churchHero>img{object-position:center center;filter:brightness(1.08) contrast(1.03)}
+.churchHeroOverlay{background:linear-gradient(90deg,rgba(3,18,30,.42) 0%,rgba(3,18,30,.12) 38%,transparent 52%)}
+.churchHeroContent{width:min(1180px,calc(100% - 56px));padding-right:55%}
+.churchHeroContent::before{inset:-30px auto -30px -30px;width:500px;max-width:calc(46vw - 24px);background:rgba(3,18,30,.68)}
+.churchHeroContent h1{width:440px;max-width:42vw;font-size:clamp(48px,4.8vw,68px);line-height:.94}
+.churchHeroContent>p:last-child{width:440px;max-width:42vw}
+.connectionHero .eyebrow{color:#e3ad34}
+.connectionHeroCopy>p:not(.eyebrow){max-width:610px;margin:0;color:rgba(255,255,255,.78);font-size:17px;line-height:1.65}
+.connectionIntro .lead{max-width:560px}
+.connectionFormHeading .eyebrow{margin:0}
+
+@media(max-width:620px) {
+  .hero{min-height:520px}
+  .section{padding:70px 20px}
+  .missionsHero,.missionDetailHero{min-height:600px}
+}
+@media(max-width:900px) {
+  .pastorHero{grid-template-columns:1fr}
+}
+@media(max-width:950px) {
+  .premiumHero{min-height:720px}
+}
+@media(max-width:650px) {
+  .premiumHero{min-height:760px;align-items:center}
+  .visitorHero{min-height:690px}
+  .visitorHero>img{object-position:62% center}
+  .sermonDetailHero{min-height:520px}
+}
+@media(max-width:600px) {
+  .churchHero{min-height:600px}
+  .churchHero>img{object-position:56% center}
+  .churchHeroOverlay{background:linear-gradient(0deg,rgba(3,18,30,.98),rgba(4,30,35,.5))}
+  .churchHeroContent{padding-top:170px}
+  .churchHeroContent h1{font-size:54px}
+  .churchHero>img{object-position:center center}
+  .donationsHero{min-height:610px}
+  .donationsHero>img{object-position:57% center}
+  .donationsHeroOverlay{background:linear-gradient(0deg,rgba(4,16,29,.98),rgba(37,22,3,.5))}
+  .donationsHeroContent{padding-top:175px}
+  .donationsHeroContent h1{font-size:52px}
+}
+@media(max-width:760px) {
+  .churchHero{min-height:650px;align-items:flex-end}
+  .churchHero>img{object-position:68% center}
+  .churchHeroOverlay{background:linear-gradient(0deg,rgba(3,18,30,.97) 0%,rgba(3,18,30,.72) 45%,rgba(3,18,30,.08) 78%)}
+  .churchHeroContent{width:calc(100% - 36px);margin:0 auto 54px;padding-top:0}
+  .churchHeroContent::before{inset:-25px -12px -25px;width:auto;border-radius:18px;background:rgba(3,18,30,.66)}
+  .churchHeroContent h1{max-width:470px;font-size:clamp(43px,12vw,58px)}
+  .churchHeroContent>p:last-child{font-size:16px;line-height:1.55}
+  .churchHero{min-height:780px;align-items:flex-end;background:#071829}
+  .churchHero>img{object-position:72% top;object-fit:cover;filter:brightness(1.08) contrast(1.02)}
+  .churchHeroOverlay{background:linear-gradient(0deg,rgba(3,18,30,.99) 0%,rgba(3,18,30,.94) 36%,rgba(3,18,30,.12) 62%,transparent 100%)}
+  .churchHeroContent{width:calc(100% - 32px);margin:0 auto 34px;padding:0}
+  .churchHeroContent::before{inset:-22px -8px -22px;width:auto;max-width:none;background:rgba(3,18,30,.74)}
+  .churchHeroContent h1,.churchHeroContent>p:last-child{width:auto;max-width:100%}
+  .churchHeroContent h1{font-size:clamp(40px,11vw,52px)}
+}
+@media(max-width:900px) and (min-width:761px) {
+  .churchHeroContent::before{width:410px}
+  .churchHeroContent h1,.churchHeroContent>p:last-child{width:360px;max-width:40vw}
+  .churchHeroContent h1{font-size:48px}
+}
+@media(max-width:700px) {
+  .connectionHeroCopy>p:not(.eyebrow){font-size:15px}
+}

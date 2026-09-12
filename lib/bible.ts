@@ -101,7 +101,15 @@ export {books};
 export async function getChapter(code:string, chapter:number): Promise<BibleChapter | null> {
   const apiKey=process.env.BIBLIA_API_KEY;
   const book=BIBLIA_BOOKS[code];
-  if(!apiKey || !book)return null;
+
+  if(!apiKey){
+    console.error(`[bible] BIBLIA_API_KEY no está configurada. Revisa las variables de entorno en Vercel.`);
+    return null;
+  }
+  if(!book){
+    console.error(`[bible] Código de libro desconocido: "${code}" (chapter=${chapter}).`);
+    return null;
+  }
 
   const textQuery=new URLSearchParams({
     passage:`${book} ${chapter}`,
@@ -121,10 +129,19 @@ export async function getChapter(code:string, chapter:number): Promise<BibleChap
       fetch(`https://api.biblia.com/v1/bible/content/RVR60.txt?${textQuery.toString()}`,{cache:"no-store"}),
       fetch(chapterUrl(code,chapter),{next:{revalidate:86400}})
     ]);
-    if(!response.ok)return null;
 
-    let verses=parseVerses(await response.text());
-    if(!verses.length)return null;
+    if(!response.ok){
+      const body=await response.text().catch(()=>"(no se pudo leer el cuerpo de la respuesta)");
+      console.error(`[bible] api.biblia.com respondió ${response.status} ${response.statusText} para ${book} ${chapter}. Cuerpo: ${body.slice(0,500)}`);
+      return null;
+    }
+
+    const rawText=await response.text();
+    let verses=parseVerses(rawText);
+    if(!verses.length){
+      console.error(`[bible] La respuesta de api.biblia.com llegó OK (200) pero no se pudo extraer ningún versículo para ${book} ${chapter}. Primeros 500 caracteres: ${rawText.slice(0,500)}`);
+      return null;
+    }
 
     if(headingResponse.ok){
       const headings=parseEditorialHeadings(await headingResponse.text());
@@ -132,6 +149,8 @@ export async function getChapter(code:string, chapter:number): Promise<BibleChap
         ...verse,
         ...(headings.has(verse.number)?{heading:headings.get(verse.number)}:{})
       }));
+    }else{
+      console.error(`[bible] No se pudieron cargar los encabezados editoriales desde biblia.com (status ${headingResponse.status}) para ${book} ${chapter}. El texto seguirá mostrándose sin encabezados.`);
     }
 
     return {
@@ -141,7 +160,8 @@ export async function getChapter(code:string, chapter:number): Promise<BibleChap
       verses,
       source:"Reina-Valera Revisada 1960 · Biblia.com · Logos Bible Software"
     };
-  }catch{
+  }catch(error){
+    console.error(`[bible] Error de red al pedir ${book} ${chapter} a api.biblia.com:`,error);
     return null;
   }
 }

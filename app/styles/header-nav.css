@@ -20,9 +20,9 @@
 .navDonate{padding:10px 15px;border-radius:999px;background:#071829!important;color:#fff!important}
 .mobileMenuButton{display:none;border:0;background:transparent;width:44px;height:44px;padding:10px;cursor:pointer}
 .mobileMenuButton span{display:block;height:3px;background:#071829;margin:5px 0;border-radius:5px}
-.mobileMenuOverlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.55);display:flex;justify-content:flex-end}
-.mobileMenuPanel{width:min(360px,88vw);height:100%;padding:24px;background:#071829;display:flex;flex-direction:column;overflow:auto}
-.mobileMenuTop{display:flex;align-items:center;justify-content:space-between;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.15);margin-bottom:12px}
+.mobileMenuOverlay{position:fixed;inset:0;z-index:5000;background:rgba(0,0,0,.55);display:flex;justify-content:flex-end;overscroll-behavior:contain}
+.mobileMenuPanel{position:relative;width:min(360px,88vw);height:100dvh;max-height:100dvh;padding:24px;background:#071829;display:flex;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.mobileMenuTop{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.15);margin-bottom:12px;background:#071829}
 .mobileMenuTop strong{color:#fff;font-size:20px}
 .mobileMenuTop button{border:0;background:transparent;color:#fff;font-size:38px;cursor:pointer}
 .mobileMenuAdmin{margin-top:20px;border:1px solid #d1a33d!important;border-radius:12px;text-align:center;color:#d1a33d!important}
@@ -32,8 +32,9 @@
   .siteHeader nav{flex-wrap:wrap;justify-content:flex-end}
 }
 @media(max-width:620px) {
-  .siteHeader{display:block}
-  .siteHeader nav{margin-top:15px;justify-content:flex-start}
+  .siteHeader{display:flex;align-items:center;position:sticky;top:0;z-index:4000}
+  .siteHeader nav{margin-top:0;justify-content:flex-start}
+  .mobileMenuButton{position:relative;z-index:4001;flex:0 0 44px}
 }
 @media(max-width:1050px) {
   .desktopNav{display:none}

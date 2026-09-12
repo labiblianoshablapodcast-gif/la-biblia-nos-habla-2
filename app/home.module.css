@@ -817,7 +817,7 @@
   }
 
   .connectGrid a::after {
-    content: "â€º";
+    content: "'";
     position: absolute;
     right: 15px;
     top: 50%;

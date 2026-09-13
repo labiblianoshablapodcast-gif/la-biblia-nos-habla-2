@@ -80,5 +80,6 @@ export default function AsvReadAloud({bookName,chapter,verses}:{bookName:string;
   </div>
   <button type="button" className="audioSkip" style={{marginTop:12,padding:"0 14px"}} onClick={stop} disabled={state==='idle'}>■ Detener</button>
   <p className="bibleAudioStatus" role="status">{error||(!supported?'La lectura en voz alta no está disponible en este navegador.':state==='paused'?'Lectura pausada. Continuar reinicia el versículo actual.':`Voz del dispositivo · ${bookName} ${chapter}.`)}</p>
+  {supported&&<p className="bibleAudioHint">¿No escucha nada? En iPhone, revise que el interruptor de silencio (al lado del volumen) esté desactivado.</p>}
  </section>;
 }

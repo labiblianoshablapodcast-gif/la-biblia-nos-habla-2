@@ -31,8 +31,8 @@ function formatDailyDate(value:Date){
 }
 
 const baseQuickLinks=[
- {icon:"▤",title:"Leer la Biblia",text:"Acceda a los libros y encuentre una palabra para hoy.",href:"/biblia",image:"/images/biblia-abierta-portada.png",alt:"Biblia abierta sobre una mesa"},
- {icon:"♢",title:"Pedir oración",text:"Comparta su necesidad con nuestro equipo pastoral.",href:"/conexion",image:"/images/manos-orando-conexion-v2.png",alt:"Manos unidas en oración"},
+ {icon:"▤",title:"Leer la Biblia",text:"Acceda a los libros y encuentre una palabra para hoy.",href:"/biblia",image:"/images/biblia-abierta-portada.jpg",alt:"Biblia abierta sobre una mesa"},
+ {icon:"♢",title:"Pedir oración",text:"Comparta su necesidad con nuestro equipo pastoral.",href:"/conexion",image:"/images/manos-orando-conexion-v2.jpg",alt:"Manos unidas en oración"},
  {icon:"✦",title:"Nuevos creyentes",text:"Si aceptó a Cristo, queremos acompañarle en su próximo paso.",href:"/primeros-pasos",image:"/images/nuevos-creyentes-discipulado.jpg",alt:"Nuevo creyente leyendo la Biblia acompañado por un mentor cristiano"},
  {icon:"⌂",title:"Nuestra iglesia",text:"Conozca quiénes somos, nuestros horarios y ubicación.",href:"/iglesia",image:"/images/iglesia-principe-de-paz-congregacion.jpeg",alt:"Congregación de la Iglesia Príncipe de Paz"},
  {icon:"◎",title:"Misiones",text:"Vea cómo compartimos el Evangelio y servimos a comunidades.",href:"/misiones",image:"/images/misiones/lanquin-2026-comunidad-02.jpg",alt:"Comunidad reunida durante la misión en Lanquín"}
@@ -57,12 +57,12 @@ export default async function Home(){
   .maybeSingle();
  const quickLinks=[
   baseQuickLinks[0],
-  {icon:"☀",title:"Texto de hoy para meditar",text:verse,href:"/devocionales",image:"/images/biblia-abierta-portada.png",alt:"Biblia abierta junto a un camino al amanecer",daily:true,date:formatDailyDate(now),reference},
+  {icon:"☀",title:"Texto de hoy para meditar",text:verse,href:"/devocionales",image:"/images/biblia-abierta-portada.jpg",alt:"Biblia abierta junto a un camino al amanecer",daily:true,date:formatDailyDate(now),reference},
   ...baseQuickLinks.slice(1)
  ];
  return <main className={styles.home}>
   <section className={styles.hero}>
-   <div className={styles.heroPortrait}><Image className={styles.heroImage} src="/images/pastor-y-yudelka-hero-v2.png" alt="Pastores Gilberto y Yudelka Maldonado" fill priority sizes="100vw"/></div>
+   <div className={styles.heroPortrait}><Image className={styles.heroImage} src="/images/pastor-y-yudelka-hero-v2.jpg" alt="Pastores Gilberto y Yudelka Maldonado" fill priority sizes="100vw"/></div>
    <div className={styles.heroOverlay}/>
    <div className={styles.heroContent}>
     <p className={styles.eyebrow}>BIENVENIDO A LA BIBLIA NOS HABLA</p>

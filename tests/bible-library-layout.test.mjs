@@ -59,7 +59,7 @@ test('three equal-width version buttons keep accessible touch targets',()=>{
 });
 
 test('photo, statistics and desktop composition stay intact without repetitive copy',()=>{
-  assert.ok(page.includes('/images/biblia-abierta-portada.png'));
+  assert.ok(page.includes('/images/biblia-abierta-portada.jpg'));
   assert.ok(page.includes('<strong>66</strong> libros'));
   assert.ok(page.includes('<strong>1,189</strong> capítulos'));
   assert.doesNotMatch(page,/Los 66 libros, 1,189 capítulos/);

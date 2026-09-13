@@ -29,7 +29,7 @@ export default function Conexion(){
         </div>
         <div className="connectionPrayerVisual" role="img" aria-label="Manos unidas en oración ante la luz de una cruz">
           <Image
-            src="/images/manos-orando-conexion-v2.png"
+            src="/images/manos-orando-conexion-v2.jpg"
             alt=""
             fill
             priority

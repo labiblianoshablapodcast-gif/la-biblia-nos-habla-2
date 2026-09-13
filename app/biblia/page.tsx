@@ -23,7 +23,7 @@ export default async function BibliaPage({searchParams}:{searchParams:Promise<{v
       </div>
     </div>
     <div className={styles.heroImage}>
-      <Image src="/images/biblia-abierta-portada.png" alt="Biblia abierta sobre una mesa" fill priority sizes="(max-width: 760px) 100vw, 48vw"/>
+      <Image src="/images/biblia-abierta-portada.jpg" alt="Biblia abierta sobre una mesa" fill priority sizes="(max-width: 760px) 100vw, 48vw"/>
       <div className={styles.imageShade}/>
       <p>“Lámpara es a mis pies tu palabra.” <span>Salmos 119:105</span></p>
     </div>

@@ -15,7 +15,7 @@ const churchPhotos = [
  ["iglesia-servicio-de-oracion.jpeg", "Servicio de oración y adoración"],
  ["iglesia-grupo-ministerial.jpeg", "Grupo ministerial de la iglesia"],
  ["iglesia-aniversario-pastoral.jpeg", "Aniversario pastoral"],
- ["iglesia-biblia-nos-habla.png", "La Biblia Nos Habla desde Iglesia Príncipe de Paz"]
+ ["iglesia-biblia-nos-habla.jpg", "La Biblia Nos Habla desde Iglesia Príncipe de Paz"]
 ] as const;
 
 function eventDate(value:string|null){
@@ -41,7 +41,7 @@ export default async function Iglesia(){
 
   <section className={styles.hero} aria-label="Iglesia Príncipe de Paz">
    <div className={styles.heroPhoto}>
-    <Image src="/images/iglesia-portada-congregacion-v2.png" alt="Congregación de la Iglesia Príncipe de Paz" fill priority sizes="100vw"/>
+    <Image src="/images/iglesia-portada-congregacion-v2.jpg" alt="Congregación de la Iglesia Príncipe de Paz" fill priority sizes="100vw"/>
    </div>
    <div className={styles.heroShade}/>
    <div className={`${styles.heroCopy} ${styles.heroCopyDesktop}`}>

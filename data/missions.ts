@@ -54,10 +54,10 @@ export const missions = [
     region: "Chicachuy, Alta Verapaz, Guatemala",
     title: "Cuando Dios cumplió Su promesa",
     summary: "Viaje misionero, servicio comunitario e inauguración del templo en Chicachuy.",
-    cover: "/images/misiones/lanquin-2026-inauguracion-poster.png",
+    cover: "/images/misiones/lanquin-2026-inauguracion-poster.jpg",
     verse: "Grandes cosas ha hecho Jehová con nosotros; estaremos alegres. — Salmo 126:3",
     images: [
-      "/images/misiones/lanquin-2026-inauguracion-poster.png",
+      "/images/misiones/lanquin-2026-inauguracion-poster.jpg",
       "/images/misiones/lanquin-2026-grupo-misionero.jpg",
       "/images/misiones/lanquin-2026-culto-templo.jpg",
       "/images/misiones/lanquin-2026-oracion-comunidad.jpg",

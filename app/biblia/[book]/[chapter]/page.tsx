@@ -41,7 +41,7 @@ export default async function ChapterPage({
  const displayBook=version==="asv"&&bibleChapter?bibleChapter.book:book.name;
 
  return <>
-  <section className="pageHero bibleChapterHero" style={{backgroundImage:"linear-gradient(90deg,rgba(7,24,41,.96) 0%,rgba(7,24,41,.86) 42%,rgba(7,24,41,.3) 100%),url('/images/biblia-abierta-portada.png')",backgroundSize:"cover",backgroundPosition:"center 58%"}}>
+  <section className="pageHero bibleChapterHero" style={{backgroundImage:"linear-gradient(90deg,rgba(7,24,41,.96) 0%,rgba(7,24,41,.86) 42%,rgba(7,24,41,.3) 100%),url('/images/biblia-abierta-portada.jpg')",backgroundSize:"cover",backgroundPosition:"center 58%"}}>
     <p className="eyebrow">{version==="asv"?"The Bible":version==="qeqchi"?"Li Santil Hu":"Santa Biblia"} · {translationName}</p>
     <h1>{displayBook} {chapter}</h1>
     <p>{version==="asv"?(book.testament==="Antiguo Testamento"?"Old Testament":"New Testament"):book.testament}</p>

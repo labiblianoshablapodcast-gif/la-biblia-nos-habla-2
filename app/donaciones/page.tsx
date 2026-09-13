@@ -57,8 +57,8 @@ export default function Donaciones(){
      <a className="btn paypalDonateButton" href={donationUrl} target="_blank" rel="noopener noreferrer">Donar con PayPal</a>
      <small>PayPal procesa la donación fuera de esta página. La iglesia no almacena información de tarjetas ni cuentas bancarias.</small>
     </div>
-    <a className="paypalQrImage" href="/images/paypal-donaciones-iglesia.png" target="_blank" rel="noopener noreferrer" aria-label="Abrir el código QR de PayPal en tamaño completo">
-     <Image src="/images/paypal-donaciones-iglesia.png" alt="Código QR de PayPal para ofrendas y donaciones de la Iglesia Príncipe de Paz Philadelphia" width={1056} height={1500} sizes="(max-width: 800px) 92vw, 430px" />
+    <a className="paypalQrImage" href="/images/paypal-donaciones-iglesia.jpg" target="_blank" rel="noopener noreferrer" aria-label="Abrir el código QR de PayPal en tamaño completo">
+     <Image src="/images/paypal-donaciones-iglesia.jpg" alt="Código QR de PayPal para ofrendas y donaciones de la Iglesia Príncipe de Paz Philadelphia" width={1056} height={1500} sizes="(max-width: 800px) 92vw, 430px" />
     </a>
    </section>
 

@@ -1,0 +1,177 @@
+/* ============================================================
+   Panel de administración
+   ============================================================ */
+
+.adminShell{display:grid;grid-template-columns:230px 1fr;min-height:600px}
+.adminNav{background:#071829;color:#fff;padding:28px}
+.adminMain{padding:45px}
+.adminActions{margin-top:45px}
+.adminActions button{border:0;padding:10px 13px;border-radius:10px;background:#e8ecef;color:#73808a}
+.loginPage{min-height:70vh;display:grid;place-items:center;background:var(--cream)}
+.loginCard{width:min(520px,100%);background:#fff;padding:38px;border-radius:22px;box-shadow:0 18px 50px rgba(7,24,41,.12)}
+.loginCard h1{font:700 56px 'Cormorant Garamond',serif;margin:0 0 10px}
+.loginForm{margin-top:24px}
+.formError{color:#a51c30;font-weight:700}
+.signOutButton{margin-top:20px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;padding:10px 12px;border-radius:10px;cursor:pointer}
+.adminTable{display:grid;gap:14px}
+.adminTable article{border:1px solid #dde3e7;border-radius:14px;padding:20px}
+.adminTable small{display:inline-block;margin-left:10px;color:#a4761e;font-weight:800}
+.adminForm{max-width:760px}
+.setupChecklist{display:grid;gap:14px;max-width:820px}
+.setupChecklist article{display:flex;gap:14px;align-items:flex-start;padding:20px;border:1px solid #dde3e7;border-radius:15px;background:#fff}
+.setupChecklist article>span{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#18583d;color:#fff;font-weight:900}
+.setupChecklist strong{display:block;font-size:17px}
+.setupChecklist p{margin:5px 0 0;color:var(--muted)}
+.adminChecks{display:flex;gap:25px;flex-wrap:wrap}
+.adminContentList{display:grid;gap:14px;margin-top:35px}
+.adminContentList article{display:flex;align-items:center;justify-content:space-between;gap:25px;padding:20px;border:1px solid #dde3e7;border-radius:16px;background:#fff}
+.adminContentList h3{margin:5px 0;font-size:28px}
+.adminContentList small{color:#a4761e;font-weight:800}
+.dangerButton{border:0;border-radius:10px;background:#8f1d1d;color:#fff;padding:10px 14px;font-weight:800;cursor:pointer}
+.adminShellPro{min-height:100vh;background:#f3f5f6}
+.adminNavPro{background:#071829;color:#fff;padding:24px 18px;display:flex;flex-direction:column}
+.adminBrand{display:flex;align-items:center;gap:12px;padding:8px 6px 24px;border-bottom:1px solid rgba(255,255,255,.12)}
+.adminBrand>span{display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:#d1a33d;color:#071829;font-weight:900}
+.adminBrand strong,.adminBrand small{display:block}
+.adminBrand small{color:rgba(255,255,255,.55)}
+.adminNavPro nav{display:grid;gap:5px;margin-top:22px}
+.adminNavFooter{margin-top:auto;display:grid;gap:10px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12)}
+.adminDashboard{padding:42px}
+.adminWelcome{display:flex;justify-content:space-between;gap:30px;align-items:flex-start}
+.adminWelcome h1{font-size:56px;margin:6px 0}
+.adminWelcome>div>p:last-child{color:var(--muted)}
+.adminQuickActions{display:flex;gap:10px;flex-wrap:wrap}
+.adminStatsPro{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin:32px 0}
+.adminStatsPro strong,.adminStatsPro span{display:block}
+.adminStatsPro strong{font:700 43px "Cormorant Garamond",serif}
+.adminStatsPro span{color:var(--muted)}
+.adminDashboardGrid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.adminPanelCard{padding:25px;border-radius:20px;background:#fff;border:1px solid #dde3e7}
+.adminPanelHeader{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}
+.adminPanelHeader h2{font-size:37px;margin:4px 0}
+.adminRecentList{display:grid;gap:10px;margin-top:18px}
+.adminRecentList>div{display:flex;justify-content:space-between;gap:20px;padding:13px 0;border-top:1px solid #edf0f1}
+.adminRecentList strong,.adminRecentList span{display:block}
+.adminRecentList span,.adminRecentList small{color:var(--muted)}
+.adminManagementGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:22px}
+.adminManagementGrid span{font-size:30px}
+.adminManagementGrid h3{font-size:30px;margin:10px 0}
+.adminManagementGrid p{color:rgba(255,255,255,.68)}
+.systemStatusGrid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.systemStatusGrid article{display:flex;gap:14px;padding:22px;border-radius:17px;background:#fff;border:1px solid #dde3e7}
+.systemStatusGrid article>span{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#18583d;color:#fff;font-weight:900}
+.systemStatusGrid h3{margin:0 0 5px}
+.systemStatusGrid p{margin:0;color:var(--muted)}
+.adminPageIntro{display:flex;justify-content:space-between;align-items:flex-start;gap:25px;margin-bottom:24px}
+.adminPageIntro h1{margin-bottom:7px}
+.adminPageIntro>div>p:last-child{color:var(--muted)}
+.successNotice{padding:17px 20px;margin:18px 0;border-radius:14px;background:#e8f6ee;border:1px solid #aed5bd;color:#18583d}
+.adminFormGrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.adminFormGrid .wideField{grid-column:1/-1}
+.adminSavedSection{margin-top:42px}
+.adminItemActions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.adminUserEmail{display:block;color:var(--muted);margin-top:-5px}
+.statusPending{background:#a4761e!important}
+.fieldHelp{display:block;margin-top:6px;color:var(--muted);font-size:12px}
+.richEditorField{display:block}
+.richEditorLabel{display:block;font-weight:800;margin-bottom:8px}
+.richToolbar{display:flex;gap:6px;flex-wrap:wrap;padding:10px;border:1px solid #ccd4d9;border-bottom:0;border-radius:14px 14px 0 0;background:#f3f5f6}
+.richToolbar button{border:1px solid #cbd3d8;background:#fff;border-radius:7px;padding:7px 10px;cursor:pointer}
+.richToolbar button:hover{background:#071829;color:#fff}
+.richEditorCanvas{min-height:390px;padding:22px;border:1px solid #ccd4d9;border-radius:0 0 14px 14px;background:#fff;line-height:1.7;outline:none}
+.richEditorCanvas:empty:before{content:attr(data-placeholder);color:#8a949a}
+.richEditorCanvas h2{font-size:34px}
+.richEditorCanvas h3{font-size:27px}
+.richEditorCanvas blockquote{border-left:4px solid #d1a33d;padding:12px 18px;background:#f8f4ea}
+.sermonProForm select{min-height:48px;border:1px solid #ccd4d9;border-radius:12px;padding:0 12px;background:#fff}
+.checkCard{display:flex!important;align-items:center;gap:10px;padding:16px;border:1px solid #dde3e7;border-radius:12px;background:#fff}
+.adminSermonTable{display:grid;gap:12px}
+.adminSermonTable article{display:grid;grid-template-columns:130px 1fr auto;gap:20px;align-items:center;padding:20px;border:1px solid #dde3e7;border-radius:16px;background:#fff}
+.adminSermonStatus{display:flex;flex-direction:column;gap:7px}
+.adminSermonStatus span{display:inline-block;width:max-content;padding:6px 9px;border-radius:999px;font-size:11px;font-weight:900}
+.statusPublished{background:#e1f3e8;color:#18583d}
+.statusDraft{background:#edf0f2;color:#5c6870}
+.statusFeatured{background:#f6ead0;color:#8b5e08}
+.adminSermonTable small{color:var(--muted)}
+.sermonProSearch{display:grid;grid-template-columns:1fr 210px 210px auto;gap:10px;margin-bottom:30px}
+.sermonProSearch input,.sermonProSearch select{min-height:51px;border:1px solid #ccd4d9;border-radius:12px;padding:0 14px;background:#fff}
+.sermonProGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.sermonProCard{overflow:hidden;border-radius:22px;background:#fff;border:1px solid #dde3e7;box-shadow:0 16px 45px rgba(7,24,41,.08)}
+.sermonProImage{position:relative;display:block;min-height:240px;background:#071829}
+.sermonProImage img{object-fit:cover}
+.sermonProImage>span{position:absolute;left:15px;top:15px;padding:7px 11px;border-radius:999px;background:#d1a33d;color:#071829;font-weight:900;font-size:11px}
+.sermonProPlaceholder{position:absolute;inset:0;display:grid;place-items:center;font-size:58px;background:linear-gradient(135deg,#244b69,#071829)}
+.sermonProCopy{padding:25px}
+.sermonProCopy small{color:#a4761e;font-weight:900}
+.sermonProCopy h2{font-size:36px;margin:8px 0}
+.sermonProCopy blockquote{border-left:4px solid #d1a33d;padding-left:13px;color:#174d75}
+.sermonProCopy p{color:var(--muted)}
+.sermonProFeatured{grid-column:span 2}
+.organizeGrid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.inlineAdminForm{display:flex;gap:10px}
+.inlineAdminForm input{flex:1;min-height:48px;border:1px solid #ccd4d9;border-radius:12px;padding:0 13px}
+.tagList{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.tagList span{padding:7px 11px;border-radius:999px;background:#edf1f3;font-weight:800}
+.seriesAdminList{display:grid;gap:10px;margin-top:20px}
+.seriesAdminList article{padding:14px;border-top:1px solid #dde3e7}
+.seriesAdminList p{color:var(--muted);margin-bottom:0}
+.richEditorTopline{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:8px}
+.richEditorTopline small{color:var(--muted)}
+.editorFooterActions{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-top:12px}
+.textButton{border:0;background:transparent;color:#7b3030;font-weight:800;cursor:pointer}
+.adminStudySetup{margin-bottom:22px;padding:18px 22px;border:1px solid #e4c46f;border-left:4px solid var(--gold);border-radius:12px;background:#fff5cf}
+.adminStudySetup p{margin:6px 0 0}
+.studyAdminTableWrap{overflow-x:auto}
+.studyAdminTable{width:100%;border-collapse:collapse;font-size:14px}
+.studyAdminTable th{padding:13px;text-align:left;background:var(--navy);color:#fff;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.studyAdminTable th:first-child{border-radius:9px 0 0}
+.studyAdminTable th:last-child{border-radius:0 9px 0 0}
+.studyAdminTable td{padding:15px 13px;border-bottom:1px solid #e1e5e7;vertical-align:top}
+.studyAdminTable td>strong,.studyAdminTable td>small{display:block}
+.studyAdminTable td>small{margin-top:4px;color:#61717b}
+
+@media(max-width:950px) {
+  .adminShell{grid-template-columns:1fr}
+  .adminNav{display:none}
+}
+@media(max-width:800px) {
+  .adminContentList article{align-items:flex-start}
+  .adminShell{padding-bottom:95px}
+}
+@media(max-width:520px) {
+  .adminContentList article{display:block}
+  .dangerButton{margin-top:12px}
+}
+@media(max-width:1050px) {
+  .adminStatsPro{grid-template-columns:repeat(3,1fr)}
+  .adminManagementGrid{grid-template-columns:1fr 1fr}
+  .adminWelcome{display:block}
+  .adminQuickActions{margin-top:18px}
+}
+@media(max-width:760px) {
+  .adminShellPro{display:block}
+  .adminNavPro{position:relative;width:auto}
+  .adminDashboard{padding:25px 18px}
+  .adminDashboardGrid,.systemStatusGrid{grid-template-columns:1fr}
+  .adminStatsPro{grid-template-columns:1fr 1fr}
+  .adminManagementGrid{grid-template-columns:1fr}
+  .adminWelcome h1{font-size:45px}
+  .adminPageIntro{display:block}
+  .adminFormGrid{grid-template-columns:1fr}
+  .adminFormGrid .wideField{grid-column:auto}
+}
+@media(max-width:1000px) {
+  .sermonProGrid{grid-template-columns:1fr 1fr}
+  .sermonProFeatured{grid-column:auto}
+  .sermonProSearch{grid-template-columns:1fr 1fr}
+}
+@media(max-width:650px) {
+  .sermonProGrid,.sermonProSearch{grid-template-columns:1fr}
+  .adminSermonTable article{grid-template-columns:1fr}
+  .inlineAdminForm{display:block}
+  .richEditorTopline,.editorFooterActions{display:block}
+  .richEditorTopline small,.editorFooterActions .textButton{display:block;margin-top:8px}
+}
+@media(max-width:700px) {
+  .studyAdminTable{min-width:850px}
+}

@@ -1,0 +1,67 @@
+/* ============================================================
+   Multimedia y canal de YouTube
+   ============================================================ */
+
+.youtubeChannelGrid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.youtubeChannelCard{padding:38px;border:1px solid #dde3e7;border-radius:24px;background:#fff;box-shadow:0 18px 45px rgba(7,24,41,.08)}
+.youtubeChannelCard h2{font-size:52px}
+.youtubeIcon{display:grid;place-items:center;width:62px;height:62px;border-radius:18px;background:#d71920;color:#fff;font-size:25px;margin-bottom:24px}
+.youtubeActions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.youtubeActions.centered{justify-content:center}
+.secondaryDark{background:transparent!important;border:1px solid #071829!important;color:#071829!important}
+.youtubeLiveSection{text-align:center}
+.youtubeLiveSection>p{max-width:760px;margin:0 auto}
+.youtubeHelp{text-align:center}
+.youtubeHelp p{max-width:850px;margin-left:auto;margin-right:auto}
+.youtubeHomeFeature{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
+.youtubeHomePanel{min-height:360px;border-radius:26px;background:linear-gradient(135deg,#d71920,#7b0b0e);color:#fff;padding:50px;display:flex;flex-direction:column;justify-content:center}
+.youtubePlay{font-size:62px}
+.youtubeHomePanel strong{font:700 42px/1 "Cormorant Garamond",serif;margin:18px 0}
+.youtubeHomePanel p{color:rgba(255,255,255,.8)}
+.predicationTopActions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:25px}
+.sermonYoutubeCard{position:relative}
+.sermonYoutubeBadge{position:absolute;right:16px;top:16px;background:#d71920;color:#fff;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:800}
+.mediaChannelGrid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.mediaChannelCard{padding:38px;border:1px solid #dde3e7;border-radius:24px;background:#fff;box-shadow:0 18px 45px rgba(7,24,41,.08)}
+.mediaChannelCard h2{font-size:50px}
+.mediaPlay{display:grid;place-items:center;width:64px;height:64px;border-radius:18px;background:#d71920;color:#fff;font-size:26px;margin-bottom:24px}
+.mediaLive{text-align:center}
+.mediaLive p{max-width:760px;margin-left:auto;margin-right:auto}
+.mediaCategories{text-align:center}
+.mediaChannelStrip{display:flex;justify-content:space-between;align-items:center;gap:30px}
+.mediaChannelActions{display:flex;gap:10px;flex-wrap:wrap}
+.mediaFilters{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;margin-bottom:32px}
+.mediaFilters select{min-height:52px;border:1px solid #ccd4d9;border-radius:13px;padding:0 15px;background:#fff;font:inherit}
+.mediaLibraryGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.mediaLibraryCard{overflow:hidden;border-radius:22px;background:#fff;border:1px solid #dde3e7;box-shadow:0 16px 45px rgba(7,24,41,.08)}
+.mediaLibraryImage{position:relative;display:block;min-height:230px;background:#071829;overflow:hidden}
+.mediaLibraryImage img{object-fit:cover;transition:transform .3s ease}
+.mediaLibraryCard:hover .mediaLibraryImage img{transform:scale(1.04)}
+.mediaLibraryPlaceholder{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(135deg,#5d1017,#071829);color:#fff}
+.mediaLibraryPlaceholder span{font-size:55px}
+.mediaTypeBadge{position:absolute;left:14px;top:14px;padding:6px 10px;border-radius:999px;background:rgba(7,24,41,.9);color:#fff;font-size:11px;font-weight:900;text-transform:uppercase}
+.mediaPlayButton{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:#d71920;color:#fff;font-size:24px;box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.mediaLibraryCopy{padding:24px}
+.mediaLibraryCopy small{color:#a4761e;font-weight:900}
+.mediaLibraryCopy h2{font-size:35px;margin:8px 0}
+.mediaLibraryCopy blockquote{border-left:4px solid #d1a33d;padding-left:14px;color:#174d75;font-style:italic}
+.mediaLibraryCopy p{color:var(--muted)}
+.mediaFeatured{grid-column:span 2}
+.mediaFeatured .mediaLibraryImage{min-height:330px}
+.multimediaClosing{text-align:center}
+.multimediaClosing p{max-width:740px;margin:0 auto 24px;color:rgba(255,255,255,.75)}
+
+@media(max-width:850px) {
+  .youtubeChannelGrid,.youtubeHomeFeature{grid-template-columns:1fr}
+  .mediaChannelGrid{grid-template-columns:1fr}
+}
+@media(max-width:1000px) {
+  .mediaLibraryGrid{grid-template-columns:1fr 1fr}
+  .mediaChannelStrip{display:block}
+  .mediaChannelActions{margin-top:18px}
+  .mediaFeatured{grid-column:auto}
+}
+@media(max-width:650px) {
+  .mediaFilters,.mediaLibraryGrid{grid-template-columns:1fr}
+  .mediaLibraryImage{min-height:220px}
+}

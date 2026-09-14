@@ -1,0 +1,68 @@
+/* ============================================================
+   Devocionales y sermones (vista pública)
+   ============================================================ */
+
+.devotionalGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.devotionalCard{padding:34px;border-radius:24px;background:#fff;border:1px solid #dde3e7;box-shadow:0 16px 45px rgba(7,24,41,.08)}
+.devotionalCard small{color:#a4761e;font-weight:800}
+.devotionalCard h2{font-size:45px;margin:10px 0}
+.devotionalCard blockquote{font:italic 700 24px "Cormorant Garamond",serif;color:#174d75;border-left:4px solid #d1a33d;padding-left:18px}
+.devotionalPrayer{margin-top:22px;padding:20px;border-radius:16px;background:#f6f1e8}
+.featuredDevotional{grid-column:1/-1;background:linear-gradient(135deg,#fff,#f4ead3)}
+.featuredBadge{display:inline-block;padding:7px 12px;border-radius:999px;background:#071829;color:#fff;font-size:12px;font-weight:900;text-transform:uppercase}
+.featuredSermonSection{display:grid;grid-template-columns:1.1fr .9fr;gap:45px;align-items:center}
+.featuredSermonVisual{min-height:330px;border-radius:24px;background:linear-gradient(135deg,#601313,#071829);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.featuredSermonVisual span{display:grid;place-items:center;width:78px;height:78px;border-radius:50%;background:#d71920;font-size:30px;margin-bottom:20px}
+.featuredSermonVisual strong{font:700 42px "Cormorant Garamond",serif}
+.sermonSearchForm{display:grid;grid-template-columns:1fr 260px auto;gap:12px;margin-bottom:32px}
+.sermonSearchForm input,.sermonSearchForm select{min-height:52px;border:1px solid #ccd4d9;border-radius:13px;padding:0 16px;background:#fff;font:inherit}
+.sermonLibraryGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.sermonLibraryCard{padding:30px;border-radius:22px;background:#fff;border:1px solid #dde3e7;box-shadow:0 16px 45px rgba(7,24,41,.08)}
+.sermonLibraryCard small{color:#a4761e;font-weight:900;text-transform:uppercase;letter-spacing:.07em}
+.sermonLibraryCard h2{font-size:42px;margin:10px 0}
+.sermonLibraryCard blockquote{font:italic 700 23px "Cormorant Garamond",serif;color:#174d75;border-left:4px solid #d1a33d;padding-left:16px}
+.sermonLibraryCard p{color:var(--muted)}
+.sermonActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.sermonFeatured{grid-column:1/-1;background:linear-gradient(135deg,#fff,#f6ecd6)}
+.sermonDetailOverlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(4,16,29,.98),rgba(4,16,29,.35)),linear-gradient(90deg,rgba(4,16,29,.75),transparent)}
+.sermonDetailContent{position:relative;z-index:2;width:min(1150px,calc(100% - 45px));margin:0 auto;padding:100px 0 70px;color:#fff}
+.sermonDetailContent h1{max-width:950px;font-size:clamp(55px,8vw,100px);line-height:.92}
+.sermonDetailContent blockquote{font:italic 700 28px "Cormorant Garamond",serif;color:#d1a33d}
+.sermonDetailContent>p{max-width:750px;color:rgba(255,255,255,.8)}
+.sermonDetailLayout{display:grid;grid-template-columns:1fr 300px;gap:55px;align-items:start}
+.sermonRichContent{font-size:19px;line-height:1.8}
+.sermonRichContent h2{font-size:45px;margin-top:35px}
+.sermonRichContent h3{font-size:34px;margin-top:28px}
+.sermonRichContent blockquote{padding:20px;border-left:5px solid #d1a33d;background:#f7f2e7;font:italic 700 24px "Cormorant Garamond",serif}
+.sermonResources{position:sticky;top:100px;display:grid;gap:12px;padding:25px;border-radius:20px;background:#f3f5f6}
+.sermonResources h2{font-size:34px;margin:0}
+.sermonPreviewOverlay{position:fixed;inset:0;z-index:2000;background:rgba(3,12,22,.75);display:grid;place-items:center;padding:20px}
+.sermonPreviewModal{position:relative;width:min(900px,96vw);max-height:90vh;overflow:auto;background:#fff;border-radius:24px;padding:45px}
+.sermonPreviewModal h1{font-size:58px;margin:8px 0}
+.previewClose{position:absolute;right:18px;top:12px;border:0;background:transparent;font-size:38px;cursor:pointer}
+.sermonSubtitle{font-size:24px;color:rgba(255,255,255,.8);max-width:800px}
+.sermonTags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:25px}
+.sermonTags span{padding:7px 11px;border-radius:999px;background:#edf1f3;color:#174d75;font-weight:800;font-size:13px}
+
+@media(max-width:800px) {
+  .devotionalGrid,.featuredSermonSection{grid-template-columns:1fr}
+  .featuredDevotional{grid-column:auto}
+}
+@media(max-width:520px) {
+  .devotionalCard{padding:24px}
+  .devotionalCard h2{font-size:37px}
+}
+@media(max-width:850px) {
+  .sermonSearchForm{grid-template-columns:1fr}
+  .sermonLibraryGrid{grid-template-columns:1fr}
+  .sermonFeatured{grid-column:auto}
+}
+@media(max-width:1000px) {
+  .sermonDetailLayout,.organizeGrid{grid-template-columns:1fr}
+  .sermonResources{position:static}
+}
+@media(max-width:650px) {
+  .sermonDetailContent h1{font-size:52px}
+  .sermonPreviewModal{padding:30px 22px}
+  .sermonPreviewModal h1{font-size:43px}
+}

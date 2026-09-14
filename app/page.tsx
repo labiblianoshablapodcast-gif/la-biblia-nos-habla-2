@@ -66,7 +66,7 @@ export default async function Home(){
    <div className={styles.heroOverlay}/>
    <div className={styles.heroContent}>
     <p className={styles.eyebrow}>BIENVENIDO A LA BIBLIA NOS HABLA</p>
-    <h1>Una palabra de esperanza<br/>para su vida.</h1>
+    <h1>Una palabra de esperanza <br/>para su vida.</h1>
     <p>Aquí encontrará la Biblia, enseñanza, misiones y una iglesia donde será bienvenido.</p>
     <p className={styles.pastorNames}>Pastores Gilberto y Yudelka Maldonado</p>
     <div className={styles.heroActions}>

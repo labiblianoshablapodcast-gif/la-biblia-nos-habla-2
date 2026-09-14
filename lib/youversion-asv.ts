@@ -1,3 +1,4 @@
+// Preview refresh marker: YOUVERSION_API_KEY enabled in Vercel Preview.
 // ASV is YouVersion Bible 12: https://www.bible.com/versions/12-asv-american-standard-version
 export const ASV_BIBLE_ID = 12;
 export const ASV_NAME = "American Standard Version (ASV)";

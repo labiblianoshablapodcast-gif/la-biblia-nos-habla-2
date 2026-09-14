@@ -1,0 +1,28 @@
+/* ============================================================
+   Tarjetas y cuadrículas reutilizables
+   ============================================================ */
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.sectionCard{border:1px solid #dde3e7;border-radius:18px;padding:26px;background:#fff;transition:.2s}
+.sectionCard:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(7,24,41,.1)}
+.sectionCard span{font-size:38px}
+.sectionCard h3{font:700 31px 'Cormorant Garamond',serif;margin:10px 0}
+.sectionCard p{color:var(--muted)}
+.cardList{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.contentCard{border:1px solid #dce2e6;border-radius:16px;padding:24px}
+.contentCard small{color:#a4761e;font-weight:800}
+.contentCard h3{font:700 30px 'Cormorant Garamond',serif;margin:6px 0}
+.notice{background:#fff4ce;border-left:5px solid var(--gold);padding:20px;border-radius:10px}
+.statGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.stat{padding:22px;border:1px solid #dde2e6;border-radius:14px}
+.stat strong{display:block;font:700 42px 'Cormorant Garamond',serif}
+.notice code{display:inline-block;background:#071829;color:#fff;padding:4px 8px;border-radius:7px;margin:4px 0}
+.mediaCategories .grid{text-align:left}
+.quickAccessSection .grid{text-align:left}
+.statGrid{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.systemStatusGrid code,.notice code{font-family:monospace;background:#edf1f3;padding:2px 6px;border-radius:5px}
+
+@media(max-width:950px) {
+  .grid,.cardList{grid-template-columns:1fr 1fr}
+  .statGrid{grid-template-columns:1fr 1fr}
+}

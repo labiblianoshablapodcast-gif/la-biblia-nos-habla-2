@@ -975,7 +975,7 @@ content: "›";
   .mobilePortrait {
     display: block;
     position: relative;
-    height: min(76vw, 480px);
+    height: min(82vw, 520px);
     overflow: hidden;
     background: radial-gradient(ellipse at 50% 38%, #155b9a 0%, #093b6b 43%, #031d33 78%);
   }
@@ -990,22 +990,22 @@ content: "›";
 
   .mobilePastors {
     position: absolute;
-    width: 120%;
+    width: 104%;
     max-width: none;
     height: auto;
-    left: -9%;
-    top: -31%;
+    left: 4%;
+    top: -22%;
   }
 
   .mobileVerse {
     position: absolute;
     z-index: 1;
     top: 20%;
-    left: 3%;
-    width: 23%;
+    left: 4%;
+    width: 22%;
     margin: 0;
     color: #a8d9ff;
-    font: italic clamp(15px, 4.3vw, 27px)/1.25 Georgia, serif;
+    font: italic clamp(14px, 4vw, 25px)/1.35 Georgia, serif;
     text-align: center;
     text-shadow: 0 1px 8px #031d33;
   }
@@ -1020,7 +1020,7 @@ content: "›";
   .mobileCrossMessage {
     position: absolute;
     z-index: 1;
-    top: 18%;
+    top: 22%;
     right: 3%;
     width: 19%;
     color: #9cd2ff;
@@ -1046,4 +1046,32 @@ content: "›";
 
   .mobileCross::before { width: 3px; height: 100%; left: calc(50% - 1.5px); }
   .mobileCross::after { height: 3px; width: 72%; left: 14%; top: 35%; }
+
+  .heroContent {
+    padding: 12px 22px 60px !important;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.6rem, 7.5vw, 3rem) !important;
+    line-height: 1.12 !important;
+  }
+
+  .heroContent .eyebrow {
+    letter-spacing: .12em !important;
+  }
+
+  .heroContent > p:not(.eyebrow) {
+    margin: 18px 0;
+  }
+
+  .heroContent .pastorNames {
+    margin: 0 0 24px;
+  }
+}
+
+/* The fixed app header includes the iPhone safe area above its normal height. */
+@media (display-mode: standalone) and (max-width: 720px) {
+  .home {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
 }

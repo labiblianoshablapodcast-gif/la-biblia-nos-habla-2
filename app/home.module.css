@@ -957,3 +957,93 @@ content: "›";
     white-space: normal;
   }
 }
+
+/* Approved mobile composition; the desktop portrait and layout remain unchanged. */
+.mobilePortrait {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .heroPortrait, .heroOverlay {
+    display: none;
+  }
+
+  .hero {
+    background: #031d33;
+  }
+
+  .mobilePortrait {
+    display: block;
+    position: relative;
+    height: min(76vw, 480px);
+    overflow: hidden;
+    background: radial-gradient(ellipse at 50% 38%, #155b9a 0%, #093b6b 43%, #031d33 78%);
+  }
+
+  .mobilePortrait::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, #031d33, transparent 24%);
+    pointer-events: none;
+  }
+
+  .mobilePastors {
+    position: absolute;
+    width: 120%;
+    max-width: none;
+    height: auto;
+    left: -9%;
+    top: -31%;
+  }
+
+  .mobileVerse {
+    position: absolute;
+    z-index: 1;
+    top: 20%;
+    left: 3%;
+    width: 23%;
+    margin: 0;
+    color: #a8d9ff;
+    font: italic clamp(15px, 4.3vw, 27px)/1.25 Georgia, serif;
+    text-align: center;
+    text-shadow: 0 1px 8px #031d33;
+  }
+
+  .mobileVerse cite {
+    display: block;
+    margin-top: 12px;
+    font: 600 clamp(10px, 2.8vw, 17px)/1.3 system-ui, sans-serif;
+    letter-spacing: .04em;
+  }
+
+  .mobileCrossMessage {
+    position: absolute;
+    z-index: 1;
+    top: 18%;
+    right: 3%;
+    width: 19%;
+    color: #9cd2ff;
+    font: 400 clamp(11px, 3.3vw, 21px)/1.35 system-ui, sans-serif;
+    letter-spacing: .1em;
+    text-align: center;
+  }
+
+  .mobileCross {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: clamp(48px, 14vw, 85px);
+    margin-bottom: 12px;
+  }
+
+  .mobileCross::before, .mobileCross::after {
+    content: "";
+    position: absolute;
+    background: #ecfaff;
+    box-shadow: 0 0 7px #a0d9ff, 0 0 16px #72beff;
+  }
+
+  .mobileCross::before { width: 3px; height: 100%; left: calc(50% - 1.5px); }
+  .mobileCross::after { height: 3px; width: 72%; left: 14%; top: 35%; }
+}

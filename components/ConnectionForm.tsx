@@ -44,11 +44,14 @@ export default function ConnectionForm(){
     if(believerError)console.error("No se pudo crear el seguimiento adicional.",believerError);
    }
 
-   setDatabaseStatus("✓ Solicitud recibida. Gracias por confiar en nosotros.");
+   const mailResponse=await fetch("/api/contact",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,email,phone,requestType,message})});
+   if(!mailResponse.ok)console.error("La solicitud se guardó, pero el correo automático no pudo enviarse.");
+
+   setDatabaseStatus(mailResponse.ok?"✓ Solicitud recibida. También enviamos una confirmación a su correo.":"✓ Solicitud recibida. Gracias por confiar en nosotros.");
    form.reset();
    window.setTimeout(()=>{
     window.location.assign("/gracias?tipo="+encodeURIComponent(requestType));
-   },700);
+   },900);
   }catch(error){
    console.error("No se pudo guardar la solicitud.",error);
    setDatabaseStatus("No pudimos enviar la solicitud. Revise su conexión e inténtelo nuevamente.");

@@ -72,7 +72,7 @@ export default function Conexion(){
       }
       @media(max-width:700px) and (display-mode:standalone){
         .petitionApprovedPhoto{min-height:350px}
-        .petitionApprovedCopy{padding-top:52px}
+        .petitionApprovedCopy{padding-top:82px}
         .petitionApprovedCopy h1{font-size:34px;line-height:.92;margin-bottom:8px}
         .petitionApprovedCopy blockquote{font-size:15px}
         .petitionApprovedCopy p{font-size:12px;line-height:1.28}

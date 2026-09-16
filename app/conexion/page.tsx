@@ -70,6 +70,13 @@ export default function Conexion(){
         .petitionApprovedForm .connectionSubmitRow .btn{width:100%;justify-content:center}
         .petitionApprovedPrivacy{margin:9px 3px 3px;padding:12px 14px}
       }
+      @media(max-width:700px) and (display-mode:standalone){
+        .petitionApprovedPhoto{min-height:350px}
+        .petitionApprovedCopy{padding-top:52px}
+        .petitionApprovedCopy h1{font-size:34px;line-height:.92;margin-bottom:8px}
+        .petitionApprovedCopy blockquote{font-size:15px}
+        .petitionApprovedCopy p{font-size:12px;line-height:1.28}
+      }
     `}</style>
   </>;
 }

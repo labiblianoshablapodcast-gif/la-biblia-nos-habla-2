@@ -46,29 +46,29 @@ export default function Conexion(){
       .petitionApprovedPrivacy p{margin:4px 0 0;font-size:14px}
       @media(max-width:700px){
         .petitionApprovedHero{padding:0}
-        .petitionApprovedPhoto{min-height:350px;border-radius:0}
+        .petitionApprovedPhoto{min-height:320px;border-radius:0}
         .petitionApprovedPhoto>img{object-position:54% center}
         .petitionApprovedShade{background:linear-gradient(90deg,rgba(5,20,34,.88) 0%,rgba(5,20,34,.52) 53%,rgba(5,20,34,.02) 100%),linear-gradient(0deg,rgba(5,20,34,.28),transparent 55%)}
-        .petitionApprovedCopy{width:100%;padding:17px 30px 14px}
-        .petitionApprovedCopy h1{max-width:330px;font-size:clamp(36px,9.7vw,46px);line-height:.91;margin-bottom:9px}
-        .petitionApprovedCopy blockquote{width:235px;margin:0 0 8px 6px;font-size:16.5px;line-height:1.1;text-align:center;font-style:italic}
-        .petitionApprovedCopy cite{font-size:11px;margin-top:7px;font-style:normal}
-        .petitionApprovedCopy p{width:51%;min-width:238px;margin:0;font-size:13.5px;line-height:1.34}
-        .petitionApprovedForm{width:calc(100% - 40px);margin:-20px auto 105px;padding:15px 16px 14px;border-radius:20px}
-        .petitionApprovedHeading{padding:0 3px 7px;gap:11px}
-        .petitionApprovedHeading>span{flex-basis:46px;width:46px;height:46px;font-size:24px}
-        .petitionApprovedHeading h2{font-size:28px}
-        .petitionApprovedHeading p{font-size:12.5px;line-height:1.25;margin-top:4px}
-        .petitionApprovedForm .ministryFormModern{padding:6px 3px 3px}
-        .petitionApprovedForm .connectionFieldGrid{gap:10px}
-        .petitionApprovedForm .connectionFieldGrid label{gap:5px}
-        .petitionApprovedForm .connectionFieldGrid label>span{font-size:12px}
-        .petitionApprovedForm .connectionFieldGrid input,.petitionApprovedForm .connectionFieldGrid select{min-height:44px;padding-top:9px;padding-bottom:9px}
-        .petitionApprovedForm .connectionFieldGrid textarea{min-height:92px}
+        .petitionApprovedCopy{width:100%;padding:14px 30px 10px}
+        .petitionApprovedCopy h1{max-width:310px;font-size:clamp(33px,8.9vw,42px);line-height:.91;margin-bottom:7px}
+        .petitionApprovedCopy blockquote{width:225px;margin:0 0 6px 6px;font-size:15.5px;line-height:1.08;text-align:center;font-style:italic}
+        .petitionApprovedCopy cite{font-size:10.5px;margin-top:6px;font-style:normal}
+        .petitionApprovedCopy p{width:51%;min-width:225px;margin:0;font-size:12.5px;line-height:1.3}
+        .petitionApprovedForm{width:calc(100% - 40px);margin:-18px auto 105px;padding:13px 14px 12px;border-radius:20px}
+        .petitionApprovedHeading{padding:0 3px 6px;gap:10px}
+        .petitionApprovedHeading>span{flex-basis:43px;width:43px;height:43px;font-size:22px}
+        .petitionApprovedHeading h2{font-size:26px}
+        .petitionApprovedHeading p{font-size:11.5px;line-height:1.2;margin-top:3px}
+        .petitionApprovedForm .ministryFormModern{padding:4px 2px 2px}
+        .petitionApprovedForm .connectionFieldGrid{gap:8px}
+        .petitionApprovedForm .connectionFieldGrid label{gap:4px}
+        .petitionApprovedForm .connectionFieldGrid label>span{font-size:11.5px}
+        .petitionApprovedForm .connectionFieldGrid input,.petitionApprovedForm .connectionFieldGrid select{min-height:40px;padding-top:7px;padding-bottom:7px;font-size:14px}
+        .petitionApprovedForm .connectionFieldGrid textarea{min-height:82px;font-size:14px}
         .petitionApprovedForm .connectionSubmitRow p{display:none}
         .petitionApprovedForm .connectionSubmitRow{display:block}
         .petitionApprovedForm .connectionSubmitRow .btn{width:100%;justify-content:center}
-        .petitionApprovedPrivacy{margin:11px 3px 3px;padding:14px 16px}
+        .petitionApprovedPrivacy{margin:9px 3px 3px;padding:12px 14px}
       }
     `}</style>
   </>;

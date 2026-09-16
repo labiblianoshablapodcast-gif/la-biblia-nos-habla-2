@@ -3,8 +3,8 @@ import ConnectionForm from '@/components/ConnectionForm';
 export default function Conexion(){
   return <>
     <section className="petitionApprovedHero">
-      <div className="petitionApprovedPhoto" aria-label="Manos unidas en oración bajo una luz dorada">
-        <img src="/images/manos-orando-conexion-v2.png" alt="Manos unidas en oración bajo una luz dorada" />
+      <div className="petitionApprovedPhoto" aria-label="Manos unidas en oración sobre una Santa Biblia al amanecer">
+        <img src="/images/7F25B293-BDDC-497D-B359-CF3D7985B4FA.png" alt="Manos unidas en oración sobre una Santa Biblia al amanecer" />
         <div className="petitionApprovedShade" />
         <div className="petitionApprovedCopy">
           <h1>No tiene que <em>caminar solo.</em></h1>
@@ -47,8 +47,8 @@ export default function Conexion(){
       @media(max-width:700px){
         .petitionApprovedHero{padding:0}
         .petitionApprovedPhoto{min-height:520px;border-radius:0}
-        .petitionApprovedPhoto>img{object-position:62% center}
-        .petitionApprovedShade{background:linear-gradient(90deg,rgba(5,20,34,.88) 0%,rgba(5,20,34,.54) 55%,rgba(5,20,34,.08) 100%),linear-gradient(0deg,rgba(5,20,34,.62),transparent 55%)}
+        .petitionApprovedPhoto>img{object-position:58% center}
+        .petitionApprovedShade{background:linear-gradient(90deg,rgba(5,20,34,.90) 0%,rgba(5,20,34,.58) 54%,rgba(5,20,34,.06) 100%),linear-gradient(0deg,rgba(5,20,34,.58),transparent 55%)}
         .petitionApprovedCopy{width:100%;padding:38px 26px 34px 26px}
         .petitionApprovedCopy h1{font-size:clamp(48px,13vw,66px);margin-bottom:22px}
         .petitionApprovedCopy blockquote{font-size:22px;text-align:center;margin-bottom:18px}

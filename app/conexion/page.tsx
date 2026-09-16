@@ -14,10 +14,10 @@ export default function Conexion(){
           <p>Cuéntenos cómo podemos ayudarle. Un miembro de nuestro equipo recibirá su solicitud y podrá darle seguimiento.</p>
           <span className="connectionResponseBadge"><i/> Su petición será recibida con privacidad y respeto</span>
         </div>
-        <div className="connectionPrayerVisual" role="img" aria-label="Manos unidas en oración junto a una Biblia">
+        <div className="connectionPrayerVisual" role="img" aria-label="Manos unidas en oración sobre una Santa Biblia bajo una luz dorada">
           <Image
-            src="/images/manos-orando-conexion-v2.png"
-            alt="Manos unidas en oración junto a una Biblia"
+            src="/images/manos-biblia-peticiones.jpg"
+            alt="Manos unidas en oración sobre una Santa Biblia bajo una luz dorada"
             fill
             priority
             sizes="(max-width: 700px) calc(100vw - 36px), 48vw"

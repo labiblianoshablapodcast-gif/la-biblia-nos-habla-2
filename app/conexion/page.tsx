@@ -49,7 +49,7 @@ export default function Conexion(){
         .petitionApprovedPhoto{min-height:520px;border-radius:0}
         .petitionApprovedPhoto>img{object-position:62% center}
         .petitionApprovedShade{background:linear-gradient(90deg,rgba(5,20,34,.88) 0%,rgba(5,20,34,.54) 55%,rgba(5,20,34,.08) 100%),linear-gradient(0deg,rgba(5,20,34,.62),transparent 55%)}
-        .petitionApprovedCopy{width:64%;padding:38px 0 34px 28px}
+        .petitionApprovedCopy{width:100%;padding:38px 26px 34px 26px}
         .petitionApprovedCopy h1{font-size:clamp(48px,13vw,66px);margin-bottom:22px}
         .petitionApprovedCopy blockquote{font-size:22px;text-align:center;margin-bottom:18px}
         .petitionApprovedCopy cite{font-size:13px}

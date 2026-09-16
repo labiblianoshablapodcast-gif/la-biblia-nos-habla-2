@@ -3,8 +3,8 @@ import ConnectionForm from '@/components/ConnectionForm';
 export default function Conexion(){
   return <>
     <section className="petitionApprovedHero">
-      <div className="petitionApprovedPhoto" aria-label="Manos unidas en oración sobre una Santa Biblia bajo una luz dorada">
-        <img src="/images/manos-biblia-peticiones.jpg" alt="Manos unidas en oración sobre una Santa Biblia bajo una luz dorada" />
+      <div className="petitionApprovedPhoto" aria-label="Manos unidas en oración bajo una luz dorada">
+        <img src="/images/manos-orando-conexion-v2.png" alt="Manos unidas en oración bajo una luz dorada" />
         <div className="petitionApprovedShade" />
         <div className="petitionApprovedCopy">
           <h1>No tiene que <em>caminar solo.</em></h1>
@@ -39,7 +39,7 @@ export default function Conexion(){
       .petitionApprovedHeading>span{display:grid;place-items:center;flex:0 0 58px;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#dba92e,#a66c05);color:#fff;font-size:31px}
       .petitionApprovedHeading h2{margin:0;font:700 40px/1 'Cormorant Garamond',serif;color:#102131}
       .petitionApprovedHeading p{margin:7px 0 0;color:#667681}
-      .petitionApprovedForm .connectionIntro,.petitionApprovedForm .connectionFormHeading{display:none}
+      .petitionApprovedForm .connectionIntro,.petitionApprovedForm .connectionFormHeading,.petitionApprovedForm .requestQuickChoices{display:none}
       .petitionApprovedForm .connectionFormModern{border:0;box-shadow:none}
       .petitionApprovedPrivacy{display:flex;gap:14px;margin-top:18px;padding:17px 20px;border-left:4px solid #d5a128;border-radius:12px;background:#fff6dc;color:#102131}
       .petitionApprovedPrivacy b{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#fff;color:#9a6a0c}

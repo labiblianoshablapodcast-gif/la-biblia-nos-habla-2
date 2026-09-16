@@ -8,7 +8,7 @@ export default function Conexion(){
         <div className="petitionApprovedShade" />
         <div className="petitionApprovedCopy">
           <h1>No tiene que <em>caminar solo.</em></h1>
-          <blockquote>“La oración eficaz del justo puede mucho.”<cite>Santiago 5:16</cite></blockquote>
+          <blockquote>“La oración del justo<br/>puede mucho.”<cite>Santiago 5:16</cite></blockquote>
           <p>Cuéntenos cómo podemos ayudarle. Un miembro de nuestro equipo recibirá su solicitud y podrá darle seguimiento.</p>
         </div>
       </div>
@@ -46,21 +46,24 @@ export default function Conexion(){
       .petitionApprovedPrivacy p{margin:4px 0 0;font-size:14px}
       @media(max-width:700px){
         .petitionApprovedHero{padding:0}
-        .petitionApprovedPhoto{min-height:520px;border-radius:0}
-        .petitionApprovedPhoto>img{object-position:58% center}
-        .petitionApprovedShade{background:linear-gradient(90deg,rgba(5,20,34,.90) 0%,rgba(5,20,34,.58) 54%,rgba(5,20,34,.06) 100%),linear-gradient(0deg,rgba(5,20,34,.58),transparent 55%)}
-        .petitionApprovedCopy{width:100%;padding:38px 26px 34px 26px}
-        .petitionApprovedCopy h1{font-size:clamp(48px,13vw,66px);margin-bottom:22px}
-        .petitionApprovedCopy blockquote{font-size:22px;text-align:center;margin-bottom:18px}
-        .petitionApprovedCopy cite{font-size:13px}
-        .petitionApprovedCopy p{font-size:17px;line-height:1.45}
-        .petitionApprovedForm{width:calc(100% - 28px);margin:-20px auto 110px;padding:18px 14px;border-radius:22px}
-        .petitionApprovedHeading{padding:2px 6px 10px}
-        .petitionApprovedHeading>span{flex-basis:50px;width:50px;height:50px;font-size:27px}
-        .petitionApprovedHeading h2{font-size:34px}
+        .petitionApprovedPhoto{min-height:430px;border-radius:0}
+        .petitionApprovedPhoto>img{object-position:56% center}
+        .petitionApprovedShade{background:linear-gradient(90deg,rgba(5,20,34,.90) 0%,rgba(5,20,34,.56) 54%,rgba(5,20,34,.03) 100%),linear-gradient(0deg,rgba(5,20,34,.34),transparent 55%)}
+        .petitionApprovedCopy{width:100%;padding:25px 34px 22px}
+        .petitionApprovedCopy h1{max-width:390px;font-size:clamp(43px,11.8vw,56px);line-height:.9;margin-bottom:15px}
+        .petitionApprovedCopy blockquote{width:280px;margin:0 0 15px 8px;font-size:20px;line-height:1.12;text-align:center;font-style:italic}
+        .petitionApprovedCopy cite{font-size:13px;margin-top:13px;font-style:normal}
+        .petitionApprovedCopy p{width:54%;min-width:275px;margin:0;font-size:16px;line-height:1.42}
+        .petitionApprovedForm{width:calc(100% - 40px);margin:-24px auto 105px;padding:20px 20px 18px;border-radius:20px}
+        .petitionApprovedHeading{padding:0 4px 10px;gap:14px}
+        .petitionApprovedHeading>span{flex-basis:54px;width:54px;height:54px;font-size:28px}
+        .petitionApprovedHeading h2{font-size:32px}
         .petitionApprovedHeading p{font-size:14px;line-height:1.35}
-        .petitionApprovedForm .ministryFormModern{padding:14px 6px 8px}
-        .petitionApprovedPrivacy{margin:14px 6px 4px}
+        .petitionApprovedForm .ministryFormModern{padding:10px 4px 4px}
+        .petitionApprovedForm .connectionSubmitRow p{display:none}
+        .petitionApprovedForm .connectionSubmitRow{display:block}
+        .petitionApprovedForm .connectionSubmitRow .btn{width:100%;justify-content:center}
+        .petitionApprovedPrivacy{margin:14px 4px 4px}
       }
     `}</style>
   </>;

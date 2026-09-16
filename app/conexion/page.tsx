@@ -46,14 +46,14 @@ export default function Conexion(){
       .petitionApprovedPrivacy p{margin:4px 0 0;font-size:14px}
       @media(max-width:700px){
         .petitionApprovedHero{padding:0}
-        .petitionApprovedPhoto{min-height:320px;border-radius:0}
+        .petitionApprovedPhoto{min-height:500px;border-radius:0;display:flex;flex-direction:column;justify-content:center}
         .petitionApprovedPhoto>img{object-position:54% center}
         .petitionApprovedShade{background:linear-gradient(90deg,rgba(5,20,34,.88) 0%,rgba(5,20,34,.52) 53%,rgba(5,20,34,.02) 100%),linear-gradient(0deg,rgba(5,20,34,.28),transparent 55%)}
-        .petitionApprovedCopy{width:100%;padding:14px 30px 10px}
-        .petitionApprovedCopy h1{max-width:310px;font-size:clamp(33px,8.9vw,42px);line-height:.91;margin-bottom:7px}
-        .petitionApprovedCopy blockquote{width:225px;margin:0 0 6px 6px;font-size:15.5px;line-height:1.08;text-align:center;font-style:italic}
-        .petitionApprovedCopy cite{font-size:10.5px;margin-top:6px;font-style:normal}
-        .petitionApprovedCopy p{width:51%;min-width:225px;margin:0;font-size:12.5px;line-height:1.3}
+        .petitionApprovedCopy{width:100%;padding:24px 30px}
+        .petitionApprovedCopy h1{max-width:360px;font-size:clamp(48px,13vw,60px);line-height:1;margin-bottom:14px}
+        .petitionApprovedCopy blockquote{width:250px;margin:0 0 12px 6px;font-size:18px;line-height:1.12;text-align:center;font-style:italic}
+        .petitionApprovedCopy cite{font-size:11px;margin-top:7px;font-style:normal}
+        .petitionApprovedCopy p{width:60%;min-width:235px;margin:0;font-size:14px;line-height:1.4}
         .petitionApprovedForm{width:calc(100% - 40px);margin:-18px auto 105px;padding:13px 14px 12px;border-radius:20px}
         .petitionApprovedHeading{padding:0 3px 6px;gap:10px}
         .petitionApprovedHeading>span{flex-basis:43px;width:43px;height:43px;font-size:22px}
@@ -71,11 +71,11 @@ export default function Conexion(){
         .petitionApprovedPrivacy{margin:9px 3px 3px;padding:12px 14px}
       }
       @media(max-width:700px) and (display-mode:standalone){
-        .petitionApprovedPhoto{min-height:350px}
-        .petitionApprovedCopy{padding-top:82px}
-        .petitionApprovedCopy h1{font-size:34px;line-height:.92;margin-bottom:8px}
-        .petitionApprovedCopy blockquote{font-size:15px}
-        .petitionApprovedCopy p{font-size:12px;line-height:1.28}
+        .petitionApprovedPhoto{min-height:500px}
+        .petitionApprovedCopy{padding:24px 30px}
+        .petitionApprovedCopy h1{font-size:clamp(48px,13vw,60px);line-height:1;margin-bottom:14px}
+        .petitionApprovedCopy blockquote{font-size:18px}
+        .petitionApprovedCopy p{font-size:14px;line-height:1.4}
       }
     `}</style>
   </>;

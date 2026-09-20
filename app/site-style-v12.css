@@ -1341,3 +1341,8 @@ main img:not([data-no-lightbox]){cursor:zoom-in}
 .photoDropzoneLabel input:disabled~*{
  opacity:.7;
 }
+
+
+/* Fix iPhone: mantener siempre visible el botón cerrar del visor global */
+.globalPhotoViewerClose{z-index:2147483647!important;top:calc(env(safe-area-inset-top,0px) + 16px)!important;right:calc(env(safe-area-inset-right,0px) + 16px)!important;width:56px!important;height:56px!important;background:#fff!important;color:#071829!important;border:2px solid #d1a33d!important;box-shadow:0 8px 28px rgba(0,0,0,.55)!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+@media(max-width:600px){.globalPhotoViewerClose{top:calc(env(safe-area-inset-top,0px) + 14px)!important;right:14px!important;width:54px!important;height:54px!important;font-size:36px!important}}

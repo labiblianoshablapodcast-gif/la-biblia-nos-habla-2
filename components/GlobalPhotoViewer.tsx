@@ -1,79 +1,50 @@
-"use client";
+'use client';
 
-import {useEffect,useRef,useState} from "react";
+import {useEffect,useState} from "react";
 
-type Photo={src:string;alt:string};
-
-function eligibleImage(target:HTMLImageElement){
- if(target.closest("header,footer,nav,[data-no-lightbox],.managedGalleryItem,.galleryViewer"))return false;
- const source=target.currentSrc||target.src;
- return Boolean(source&&!source.includes("/icons/")&&target.naturalWidth>=180&&target.naturalHeight>=120);
-}
+type ActivePhoto={src:string;alt:string};
 
 export default function GlobalPhotoViewer(){
- const [photo,setPhoto]=useState<Photo|null>(null);
- const closeRef=useRef<HTMLButtonElement>(null);
- const previousFocus=useRef<HTMLElement|null>(null);
-
- function showPhoto(target:HTMLImageElement){
-  if(!eligibleImage(target))return;
-  previousFocus.current=target;
-  setPhoto({src:target.currentSrc||target.src,alt:target.alt||"Fotografía"});
- }
+ const [photo,setPhoto]=useState<ActivePhoto|null>(null);
 
  useEffect(()=>{
-  const prepare=(image:HTMLImageElement)=>{
-   if(!eligibleImage(image))return;
-   image.tabIndex=0;
-   image.setAttribute("role","button");
-   image.setAttribute("aria-label",image.alt?("Ampliar fotografía: "+image.alt):"Ampliar fotografía");
-  };
-  const prepareAll=()=>document.querySelectorAll<HTMLImageElement>("img").forEach(prepare);
-  prepareAll();
-
-  const openPhoto=(event:MouseEvent)=>{
-   const target=event.target;
-   if(!(target instanceof HTMLImageElement)||!eligibleImage(target))return;
-   event.preventDefault();event.stopPropagation();showPhoto(target);
-  };
-  const openWithKeyboard=(event:KeyboardEvent)=>{
-   const target=event.target;
-   if(!(target instanceof HTMLImageElement)||!eligibleImage(target)||!["Enter"," "].includes(event.key))return;
-   event.preventDefault();showPhoto(target);
-  };
-  const prepareLoaded=(event:Event)=>{if(event.target instanceof HTMLImageElement)prepare(event.target);};
-  const observer=new MutationObserver(prepareAll);
-  observer.observe(document.body,{childList:true,subtree:true});
-  document.addEventListener("click",openPhoto,true);
-  document.addEventListener("keydown",openWithKeyboard,true);
-  document.addEventListener("load",prepareLoaded,true);
-  return()=>{
-   observer.disconnect();
-   document.removeEventListener("click",openPhoto,true);
-   document.removeEventListener("keydown",openWithKeyboard,true);
-   document.removeEventListener("load",prepareLoaded,true);
-  };
+  function openFromImage(image:HTMLImageElement){
+   if(image.closest(".galleryViewer,.globalPhotoViewer"))return;
+   if(image.dataset.noLightbox!==undefined)return;
+   if(image.closest("a,button"))return;
+   const src=image.currentSrc||image.src;
+   if(!src)return;
+   setPhoto({src,alt:image.alt||"Fotografía"});
+  }
+  function onClick(event:MouseEvent){
+   const target=event.target as HTMLElement|null;
+   const image=target?.closest("main img") as HTMLImageElement|null;
+   if(!image)return;
+   openFromImage(image);
+  }
+  function onKey(event:KeyboardEvent){
+   if(event.key==="Escape")setPhoto(null);
+   if((event.key==="Enter"||event.key===" ")&&event.target instanceof HTMLImageElement&&event.target.closest("main")){
+    event.preventDefault();openFromImage(event.target);
+   }
+  }
+  document.addEventListener("click",onClick);
+  document.addEventListener("keydown",onKey);
+  return()=>{document.removeEventListener("click",onClick);document.removeEventListener("keydown",onKey)};
  },[]);
 
  useEffect(()=>{
   if(!photo)return;
   const previous=document.body.style.overflow;
   document.body.style.overflow="hidden";
-  closeRef.current?.focus();
-  const close=(event:KeyboardEvent)=>{if(event.key==="Escape")setPhoto(null);};
-  window.addEventListener("keydown",close);
-  return()=>{
-   document.body.style.overflow=previous;
-   window.removeEventListener("keydown",close);
-   previousFocus.current?.focus();
-  };
+  return()=>{document.body.style.overflow=previous};
  },[photo]);
 
  if(!photo)return null;
  return <div className="globalPhotoViewer" role="dialog" aria-modal="true" aria-label={photo.alt} onClick={()=>setPhoto(null)}>
-  <button ref={closeRef} className="globalPhotoViewerClose" type="button" aria-label="Cerrar fotografía" onClick={()=>setPhoto(null)}>×</button>
+  <button className="globalPhotoViewerClose" type="button" aria-label="Cerrar fotografía" onClick={event=>{event.stopPropagation();setPhoto(null)}} autoFocus>×</button>
   <figure onClick={event=>event.stopPropagation()}>
-   <img src={photo.src} alt={photo.alt} data-no-lightbox/>
+   <img src={photo.src} alt={photo.alt}/>
    {photo.alt&&photo.alt!=="Fotografía"&&<figcaption>{photo.alt}</figcaption>}
   </figure>
  </div>;

@@ -16,3 +16,20 @@
 @media(max-width:950px) {
   .albumGrid{grid-template-columns:1fr 1fr}
 }
+
+
+/* Visor global de fotos administradas */
+.managedGalleryGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.managedGalleryItem{position:relative;display:block;min-height:280px;padding:0;overflow:hidden;border:0;border-radius:18px;background:#071829;cursor:zoom-in;text-align:left}
+.managedGalleryItem>img{display:block;width:100%;height:100%;min-height:280px;object-fit:cover}
+.galleryExpandIcon{position:absolute;top:14px;right:14px;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:rgba(7,24,41,.78);color:#fff;font-size:24px}
+.managedGalleryCaption{position:absolute;right:0;bottom:0;left:0;padding:52px 18px 17px;background:linear-gradient(transparent,rgba(2,13,24,.92));color:#fff}
+.managedGalleryCaption strong,.managedGalleryCaption small{display:block}.managedGalleryCaption small{margin-top:4px;color:#e6b336;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.galleryViewer{position:fixed;z-index:20000;inset:0;display:grid;place-items:center;padding:86px 78px 72px;background:rgba(2,13,24,.96);backdrop-filter:blur(10px)}
+.galleryViewerContent{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;width:min(1120px,calc(100vw - 156px));height:min(80dvh,820px);overflow:hidden;border-radius:18px;background:#061727}
+.galleryViewerContent>img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+.galleryViewerContent>div{position:absolute;right:0;bottom:0;left:0;padding:48px 22px 18px;background:linear-gradient(transparent,rgba(2,13,24,.92));color:#fff;text-align:center}.galleryViewerContent strong,.galleryViewerContent small{display:block}.galleryViewerContent small{margin-top:5px;color:#e6b336;text-transform:uppercase;letter-spacing:.1em}
+.galleryViewerClose{position:fixed!important;z-index:20003!important;top:calc(env(safe-area-inset-top,0px) + 18px)!important;right:calc(env(safe-area-inset-right,0px) + 18px)!important;display:grid!important;place-items:center!important;width:54px!important;height:54px!important;padding:0!important;border:2px solid rgba(255,255,255,.72)!important;border-radius:50%!important;background:#fff!important;color:#071829!important;font-size:36px!important;font-weight:500!important;line-height:1!important;cursor:pointer!important;box-shadow:0 8px 30px rgba(0,0,0,.45)!important}
+.galleryViewerPrevious,.galleryViewerNext{position:fixed;z-index:20002;top:50%;display:grid;place-items:center;width:54px;height:72px;padding:0;transform:translateY(-50%);border:1px solid rgba(255,255,255,.3);border-radius:28px;background:rgba(255,255,255,.12);color:#fff;font-size:42px;cursor:pointer}.galleryViewerPrevious{left:16px}.galleryViewerNext{right:16px}
+@media(max-width:950px){.managedGalleryGrid{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.managedGalleryGrid{grid-template-columns:1fr}.galleryViewer{padding:calc(env(safe-area-inset-top,0px) + 82px) 10px calc(env(safe-area-inset-bottom,0px) + 76px)}.galleryViewerContent{width:100%;height:70dvh;border-radius:14px}.galleryViewerClose{top:calc(env(safe-area-inset-top,0px) + 12px)!important;right:14px!important;width:52px!important;height:52px!important}.galleryViewerPrevious,.galleryViewerNext{top:auto;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);width:54px;height:48px;transform:none}.galleryViewerPrevious{left:calc(50% - 66px)}.galleryViewerNext{right:calc(50% - 66px)}}

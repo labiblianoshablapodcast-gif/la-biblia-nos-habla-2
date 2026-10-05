@@ -272,3 +272,58 @@ body>main#contenido-principal{background:#fff;color:var(--ink)}
     padding-top:calc(72px + env(safe-area-inset-top,0px));
   }
 }
+
+/* Center the photograph itself; captions and controls must not shift its midpoint. */
+body>.globalPhotoViewer,body>.galleryViewer,body>.lightbox{
+  --photo-gutter-y:max(76px,calc(env(safe-area-inset-top,0px) + 76px),calc(env(safe-area-inset-bottom,0px) + 76px));
+  --photo-gutter-x:max(14px,calc(env(safe-area-inset-left,0px) + 14px),calc(env(safe-area-inset-right,0px) + 14px));
+  padding:var(--photo-gutter-y) var(--photo-gutter-x)!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+body>.globalPhotoViewer>figure,
+body>.galleryViewer>.galleryViewerContent,
+body>.lightbox>.lightboxImage,
+body>.lightbox>figure{
+  position:relative;
+  display:flex!important;
+  flex:0 1 auto!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:100%!important;
+  max-width:1500px!important;
+  height:100%!important;
+  max-height:100%!important;
+  margin:0!important;
+}
+body>.globalPhotoViewer>figure>img,
+body>.galleryViewer>.galleryViewerContent>img{
+  flex:0 1 auto;
+  width:auto!important;
+  height:auto!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  margin:0!important;
+  object-fit:contain!important;
+}
+body>.globalPhotoViewer>figure>figcaption,
+body>.galleryViewer>.galleryViewerContent>div{
+  position:absolute!important;
+  top:100%;
+  bottom:auto!important;
+  left:0;
+  right:0;
+  width:100%;
+  max-width:none;
+  margin:12px 0 0!important;
+  padding:0 12px!important;
+  background:none;
+  text-align:center;
+}
+@media(orientation:landscape) and (max-height:520px){
+  body>.globalPhotoViewer,body>.galleryViewer,body>.lightbox{
+    --photo-gutter-y:max(50px,calc(env(safe-area-inset-top,0px) + 50px),calc(env(safe-area-inset-bottom,0px) + 50px));
+    --photo-gutter-x:max(76px,calc(env(safe-area-inset-left,0px) + 76px),calc(env(safe-area-inset-right,0px) + 76px));
+  }
+}
+body>.galleryViewer>.galleryViewerContent{overflow:visible!important}

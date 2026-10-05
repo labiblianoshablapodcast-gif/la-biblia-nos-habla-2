@@ -327,3 +327,4 @@ body>.galleryViewer>.galleryViewerContent>div{
   }
 }
 body>.galleryViewer>.galleryViewerContent{overflow:visible!important}
+html:has(body>.globalPhotoViewer,body>.galleryViewer,body>.lightbox){overflow:hidden!important}

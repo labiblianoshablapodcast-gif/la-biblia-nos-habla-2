@@ -1,6 +1,7 @@
 "use client";
 
 import {useEffect, useState} from "react";
+import {createPortal} from "react-dom";
 import media from "./garfield-media.module.css";
 import refine from "./garfield-refinement.module.css";
 
@@ -32,11 +33,11 @@ export default function ChurchGallery(){
     <span role="img" aria-label={photo.label}/><button className={refine.photoButton} type="button" onClick={()=>setSelected(index)} aria-label={`Ver foto: ${photo.caption}`}/><figcaption>{photo.caption}<b aria-hidden="true">Ver foto ↗</b></figcaption>
    </figure>)}
   </div>
-  {selected!==null&&<div className={refine.lightbox} role="dialog" aria-modal="true" aria-label={photos[selected].caption} onMouseDown={event=>{if(event.target===event.currentTarget)setSelected(null);}}>
-   <button className={refine.lightboxClose} type="button" onClick={()=>setSelected(null)} aria-label="Cerrar foto">×</button>
+  {selected!==null&&createPortal(<div className={`${refine.lightbox} lightbox`} role="dialog" aria-modal="true" aria-label={photos[selected].caption} onMouseDown={event=>{if(event.target===event.currentTarget)setSelected(null);}}>
+   <button className={`${refine.lightboxClose} lightboxClose`} type="button" onClick={()=>setSelected(null)} aria-label="Cerrar foto">×</button>
    <button className={`${refine.lightboxNav} ${refine.lightboxPrev}`} type="button" onClick={()=>setSelected((selected+photos.length-1)%photos.length)} aria-label="Foto anterior">‹</button>
    <figure className={`${refine.lightboxPhoto} ${photos[selected].className}`}><span role="img" aria-label={photos[selected].label}/><figcaption>{photos[selected].caption}</figcaption></figure>
    <button className={`${refine.lightboxNav} ${refine.lightboxNext}`} type="button" onClick={()=>setSelected((selected+1)%photos.length)} aria-label="Foto siguiente">›</button>
-  </div>}
+  </div>,document.body)}
  </>;
 }

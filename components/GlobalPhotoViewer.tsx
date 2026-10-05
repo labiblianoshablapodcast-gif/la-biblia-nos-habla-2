@@ -1,6 +1,7 @@
 'use client';
 
 import {useEffect,useState} from "react";
+import {createPortal} from "react-dom";
 
 type ActivePhoto={src:string;alt:string};
 
@@ -41,11 +42,11 @@ export default function GlobalPhotoViewer(){
  },[photo]);
 
  if(!photo)return null;
- return <div className="globalPhotoViewer" role="dialog" aria-modal="true" aria-label={photo.alt} onClick={()=>setPhoto(null)}>
+ return createPortal(<div className="globalPhotoViewer" role="dialog" aria-modal="true" aria-label={photo.alt} onClick={()=>setPhoto(null)}>
   <button className="globalPhotoViewerClose" type="button" aria-label="Cerrar fotografía" onClick={event=>{event.stopPropagation();setPhoto(null)}} autoFocus>×</button>
   <figure onClick={event=>event.stopPropagation()}>
    <img src={photo.src} alt={photo.alt}/>
    {photo.alt&&photo.alt!=="Fotografía"&&<figcaption>{photo.alt}</figcaption>}
   </figure>
- </div>;
+ </div>,document.body);
 }

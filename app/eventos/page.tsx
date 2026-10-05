@@ -13,9 +13,10 @@ const shortDays=[
 export default async function Eventos(){
  const supabase=await createClient();
  const now=new Date().toISOString();
- const [{data:events},{data:eventPhotos}]=await Promise.all([
+ const [{data:events},{data:eventPhotos},{data:pastEvents}]=await Promise.all([
   supabase.from("events").select("*").eq("published",true).gte("starts_at",now).order("starts_at",{ascending:true}).limit(12),
-  supabase.from("gallery_items").select("id,title,alt_text,image_url,created_at").eq("published",true).ilike("category","evento%").order("created_at",{ascending:false}).limit(12)
+  supabase.from("gallery_items").select("id,title,alt_text,image_url,created_at").eq("published",true).ilike("category","evento%").order("created_at",{ascending:false}).limit(12),
+  supabase.from("events").select("*").eq("published",true).lt("starts_at",now).order("starts_at",{ascending:false}).limit(6)
  ]);
  const eventImages=new Set((events??[]).map(item=>item.image_url).filter(Boolean));
  const publicEvents=[
@@ -72,5 +73,17 @@ export default async function Eventos(){
     </div>}
    </div>
   </section>
+  {!!pastEvents?.length&&<section className={`section ${styles.specialSection}`}>
+   <div className={styles.sectionHeading}><div><p className="eyebrow">Memoria de nuestra iglesia</p><h2>Eventos recientes</h2></div><p>Conservamos las actividades realizadas y sus fotografías.</p></div>
+   <div className="eventPublicGrid">
+    {pastEvents.map(event=><article className="eventPublicCard" key={event.id}>
+     {event.image_url&&<img className="eventPublicImage" src={event.image_url} alt={event.title}/>}
+     <div className="eventPublicBody">
+      <small>{new Date(event.starts_at).toLocaleString("es-US",{dateStyle:"long",timeStyle:"short",timeZone:"America/New_York"})} · Realizado</small>
+      <h3>{event.title}</h3><p>{event.description}</p>{event.location&&<strong>⌖ {event.location}</strong>}
+     </div>
+    </article>)}
+   </div>
+  </section>}
  </>;
 }

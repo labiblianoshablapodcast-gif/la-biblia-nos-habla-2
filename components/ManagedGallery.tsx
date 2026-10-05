@@ -1,6 +1,7 @@
 'use client';
 
 import {useEffect,useState} from "react";
+import {createPortal} from "react-dom";
 
 type Photo={
  id:number;
@@ -47,7 +48,7 @@ export default function ManagedGallery({photos}:{photos:Photo[]}){
    </button>)}
   </div>
 
-  {photo&&<div className="galleryViewer" role="dialog" aria-modal="true" aria-label={photo.title} onClick={()=>setActive(null)}>
+  {photo&&createPortal(<div className="galleryViewer" role="dialog" aria-modal="true" aria-label={photo.title} onClick={()=>setActive(null)}>
    <button className="galleryViewerClose" type="button" onClick={()=>setActive(null)} aria-label="Cerrar fotografía" autoFocus>×</button>
    {photos.length>1&&<button className="galleryViewerPrevious" type="button" onClick={event=>{event.stopPropagation();setActive(current=>current===null?0:(current-1+photos.length)%photos.length)}} aria-label="Fotografía anterior">‹</button>}
    <div className="galleryViewerContent" onClick={event=>event.stopPropagation()}>
@@ -55,6 +56,6 @@ export default function ManagedGallery({photos}:{photos:Photo[]}){
     <div><strong>{photo.title}</strong>{photo.category&&<small>{photo.category}</small>}</div>
    </div>
    {photos.length>1&&<button className="galleryViewerNext" type="button" onClick={event=>{event.stopPropagation();setActive(current=>current===null?0:(current+1)%photos.length)}} aria-label="Fotografía siguiente">›</button>}
-  </div>}
+  </div>,document.body)}
  </>;
 }

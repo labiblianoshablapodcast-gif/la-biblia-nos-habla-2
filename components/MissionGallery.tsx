@@ -1,7 +1,8 @@
 'use client';
 
 import Image from "next/image";
-import {useState} from "react";
+import {useEffect,useState} from "react";
+import {createPortal} from "react-dom";
 
 export default function MissionGallery({
   images,
@@ -11,6 +12,15 @@ export default function MissionGallery({
   title: string;
 }){
   const [selected,setSelected]=useState<string|null>(null);
+
+  useEffect(()=>{
+    if(!selected)return;
+    const previous=document.body.style.overflow;
+    document.body.style.overflow="hidden";
+    const close=(event:KeyboardEvent)=>{if(event.key==="Escape")setSelected(null)};
+    window.addEventListener("keydown",close);
+    return()=>{document.body.style.overflow=previous;window.removeEventListener("keydown",close)};
+  },[selected]);
 
   return <>
     <div className="missionGallery">
@@ -26,11 +36,11 @@ export default function MissionGallery({
       ))}
     </div>
 
-    {selected && <div className="lightbox" role="dialog" aria-modal="true" onClick={()=>setSelected(null)}>
-      <button className="lightboxClose" onClick={()=>setSelected(null)}>×</button>
+    {selected && createPortal(<div className="lightbox" role="dialog" aria-modal="true" aria-label={title} onClick={()=>setSelected(null)}>
+      <button className="lightboxClose" type="button" aria-label="Cerrar fotografía" autoFocus onClick={()=>setSelected(null)}>×</button>
       <div className="lightboxImage" onClick={event=>event.stopPropagation()}>
         <Image src={selected} alt={title} fill sizes="95vw"/>
       </div>
-    </div>}
+    </div>,document.body)}
   </>;
 }

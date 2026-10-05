@@ -22,7 +22,7 @@ button,input,select,textarea{font:inherit}
     left:0!important;
     right:0!important;
     width:100%!important;
-    z-index:2147483000!important;
+    z-index:1200!important;
     transform:none!important;
     visibility:visible!important;
     opacity:1!important;
@@ -32,7 +32,7 @@ button,input,select,textarea{font:inherit}
   }
   .siteHeader .mobileMenuButton{
     position:relative!important;
-    z-index:2147483001!important;
+    z-index:1!important;
     visibility:visible!important;
     opacity:1!important;
     pointer-events:auto!important;
@@ -40,7 +40,7 @@ button,input,select,textarea{font:inherit}
   .mobileMenuOverlay{
     position:fixed!important;
     inset:0!important;
-    z-index:2147483646!important;
+    z-index:30000!important;
     visibility:visible!important;
     opacity:1!important;
     pointer-events:auto!important;
@@ -50,7 +50,7 @@ button,input,select,textarea{font:inherit}
     top:0!important;
     right:0!important;
     bottom:0!important;
-    z-index:2147483647!important;
+    z-index:1!important;
     height:100dvh!important;
     max-height:100dvh!important;
     visibility:visible!important;
@@ -236,4 +236,39 @@ button,input,select,textarea{font:inherit}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
+/* Photo dialogs are portalled to body, above navigation and outside section styles. */
+body>.globalPhotoViewer,body>.galleryViewer,body>.lightbox{
+  position:fixed!important;
+  inset:0!important;
+  z-index:20000!important;
+  height:100dvh;
+}
+body>.globalPhotoViewer .globalPhotoViewerClose,
+body>.galleryViewer .galleryViewerClose,
+body>.lightbox .lightboxClose{
+  position:absolute!important;
+  top:calc(env(safe-area-inset-top,0px) + 14px)!important;
+  right:calc(env(safe-area-inset-right,0px) + 14px)!important;
+  z-index:3!important;
+  display:grid!important;
+  place-items:center!important;
+  width:54px!important;
+  height:54px!important;
+  padding:0!important;
+  border:2px solid #d7aa4b!important;
+  border-radius:50%!important;
+  background:#fff!important;
+  color:#071829!important;
+  font-size:36px!important;
+  line-height:1!important;
+  box-shadow:0 4px 20px rgba(0,0,0,.4);
+}
+/* Standalone status bar stays navy; public content retains its readable canvas. */
+body>main#contenido-principal{background:#fff;color:var(--ink)}
+@media(display-mode:standalone) and (max-width:1050px){
+  body:not(:has(.adminShell))>main#contenido-principal{
+    padding-top:calc(72px + env(safe-area-inset-top,0px));
+  }
 }

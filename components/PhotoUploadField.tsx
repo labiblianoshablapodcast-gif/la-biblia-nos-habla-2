@@ -17,6 +17,19 @@ const OPTIMIZABLE_TYPES=new Set(["image/jpeg","image/png","image/webp"]);
 const OPTIMIZE_FROM_BYTES=1200*1024;
 const MAX_IMAGE_EDGE=2000;
 
+function isHeic(file:File){
+ return /image\/hei[cf]/i.test(file.type)||/\.hei[cf]$/i.test(file.name);
+}
+
+async function convertHeic(file:File){
+ if(!isHeic(file))return file;
+ const {default:heic2any}=await import("heic2any");
+ const converted=await heic2any({blob:file,toType:"image/jpeg",quality:.88});
+ const blob=Array.isArray(converted)?converted[0]:converted;
+ if(!blob)throw new Error("No se pudo convertir la fotografía.");
+ return new File([blob],file.name.replace(/\.[^.]+$/,"")+".jpg",{type:"image/jpeg",lastModified:file.lastModified});
+}
+
 function readableSize(bytes:number){
  return bytes>=1024*1024?`${(bytes/1024/1024).toFixed(1)} MB`:`${Math.max(1,Math.round(bytes/1024))} KB`;
 }
@@ -96,7 +109,7 @@ export default function PhotoUploadField({
 
  async function upload(file?:File){
   if(!file)return;
-  if(!file.type.startsWith("image/")){
+  if(!file.type.startsWith("image/")&&!isHeic(file)){
    setStatus("Seleccione una fotografía válida.");
    return;
   }
@@ -108,7 +121,20 @@ export default function PhotoUploadField({
   setBusy(true);
   setStatus("Preparando fotografía…");
 
-  const preparedFile=await optimizePhoto(file);
+  let preparedFile:File;
+  try{
+   if(isHeic(file))setStatus("Convirtiendo fotografía de iPhone…");
+   preparedFile=await optimizePhoto(await convertHeic(file));
+  }catch{
+   setStatus("No pudimos convertir esta fotografía. Seleccione una copia en JPG, PNG o WEBP.");
+   setBusy(false);
+   return;
+  }
+  if(preparedFile.size>10*1024*1024){
+   setStatus("La fotografía convertida supera 10 MB. Seleccione una copia más pequeña.");
+   setBusy(false);
+   return;
+  }
   const wasOptimized=preparedFile!==file;
   setStatus(wasOptimized?"Subiendo fotografía optimizada…":"Subiendo fotografía…");
 

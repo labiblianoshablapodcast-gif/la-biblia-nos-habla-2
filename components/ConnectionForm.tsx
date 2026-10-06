@@ -59,7 +59,7 @@ export default function ConnectionForm(){
   }
  }
 
- const whatsappText=encodeURIComponent("Dios le bendiga. Acabo de llenar el formulario. Mi solicitud es: "+request+".");
+ const whatsappText=encodeURIComponent("Dios le bendiga. Quisiera comunicarme con el equipo pastoral. Mi solicitud es: "+request+".");
  return <div className="connectionFormWrap connectionFormModern">
   <div className="connectionFormHeading"><div><p className="eyebrow">Formulario confidencial</p><h2>¿Cómo podemos acompañarle?</h2></div><span>Respuesta pastoral</span></div>
   <div className="requestQuickChoices" role="group" aria-label="Seleccione el tipo de ayuda">
@@ -77,6 +77,6 @@ export default function ConnectionForm(){
    {databaseStatus&&<p className="databaseStatus" role="status" aria-live="polite">{databaseStatus}</p>}
    <div className="connectionSubmitRow"><p><b>🔒</b> Información guardada en el sistema pastoral</p><button className="btn" disabled={submitting}>{submitting?"Enviando...":"Enviar solicitud"}<span>→</span></button></div>
   </form>
-  {whatsapp?<a className="whatsappButton whatsappButtonModern" href={"https://wa.me/"+whatsapp+"?text="+whatsappText} target="_blank" rel="noopener noreferrer">💬 Hablar ahora por WhatsApp</a>:<p className="setupNote">El botón de WhatsApp aparecerá al añadir el número en Vercel.</p>}
+  {whatsapp?<a className="whatsappButton whatsappButtonModern" href={"https://wa.me/"+whatsapp+"?text="+whatsappText} target="_blank" rel="noopener noreferrer">💬 Hablar ahora por WhatsApp</a>:<a className="whatsappButton whatsappButtonModern" href="mailto:labiblianoshablapodcast@gmail.com">✉ Contactar al equipo pastoral por correo</a>}
  </div>;
 }

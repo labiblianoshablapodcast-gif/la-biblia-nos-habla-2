@@ -66,8 +66,6 @@ export default async function Home(){
    <div className={styles.heroOverlay}/>
    <div className={styles.mobilePortrait}>
     <Image className={styles.mobilePastors} src="/images/portada-pastores-nueva.png" alt="Pastores Gilberto y Yudelka Maldonado" width={1536} height={2048} sizes="(max-width: 720px) 120vw, 1px"/>
-    <blockquote className={styles.mobileVerse}>“Yo soy el camino, y la verdad, y la vida.”<cite>Juan 14:6</cite></blockquote>
-    <div className={styles.mobileCrossMessage}><span className={styles.mobileCross} aria-hidden="true"/><span>CRISTO<br/>CAMBIA<br/>VIDAS</span></div>
    </div>
    <div className={styles.heroContent}>
     <p className={styles.eyebrow}>BIENVENIDO A LA BIBLIA NOS HABLA</p>

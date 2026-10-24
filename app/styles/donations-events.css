@@ -40,3 +40,41 @@
   .eventPublicImage{height:260px;object-position:center 35%}
   .eventPublicBody{padding:20px}
 }
+
+/* Donation page: compact, image-first hero on phones. */
+@media (max-width: 760px) {
+  .donationLibraryHero {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    height: auto !important;
+    gap: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .donationLibraryImage {
+    order: -1 !important;
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 16 / 9 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+  .donationLibraryImage > img {
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+  .donationLibraryCopy {
+    width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 22px 22px 28px !important;
+    margin: 0 !important;
+  }
+  .donationLibraryShade,
+  .donationLibraryImage > p { display: none !important; }
+}

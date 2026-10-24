@@ -1075,3 +1075,24 @@ content: "›";
     padding-top: env(safe-area-inset-top, 0px);
   }
 }
+
+/* New approved artwork already includes its own title, verse and cross. Show it in full on mobile. */
+@media (max-width: 720px) {
+  .mobilePortrait {
+    height: auto !important;
+    aspect-ratio: 3 / 2 !important;
+    overflow: visible !important;
+    background: #031d33 !important;
+  }
+  .mobilePortrait::after { display: none !important; }
+  .mobilePastors {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+    transform: none !important;
+  }
+  .heroContent { padding-top: 20px !important; }
+}

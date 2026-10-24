@@ -20,7 +20,7 @@ export default function Donaciones(){
     </div>
    </div>
    <div className="donationLibraryImage">
-    <Image src="/images/donaciones-ofrenda-iglesia.jpg" alt="Congregación participando en la ofrenda durante un servicio cristiano" fill priority sizes="(max-width: 760px) 100vw, 50vw" />
+    <Image src="/images/a_photorealistic_warmly_lit_reverent_church_fait.png" alt="Ofrenda: Biblia abierta y una mano depositando un sobre en el plato de ofrendas" fill priority sizes="(max-width: 760px) 100vw, 50vw" />
     <div className="donationLibraryShade" />
     <p>“Dios ama al dador alegre.” <span>2 Corintios 9:7</span></p>
    </div>

@@ -62,10 +62,10 @@ export default async function Home(){
  ];
  return <main className={styles.home}>
   <section className={styles.hero}>
-   <div className={styles.heroPortrait}><Image className={styles.heroImage} src="/images/pastor-y-yudelka-hero-v2.png" alt="Pastores Gilberto y Yudelka Maldonado" fill priority sizes="100vw"/></div>
+   <div className={styles.heroPortrait}><Image className={styles.heroImage} src="/images/portada-pastores-nueva.png" alt="Pastores Gilberto y Yudelka Maldonado" fill priority sizes="100vw"/></div>
    <div className={styles.heroOverlay}/>
    <div className={styles.mobilePortrait}>
-    <Image className={styles.mobilePastors} src="/images/home-pastors-approved-mobile.png" alt="Pastores Gilberto y Yudelka Maldonado" width={1536} height={2048} sizes="(max-width: 720px) 120vw, 1px"/>
+    <Image className={styles.mobilePastors} src="/images/portada-pastores-nueva.png" alt="Pastores Gilberto y Yudelka Maldonado" width={1536} height={2048} sizes="(max-width: 720px) 120vw, 1px"/>
     <blockquote className={styles.mobileVerse}>“Yo soy el camino, y la verdad, y la vida.”<cite>Juan 14:6</cite></blockquote>
     <div className={styles.mobileCrossMessage}><span className={styles.mobileCross} aria-hidden="true"/><span>CRISTO<br/>CAMBIA<br/>VIDAS</span></div>
    </div>

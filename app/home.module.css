@@ -1096,3 +1096,11 @@ content: "›";
   }
   .heroContent { padding-top: 20px !important; }
 }
+
+/* Mobile hero: artwork should follow the header, with no forced blank height. */
+@media (max-width:720px) {
+ .hero { min-height:0 !important; display:flex !important; flex-direction:column !important; }
+ .mobilePortrait { display:block !important; position:relative !important; height:auto !important; aspect-ratio:auto !important; overflow:visible !important; flex:none !important; margin:0 !important; padding:0 !important; }
+ .mobilePastors { display:block !important; position:relative !important; left:auto !important; right:auto !important; top:auto !important; bottom:auto !important; width:100% !important; max-width:100% !important; height:auto !important; object-fit:contain !important; }
+ .heroContent { margin:0 !important; padding:20px 22px 36px !important; }
+}

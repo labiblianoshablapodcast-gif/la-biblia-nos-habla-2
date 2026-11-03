@@ -1221,3 +1221,44 @@ content: "›";
   .mobilePastors { display: none !important; }
   .heroContent { margin: 0 !important; padding: 20px 22px 36px !important; }
 }
+
+
+/* Portada móvil sin texto duplicado; enlaces sobre botones de la imagen */
+@media (max-width: 720px) {
+  .hero { position: relative !important; }
+  .heroContent {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    pointer-events: none !important;
+    z-index: 2 !important;
+  }
+  .heroContent > .eyebrow,
+  .heroContent > h1,
+  .heroContent > p:not(.eyebrow) { display: none !important; }
+  .heroActions {
+    position: absolute !important;
+    left: 5.2% !important;
+    bottom: 5.1% !important;
+    display: flex !important;
+    gap: 1.6vw !important;
+    flex-wrap: nowrap !important;
+    pointer-events: auto !important;
+  }
+  .heroActions a {
+    display: block !important;
+    width: 15.7vw !important;
+    height: 3.9vw !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: transparent !important;
+    font-size: 0 !important;
+    box-shadow: none !important;
+  }
+  .heroActions a:focus-visible { outline: 2px solid #f4bd42 !important; outline-offset: 2px; }
+}

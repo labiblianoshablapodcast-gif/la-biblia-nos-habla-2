@@ -1148,3 +1148,57 @@ content: "›";
     box-sizing: border-box;
   }
 }
+
+
+/* Portada aprobada: recortar únicamente la franja hero de la captura subida.
+   Los enlaces siguen siendo HTML real sobre los botones dibujados. */
+@media (min-width: 721px) {
+  .hero {
+    height: 38.9vw !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    background-image: url("/images/a_wide_screenshot_website_homepage_hero_banner_for.png") !important;
+    background-size: 100% auto !important;
+    background-repeat: no-repeat !important;
+    background-position: center -5.02vw !important;
+  }
+  .heroPortrait, .heroOverlay { display: none !important; }
+  .heroContent {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    pointer-events: none;
+  }
+  .heroContent > .eyebrow,
+  .heroContent > h1,
+  .heroContent > p:not(.eyebrow) { display: none !important; }
+  .heroActions {
+    position: absolute !important;
+    left: 5.2% !important;
+    bottom: 5.3% !important;
+    display: flex !important;
+    gap: 1.6vw !important;
+    flex-wrap: nowrap !important;
+    pointer-events: auto;
+  }
+  .heroActions a {
+    display: block !important;
+    width: 15.7vw !important;
+    height: 3.9vw !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 12px !important;
+    background: transparent !important;
+    color: transparent !important;
+    font-size: 0 !important;
+    box-shadow: none !important;
+  }
+  .heroActions a:hover, .heroActions a:focus-visible {
+    outline: 2px solid #f4bd42;
+    outline-offset: 2px;
+  }
+}

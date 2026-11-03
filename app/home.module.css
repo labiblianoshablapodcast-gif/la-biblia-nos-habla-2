@@ -1262,3 +1262,60 @@ content: "›";
   }
   .heroActions a:focus-visible { outline: 2px solid #f4bd42 !important; outline-offset: 2px; }
 }
+
+
+/* Corrección final móvil: sin espacio blanco, portada completa y botones accesibles */
+@media (max-width: 720px) {
+  .hero {
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+  .mobilePortrait {
+    flex: none !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1536 / 597 !important;
+    background-position: center -5.02vw !important;
+  }
+  .heroContent {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    padding: 12px 18px 18px !important;
+    background: #031d33 !important;
+    pointer-events: auto !important;
+  }
+  .heroActions {
+    position: static !important;
+    display: flex !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    flex-wrap: nowrap !important;
+    pointer-events: auto !important;
+  }
+  .heroActions a {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 1 0 !important;
+    width: auto !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    padding: 0 8px !important;
+    border-radius: 9px !important;
+    font-size: clamp(.68rem,2.9vw,.88rem) !important;
+    white-space: nowrap !important;
+    color: #071829 !important;
+    background: #e4ae35 !important;
+  }
+  .heroActions .outlineButton {
+    background: transparent !important;
+    border: 1px solid rgba(255,255,255,.75) !important;
+    color: #fff !important;
+  }
+  .mobileChurchCard { margin-top: 14px !important; }
+}

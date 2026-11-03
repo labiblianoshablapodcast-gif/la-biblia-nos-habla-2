@@ -1104,3 +1104,26 @@ content: "›";
  .mobilePastors { display:block !important; position:relative !important; left:auto !important; right:auto !important; top:auto !important; bottom:auto !important; width:100% !important; max-width:100% !important; height:auto !important; object-fit:contain !important; }
  .heroContent { margin:0 !important; padding:20px 22px 36px !important; }
 }
+
+
+/* Portada limpia: la marca y el número de versión impresos en la foto
+   quedan cubiertos en la zona izquierda; los pastores siguen visibles. */
+@media (min-width: 721px) {
+  .heroOverlay {
+    background: linear-gradient(90deg,#061b36 0%,#072b58 37%,rgba(6,35,74,.97) 43%,rgba(6,35,74,.72) 52%,rgba(6,35,74,.08) 68%,transparent 80%) !important;
+    z-index: 0;
+  }
+  .heroContent { isolation: isolate; }
+  .hero h1 {
+    max-width: 570px !important;
+    font-size: clamp(2.7rem,4.2vw,4.7rem) !important;
+    line-height: 1.06 !important;
+    letter-spacing: -.035em;
+    text-wrap: balance;
+  }
+  .heroContent>p:not(.eyebrow) { max-width: 490px; }
+}
+@media (max-width: 720px) {
+  .hero h1 { font-size: clamp(2.35rem,8.5vw,3.5rem) !important; line-height: 1.08 !important; }
+  .heroContent>p:not(.eyebrow) { line-height: 1.6; }
+}

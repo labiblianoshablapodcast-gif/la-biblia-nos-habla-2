@@ -1069,10 +1069,11 @@ content: "›";
   }
 }
 
-/* The fixed app header includes the iPhone safe area above its normal height. */
+/* Main already offsets the fixed iPhone header, including its safe area.
+   Avoid adding that safe area a second time on the homepage. */
 @media (display-mode: standalone) and (max-width: 720px) {
   .home {
-    padding-top: env(safe-area-inset-top, 0px);
+    padding-top: 0 !important;
   }
 }
 

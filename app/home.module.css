@@ -1202,3 +1202,22 @@ content: "›";
     outline-offset: 2px;
   }
 }
+
+
+/* Portada móvil aprobada sin 2.0 */
+@media (max-width: 720px) {
+  .hero { display: flex !important; flex-direction: column !important; background: #031d33 !important; }
+  .mobilePortrait {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1536 / 597 !important;
+    background-image: url("/images/a_wide_screenshot_website_homepage_hero_banner_for.png") !important;
+    background-size: 100% auto !important;
+    background-position: center -5.02vw !important;
+    background-repeat: no-repeat !important;
+    overflow: hidden !important;
+  }
+  .mobilePastors { display: none !important; }
+  .heroContent { margin: 0 !important; padding: 20px 22px 36px !important; }
+}

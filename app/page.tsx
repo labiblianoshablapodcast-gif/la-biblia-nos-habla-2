@@ -4,6 +4,7 @@ import {church} from "@/data/church";
 import {youtube} from "@/data/youtube";
 import {books,getChapter} from "@/lib/bible";
 import {createClient} from "@/lib/supabase/server";
+import PodcastEpisodes from "@/components/PodcastEpisodes";
 import ShortVideoPlayer from "@/components/ShortVideoPlayer";
 import styles from "./home.module.css";
 import shortStyles from "./shorts.module.css";
@@ -115,6 +116,8 @@ export default async function Home(){
     </div>
    </Link>)}
   </section>
+
+  <PodcastEpisodes home/>
 
   <section className={shortStyles.section} aria-labelledby="shorts-heading">
    <header className={shortStyles.header}>

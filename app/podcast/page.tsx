@@ -1,3 +1,4 @@
+import PodcastEpisodes from "@/components/PodcastEpisodes";
 import {youtube} from "@/data/youtube";
 
 const platforms=[
@@ -14,6 +15,8 @@ export default function Podcast(){
    <h1>La Palabra para escuchar dondequiera que esté.</h1>
    <p>Predicaciones, estudios y conversaciones para crecer en el conocimiento de Dios.</p>
   </section>
+
+  <PodcastEpisodes/>
 
   <section className="section">
    <p className="eyebrow">Escuche en su plataforma preferida</p>

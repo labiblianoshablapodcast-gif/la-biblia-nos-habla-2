@@ -1,3 +1,24 @@
+.introSection {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+  align-items: center;
+  gap: 32px;
+  max-width: 1200px;
+  margin: 32px auto;
+  padding: 28px;
+  border: 1px solid #dce2e7;
+  border-radius: 16px;
+  background: #f6f8fa;
+}
+.introCopy { min-width: 0; }
+.introCopy h2 { margin: 0 0 12px; font-size: clamp(1.6rem, 3vw, 2.4rem); }
+.introCopy > p:last-child { margin: 0; line-height: 1.6; color: #475569; }
+.introVideo { display: block; width: 100%; min-width: 0; aspect-ratio: 16 / 9; border-radius: 10px; background: #061429; }
+@media (max-width: 720px) {
+  .introSection { grid-template-columns: minmax(0, 1fr); margin: 20px 16px; padding: 20px; gap: 18px; }
+  .introCopy .eyebrow { max-width: 100%; }
+}
+
 .eyebrow {
   margin: 0 0 12px;
   color: #dda72f;

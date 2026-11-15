@@ -80,6 +80,18 @@ export default async function Home(){
    </div>
   </section>
 
+  <section id="introduccion" className={styles.introSection} aria-labelledby="intro-heading">
+   <div className={styles.introCopy}>
+    <p className={styles.eyebrow}>LA PALABRA DE DIOS PARA SU VIDA</p>
+    <h2 id="intro-heading">La Biblia Nos Habla</h2>
+    <p>Vea nuestra introducción con el Pastor Gilberto Maldonado.</p>
+   </div>
+   <video className={styles.introVideo} controls playsInline preload="none" poster="/media/la-biblia-nos-habla-intro.jpg" aria-label="Introducción de La Biblia Nos Habla, Pastor Gilberto Maldonado">
+    <source src="/media/la-biblia-nos-habla-intro.mp4" type="video/mp4"/>
+    <a href="/media/la-biblia-nos-habla-intro.mp4">Ver la introducción de La Biblia Nos Habla</a>
+   </video>
+  </section>
+
   <section className={styles.mobileChurchCard} aria-label="Información de la iglesia">
    <span className={styles.mobilePin}>●</span>
    <h2>Iglesia Príncipe de Paz</h2>
